@@ -15,9 +15,6 @@ public class Manager : MonoBehaviour
     float x, y; //구슬 생성 위한 좌표
     static int redCnt=0, yelCnt=0, greCnt=0, bluCnt=0, purCnt=0, queCnt=0; //구슬 개수 카운트 변수
 
-    int[] a = new int[3] { 1, 2, 3};
-
-
     // Start is called before the first frame update
     void Start()
     {
