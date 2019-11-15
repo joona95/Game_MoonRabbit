@@ -31,6 +31,10 @@ public class Shooter : MonoBehaviour
             degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
             this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
         }
+        if (Input.GetMouseButtonUp(0))//터치 뗄때
+        {
+            GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
+        }
 #else
         if (Input.touchCount > 0)
         {
@@ -51,17 +55,11 @@ public class Shooter : MonoBehaviour
             }
             if(touch.phase == TouchPhase.Ended) //손가락이 화면에서 떨어지면 touch가 끝난 경우
             {
-
+                GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
             }
         }
 #endif
     }
 
-#if UNITY_EDITOR
-    //사용자가 마우스 놓을 때
-    private void OnMouseUp()
-    {
-        
-    }
-#endif
+
 }
