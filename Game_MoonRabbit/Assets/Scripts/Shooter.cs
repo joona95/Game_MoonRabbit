@@ -24,18 +24,7 @@ public class Shooter : MonoBehaviour
     void Update()
     {
 
-#if UNITY_EDITOR
-        if (Input.GetMouseButton(0))
-        {
-            touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-            degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
-            this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
-        }
-        if (Input.GetMouseButtonUp(0))//터치 뗄때
-        {
-            GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
-        }
-#else
+#if (UNITY_ANDROID || UNITY_IOS)
         if (Input.touchCount > 0)
         {
             //화면 touch 처음 하나만 인식
@@ -57,6 +46,17 @@ public class Shooter : MonoBehaviour
             {
                 GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
             }
+        }
+#else
+        if (Input.GetMouseButton(0))
+        {
+            touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+            degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
+            this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
+        }
+        if (Input.GetMouseButtonUp(0))//터치 뗄때
+        {
+            GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
         }
 #endif
     }
