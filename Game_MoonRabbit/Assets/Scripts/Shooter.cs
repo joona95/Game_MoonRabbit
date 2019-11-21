@@ -52,11 +52,13 @@ public class Shooter : MonoBehaviour
         {
             touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
             degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
-            this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
+            if(-80<degree&&degree<80)
+                this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
         }
         if (Input.GetMouseButtonUp(0))//터치 뗄때
         {
-            GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
+            if (-80 < degree && degree < 80)
+                GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
         }
 #endif
     }

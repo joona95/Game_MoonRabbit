@@ -35,7 +35,7 @@ public class Manager : MonoBehaviour
         //첫번째 발사할 구슬
         float a;
         a = Random.Range(0.0f, 100.0f);
-        PlayerPrefs.SetFloat("rand", a);
+        
         if ((a >= 0.0f) && (a < purpl))
         {
             ballPrefabs[0] = (GameObject)Instantiate(purple, new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
@@ -65,7 +65,7 @@ public class Manager : MonoBehaviour
 
         //두번째 발사할 구슬
         a = Random.Range(0.0f, 100.0f);
-        PlayerPrefs.SetFloat("rand", a);
+        
         if ((a >= 0.0f) && (a < purpl))
         {
             ballPrefabs[1] = (GameObject)Instantiate(purple, new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
@@ -263,7 +263,7 @@ public class Manager : MonoBehaviour
 
         float a;
         a = Random.Range(0.0f, 100.0f);
-        PlayerPrefs.SetFloat("rand", a);
+        
         if ((a >= 0.0f) && (a < purpl))
         {
             ballPrefabs[1] = (GameObject)Instantiate(purple, new Vector3(-2f, -4f, 0f), Quaternion.identity);
