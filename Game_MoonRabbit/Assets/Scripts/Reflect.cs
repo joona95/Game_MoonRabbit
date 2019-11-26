@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Reflect : MonoBehaviour
 {
-    public Vector3 normalized;
+    Vector3 normalized;
+    Vector3 colVec;
+    Vector3 currentVec;
+    Vector3 incomingVec;
+    Vector3 toVec;
 
-    public static float GetAngle(Vector3 incoming)
-    {
-        Vector3 v = incoming;
-        return Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
-    }
+    int firstcol = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,31 +24,22 @@ public class Reflect : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.tag == "wall")
+        if (col.tag == "wall" && firstcol == 0) // 첫 충돌
         {
-            Vector3 colVec = this.gameObject.GetComponent<Transform>().position; //충돌 지점
-            Vector3 currentVec = GameObject.Find("Shotspawn").transform.position; //현재 지점
-            Vector3 incomingVec = colVec - currentVec; //입사 벡터
-
-            Vector3 toVec = new Vector3(-incomingVec.x, incomingVec.y, 0f);
-            //Vector3 normalVec = col.contacts[0].normal; //노말 벡터
-            //Vector3 reflectVec = Vector3.Reflect(incomingVec, normalVec); //반사 벡터
-
-
+            colVec = this.gameObject.GetComponent<Transform>().position; //충돌 지점
+            currentVec = GameObject.Find("Shotspawn").transform.position; //시작 지점
+            incomingVec = colVec - currentVec; //입사 벡터
+            toVec = new Vector3(-incomingVec.x, incomingVec.y, 0f); //향할 방향
+            normalized = toVec.normalized; // 정규화
+            GetComponent<Rigidbody2D>().velocity = normalized * 4f; //반사
+            firstcol++;
+        }
+        else if(col.tag == "wall" && firstcol > 0) //두번째 충돌부터
+        {
+            incomingVec = toVec;
+            toVec = new Vector3(-incomingVec.x, incomingVec.y, 0f);
             normalized = toVec.normalized;
-            //Vector3 newreflectVec = -normalized;
-            //newreflectVec = new Vector3(newreflectVec.x, newreflectVec.y, 2 * GetAngle(normalized));
-            //Quaternion rotation = Quaternion.Euler(4*newreflectVec);
-            //this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 2 * GetAngle(normalized));
-            GetComponent<Rigidbody2D>().velocity = normalized * 4f;
-
-            Debug.Log("col" + colVec);
-            Debug.Log("incoming" + incomingVec);
-            Debug.Log("currnet" + currentVec);
-            Debug.Log("to" + toVec);
-
-            //normalized = reflectVec.normalized; //반사 벡터 정규화
-            //GetComponent<Rigidbody2D>().velocity = normalized*4f; //반사
+            GetComponent<Rigidbody2D>().velocity = normalized * 5f;
         }
 
     }

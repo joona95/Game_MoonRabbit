@@ -15,7 +15,7 @@ public class Ball : MonoBehaviour
     {
         if (this.gameObject.transform.position == GameObject.Find("Shotspawn").transform.position)//발사할 공에 한정하여 발사가 되게금 하는 함수
         {
-            GetComponent<Rigidbody2D>().velocity = transform.right * 4f;//발사
+            GetComponent<Rigidbody2D>().velocity = transform.right * 5f;//발사
         }
     }
 }
