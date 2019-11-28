@@ -436,12 +436,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37396c43a8febb145a14f3beeb5b955b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  red: {fileID: 6083755360055541519, guid: 5d74081675732d84fb4e3629c19fb326, type: 3}
-  yellow: {fileID: 5547561451903292086, guid: 3df607dab9e6b5849820e5c486b19c58, type: 3}
-  green: {fileID: 5439249304197300046, guid: ec23a1b716c226b41bbd34f149c3538b, type: 3}
-  blue: {fileID: 8413952026668213431, guid: b4c7ce6d36e3778488cd2b93426eac36, type: 3}
-  purple: {fileID: 3045188170868095235, guid: 2dd3d55cc0b4dec40b8196cb7cb9aa45, type: 3}
-  quest: {fileID: 5184420521231636692, guid: 0ccc4798743ce994580844df3f6c080f, type: 3}
+  BallType:
+  - {fileID: 6083755360055541519, guid: 5d74081675732d84fb4e3629c19fb326, type: 3}
+  - {fileID: 5547561451903292086, guid: 3df607dab9e6b5849820e5c486b19c58, type: 3}
+  - {fileID: 5439249304197300046, guid: ec23a1b716c226b41bbd34f149c3538b, type: 3}
+  - {fileID: 8413952026668213431, guid: b4c7ce6d36e3778488cd2b93426eac36, type: 3}
+  - {fileID: 3045188170868095235, guid: 2dd3d55cc0b4dec40b8196cb7cb9aa45, type: 3}
+  - {fileID: 5184420521231636692, guid: 0ccc4798743ce994580844df3f6c080f, type: 3}
+  - {fileID: 8324459919618690927, guid: 966b00e46b1c8084e86ed2323d48df83, type: 3}
+  - {fileID: 2856544455777816496, guid: 92fe60fdeb4839142879545b103a6343, type: 3}
+  - {fileID: 4039334602426303283, guid: 2ec29b04050f1af4f8bf0c99a98f83e4, type: 3}
+  - {fileID: 3806017269372156223, guid: a1b13e47c2823e74e9404f150f079766, type: 3}
   shotspawn: {fileID: 921221988}
   ballPrefabs: []
   size: 0

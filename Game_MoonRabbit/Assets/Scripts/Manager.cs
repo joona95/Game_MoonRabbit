@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    public GameObject red; //빨간 구슬
-    public GameObject yellow; //노란 구슬
-    public GameObject green; //초록 구슬
-    public GameObject blue; //파란 구슬
-    public GameObject purple; //보라 구슬
-    public GameObject quest; //퀘스트 구슬
+    List<GameObject[]> Map=new List<GameObject[]>(); //관리할 맵
+    int total_row, total_col; //맵 전체 행, 열
+    
+
+    public GameObject[] BallType=new GameObject[10];//구슬 색깔별로 종류 저장
+    //0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보
+
     public GameObject shotspawn;//구슬 발사의 출발점을 정하기 위한 것
     public GameObject[] ballPrefabs;//발사할 구슬의 배열
 
     public int size;//발사할 구슬의 배열의 사이즈
     float purpl, re, blu, yello;//구슬 개수 비율
 
-    int[] ballCnt = new int[6]; //구슬 개수 알려주는 배열. red,yellow,green,blue,purple,quest 순서
-    float x, y; //구슬 생성 위한 좌표
+    //int[] ballCnt = new int[6]; //구슬 개수 알려주는 배열. red,yellow,green,blue,purple,quest 순서
+    //float x, y; //구슬 생성 위한 좌표
     static int redCnt=0, yelCnt=0, greCnt=0, bluCnt=0, purCnt=0, queCnt=0; //구슬 개수 카운트 변수
     int total = 0;//전체 구슬 개수
 
@@ -38,27 +39,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(purple, new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[4], new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(red, new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[0], new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(blue, new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[3], new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(yellow, new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[1], new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(green, new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[2], new Vector3(-2f, -2f, 0f), Quaternion.identity); purCnt++;
             greCnt++;
         }//(80퍼 이상 초록)
    
@@ -68,27 +69,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(purple, new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(red, new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(blue, new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(yellow, new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(green, new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(-2f, -4f, 0f), Quaternion.identity); purCnt++;
             greCnt++;
         }//(80퍼 이상 초록)
  
@@ -96,148 +97,85 @@ public class Manager : MonoBehaviour
 
     void Awake()
     {
-        x = -2.34f;
-        y =4.0f; //구슬 초기 생성 좌표 설정
-        for(int i=0; i < 10; i++)
-        {
-            Instantiate(red, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x += 0.52f;
-            redCnt++; //구슬 개수 카운트
-        } //위에서 두번째 줄 빨간 구슬 생성
+        //맵생성
+        total_row = 9; //맵의 주어진 전체 행 설정
+        total_col = 10; //맵의 주어진 전체 열 설정
+        //스테이지 구슬 배치
+        int[,] stage = new int[,] { { 0,0,0,0,0,0,0,0,0,-1 },
+                                    { 0,0,0,0,0,0,0,0,0,0},
+                                    { 3,3,3,0,5,0,3,3,3,-1},
+                                    { 3,3,3,3,0,0,3,3,3,3},
+                                    { 2,2,2,3,3,3,1,1,1,-1},
+                                    { 2,2,2,2,2,1,1,1,1,1},
+                                    { 2,2,2,2,4,1,1,1,1,-1},
+                                    { 4,4,4,4,4,4,4,4,4,4},
+                                    { 4,4,4,4,4,4,4,4,4,-1} };
 
-        x = -2.08f;
-        y = 4.45f; //구슬 초기 생성 좌표 설정
-        for (int i = 0; i < 9; i++)
-        {
-            Instantiate(red, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x += 0.52f;
-            redCnt++; //구슬 개수 카운트
-        } //위에서 첫번째 줄 빨간 구슬 생성
 
-        Instantiate(red, new Vector3(0.52f, 3.55f, 0), Quaternion.Euler(0f, 0f, 0f));
-        redCnt++;
-        Instantiate(red, new Vector3(-0.52f, 3.55f, 0), Quaternion.Euler(0f, 0f, 0f));
-        redCnt++;
-        Instantiate(red, new Vector3(0.26f, 3.10f, 0), Quaternion.Euler(0f, 0f, 0f));
-        redCnt++;
-        Instantiate(red, new Vector3(-0.26f, 3.10f, 0), Quaternion.Euler(0f, 0f, 0f));
-        redCnt++; //빨간 구슬 나머지 생성
-
-        x = -2.08f;
-        y = 3.55f;
-        for (int i = 0; i < 3; i++)
-        {
-            Instantiate(blue, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            bluCnt++;
-            Instantiate(blue, new Vector3(-x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x += 0.52f;
-            bluCnt++; //구슬 개수 카운트
-        } //위에서 세번째 줄 생성
-
-        x = -2.34f;
-        y = 3.10f;
-        for (int i = 0; i < 4; i++)
-        {
-            Instantiate(blue, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            bluCnt++;
-            Instantiate(blue, new Vector3(-x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x += 0.52f;
-            bluCnt++; //구슬 개수 카운트
-        } //위에서 네번째 줄 생성
-
-        Instantiate(blue, new Vector3(0f, 2.65f, 0), Quaternion.Euler(0f, 0f, 0f));
-        bluCnt++;
-        Instantiate(blue, new Vector3(0.52f, 2.65f, 0), Quaternion.Euler(0f, 0f, 0f));
-        bluCnt++;
-        Instantiate(blue, new Vector3(-0.52f, 2.65f, 0), Quaternion.Euler(0f, 0f, 0f));
-        bluCnt++; //파란 구슬 나머지 생성
-
-        x = -2.08f;
-        y = 2.65f;
-        for (int i = 0; i < 3; i++)
-        {
-            Instantiate(green, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x += 0.52f;
-            greCnt++; //구슬 개수 카운트
-        } //위에서 다섯번째 줄 생성
-
-        x = -2.08f;
-        y = 1.75f;
-        for (int i = 0; i < 4; i++)
-        {
-            Instantiate(green, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x += 0.52f;
-            greCnt++; //구슬 개수 카운트
-        } //위에서 일곱번째 줄 생성
-
-        x = -2.34f;
-        y = 2.20f;
-        for (int i = 0; i < 5; i++)
-        {
-            Instantiate(green, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x += 0.52f;
-            greCnt++; //구슬 개수 카운트
-        } //위에서 여섯번째 줄 생성
-
-        x = 2.08f;
-        y = 2.65f;
-        for (int i = 0; i < 3; i++)
-        {
-            Instantiate(yellow, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x -= 0.52f;
-            yelCnt++; //구슬 개수 카운트
-        } //위에서 다섯번째 줄 생성
-
-        x = 2.08f;
-        y = 1.75f;
-        for (int i = 0; i < 4; i++)
-        {
-            Instantiate(yellow, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x -= 0.52f;
-            yelCnt++; //구슬 개수 카운트
-        } //위에서 일곱번째 줄 생성
-
-        x = 2.34f;
-        y = 2.2f;
-        for (int i = 0; i < 5; i++)
-        {
-            Instantiate(yellow, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x -= 0.52f;
-            yelCnt++; //구슬 개수 카운트
-        } //위에서 여섯번째 줄 생성
-
-        x = 2.34f;
-        y = 1.30f;
-        for (int i = 0; i < 10; i++)
-        {
-            Instantiate(purple, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x -= 0.52f;
-            purCnt++; //구슬 개수 카운트
-        } //여덟번째 줄 생성
-
-        x = 2.08f;
-        y = 0.85f;
-        for (int i = 0; i < 9; i++)
-        {
-            Instantiate(purple, new Vector3(x, y, 0), Quaternion.Euler(0f, 0f, 0f));
-            x -= 0.52f;
-            purCnt++; //구슬 개수 카운트
-        } //아홉째 줄 생성
-
-        Instantiate(purple, new Vector3(0f, 1.75f, 0), Quaternion.Euler(0f, 0f, 0f));
-        purCnt++;
-
-        Instantiate(quest, new Vector3(0f, 3.55f, 0), Quaternion.Euler(0f, 0f, 0f));
-        queCnt++;
-
-        ballCnt[0] = redCnt;
-        ballCnt[1] = yelCnt;
-        ballCnt[2] = greCnt;
-        ballCnt[3] = bluCnt;
-        ballCnt[4] = purCnt;
-        ballCnt[5] = queCnt; //배열에 구슬 카운트 한 것 입력
         
+        float x, y=4.45f; //구슬 생성 위치 지정 변수
+        int t; //행 구분을 위한 변수
+        for(int i = 0; i < total_row; i++)
+        {
+            if (stage[i, total_col - 1] == -1) //9개 행
+            {
+                x = 2.08f;
+                t = 9;
+            }
+            else //10개 행
+            {
+                x = 2.34f;
+                t = 10;
+            }
+
+        
+            GameObject[] tmp = new GameObject[t];//관리할 맵 리스트에 넣을 한 줄의 구슬 전체 배열
+            for(int j = t - 1; j >= 0; j--)
+            {
+                tmp[j]=Instantiate(BallType[stage[i, j]], new Vector3(x, y, 0f), Quaternion.Euler(0f, 0f, 0f)); //구슬 생성
+                tmp[j].GetComponent<Ball>().type = total_row - t; //구슬 종류 (0:9개, 1:10개)
+                tmp[j].GetComponent<Ball>().row = i; //해당 구슬이 배치된 행
+                tmp[j].GetComponent<Ball>().col = j; //해당 구슬이 배치된 열
+
+                //처음 배치되는 전체 구슬 숫자 카운트
+                switch (stage[i, j])
+                {
+                    case 0:
+                        redCnt++;
+                        break;
+                    case 1:
+                        yelCnt++;
+                        break;
+                    case 2:
+                        greCnt++;
+                        break;
+                    case 3:
+                        bluCnt++;
+                        break;
+                    case 4:
+                        purCnt++;
+                        break;
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                        queCnt++;
+                        break;
+                }
+
+                x -= 0.52f;
+            }
+            Map.Add(tmp); //리스트에 구슬 한 줄의 배열 넣기
+            
+
+            y -= 0.45f;
+        }
+
+
     }
+
+
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
@@ -266,27 +204,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(purple, new Vector3(-2f, -4f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(-2f, -4f, 0f), Quaternion.identity);
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(red, new Vector3(-2f, -4f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(-2f, -4f, 0f), Quaternion.identity);
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(blue, new Vector3(-2f, -4f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(-2f, -4f, 0f), Quaternion.identity);
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(yellow, new Vector3(-2f, -4f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(-2f, -4f, 0f), Quaternion.identity);
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(green, new Vector3(-2f, -4f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(-2f, -4f, 0f), Quaternion.identity);
             greCnt++;
         }
 

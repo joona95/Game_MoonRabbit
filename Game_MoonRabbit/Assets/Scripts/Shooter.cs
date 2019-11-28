@@ -34,17 +34,20 @@ public class Shooter : MonoBehaviour
             {
                 touchPos = touch.position;
                 degree = GetAngle(this.gameObject.transform.position, touchPos)-90;
-                this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
+                if(-80<degree&&degree<80) 
+                    this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
             }
             if(touch.phase == TouchPhase.Moved) //손가락이 화면 위에서 터치한 상태로 이동
             {
                 touchPos = touch.position;
                 degree = GetAngle(this.gameObject.transform.position, touchPos)-90;
-                this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
+                if(-80<degree&&degree<80)        
+                    this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
             }
             if(touch.phase == TouchPhase.Ended) //손가락이 화면에서 떨어지면 touch가 끝난 경우
             {
-                GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
+                if (-80 < degree && degree < 80)
+                    GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
             }
         }
 #else

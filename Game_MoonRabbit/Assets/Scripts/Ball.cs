@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
+    public int type;
+    public float row, col;
+
     // Start is called before the first frame update
     void Start()
     {
