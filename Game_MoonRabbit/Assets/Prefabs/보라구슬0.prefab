@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -4508603454738566207}
   m_Layer: 0
   m_Name: "\uBCF4\uB77C\uAD6C\uC2AC0"
-  m_TagString: ball
+  m_TagString: purple
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bed612e11d34fe49b6fbd7aeb1a8255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  row: 0
+  col: 0
 --- !u!212 &1719471456347418088
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -146,4 +149,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe4ac0b6d0f4d6a46a54b46cf0a63958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normalized: {x: 0, y: 0, z: 0}

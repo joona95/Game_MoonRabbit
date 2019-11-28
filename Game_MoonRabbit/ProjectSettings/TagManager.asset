@@ -4,8 +4,13 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - ball
   - wall
+  - shootball
+  - red
+  - yellow
+  - green
+  - blue
+  - purple
   layers:
   - Default
   - TransparentFX

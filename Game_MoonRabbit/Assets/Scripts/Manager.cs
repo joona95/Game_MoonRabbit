@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    List<GameObject[]> Map=new List<GameObject[]>(); //관리할 맵
+    static public List<GameObject[]> Map=new List<GameObject[]>(); //관리할 맵
     int total_row, total_col; //맵 전체 행, 열
     
 
@@ -113,9 +113,10 @@ public class Manager : MonoBehaviour
 
 
         
-        float x, y=4.45f; //구슬 생성 위치 지정 변수
+        float x, y=0.85f; //구슬 생성 위치 지정 변수.  제일 밑에서부터 쌓아올라가기
         int t; //행 구분을 위한 변수
-        for(int i = 0; i < total_row; i++)
+        Stack<GameObject[]> temp = new Stack<GameObject[]>();//List Map에 거꾸로 넣어주기
+        for(int i = total_row-1; i >=0; i--)
         {
             if (stage[i, total_col - 1] == -1) //9개 행
             {
@@ -133,7 +134,7 @@ public class Manager : MonoBehaviour
             for(int j = t - 1; j >= 0; j--)
             {
                 tmp[j]=Instantiate(BallType[stage[i, j]], new Vector3(x, y, 0f), Quaternion.Euler(0f, 0f, 0f)); //구슬 생성
-                tmp[j].GetComponent<Ball>().type = total_row - t; //구슬 종류 (0:9개, 1:10개)
+                tmp[j].GetComponent<Ball>().type = total_col - t; //구슬 종류 (0:10개, 1:9개)
                 tmp[j].GetComponent<Ball>().row = i; //해당 구슬이 배치된 행
                 tmp[j].GetComponent<Ball>().col = j; //해당 구슬이 배치된 열
 
@@ -166,12 +167,16 @@ public class Manager : MonoBehaviour
 
                 x -= 0.52f;
             }
-            Map.Add(tmp); //리스트에 구슬 한 줄의 배열 넣기
+            temp.Push(tmp); //리스트에 구슬 한 줄의 배열 넣기
             
 
-            y -= 0.45f;
+            y += 0.45f;
         }
 
+        while (temp.Count != 0)
+        {
+            Map.Add(temp.Pop());
+        }
 
     }
 
