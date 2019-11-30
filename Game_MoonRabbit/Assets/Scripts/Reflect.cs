@@ -24,23 +24,25 @@ public class Reflect : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "wall" && firstcol == 0) // 첫 충돌
+        if (this.tag == "shootball") //발사하는 공일 때만
         {
-            colVec = this.gameObject.GetComponent<Transform>().position; //충돌 지점
-            presentVec = GameObject.Find("Shotspawn").transform.position; //시작 지점
-            incomingVec = colVec - presentVec; //입사 벡터
-            toVec = new Vector3(-incomingVec.x, incomingVec.y, 0f); //향할 방향
-            normalized = toVec.normalized; // 정규화
-            GetComponent<Rigidbody2D>().velocity = normalized * 5f; //반사
-            firstcol++;
+            if (col.tag == "wall" && firstcol == 0) // 첫 충돌
+            {
+                colVec = this.gameObject.GetComponent<Transform>().position; //충돌 지점
+                presentVec = GameObject.Find("Shotspawn").transform.position; //시작 지점
+                incomingVec = colVec - presentVec; //입사 벡터
+                toVec = new Vector3(-incomingVec.x, incomingVec.y, 0f); //향할 방향
+                normalized = toVec.normalized; // 정규화
+                GetComponent<Rigidbody2D>().velocity = normalized * 5f; //반사
+                firstcol++;
+            }
+            else if (col.tag == "wall" && firstcol > 0) //두번째 충돌부터
+            {
+                incomingVec = toVec;
+                toVec = new Vector3(-incomingVec.x, incomingVec.y, 0f);
+                normalized = toVec.normalized;
+                GetComponent<Rigidbody2D>().velocity = normalized * 5f;
+            }
         }
-        else if(col.tag == "wall" && firstcol > 0) //두번째 충돌부터
-        {
-            incomingVec = toVec;
-            toVec = new Vector3(-incomingVec.x, incomingVec.y, 0f);
-            normalized = toVec.normalized;
-            GetComponent<Rigidbody2D>().velocity = normalized * 5f;
-        }
-
     }
 }

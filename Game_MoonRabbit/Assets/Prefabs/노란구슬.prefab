@@ -50,6 +50,7 @@ MonoBehaviour:
   type: 0
   row: 0
   col: 0
+  color: 
 --- !u!212 &5547561451903292087
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -115,7 +116,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.575
+  m_Radius: 0.52
 --- !u!50 &2053105885654358127
 Rigidbody2D:
   serializedVersion: 4

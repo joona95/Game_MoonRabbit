@@ -5,7 +5,7 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     static public List<GameObject[]> Map=new List<GameObject[]>(); //관리할 맵
-    int total_row, total_col; //맵 전체 행, 열
+    static public int total_row, total_col; //맵 전체 행, 열
     
 
     public GameObject[] BallType=new GameObject[10];//구슬 색깔별로 종류 저장
@@ -137,6 +137,7 @@ public class Manager : MonoBehaviour
                 tmp[j].GetComponent<Ball>().type = total_col - t; //구슬 종류 (0:10개, 1:9개)
                 tmp[j].GetComponent<Ball>().row = i; //해당 구슬이 배치된 행
                 tmp[j].GetComponent<Ball>().col = j; //해당 구슬이 배치된 열
+                
 
                 //처음 배치되는 전체 구슬 숫자 카운트
                 switch (stage[i, j])
@@ -173,6 +174,7 @@ public class Manager : MonoBehaviour
             y += 0.45f;
         }
 
+        //Map에 GameObject[] 처음 행부터 모든 행 전부 넣어주기
         while (temp.Count != 0)
         {
             Map.Add(temp.Pop());
@@ -234,4 +236,5 @@ public class Manager : MonoBehaviour
         }
 
     }
+
 }
