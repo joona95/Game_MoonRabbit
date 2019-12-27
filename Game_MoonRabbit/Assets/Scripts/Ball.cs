@@ -9,6 +9,8 @@ public class Ball : MonoBehaviour
     public string color; //shootball tag 바궈주기 위한 변수
     public bool visit = false; //3개이상 연속인지 여부 판별할 때 이용
     public bool connect = true; //연결여부 판단
+    static public int discon_cnt = 0, discon_total = 0; //연결끊긴 구슬의 갯수
+    public bool quest; //퀘스트 구슬인지 여부
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +21,7 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         if (this.gameObject.transform.position == GameObject.Find("Shotspawn").transform.position)//발사할 공에 한정하여 발사가 되게끔 하는 함수
         {
             GetComponent<Rigidbody2D>().velocity = transform.right * 5f;//발사
@@ -29,7 +32,8 @@ public class Ball : MonoBehaviour
         //연결되지 않은 경우 아래로 떨어지고 일정 위치에서 destroy
         if (connect == false)
         {
-            this.gameObject.transform.Translate(0, -0.2f, 0, Space.World);
+            
+            this.gameObject.transform.Translate(0, -0.3f, 0, Space.World);
             if (this.gameObject.transform.position.y <= -3f)
             {
                 if (this.gameObject.tag == "red")
@@ -43,7 +47,17 @@ public class Ball : MonoBehaviour
                 else if (this.gameObject.tag == "purple")
                     Manager.purCnt--;
 
+                if (quest == true) //퀘스트구슬이면 퀘스트구슬갯수 감소
+                {
+                    Manager.queCnt--;
+                }
+
                 Destroy(this.gameObject);
+                discon_cnt++;
+
+                //연결끊긴것들 다 떨어지면 shooter 다시 동작하게
+                if(discon_cnt==discon_total)
+                    Shooter.possible = true;
             }
         }
 
@@ -56,6 +70,8 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+       
+
         if (this.gameObject.tag == "shootball" && collision.gameObject.tag!="wall") //shootball이 벽이 아닌 공에 닿았을 때
         {
             this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
@@ -202,13 +218,19 @@ public class Ball : MonoBehaviour
             Queue<GameObject> q = new Queue<GameObject>();
             q.Enqueue(this.gameObject);
             q.Peek().GetComponent<Ball>().visit = true;
-            int count = 0; 
+            int count = 0; //같은 색상의 연결된 구슬 갯수
+            int qcount = 0; //같은 색상의 연결된 구슬 중 퀘스트 구슬 갯수
             while (q.Count != 0)
             {
                 GameObject obj = q.Dequeue();
                 int r = obj.GetComponent<Ball>().row;
                 int c = obj.GetComponent<Ball>().col;
-       
+
+                if (obj.GetComponent<Ball>().quest == true) //같은 색상의 연결된 구슬 중 퀘스트 구슬인 경우의 수
+                {
+                    qcount++;
+                }
+
                 count++;
 
                 if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
@@ -308,10 +330,12 @@ public class Ball : MonoBehaviour
                 else if (this.gameObject.tag == "purple")
                     Manager.purCnt -= count;
 
+                Manager.queCnt -= qcount; //퀘스트 구슬 갯수 감소
+                
             }
 
 
-
+            discon_total = 0; discon_cnt = 0; //연결되지 않은 구슬갯수 초기화
             
             for(int i = 0; i < Manager.total_row; i++)
             {
@@ -415,13 +439,20 @@ public class Ball : MonoBehaviour
 
                         if (min_r != 0)
                         {
-                            Manager.Map[i][j].GetComponent<Ball>().connect = false;
+                            Manager.Map[i][j].GetComponent<Ball>().connect = false; //connect여부 표시
+                            discon_total++; //연결되지 않은 구슬 갯수
                         }
                                              
                     }
                 }
             }
-           
+
+            //연결끊긴것들이 없으면 shooter 다시 동작하게
+            if (discon_total == 0)
+                Shooter.possible = true;
+
         }
     }
+
+ 
 }

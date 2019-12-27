@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
+    static public bool possible = true; //대포 발사 가능한 시점과 불가능한 시점 구분 용도
     Vector3 touchPos;
     float degree;
 
@@ -46,8 +47,10 @@ public class Shooter : MonoBehaviour
             }
             if(touch.phase == TouchPhase.Ended) //손가락이 화면에서 떨어지면 touch가 끝난 경우
             {
-                if (-80 < degree && degree < 80)
+                if (-80 < degree && degree < 80 && possible==true){
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
+                    possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
+                }
             }
         }
 #else
@@ -60,8 +63,11 @@ public class Shooter : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))//터치 뗄때
         {
-            if (-80 < degree && degree < 80)
+            if (-80 < degree && degree < 80 && possible == true)
+            {
                 GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
+                Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
+            }
         }
 #endif
     }

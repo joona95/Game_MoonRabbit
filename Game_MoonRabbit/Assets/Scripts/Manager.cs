@@ -162,9 +162,11 @@ public class Manager : MonoBehaviour
                     case 6:
                     case 7:
                     case 8:
-                    case 9:
+                    case 9:                 
                         queCnt++;
+                        tmp[j].GetComponent<Ball>().quest = true; //퀘스트 구슬인 경우 각 구슬마다 표시
                         break;
+  
                 }
 
                 x -= 0.52f;
@@ -183,12 +185,14 @@ public class Manager : MonoBehaviour
 
         
 
+
     }
 
 
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
+
         total = redCnt + bluCnt + yelCnt + purCnt + greCnt;
         purpl = ((float)purCnt / total) * 100f;
         re = purpl + (((float)redCnt / total) * 100f);
@@ -197,22 +201,119 @@ public class Manager : MonoBehaviour
 
 
         //각 row에 구슬이 하나도 없다면 total_row 감소
-        for(int i = total_row - 1; i >= 0; i--)
+        for (int i = total_row - 1; i >= 0; i--)
         {
             int cnt = 0;
-            for(int j = Map[i].Length-1; j >= 0; j--)
+            for (int j = Map[i].Length - 1; j >= 0; j--)
             {
                 if (Map[i][j] == null)
                     cnt++;
             }
             if (cnt == Map[i].Length)
             {
-                Map.Remove(Map[i]);
                 total_row--;
+                Map.Remove(Map[i]);
             }
+
         }
 
+        if (queCnt==0) //게임 성공
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
 
+            //가장 낮은 위치에 있는 구슬 y값 구하기
+            float min_y = 0.85f;
+            for (int i = Map[total_row - 1].Length - 1; i >= 0; i--)
+            {
+                if (Map[total_row - 1][i] != null)
+                {
+                    min_y = Mathf.Round(Map[total_row - 1][i].transform.position.y * 100) / 100;
+                    break;
+                }
+            }
+
+
+            if (Ball.discon_total == Ball.discon_cnt) //연결되지 않은 구슬들 다 떨어지면 동작
+            {
+                //가장 높은 위치에 있는 구슬 y 값 구하기
+                float max_y = 4.45f;
+                for (int i = Map[0].Length - 1; i >= 0; i--)
+                {
+                    if (Map[0][i] != null)
+                    {
+                        max_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100;
+                        break;
+                    }
+                }
+
+
+                if (min_y < 0.85f)
+                {
+                    float[,] end_y = new float[total_row, total_col];
+                    for (int i = 0; i < total_row; i++)
+                    {
+                        for (int j = 0; j < Map[i].Length; j++)
+                        {
+                            if (Map[i][j] != null)
+                                end_y[i, j] = Map[i][j].transform.position.y + 0.45f;
+                        }
+                    }
+
+
+                    for (int i = 0; i < total_row; i++)
+                    {
+                        for (int j = 0; j < Map[i].Length; j++)
+                        {
+                            if (Map[i][j] != null)
+                            {
+
+
+                                if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
+                                {
+                                    Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y + 0.05f, Map[i][j].transform.position.z);
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+                else if (min_y > 0.85f && max_y > 4.45f)
+                {
+                    float[,] end_y = new float[total_row, total_col];
+                    for (int i = 0; i < total_row; i++)
+                    {
+                        for (int j = 0; j < Map[i].Length; j++)
+                        {
+                            if (Map[i][j] != null)
+                                end_y[i, j] = Map[i][j].transform.position.y - (max_y - 4.45f);
+                        }
+                    }
+
+                    for (int i = 0; i < total_row; i++)
+                    {
+                        for (int j = 0; j < Map[i].Length; j++)
+                        {
+                            if (Map[i][j] != null)
+                            {
+
+                                if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 > end_y[i, j])
+                                {
+                                    Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y - 0.05f, Map[i][j].transform.position.z);
+
+                                }
+                            }
+                        }
+                    }
+
+
+                }
+
+            }
+        }
 
     }
 
@@ -260,4 +361,5 @@ public class Manager : MonoBehaviour
         
     }
 
+    
 }
