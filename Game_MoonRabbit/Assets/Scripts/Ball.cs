@@ -32,6 +32,17 @@ public class Ball : MonoBehaviour
             this.gameObject.transform.Translate(0, -0.2f, 0, Space.World);
             if (this.gameObject.transform.position.y <= -3f)
             {
+                if (this.gameObject.tag == "red")
+                    Manager.redCnt--;
+                else if (this.gameObject.tag == "yellow")
+                    Manager.yelCnt--;
+                else if (this.gameObject.tag == "green")
+                    Manager.greCnt--;
+                else if (this.gameObject.tag == "blue")
+                    Manager.bluCnt--;
+                else if (this.gameObject.tag == "purple")
+                    Manager.purCnt--;
+
                 Destroy(this.gameObject);
             }
         }
