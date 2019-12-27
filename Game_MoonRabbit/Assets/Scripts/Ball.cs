@@ -8,7 +8,7 @@ public class Ball : MonoBehaviour
     public int row, col; //해당 구슬의 맵 상 위치 행, 열
     public string color; //shootball tag 바궈주기 위한 변수
     public bool visit = false; //3개이상 연속인지 여부 판별할 때 이용
-    
+    public bool connect = true; //연결여부 판단
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,21 @@ public class Ball : MonoBehaviour
             this.gameObject.GetComponent<Ball>().color = this.gameObject.tag; //원래 tag 저장
             this.gameObject.tag = "shootball"; //발사할 공 tag 변경
         }
+
+        //연결되지 않은 경우 아래로 떨어지고 일정 위치에서 destroy
+        if (connect == false)
+        {
+            this.gameObject.transform.Translate(0, -0.2f, 0, Space.World);
+            if (this.gameObject.transform.position.y <= -3f)
+            {
+                Destroy(this.gameObject);
+            }
+        }
+
+        
+
+        
+        
     }
 
 
@@ -183,7 +198,6 @@ public class Ball : MonoBehaviour
                 int r = obj.GetComponent<Ball>().row;
                 int c = obj.GetComponent<Ball>().col;
        
-
                 count++;
 
                 if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
@@ -254,6 +268,7 @@ public class Ball : MonoBehaviour
                 }
             }
 
+
             //3개 이상인 경우 destroy
             if (count >= 3)
             {
@@ -269,6 +284,7 @@ public class Ball : MonoBehaviour
                     }
                 }
 
+                
                 //색상갯수 감소
                 if (this.gameObject.tag == "red")
                     Manager.redCnt -= count;
@@ -280,8 +296,121 @@ public class Ball : MonoBehaviour
                     Manager.bluCnt -= count;
                 else if (this.gameObject.tag == "purple")
                     Manager.purCnt -= count;
+
             }
 
+
+
+            
+            for(int i = 0; i < Manager.total_row; i++)
+            {
+                for(int j = 0; j < Manager.Map[i].Length; j++)
+                {
+                    if (Manager.Map[i][j] != null)
+                    {
+                        //visit 초기화
+                        for (int k = 0; k < Manager.total_row; k++)
+                        {
+                            for (int l = 0; l < Manager.Map[k].Length; l++)
+                            {
+                                if (Manager.Map[k][l] != null)
+                                    Manager.Map[k][l].GetComponent<Ball>().visit = false;
+                            }
+                        }
+
+                        //각 공마다 연결돼 있는지 여부 판단
+                        Stack<GameObject> s = new Stack<GameObject>();
+                        s.Push(Manager.Map[i][j]);
+                        Manager.Map[i][j].GetComponent<Ball>().visit = true;
+                        int min_r = Manager.total_row;
+                        while (s.Count != 0)
+                        {
+                            GameObject obj = s.Pop();
+                            int r = obj.GetComponent<Ball>().row;
+                            int c = obj.GetComponent<Ball>().col;
+
+                            if (r < min_r)
+                                min_r = r;
+
+                            if (obj.GetComponent<Ball>().type == 1) //9개
+                            {
+                                if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r + 1][c]);
+                                    Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
+                                }
+                                if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r + 1][c + 1]);
+                                    Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
+                                }
+                                if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r][c - 1]);
+                                    Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                                }
+                                if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r][c + 1]);
+                                    Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
+                                }
+                                if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r - 1][c]);
+                                    Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                                }
+                                if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r - 1][c + 1]);
+                                    Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
+                                }
+
+                            }
+                            else //10개
+                            {
+                                if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r + 1][c - 1]);
+                                    Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
+                                }
+                                if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r + 1][c]);
+                                    Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
+                                }
+                                if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r][c - 1]);
+                                    Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                                }
+                                if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r][c + 1]);
+                                    Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
+                                }
+                                if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r - 1][c - 1]);
+                                    Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
+                                }
+                                if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false)
+                                {
+                                    s.Push(Manager.Map[r - 1][c]);
+                                    Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                                }
+
+                            }
+                        }
+
+                        if (min_r != 0)
+                        {
+                            Manager.Map[i][j].GetComponent<Ball>().connect = false;
+                        }
+                                             
+                    }
+                }
+            }
+           
         }
     }
 }

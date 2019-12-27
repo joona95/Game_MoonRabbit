@@ -7,6 +7,7 @@ public class Manager : MonoBehaviour
     static public List<GameObject[]> Map=new List<GameObject[]>(); //관리할 맵
     static public int total_row, total_col; //맵 전체 행, 열
     
+   
 
     public GameObject[] BallType=new GameObject[10];//구슬 색깔별로 종류 저장
     //0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보
@@ -39,27 +40,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[4], new Vector3(0f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[4], new Vector3(0f, -4.5f, 0f), Quaternion.identity);
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[0], new Vector3(0f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[0], new Vector3(0f, -4.5f, 0f), Quaternion.identity); 
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[3], new Vector3(0f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[3], new Vector3(0f, -4.5f, 0f), Quaternion.identity); 
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[1], new Vector3(0f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[1], new Vector3(0f, -4.5f, 0f), Quaternion.identity);
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[2], new Vector3(0f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[2], new Vector3(0f, -4.5f, 0f), Quaternion.identity);
             greCnt++;
         }//(80퍼 이상 초록)
    
@@ -69,27 +70,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); purCnt++;
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
             greCnt++;
         }//(80퍼 이상 초록)
  
@@ -180,6 +181,8 @@ public class Manager : MonoBehaviour
             Map.Add(temp.Pop());
         }
 
+        
+
     }
 
 
@@ -191,6 +194,26 @@ public class Manager : MonoBehaviour
         re = purpl + (((float)redCnt / total) * 100f);
         blu = re + (((float)bluCnt / total) * 100f);
         yello = blu + (((float)yelCnt / total) * 100f);
+
+
+        //각 row에 구슬이 하나도 없다면 total_row 감소
+        for(int i = total_row - 1; i >= 0; i--)
+        {
+            int cnt = 0;
+            for(int j = Map[i].Length-1; j >= 0; j--)
+            {
+                if (Map[i][j] == null)
+                    cnt++;
+            }
+            if (cnt == Map[i].Length)
+            {
+                Map.Remove(Map[i]);
+                total_row--;
+            }
+        }
+
+
+
     }
 
     public void bubblepop()//구슬 생성 함수
@@ -234,7 +257,7 @@ public class Manager : MonoBehaviour
             ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity);
             greCnt++;
         }
-
+        
     }
 
 }
