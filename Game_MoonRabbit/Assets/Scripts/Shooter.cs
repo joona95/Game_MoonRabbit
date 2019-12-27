@@ -24,6 +24,12 @@ public class Shooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Manager.queCnt == 0)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
 
 #if (UNITY_ANDROID || UNITY_IOS)
         if (Input.touchCount > 0)
@@ -54,23 +60,24 @@ public class Shooter : MonoBehaviour
             }
         }
 #else
-        if (Input.GetMouseButton(0))
-        {
-            touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
-            degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
-            if(-80<degree&&degree<80)
-                this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
-        }
-        if (Input.GetMouseButtonUp(0))//터치 뗄때
-        {
-            if (-80 < degree && degree < 80 && possible == true)
+            if (Input.GetMouseButton(0))
             {
-                GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
-                Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
+                touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
+                degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
+                if (-80 < degree && degree < 80)
+                    this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree);
             }
-        }
+            if (Input.GetMouseButtonUp(0))//터치 뗄때
+            {
+                if (-80 < degree && degree < 80 && possible == true)
+                {
+                    GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
+                    Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
+                }
+            }
 #endif
-    }
+        }
 
+    }
 
 }

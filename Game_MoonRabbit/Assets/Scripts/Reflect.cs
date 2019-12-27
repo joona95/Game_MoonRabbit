@@ -24,7 +24,7 @@ public class Reflect : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (this.tag == "shootball") //발사하는 공일 때만
+        if (this.gameObject.GetComponent<Ball>().shootball==true) //발사하는 공일 때만
         {
             if (col.tag == "wall" && firstcol == 0) // 첫 충돌
             {

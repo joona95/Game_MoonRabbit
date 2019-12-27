@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     public bool connect = true; //연결여부 판단
     static public int discon_cnt = 0, discon_total = 0; //연결끊긴 구슬의 갯수
     public bool quest; //퀘스트 구슬인지 여부
+    public bool shootball = false; //발사하는 공인지 여부
 
     // Start is called before the first frame update
     void Start()
@@ -24,9 +25,8 @@ public class Ball : MonoBehaviour
 
         if (this.gameObject.transform.position == GameObject.Find("Shotspawn").transform.position)//발사할 공에 한정하여 발사가 되게끔 하는 함수
         {
+            shootball = true; //shootball 발사할 공 여부 변경
             GetComponent<Rigidbody2D>().velocity = transform.right * 5f;//발사
-            this.gameObject.GetComponent<Ball>().color = this.gameObject.tag; //원래 tag 저장
-            this.gameObject.tag = "shootball"; //발사할 공 tag 변경
         }
 
         //연결되지 않은 경우 아래로 떨어지고 일정 위치에서 destroy
@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
     {
        
 
-        if (this.gameObject.tag == "shootball" && collision.gameObject.tag!="wall") //shootball이 벽이 아닌 공에 닿았을 때
+        if (shootball==true && collision.gameObject.tag!="wall") //shootball이 벽이 아닌 공에 닿았을 때
         {
             this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
 
@@ -176,7 +176,10 @@ public class Ball : MonoBehaviour
                 }
 
             }
-            
+
+            //shootball 발사하는공 여부 변경
+            shootball = false;
+
 
             int t; //현재 row의 갯수
             if (Manager.Map[this.gameObject.GetComponent<Ball>().row - 1].Length == Manager.total_col) //현재 row의 이전 행의 배열 수가 10 -> 현재 9
@@ -199,9 +202,6 @@ public class Ball : MonoBehaviour
             }
 
             Manager.Map[this.gameObject.GetComponent<Ball>().row][this.gameObject.GetComponent<Ball>().col] = this.gameObject; //Map의 해당 row, col 위치에 shootball 저장
-
-            //tag를 shootball에서 다시 색깔이름으로 바꿔주기
-            this.gameObject.tag = this.gameObject.GetComponent<Ball>().color;
 
 
             //visit 초기화
