@@ -7,7 +7,11 @@ public class Shooter : MonoBehaviour
 {
     static public bool possible = true; //대포 발사 가능한 시점과 불가능한 시점 구분 용도
     Vector3 touchPos;
+
     float degree;
+    
+    SpriteRenderer sprite; //대포(경로) 이미지
+    Color color;
 
     public static float GetAngle(Vector3 from, Vector3 to)
     {
@@ -18,7 +22,10 @@ public class Shooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        sprite = this.gameObject.GetComponent<SpriteRenderer>();
+        color = sprite.color;
+        color.a = 0f; //시작할 때 투명함
+        sprite.color = color;
     }
 
     // Update is called once per frame
@@ -63,6 +70,8 @@ public class Shooter : MonoBehaviour
 #else
             if (Input.GetMouseButton(0))
             {
+                color.a = 1f; //터치하고 있으면(누르고 있으면) 경로 보임
+                sprite.color = color;
                 touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
                 degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
                 if (-80 < degree && degree < 80)
@@ -70,6 +79,8 @@ public class Shooter : MonoBehaviour
             }
             if (Input.GetMouseButtonUp(0))//터치 뗄때
             {
+                color.a = 0f; //터치 떼면 경로 안 보임
+                sprite.color = color;
                 if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                 {
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
