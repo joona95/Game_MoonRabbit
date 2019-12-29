@@ -18,8 +18,7 @@ public class Manager : MonoBehaviour
     public int size;//발사할 구슬의 배열의 사이즈
     float purpl, re, blu, yello;//구슬 개수 비율
 
-    //int[] ballCnt = new int[6]; //구슬 개수 알려주는 배열. red,yellow,green,blue,purple,quest 순서
-    //float x, y; //구슬 생성 위한 좌표
+    static public int limit_cnt = 30; //구슬 제한 갯수
     static public int redCnt=0, yelCnt=0, greCnt=0, bluCnt=0, purCnt=0, queCnt=0; //구슬 개수 카운트 변수
     int total = 0;//전체 구슬 개수
 

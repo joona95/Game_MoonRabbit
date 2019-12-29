@@ -53,9 +53,10 @@ public class Shooter : MonoBehaviour
             }
             if(touch.phase == TouchPhase.Ended) //손가락이 화면에서 떨어지면 touch가 끝난 경우
             {
-                if (-80 < degree && degree < 80 && possible==true){
+                if (-80 < degree && degree < 80 && possible==true && Manager.limit_cnt!=0){ //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
                     possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
+                    Manager.limit_cnt--; //제한 구슬 갯수 감소
                 }
             }
         }
@@ -69,10 +70,11 @@ public class Shooter : MonoBehaviour
             }
             if (Input.GetMouseButtonUp(0))//터치 뗄때
             {
-                if (-80 < degree && degree < 80 && possible == true)
+                if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                 {
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
                     Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
+                    Manager.limit_cnt--; //제한 구슬 갯수 감소
                 }
             }
 #endif
