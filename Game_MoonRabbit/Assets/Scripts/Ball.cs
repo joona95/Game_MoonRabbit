@@ -33,7 +33,7 @@ public class Ball : MonoBehaviour
         if (connect == false)
         {
             
-            this.gameObject.transform.Translate(0, -0.3f, 0, Space.World);
+            this.gameObject.transform.Translate(0, -0.2f, 0, Space.World);
             if (this.gameObject.transform.position.y <= -3f)
             {
                 if (this.gameObject.tag == "red")
