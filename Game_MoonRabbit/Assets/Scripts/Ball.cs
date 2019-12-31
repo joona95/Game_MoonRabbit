@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
     {
        
 
-        if (shootball==true && collision.gameObject.tag!="wall") //shootball이 벽이 아닌 공에 닿았을 때
+        if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line") //shootball이 벽이 아닌 공에 닿았을 때
         {
             this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
 
