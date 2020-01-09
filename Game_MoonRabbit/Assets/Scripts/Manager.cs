@@ -225,8 +225,13 @@ public class Manager : MonoBehaviour
 
             //가장 낮은 위치에 있는 구슬 y값 구하기
             float min_y = 0.85f;
-            for (int i = Map[total_row - 1].Length - 1; i >= 0; i--)
+            int map_index = 0;
+            map_index = Map[total_row - 1].Length - 1;
+            
+            for (int i = map_index; i >= 0 ; i--)
             {
+
+                Debug.Log(i);
                 if (Map[total_row - 1][i] != null)
                 {
                     min_y = Mathf.Round(Map[total_row - 1][i].transform.position.y * 100) / 100;

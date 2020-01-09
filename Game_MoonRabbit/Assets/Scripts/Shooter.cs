@@ -99,12 +99,12 @@ public class Shooter : MonoBehaviour
                 {
                     if(80 > degree && degree > 0)
                     {
-                        reflectline.transform.position = new Vector3(-2.5f, -3.5f + yPos, 0);
+                        reflectline.transform.position = new Vector3(-2.5f, -4f + yPos, 0);
                         reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                     }
                     else if(-80 < degree && degree < 0)
                     {
-                        reflectline.transform.position = new Vector3(2.5f, -3.5f - yPos, 0);
+                        reflectline.transform.position = new Vector3(2.5f, -4f - yPos, 0);
                         reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                     }
                     recolor.a = 1f;
