@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Manager : MonoBehaviour
 {
-    static public List<GameObject[]> Map=new List<GameObject[]>(); //관리할 맵
+    static public List<GameObject[]> Map; //관리할 맵
     static public int total_row, total_col; //맵 전체 행, 열
-    
-   
+    static public List<Dictionary<string, object>> StageInfo;
+    static public int current_stage;//현재 스테이지 레벨
+    static public int[,] stage;
 
     public GameObject[] BallType=new GameObject[10];//구슬 색깔별로 종류 저장
     //0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보
@@ -97,6 +98,7 @@ public class Manager : MonoBehaviour
 
     void Awake()
     {
+        /*
         //맵생성
         total_row = 9; //맵의 주어진 전체 행 설정
         total_col = 10; //맵의 주어진 전체 열 설정
@@ -110,9 +112,14 @@ public class Manager : MonoBehaviour
                                     { 2,2,2,2,4,1,1,1,1,-1},
                                     { 4,4,4,4,4,4,4,4,4,4},
                                     { 4,4,4,4,4,4,4,4,4,-1} };
+        */
+        StageInfo = MapLoader.StageRead("StageInfo");
+        total_row = int.Parse(StageInfo[current_stage]["Row"].ToString());
+        total_col = int.Parse(StageInfo[current_stage]["Col"].ToString());
+        stage = new int[total_row, total_col];
+        MapLoader.MapRead(current_stage.ToString());
+        Map= new List<GameObject[]>();
 
-
-        
         float x, y=0.85f; //구슬 생성 위치 지정 변수.  제일 밑에서부터 쌓아올라가기
         int t; //행 구분을 위한 변수
         Stack<GameObject[]> temp = new Stack<GameObject[]>();//List Map에 거꾸로 넣어주기

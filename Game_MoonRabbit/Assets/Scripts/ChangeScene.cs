@@ -30,101 +30,121 @@ public class ChangeScene : MonoBehaviour
 
     public void Stage1_Button()
     {
-        SceneManager.LoadScene("Stage1");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 1;
     }
 
     public void Stage2_Button()
     {
-        SceneManager.LoadScene("Stage2");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 2;
     }
 
     public void Stage3_Button()
     {
-        SceneManager.LoadScene("Stage3");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 3;
     }
 
     public void Stage4_Button()
     {
-        SceneManager.LoadScene("Stage4");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 4;
     }
 
     public void Stage5_Button()
     {
-        SceneManager.LoadScene("Stage5");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 5;
     }
 
     public void Stage6_Button()
     {
-        SceneManager.LoadScene("Stage6");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 6;
     }
 
     public void Stage7_Button()
     {
-        SceneManager.LoadScene("Stage7");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 7;
     }
 
     public void Stage8_Button()
     {
-        SceneManager.LoadScene("Stage8");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 8;
     }
 
     public void Stage9_Button()
     {
-        SceneManager.LoadScene("Stage9");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 9;
     }
 
     public void Stage10_Button()
     {
-        SceneManager.LoadScene("Stage10");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 10;
     }
 
     public void Stage11_Button()
     {
-        SceneManager.LoadScene("Stage11");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 11;
     }
 
     public void Stage12_Button()
     {
-        SceneManager.LoadScene("Stage12");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 12;
     }
 
     public void Stage13_Button()
     {
-        SceneManager.LoadScene("Stage13");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 13;
     }
 
     public void Stage14_Button()
     {
-        SceneManager.LoadScene("Stage14");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 14;
     }
 
     public void Stage15_Button()
     {
-        SceneManager.LoadScene("Stage15");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 15;
     }
 
     public void Stage16_Button()
     {
-        SceneManager.LoadScene("Stage16");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 16;
     }
 
     public void Stage17_Button()
     {
-        SceneManager.LoadScene("Stage17");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 17;
     }
 
     public void Stage18_Button()
     {
-        SceneManager.LoadScene("Stage18");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 18;
     }
 
     public void Stage19_Button()
     {
-        SceneManager.LoadScene("Stage19");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 19;
     }
 
     public void Stage20_Button()
     {
-        SceneManager.LoadScene("Stage20");
+        SceneManager.LoadScene("Stage");
+        Manager.current_stage = 20;
     }
 }
