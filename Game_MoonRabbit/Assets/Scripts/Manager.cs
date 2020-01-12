@@ -6,12 +6,12 @@ public class Manager : MonoBehaviour
 {
     static public List<GameObject[]> Map; //관리할 맵
     static public int total_row, total_col; //맵 전체 행, 열
-    static public List<Dictionary<string, object>> StageInfo;
+    static public List<Dictionary<string, object>> StageInfo; //스테이지마다 전체 row,col정보읽어오기
     static public int current_stage;//현재 스테이지 레벨
-    static public int[,] stage;
+    static public int[,] stage; //각 스테이지마다 맵 구슬 생성 정보 저장
 
-    public GameObject[] BallType=new GameObject[10];//구슬 색깔별로 종류 저장
-    //0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보
+    public GameObject[] BallType=new GameObject[17];//구슬 색깔별로 종류 저장
+    //-1:10,9열구분 -2:없는거 0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보 10:돌 11:건드리면죽는폭탄 12:갯수증가+2 13:갯수감소-2 14:가로줄폭탄 15:6개폭탄 16:무지개
 
     public GameObject shotspawn;//구슬 발사의 출발점을 정하기 위한 것
     public GameObject[] ballPrefabs;//발사할 구슬의 배열
@@ -98,27 +98,15 @@ public class Manager : MonoBehaviour
 
     void Awake()
     {
-        /*
+        
         //맵생성
-        total_row = 9; //맵의 주어진 전체 행 설정
-        total_col = 10; //맵의 주어진 전체 열 설정
-        //스테이지 구슬 배치
-        int[,] stage = new int[,] { { 0,0,0,0,0,0,0,0,0,-1 },
-                                    { 0,0,0,0,0,0,0,0,0,0},
-                                    { 3,3,3,0,5,0,3,3,3,-1},
-                                    { 3,3,3,3,0,0,3,3,3,3},
-                                    { 2,2,2,3,3,3,1,1,1,-1},
-                                    { 2,2,2,2,2,1,1,1,1,1},
-                                    { 2,2,2,2,4,1,1,1,1,-1},
-                                    { 4,4,4,4,4,4,4,4,4,4},
-                                    { 4,4,4,4,4,4,4,4,4,-1} };
-        */
-        StageInfo = MapLoader.StageRead("StageInfo");
-        total_row = int.Parse(StageInfo[current_stage]["Row"].ToString());
-        total_col = int.Parse(StageInfo[current_stage]["Col"].ToString());
+        StageInfo = MapLoader.StageRead("StageInfo");//stage정보 csv 읽어오기
+        total_row = int.Parse(StageInfo[current_stage-1]["Row"].ToString()); //stage에 따른 total row
+        total_col = int.Parse(StageInfo[current_stage-1]["Col"].ToString()); //stage에 따른 total col
         stage = new int[total_row, total_col];
-        MapLoader.MapRead(current_stage.ToString());
-        Map= new List<GameObject[]>();
+        Debug.Log(total_row + "," + total_col);
+        MapLoader.MapRead(current_stage.ToString()); //구슬 생성 맵 정보 csv에서 읽어오기
+        Map = new List<GameObject[]>();
 
         float x, y=0.85f; //구슬 생성 위치 지정 변수.  제일 밑에서부터 쌓아올라가기
         int t; //행 구분을 위한 변수
@@ -140,39 +128,46 @@ public class Manager : MonoBehaviour
             GameObject[] tmp = new GameObject[t];//관리할 맵 리스트에 넣을 한 줄의 구슬 전체 배열
             for(int j = t - 1; j >= 0; j--)
             {
-                tmp[j]=Instantiate(BallType[stage[i, j]], new Vector3(x, y, 0f), Quaternion.Euler(0f, 0f, 0f)); //구슬 생성
-                tmp[j].GetComponent<Ball>().type = total_col - t; //구슬 종류 (0:10개, 1:9개)
-                tmp[j].GetComponent<Ball>().row = i; //해당 구슬이 배치된 행
-                tmp[j].GetComponent<Ball>().col = j; //해당 구슬이 배치된 열
-                
-
-                //처음 배치되는 전체 구슬 숫자 카운트
-                switch (stage[i, j])
+                if (stage[i, j] == -2) //비어있을때
                 {
-                    case 0:
-                        redCnt++;
-                        break;
-                    case 1:
-                        yelCnt++;
-                        break;
-                    case 2:
-                        greCnt++;
-                        break;
-                    case 3:
-                        bluCnt++;
-                        break;
-                    case 4:
-                        purCnt++;
-                        break;
-                    case 5:
-                    case 6:
-                    case 7:
-                    case 8:
-                    case 9:                 
-                        queCnt++;
-                        tmp[j].GetComponent<Ball>().quest = true; //퀘스트 구슬인 경우 각 구슬마다 표시
-                        break;
-  
+                    tmp[j] = null;
+                }
+                else //비어있지않을때
+                {
+                    tmp[j] = Instantiate(BallType[stage[i, j]], new Vector3(x, y, 0f), Quaternion.Euler(0f, 0f, 0f)); //구슬 생성
+                    tmp[j].GetComponent<Ball>().type = total_col - t; //구슬 종류 (0:10개, 1:9개)
+                    tmp[j].GetComponent<Ball>().row = i; //해당 구슬이 배치된 행
+                    tmp[j].GetComponent<Ball>().col = j; //해당 구슬이 배치된 열
+
+
+                    //처음 배치되는 전체 구슬 숫자 카운트
+                    switch (stage[i, j])
+                    {
+                        case 0:
+                            redCnt++;
+                            break;
+                        case 1:
+                            yelCnt++;
+                            break;
+                        case 2:
+                            greCnt++;
+                            break;
+                        case 3:
+                            bluCnt++;
+                            break;
+                        case 4:
+                            purCnt++;
+                            break;
+                        case 5:
+                        case 6:
+                        case 7:
+                        case 8:
+                        case 9:
+                            queCnt++;
+                            tmp[j].GetComponent<Ball>().quest = true; //퀘스트 구슬인 경우 각 구슬마다 표시
+                            break;
+
+                    }
                 }
 
                 x -= 0.52f;
@@ -189,7 +184,6 @@ public class Manager : MonoBehaviour
             Map.Add(temp.Pop());
         }
 
-        
 
 
     }
@@ -238,7 +232,7 @@ public class Manager : MonoBehaviour
             for (int i = map_index; i >= 0 ; i--)
             {
 
-                Debug.Log(i);
+                //Debug.Log(i);
                 if (Map[total_row - 1][i] != null)
                 {
                     min_y = Mathf.Round(Map[total_row - 1][i].transform.position.y * 100) / 100;

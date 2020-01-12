@@ -91,18 +91,21 @@ public class Ball : MonoBehaviour
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
                         this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y + 0.45f, 0f);
+ 
                     }
                     else if(col_y - 0.225 > this_y) //아래쪽 오른쪽 
                     {
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
                         this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y - 0.45f, 0f);
+                 
                     }
                     else //col_y - 0.225 <= this_y <= col_y + 0.225  //오른쪽
                     {
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
-                        this.gameObject.transform.position = new Vector3(col_x + 0.52f, col_y, 0f);       
+                        this.gameObject.transform.position = new Vector3(col_x + 0.52f, col_y, 0f);
+                      
                     }
                 }
                 else //col_x >= this_x
@@ -112,6 +115,7 @@ public class Ball : MonoBehaviour
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
                         this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y + 0.45f, 0f);
+              
 
                     }
                     else if (col_y - 0.225 > this_y) //아래쪽 왼쪽
@@ -119,6 +123,7 @@ public class Ball : MonoBehaviour
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
                         this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y - 0.45f, 0f);
+              
 
                     }
                     else //col_y - 0.225 <= this_y <= col_y + 0.225  //왼쪽
@@ -126,6 +131,7 @@ public class Ball : MonoBehaviour
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
                         this.gameObject.transform.position = new Vector3(col_x - 0.52f, col_y, 0f);
+                 
                     }
                 }
 
@@ -141,18 +147,21 @@ public class Ball : MonoBehaviour
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
                         this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y + 0.45f, 0f);
+            
                     }
                     else if (col_y - 0.225 > this_y) //아래쪽 오른쪽
                     {
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
                         this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y - 0.45f, 0f);
+               
                     }
                     else //col_y - 0.225 <= this_y <= col_y + 0.225  //오른쪽
                     {
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
                         this.gameObject.transform.position = new Vector3(col_x + 0.52f, col_y, 0f);
+                   
                     }
                 }
                 else //col_x >= this_x  
@@ -162,18 +171,21 @@ public class Ball : MonoBehaviour
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
                         this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y + 0.45f, 0f);
+        
                     }
                     else if (col_y - 0.225 > this_y) //아래쪽 왼쪽
                     {
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
                         this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y - 0.45f, 0f);
+    
                     }
                     else //col_y - 0.225 <= this_y <= col_y + 0.225  //왼쪽
                     {
                         this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
                         this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
                         this.gameObject.transform.position = new Vector3(col_x - 0.52f, col_y, 0f);
+          
                     }
                 }
 
@@ -181,27 +193,30 @@ public class Ball : MonoBehaviour
 
            
 
-            int t; //현재 row의 갯수
-            if (Manager.Map[this.gameObject.GetComponent<Ball>().row - 1].Length == Manager.total_col) //현재 row의 이전 행의 배열 수가 10 -> 현재 9
-            {
-                this.gameObject.GetComponent<Ball>().type = 1;
-                t = Manager.total_col-1;
-            }
-            else //현재 row의 이전 행의 배열 수가 9 -> 현재 10
-            {
-                this.gameObject.GetComponent<Ball>().type = 0;
-                t = Manager.total_col;
-            }
-
+            
+            
 
             if (this.gameObject.GetComponent<Ball>().row >= Manager.total_row) //total_row보다 현재 row가 크면 Map에 새로운 배열을 넣어주어야함. total_row도 증가.
             {
+                int t; //현재 row의 갯수
+                if (Manager.Map[this.gameObject.GetComponent<Ball>().row - 1].Length == Manager.total_col) //현재 row의 이전 행의 배열 수가 10 -> 현재 9
+                {
+                    this.gameObject.GetComponent<Ball>().type = 1;
+                    t = Manager.total_col - 1;
+                }
+                else //현재 row의 이전 행의 배열 수가 9 -> 현재 10
+                {
+                    this.gameObject.GetComponent<Ball>().type = 0;
+                    t = Manager.total_col;
+                }
+
                 GameObject[] tmp = new GameObject[t];
                 Manager.Map.Add(tmp);
                 Manager.total_row++;
             }
 
             Manager.Map[this.gameObject.GetComponent<Ball>().row][this.gameObject.GetComponent<Ball>().col] = this.gameObject; //Map의 해당 row, col 위치에 shootball 저장
+            this.gameObject.GetComponent<Ball>().type = Manager.total_col - Manager.Map[this.gameObject.GetComponent<Ball>().row].Length;
 
             //shootball 발사하는공 여부 변경
             shootball = false;
@@ -227,6 +242,7 @@ public class Ball : MonoBehaviour
                 GameObject obj = q.Dequeue();
                 int r = obj.GetComponent<Ball>().row;
                 int c = obj.GetComponent<Ball>().col;
+               
 
                 if (obj.GetComponent<Ball>().quest == true) //같은 색상의 연결된 구슬 중 퀘스트 구슬인 경우의 수
                 {
@@ -335,6 +351,7 @@ public class Ball : MonoBehaviour
                 Manager.queCnt -= qcount; //퀘스트 구슬 갯수 감소
                 
             }
+            
 
 
             discon_total = 0; discon_cnt = 0; //연결되지 않은 구슬갯수 초기화
@@ -384,7 +401,7 @@ public class Ball : MonoBehaviour
                                 if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
                                 {
                                     s.Push(Manager.Map[r][c - 1]);
-                                    Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                                   Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                                 }
                                 if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
                                 {
@@ -441,6 +458,7 @@ public class Ball : MonoBehaviour
 
                         if (min_r != 0)
                         {
+                    
                             Manager.Map[i][j].GetComponent<Ball>().connect = false; //connect여부 표시
                             discon_total++; //연결되지 않은 구슬 갯수
                         }

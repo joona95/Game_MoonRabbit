@@ -9,7 +9,7 @@ public class MapLoader
     static string LINE_SPLIT_RE = @"\r\n|\n\r|\n|\r";
     static char[] TRIM_CHARS = { '\"' };
 
-    public static List<Dictionary<string, object>> StageRead(string file)
+    public static List<Dictionary<string, object>> StageRead(string file) //stage마다 전체 row,col 정보 읽기
     {
         var list = new List<Dictionary<string, object>>();
         TextAsset data = Resources.Load(file) as TextAsset;
@@ -53,23 +53,18 @@ public class MapLoader
     }
 
 
-    public static void MapRead(string file)
+    public static void MapRead(string file) //stage마다 맵 csv 읽기
     {
-        //var list = new List<Dictionary<string, object>>();
         TextAsset data = Resources.Load(file) as TextAsset;
 
         var lines = Regex.Split(data.text, LINE_SPLIT_RE);
 
-        //if (lines.Length <= 1) return list;
-
-        //var header = Regex.Split(lines[0], SPLIT_RE);
         for (var i = 0; i < lines.Length; i++)
         {
 
             var values = Regex.Split(lines[i], SPLIT_RE);
             if (values.Length == 0 || values[0] == "") continue;
 
-            //var entry = new Dictionary<string, object>();
             for (var j = 0;j < values.Length; j++)
             {
                 string value = values[j];
@@ -91,12 +86,9 @@ public class MapLoader
                 }
 
                 Manager.stage[i,j]= int.Parse(finalvalue.ToString());
-
-                //entry[j] = finalvalue;
+                
             }
-            //list.Add(entry);
         }
-        //return list;
     }
 
 

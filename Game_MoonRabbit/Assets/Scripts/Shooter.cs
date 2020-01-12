@@ -52,7 +52,7 @@ public class Shooter : MonoBehaviour
         }
         else
         {
-
+            Time.timeScale = 1f;
 #if (UNITY_ANDROID || UNITY_IOS)
         if (Input.touchCount > 0)
         {
