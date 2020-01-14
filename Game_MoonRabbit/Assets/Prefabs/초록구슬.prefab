@@ -51,6 +51,10 @@ MonoBehaviour:
   row: 0
   col: 0
   color: 
+  visit: 0
+  connect: 1
+  quest: 0
+  shootball: 0
 --- !u!212 &6680225978746697973
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -89,7 +93,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 8b2cc358cdee7954fb87dd49cebc64fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

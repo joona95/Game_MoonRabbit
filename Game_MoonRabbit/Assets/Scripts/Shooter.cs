@@ -94,17 +94,17 @@ public class Shooter : MonoBehaviour
 
                 colPos = this.gameObject.GetComponent<Transform>().position; //충돌 위치
                 radian = degree * Mathf.PI / 180; // 충돌 각
-                yPos = 2.5f / Mathf.Tan(radian);
+                yPos = 2.3f / Mathf.Tan(radian);
                 if (colcheck) //경로와 벽이 충돌중인지 확인, 충돌중이라면 반사 경로 보여줌
                 {
                     if(80 > degree && degree > 0)
                     {
-                        reflectline.transform.position = new Vector3(-2.5f, -4f + yPos, 0);
+                        reflectline.transform.position = new Vector3(-2.3f, -4f + yPos, 0);
                         reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                     }
                     else if(-80 < degree && degree < 0)
                     {
-                        reflectline.transform.position = new Vector3(2.5f, -4f - yPos, 0);
+                        reflectline.transform.position = new Vector3(2.3f, -4f - yPos, 0);
                         reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                     }
                     recolor.a = 1f;
