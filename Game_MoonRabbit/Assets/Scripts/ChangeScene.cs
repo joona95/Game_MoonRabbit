@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class ChangeScene : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class ChangeScene : MonoBehaviour
     public void OnClickStartButton()
     {
         SceneManager.LoadScene("Map");
+        
     }
 
     //back버튼
@@ -34,6 +36,7 @@ public class ChangeScene : MonoBehaviour
     //stage이동 버튼
     public void Stage1_Button()
     {
+        
         Manager.current_stage = 1;
         SceneManager.LoadScene("Stage");
     }

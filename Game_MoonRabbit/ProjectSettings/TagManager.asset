@@ -12,6 +12,7 @@ TagManager:
   - blue
   - purple
   - line
+  - buttons
   layers:
   - Default
   - TransparentFX

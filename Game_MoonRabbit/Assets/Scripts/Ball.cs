@@ -12,11 +12,12 @@ public class Ball : MonoBehaviour
     static public int discon_cnt = 0, discon_total = 0; //연결끊긴 구슬의 갯수
     public bool quest; //퀘스트 구슬인지 여부
     public bool shootball = false; //발사하는 공인지 여부
+    semmanager sem;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        sem = FindObjectOfType<semmanager>();
     }
 
     // Update is called once per frame
@@ -75,7 +76,7 @@ public class Ball : MonoBehaviour
         if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line") //shootball이 벽이 아닌 공에 닿았을 때
         {
             this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
-
+            sem.play(2);
             float col_x = collision.gameObject.transform.position.x; //collision의 x 좌표
             float col_y = collision.gameObject.transform.position.y; //collision의 y 좌표
             float this_x = this.gameObject.transform.position.x; //shootball의 x 좌표
@@ -329,6 +330,7 @@ public class Ball : MonoBehaviour
                     {
                         if (Manager.Map[i][j] != null && Manager.Map[i][j].GetComponent<Ball>().visit == true)
                         {
+                            sem.play(1);
                             Destroy(Manager.Map[i][j]);
                             Manager.Map[i][j] = null;                     
                         }

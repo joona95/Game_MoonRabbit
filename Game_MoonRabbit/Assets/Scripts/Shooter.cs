@@ -8,20 +8,22 @@ public class Shooter : MonoBehaviour
     static public bool possible = true; //대포 발사 가능한 시점과 불가능한 시점 구분 용도
     Vector3 touchPos;
     Vector3 colPos;
-
+    bgmmanager bgm;//스테이지의 배경음악의 매개체이자 효과음의 매개체
+    semmanager sem;//스크립트에서 함수 불러옴
     float degree;
     float redegree;
     float yPos;
     float radian;
-
+    private float offest;
     bool colcheck = false;
 
     public GameObject reflectline;
     
     SpriteRenderer sprite; //대포(경로) 이미지
     SpriteRenderer resprite;
-    Color color;
-    Color recolor;
+    public Color color;
+    public Color recolor;
+    public int jdg;
 
     public static float GetAngle(Vector3 from, Vector3 to)
     {
@@ -41,6 +43,10 @@ public class Shooter : MonoBehaviour
         recolor = resprite.color;
         recolor.a = 0f; //시작할 때 투명함
         resprite.color = recolor;
+        bgm = FindObjectOfType<bgmmanager>();
+        bgm.stop();
+        bgm.play(1);
+        sem = FindObjectOfType<semmanager>();
     }
 
     // Update is called once per frame
@@ -54,7 +60,7 @@ public class Shooter : MonoBehaviour
         {
             Time.timeScale = 1f;
 #if (UNITY_ANDROID || UNITY_IOS)
-        if (Input.touchCount > 0)
+        if ((Input.touchCount > 0)&&(GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false))
         {
             //화면 touch 처음 하나만 인식
             Touch touch = Input.GetTouch(0);
@@ -76,6 +82,7 @@ public class Shooter : MonoBehaviour
             if(touch.phase == TouchPhase.Ended) //손가락이 화면에서 떨어지면 touch가 끝난 경우
             {
                 if (-80 < degree && degree < 80 && possible==true && Manager.limit_cnt!=0){ //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
+                    sem.play(0);
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
                     possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
                     Manager.limit_cnt--; //제한 구슬 갯수 감소
@@ -83,8 +90,8 @@ public class Shooter : MonoBehaviour
             }
         }
 #else
-            if (Input.GetMouseButton(0))
-            {
+            if ((Input.GetMouseButton(0))&&(GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false))
+            {//설정 버튼이 눌리지 않을때 대포의 궤적을 조절하고 발사할 수 있음
                 color.a = 1f; //터치하고 있으면(누르고 있으면) 경로 보임
                 sprite.color = color;
                 touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
@@ -107,8 +114,12 @@ public class Shooter : MonoBehaviour
                         reflectline.transform.position = new Vector3(2.3f, -4f - yPos, 0);
                         reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                     }
+                    
                     recolor.a = 1f;
                     resprite.color = recolor;
+                        
+                    
+                    
                 }
                 if (!colcheck)
                 {
@@ -124,6 +135,7 @@ public class Shooter : MonoBehaviour
                 sprite.color = color;
                 if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                 {
+                    sem.play(0);//구슬 쏠때 효과음 생성
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
                     Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
                     Manager.limit_cnt--; //제한 구슬 갯수 감소
