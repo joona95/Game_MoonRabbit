@@ -73,7 +73,7 @@ public class Ball : MonoBehaviour
     {
        
 
-        if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line") //shootball이 벽이 아닌 공에 닿았을 때
+        if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line"&&collision.gameObject.tag!="ceil") //shootball이 벽이 아닌 공에 닿았을 때
         {
             this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
             sem.play(2);
@@ -473,6 +473,10 @@ public class Ball : MonoBehaviour
             if (discon_total == 0)
                 Shooter.possible = true;
 
+        }
+        else if (shootball == true && collision.gameObject.tag == "ceil")
+        {
+            this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         }
     }
 

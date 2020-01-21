@@ -23,6 +23,9 @@ public class Manager : MonoBehaviour
     static public int redCnt=0, yelCnt=0, greCnt=0, bluCnt=0, purCnt=0, queCnt=0; //구슬 개수 카운트 변수
     int total = 0;//전체 구슬 개수
 
+    public GameObject ceil;
+    float top_y;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -184,7 +187,8 @@ public class Manager : MonoBehaviour
             Map.Add(temp.Pop());
         }
 
-
+        top_y = y;
+        ceil.transform.position = new Vector3(0f, top_y-0.15f, 0f);
 
     }
 
@@ -232,7 +236,7 @@ public class Manager : MonoBehaviour
             for (int i = map_index; i >= 0 ; i--)
             {
 
-                //Debug.Log(i);
+          
                 if (Map[total_row - 1][i] != null)
                 {
                     min_y = Mathf.Round(Map[total_row - 1][i].transform.position.y * 100) / 100;
@@ -263,7 +267,9 @@ public class Manager : MonoBehaviour
                         for (int j = 0; j < Map[i].Length; j++)
                         {
                             if (Map[i][j] != null)
+                            {
                                 end_y[i, j] = Map[i][j].transform.position.y + 0.45f;
+                            }
                         }
                     }
 
@@ -274,12 +280,11 @@ public class Manager : MonoBehaviour
                         {
                             if (Map[i][j] != null)
                             {
-
-
                                 if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
                                 {
                                     Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y + 0.05f, Map[i][j].transform.position.z);
                                 }
+
                             }
                         }
                     }
@@ -310,11 +315,23 @@ public class Manager : MonoBehaviour
                                     Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y - 0.05f, Map[i][j].transform.position.z);
 
                                 }
+                                
                             }
                         }
                     }
 
 
+                }
+
+             
+                for (int i = Map[0].Length - 1; i >= 0; i--)
+                {
+                    if (Map[0][i] != null)
+                    {
+                        top_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100 + 0.3f;
+                        ceil.transform.position = new Vector3(0f, top_y, 0f);
+                        break;
+                    }
                 }
 
             }
