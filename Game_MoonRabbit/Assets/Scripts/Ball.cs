@@ -12,6 +12,7 @@ public class Ball : MonoBehaviour
     static public int discon_cnt = 0, discon_total = 0; //연결끊긴 구슬의 갯수
     public bool quest; //퀘스트 구슬인지 여부
     public bool shootball = false; //발사하는 공인지 여부
+    public int count = 0;
     semmanager sem;
 
     // Start is called before the first frame update
@@ -218,144 +219,202 @@ public class Ball : MonoBehaviour
 
             Manager.Map[this.gameObject.GetComponent<Ball>().row][this.gameObject.GetComponent<Ball>().col] = this.gameObject; //Map의 해당 row, col 위치에 shootball 저장
             this.gameObject.GetComponent<Ball>().type = Manager.total_col - Manager.Map[this.gameObject.GetComponent<Ball>().row].Length;
-
+            
+       
             //shootball 발사하는공 여부 변경
             shootball = false;
 
-            //visit 초기화
-            for (int i = 0; i < Manager.total_row; i++)
+
+            //10,11,12,13,14:갯수증가+2 빨,노,초,파,보 15,16,17,18,19:갯수감소-2 빨,노,초,파,보 
+            //20:돌 21:건드리면죽는폭탄 22:가로줄폭탄 23:6개폭탄 24:무지개
+            if (collision.tag == "diebomb")
             {
-                for(int j = 0; j < Manager.Map[i].Length; j++)
-                {
-                    if (Manager.Map[i][j] != null)
-                        Manager.Map[i][j].GetComponent<Ball>().visit = false;
-                }
+                Time.timeScale = 0f;
             }
-
-            //현재 구슬과 동일한 색상의 연속된 구슬이 3개 이상 있는지 판별
-            Queue<GameObject> q = new Queue<GameObject>();
-            q.Enqueue(this.gameObject);
-            q.Peek().GetComponent<Ball>().visit = true;
-            int count = 0; //같은 색상의 연결된 구슬 갯수
-            int qcount = 0; //같은 색상의 연결된 구슬 중 퀘스트 구슬 갯수
-            while (q.Count != 0)
+            else if (collision.tag == "rowbomb")
             {
-                GameObject obj = q.Dequeue();
-                int r = obj.GetComponent<Ball>().row;
-                int c = obj.GetComponent<Ball>().col;
-               
-
-                if (obj.GetComponent<Ball>().quest == true) //같은 색상의 연결된 구슬 중 퀘스트 구슬인 경우의 수
+                /*
+                for (int i=0;i< Manager.Map[collision.GetComponent<Ball>().row].Length; i++)
                 {
-                    qcount++;
-                }
+                    if (Manager.Map[collision.GetComponent<Ball>().row][i].GetComponent<Ball>().quest == true)
+                    {
+                        Manager.queCnt--;
+                    }
 
-                count++;
+                    Manager.limit_cnt += Manager.Map[collision.GetComponent<Ball>().row][i].GetComponent<Ball>().count;
 
-                if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
-                {
-                    if (0 <=r-1&&c<Manager.Map[r-1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r-1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                    if (Manager.Map[collision.GetComponent<Ball>().row][i].tag == "red")
                     {
-                        q.Enqueue(Manager.Map[r - 1][c]);
-                        Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                        Manager.redCnt--;
                     }
-                    if (0<=r-1&&c+1<Manager.Map[r-1].Length && Manager.Map[r - 1][c+1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r-1][c+1].GetComponent<Ball>().tag == this.gameObject.tag)
+                    else if (Manager.Map[collision.GetComponent<Ball>().row][i].tag == "yellow")
                     {
-                        q.Enqueue(Manager.Map[r - 1][c+1]);
-                        Manager.Map[r - 1][c+1].GetComponent<Ball>().visit = true;
+                        Manager.yelCnt--;
                     }
-                    if (0<=c-1 && Manager.Map[r][c-1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c-1].GetComponent<Ball>().tag == this.gameObject.tag)
+                    else if (Manager.Map[collision.GetComponent<Ball>().row][i].tag == "green")
                     {
-                        q.Enqueue(Manager.Map[r][c-1]);
-                        Manager.Map[r][c-1].GetComponent<Ball>().visit = true;
+                        Manager.greCnt--;
                     }
-                    if (c+1<Manager.Map[r].Length && Manager.Map[r][c+1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c+1].GetComponent<Ball>().tag == this.gameObject.tag)
+                    else if (Manager.Map[collision.GetComponent<Ball>().row][i].tag == "blue")
                     {
-                        q.Enqueue(Manager.Map[r][c+1]);
-                        Manager.Map[r][c+1].GetComponent<Ball>().visit = true;
+                        Manager.bluCnt--;
                     }
-                    if (r+1<Manager.total_row&&c<Manager.Map[r+1].Length && Manager.Map[r +1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r+1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                    else if (Manager.Map[collision.GetComponent<Ball>().row][i].tag == "purple")
                     {
-                        q.Enqueue(Manager.Map[r + 1][c]);
-                        Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
+                        Manager.purCnt--;
                     }
-                    if (r+1<Manager.total_row&&c+1<Manager.Map[r+1].Length  && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r+1][c+1].GetComponent<Ball>().tag == this.gameObject.tag)
-                    {
-                        q.Enqueue(Manager.Map[r + 1][c + 1]);
-                        Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
-                    }
+
+                    Destroy(Manager.Map[collision.GetComponent<Ball>().row][i]);
                 }
-                else //10개일 때 이웃한 6개 
-                {
-                    if (0<=r-1&&0<=c-1 && Manager.Map[r - 1][c-1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r-1][c-1].GetComponent<Ball>().tag == this.gameObject.tag)
-                    {
-                        q.Enqueue(Manager.Map[r - 1][c-1]);
-                        Manager.Map[r - 1][c-1].GetComponent<Ball>().visit = true;
-                    }
-                    if (0<=r-1 &&c<Manager.Map[r-1].Length&& Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r-1][c].GetComponent<Ball>().tag == this.gameObject.tag)
-                    {
-                        q.Enqueue(Manager.Map[r - 1][c]);
-                        Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
-                    }
-                    if (0<=c-1  && Manager.Map[r][c-1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c-1].GetComponent<Ball>().tag == this.gameObject.tag)
-                    {
-                        q.Enqueue(Manager.Map[r][c-1]);
-                        Manager.Map[r][c-1].GetComponent<Ball>().visit = true;
-                    }
-                    if (c+1<Manager.Map[r].Length && Manager.Map[r][c+1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c+1].GetComponent<Ball>().tag == this.gameObject.tag)
-                    {
-                        q.Enqueue(Manager.Map[r][c+1]);
-                        Manager.Map[r][c+1].GetComponent<Ball>().visit = true;
-                    }
-                    if (r+1<Manager.total_row&&0<=c-1&& Manager.Map[r + 1][c-1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r+1][c-1].GetComponent<Ball>().tag == this.gameObject.tag)
-                    {
-                        q.Enqueue(Manager.Map[r + 1][c-1]);
-                        Manager.Map[r + 1][c-1].GetComponent<Ball>().visit = true;
-                    }
-                    if (r+1<Manager.total_row&&c<Manager.Map[r+1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r+1][c].GetComponent<Ball>().tag == this.gameObject.tag)
-                    {
-                        q.Enqueue(Manager.Map[r + 1][c]);
-                        Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
-                    }
-                }
+                */
+                
             }
-
-
-            //3개 이상인 경우 destroy
-            if (count >= 3)
+            else if (collision.tag == "sixbomb")
             {
+
+            }
+            else if (collision.tag == "rainbow")
+            {
+
+            }
+            else
+            {
+
+                //visit 초기화
                 for (int i = 0; i < Manager.total_row; i++)
                 {
                     for (int j = 0; j < Manager.Map[i].Length; j++)
                     {
-                        if (Manager.Map[i][j] != null && Manager.Map[i][j].GetComponent<Ball>().visit == true)
+                        if (Manager.Map[i][j] != null)
+                            Manager.Map[i][j].GetComponent<Ball>().visit = false;
+                    }
+                }
+
+                //현재 구슬과 동일한 색상의 연속된 구슬이 3개 이상 있는지 판별
+                Queue<GameObject> q = new Queue<GameObject>();
+                q.Enqueue(this.gameObject);
+                q.Peek().GetComponent<Ball>().visit = true;
+                int count = 0; //같은 색상의 연결된 구슬 갯수
+                int qcount = 0; //같은 색상의 연결된 구슬 중 퀘스트 구슬 갯수
+                while (q.Count != 0)
+                {
+                    GameObject obj = q.Dequeue();
+                    int r = obj.GetComponent<Ball>().row;
+                    int c = obj.GetComponent<Ball>().col;
+
+
+                    if (obj.GetComponent<Ball>().quest == true) //같은 색상의 연결된 구슬 중 퀘스트 구슬인 경우의 수
+                    {
+                        qcount++;
+                    }
+
+                    count++;
+
+                    if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
+                    {
+                        if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
                         {
-                            sem.play(1);
-                            Destroy(Manager.Map[i][j]);
-                            Manager.Map[i][j] = null;                     
+                            q.Enqueue(Manager.Map[r - 1][c]);
+                            Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                        }
+                        if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r - 1][c + 1]);
+                            Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
+                        }
+                        if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r][c - 1]);
+                            Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                        }
+                        if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r][c + 1]);
+                            Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
+                        }
+                        if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r + 1][c]);
+                            Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
+                        }
+                        if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r + 1][c + 1]);
+                            Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
+                        }
+                    }
+                    else //10개일 때 이웃한 6개 
+                    {
+                        if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r - 1][c - 1]);
+                            Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
+                        }
+                        if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r - 1][c]);
+                            Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                        }
+                        if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r][c - 1]);
+                            Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                        }
+                        if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r][c + 1]);
+                            Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
+                        }
+                        if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r + 1][c - 1]);
+                            Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
+                        }
+                        if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                        {
+                            q.Enqueue(Manager.Map[r + 1][c]);
+                            Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
                         }
                     }
                 }
 
-                
-                //색상갯수 감소
-                if (this.gameObject.tag == "red")
-                    Manager.redCnt -= count;
-                else if (this.gameObject.tag == "yellow")
-                    Manager.yelCnt -= count;
-                else if (this.gameObject.tag == "green")
-                    Manager.greCnt -= count;
-                else if (this.gameObject.tag == "blue")
-                    Manager.bluCnt -= count;
-                else if (this.gameObject.tag == "purple")
-                    Manager.purCnt -= count;
 
-                Manager.queCnt -= qcount; //퀘스트 구슬 갯수 감소
-                
+                //3개 이상인 경우 destroy
+                if (count >= 3)
+                {
+                    for (int i = 0; i < Manager.total_row; i++)
+                    {
+                        for (int j = 0; j < Manager.Map[i].Length; j++)
+                        {
+                            if (Manager.Map[i][j] != null && Manager.Map[i][j].GetComponent<Ball>().visit == true)
+                            {
+                                sem.play(1);
+                                Destroy(Manager.Map[i][j]);
+                                Manager.Map[i][j] = null;
+                            }
+                        }
+                    }
+
+
+                    //색상갯수 감소
+                    if (this.gameObject.tag == "red")
+                        Manager.redCnt -= count;
+                    else if (this.gameObject.tag == "yellow")
+                        Manager.yelCnt -= count;
+                    else if (this.gameObject.tag == "green")
+                        Manager.greCnt -= count;
+                    else if (this.gameObject.tag == "blue")
+                        Manager.bluCnt -= count;
+                    else if (this.gameObject.tag == "purple")
+                        Manager.purCnt -= count;
+
+                    Manager.queCnt -= qcount; //퀘스트 구슬 갯수 감소
+
+                }
             }
-            
 
 
+            //연결 여부 판별
             discon_total = 0; discon_cnt = 0; //연결되지 않은 구슬갯수 초기화
             
             for(int i = 0; i < Manager.total_row; i++)
@@ -474,9 +533,205 @@ public class Ball : MonoBehaviour
                 Shooter.possible = true;
 
         }
-        else if (shootball == true && collision.gameObject.tag == "ceil")
+        else if (shootball == true && collision.gameObject.tag == "ceil")//천장에 닿았을때
         {
             this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            this.gameObject.GetComponent<Ball>().row = 0;
+
+            float max_y = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                if (Manager.Map[0][i])
+                {
+                    max_y = Manager.Map[0][i].transform.position.y;
+                    break;
+                }
+            }
+
+            float x = Mathf.Round(this.gameObject.transform.position.x*100)/100;
+            if (Manager.Map[0].Length == 9)//첫번째 행이 9개일때
+            {
+                this.gameObject.GetComponent<Ball>().type = 1;
+                if (-0.26f <= x && x < 0.26f)
+                {
+                    if (!Manager.Map[0][4])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 4;
+                        Manager.Map[0][4] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(0f, max_y, 0f);
+                    }
+                }
+                else if (-0.78f <= x && x < -0.26f)
+                {
+                    if (!Manager.Map[0][3])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 3;
+                        Manager.Map[0][3] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-0.52f, max_y, 0f);
+                    }
+                }
+                else if (-1.30f <= x && x < -0.78f)
+                {
+                    if (!Manager.Map[0][2])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 2;
+                        Manager.Map[0][2] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-1.04f, max_y, 0f);
+                    }
+                }
+                else if (-1.82f <= x && x < -1.30f)
+                {
+                    if (!Manager.Map[0][1])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 1;
+                        Manager.Map[0][1] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-1.56f, max_y, 0f);
+                    }
+                }
+                else if (x < -1.82f)
+                {
+                    if (!Manager.Map[0][0])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 0;
+                        Manager.Map[0][0] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-2.08f, max_y, 0f);
+                    }
+                }
+                else if (0.26f <= x && x < 0.78f)
+                {
+                    if (!Manager.Map[0][5])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 5;
+                        Manager.Map[0][5] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(0.52f, max_y, 0f);
+                    }
+                }
+                else if (0.78f <= x && x < 1.30f)
+                {
+                    if (!Manager.Map[0][6])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 6;
+                        Manager.Map[0][6] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(1.04f, max_y, 0f);
+                    }
+                }
+                else if (1.30f <= x && x < 1.82f)
+                {
+                    if (!Manager.Map[0][7])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 7;
+                        Manager.Map[0][7] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(1.56f, max_y, 0f);
+                    }
+                }
+                else if (1.82f <= x)
+                {
+                    if (!Manager.Map[0][8])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 8;
+                        Manager.Map[0][8] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(2.08f, max_y, 0f);
+                    }
+                }
+            }
+            else//첫번째 행이 10개일때
+            {
+                this.gameObject.GetComponent<Ball>().type = 0;
+
+                if (-0.52f <= x && x < 0f)
+                {
+                    if (!Manager.Map[0][4])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 4;
+                        Manager.Map[0][4] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-0.26f, max_y, 0f);
+                    }
+                }
+                else if (-1.04f <= x && x < -0.52f)
+                {
+                    if (!Manager.Map[0][3])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 3;
+                        Manager.Map[0][3] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-0.78f, max_y, 0f);
+                    }
+                }
+                else if (-1.56f <= x && x < -1.04f)
+                {
+                    if (!Manager.Map[0][2])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 2;
+                        Manager.Map[0][2] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-1.30f, max_y, 0f);
+                    }
+                }
+                else if (-2.08f <= x && x < -1.56f)
+                {
+                    if (!Manager.Map[0][1])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 1;
+                        Manager.Map[0][1] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-1.82f, max_y, 0f);
+                    }
+                }
+                else if (x < -2.08f)
+                {
+                    if (!Manager.Map[0][0])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 0;
+                        Manager.Map[0][0] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(-2.34f, max_y, 0f);
+                    }
+                }
+                else if (0f <= x && x < 0.52f)
+                {
+                    if (!Manager.Map[0][5])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 5;
+                        Manager.Map[0][5] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(0.26f, max_y, 0f);
+                    }
+                }
+                else if (0.52f <= x && x < 1.04f)
+                {
+                    if (!Manager.Map[0][6])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 6;
+                        Manager.Map[0][6] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(0.78f, max_y, 0f);
+                    }
+                }
+                else if (1.04f <= x && x < 1.56f)
+                {
+                    if (!Manager.Map[0][7])
+                    {
+                        this.gameObject.GetComponent<Ball>().col=7;
+                        Manager.Map[0][7] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(1.30f, max_y, 0f);
+                    }
+                }
+                else if (1.56f <= x && x < 2.08f)
+                {
+                    if (!Manager.Map[0][8])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 8;
+                        Manager.Map[0][8] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(1.82f, max_y, 0f);
+                    }
+                }
+                else if (2.08f <= x)
+                {
+                    if (!Manager.Map[0][9])
+                    {
+                        this.gameObject.GetComponent<Ball>().col = 9;
+                        Manager.Map[0][9] = this.gameObject;
+                        this.gameObject.transform.position = new Vector3(2.34f, max_y, 0f);
+                    }
+                }
+            }
+
+            shootball = false;
+            Shooter.possible = true;
         }
     }
 

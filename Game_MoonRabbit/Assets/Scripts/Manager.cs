@@ -10,8 +10,11 @@ public class Manager : MonoBehaviour
     static public int current_stage;//현재 스테이지 레벨
     static public int[,] stage; //각 스테이지마다 맵 구슬 생성 정보 저장
 
-    public GameObject[] BallType=new GameObject[17];//구슬 색깔별로 종류 저장
-    //-1:10,9열구분 -2:없는거 0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보 10:돌 11:건드리면죽는폭탄 12:갯수증가+2 13:갯수감소-2 14:가로줄폭탄 15:6개폭탄 16:무지개
+    public GameObject[] BallType=new GameObject[25];//구슬 색깔별로 종류 저장
+    //-1:10,9열구분 -2:없는거 
+    //0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보 
+    //10,11,12,13,14:갯수증가+2 빨,노,초,파,보 15,16,17,18,19:갯수감소-2 빨,노,초,파,보 
+    //20:돌 21:건드리면죽는폭탄 22:가로줄폭탄 23:6개폭탄 24:무지개
 
     public GameObject shotspawn;//구슬 발사의 출발점을 정하기 위한 것
     public GameObject[] ballPrefabs;//발사할 구슬의 배열
@@ -19,7 +22,7 @@ public class Manager : MonoBehaviour
     public int size;//발사할 구슬의 배열의 사이즈
     float purpl, re, blu, yello;//구슬 개수 비율
 
-    static public int limit_cnt = 30; //구슬 제한 갯수
+    static public int limit_cnt; //구슬 제한 갯수
     static public int redCnt=0, yelCnt=0, greCnt=0, bluCnt=0, purCnt=0, queCnt=0; //구슬 개수 카운트 변수
     int total = 0;//전체 구슬 개수
 
@@ -106,6 +109,7 @@ public class Manager : MonoBehaviour
         StageInfo = MapLoader.StageRead("StageInfo");//stage정보 csv 읽어오기
         total_row = int.Parse(StageInfo[current_stage-1]["Row"].ToString()); //stage에 따른 total row
         total_col = int.Parse(StageInfo[current_stage-1]["Col"].ToString()); //stage에 따른 total col
+        limit_cnt = int.Parse(StageInfo[current_stage - 1]["Count"].ToString());
         stage = new int[total_row, total_col];
         Debug.Log(total_row + "," + total_col);
         MapLoader.MapRead(current_stage.ToString()); //구슬 생성 맵 정보 csv에서 읽어오기
@@ -162,14 +166,70 @@ public class Manager : MonoBehaviour
                             purCnt++;
                             break;
                         case 5:
+                            redCnt++;
+                            queCnt++;
+                            tmp[j].GetComponent<Ball>().quest = true;
+                            break;
                         case 6:
+                            yelCnt++;
+                            queCnt++;
+                            tmp[j].GetComponent<Ball>().quest = true;
+                            break;
                         case 7:
+                            greCnt++;
+                            queCnt++;
+                            tmp[j].GetComponent<Ball>().quest = true;
+                            break;
                         case 8:
+                            bluCnt++;
+                            queCnt++;
+                            tmp[j].GetComponent<Ball>().quest = true;
+                            break;
                         case 9:
+                            purCnt++;
                             queCnt++;
                             tmp[j].GetComponent<Ball>().quest = true; //퀘스트 구슬인 경우 각 구슬마다 표시
                             break;
-
+                        case 10:
+                            redCnt++;
+                            tmp[j].GetComponent<Ball>().count += 2;
+                            break;
+                        case 11:
+                            yelCnt++;
+                            tmp[j].GetComponent<Ball>().count += 2;
+                            break;
+                        case 12:
+                            greCnt++;
+                            tmp[j].GetComponent<Ball>().count += 2;
+                            break;
+                        case 13:
+                            bluCnt++;
+                            tmp[j].GetComponent<Ball>().count += 2;
+                            break;
+                        case 14:
+                            purCnt++;
+                            tmp[j].GetComponent<Ball>().count += 2;
+                            break;
+                        case 15:
+                            redCnt++;
+                            tmp[j].GetComponent<Ball>().count -= 2;
+                            break;
+                        case 16:
+                            yelCnt++;
+                            tmp[j].GetComponent<Ball>().count -= 2;
+                            break;
+                        case 17:
+                            greCnt++;
+                            tmp[j].GetComponent<Ball>().count -= 2;
+                            break;
+                        case 18:
+                            bluCnt++;
+                            tmp[j].GetComponent<Ball>().count -= 2;
+                            break;
+                        case 19:
+                            purCnt++;
+                            tmp[j].GetComponent<Ball>().count -= 2;
+                            break;
                     }
                 }
 
