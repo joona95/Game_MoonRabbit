@@ -223,6 +223,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col - 1]);
                         Time.timeScale = 0f;
                     }                  
@@ -231,6 +232,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col]);
                         Time.timeScale = 0f;
                     }
@@ -239,6 +241,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col - 1]);
                         Time.timeScale = 0f;
                     }
@@ -247,6 +250,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col + 1]);
                         Time.timeScale = 0f;
                     }
@@ -255,6 +259,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col - 1]);
                         Time.timeScale = 0f;
                     }
@@ -263,6 +268,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col]);
                         Time.timeScale = 0f;
                     }
@@ -275,6 +281,7 @@ public class Ball : MonoBehaviour
                 {            
                     if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col - 1]);
                     }
 
@@ -283,6 +290,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col]);
                     }
 
@@ -291,6 +299,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col - 1]);
                     }
 
@@ -299,6 +308,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col + 1]);
                     }
 
@@ -307,6 +317,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col - 1]);
                     }
 
@@ -315,6 +326,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col]);
                     }
 
@@ -328,6 +340,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col]);
                         Time.timeScale = 0f;
                     }
@@ -336,6 +349,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col + 1]);
                         Time.timeScale = 0f;
                     }
@@ -344,6 +358,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col - 1]);
                         Time.timeScale = 0f;
                     }
@@ -352,6 +367,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col + 1]);
                         Time.timeScale = 0f;
                     }
@@ -360,6 +376,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col]);
                         Time.timeScale = 0f;
                     }
@@ -368,6 +385,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col + 1]);
                         Time.timeScale = 0f;
                     }
@@ -381,6 +399,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col]);
                     }
 
@@ -389,6 +408,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row - 1][col + 1]);
                     }
 
@@ -397,6 +417,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col - 1]);
                     }
                 }
@@ -404,6 +425,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row][col + 1]);
                     }
                 }
@@ -411,6 +433,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col]);
                     }
                 }
@@ -418,6 +441,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
+                        special = true;
                         Destroy(Manager.Map[row + 1][col + 1]);
                     }
                 }
