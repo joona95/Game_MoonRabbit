@@ -10,7 +10,7 @@ public class Manager : MonoBehaviour
     static public int current_stage;//현재 스테이지 레벨
     static public int[,] stage; //각 스테이지마다 맵 구슬 생성 정보 저장
 
-    public GameObject[] BallType=new GameObject[25];//구슬 색깔별로 종류 저장
+    public GameObject[] BallType=new GameObject[24];//구슬 색깔별로 종류 저장
     //-1:10,9열구분 -2:없는거 
     //0,1,2,3,4: 빨,노,초,파,보   5,6,7,8,9: 퀘스트빨,노,초,파,보 
     //10,11,12,13,14:갯수증가+2 빨,노,초,파,보 15,16,17,18,19:갯수감소-2 빨,노,초,파,보 
@@ -230,6 +230,16 @@ public class Manager : MonoBehaviour
                             purCnt++;
                             tmp[j].GetComponent<Ball>().count -= 2;
                             break;
+                        case 21:
+                            tmp[j].GetComponent<Ball>().diebomb = true;
+                            break;
+                        case 22:
+                            tmp[j].GetComponent<Ball>().rowbomb = true;
+                            break;
+                        case 23:
+                            tmp[j].GetComponent<Ball>().sixbomb = true;
+                            break;
+
                     }
                 }
 
