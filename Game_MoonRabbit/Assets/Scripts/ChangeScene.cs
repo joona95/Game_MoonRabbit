@@ -41,6 +41,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage1_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 1;
         //SceneManager.LoadScene("Stage");
     }
@@ -48,6 +49,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage2_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 2;
         //SceneManager.LoadScene("Stage");
     }
@@ -55,6 +57,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage3_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 3;
         //SceneManager.LoadScene("Stage");
     }
@@ -62,6 +65,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage4_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 4;
         //SceneManager.LoadScene("Stage");
     }
@@ -69,6 +73,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage5_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 5;
         //SceneManager.LoadScene("Stage");
     }
@@ -76,6 +81,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage6_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 6;
         //SceneManager.LoadScene("Stage");
     }
@@ -83,6 +89,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage7_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 7;
         //SceneManager.LoadScene("Stage");
     }
@@ -90,6 +97,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage8_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 8;
         //SceneManager.LoadScene("Stage");
     }
@@ -97,6 +105,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage9_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 9;
         //SceneManager.LoadScene("Stage");
     }
@@ -104,6 +113,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage10_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 10;
         //SceneManager.LoadScene("Stage");
     }
@@ -111,6 +121,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage11_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 11;
         //SceneManager.LoadScene("Stage");
     }
@@ -118,6 +129,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage12_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 12;
         //SceneManager.LoadScene("Stage");
     }
@@ -125,6 +137,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage13_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 13;
         //SceneManager.LoadScene("Stage");
     }
@@ -132,6 +145,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage14_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 14;
         //SceneManager.LoadScene("Stage");
     }
@@ -139,6 +153,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage15_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 15;
         //SceneManager.LoadScene("Stage");
     }
@@ -146,6 +161,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage16_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 16;
         //SceneManager.LoadScene("Stage");
     }
@@ -153,6 +169,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage17_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 17;
         //SceneManager.LoadScene("Stage");
     }
@@ -160,6 +177,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage18_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 18;
         //SceneManager.LoadScene("Stage");
     }
@@ -167,6 +185,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage19_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 19;
         //SceneManager.LoadScene("Stage");
     }
@@ -174,6 +193,7 @@ public class ChangeScene : MonoBehaviour
     public void Stage20_Button()
     {
         StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 20;
         //SceneManager.LoadScene("Stage");
     }

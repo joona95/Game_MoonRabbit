@@ -60,176 +60,668 @@ public class Ball : MonoBehaviour
     {
        
 
-        if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line"&&collision.gameObject.tag!="ceil") //shootball이 벽이 아닌 공에 닿았을 때
+        if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line") //shootball이 벽이 아닌 공에 닿았을 때
         {
-
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
-            sem.play(2);
-            float col_x = collision.gameObject.transform.position.x; //collision의 x 좌표
-            float col_y = collision.gameObject.transform.position.y; //collision의 y 좌표
-            float this_x = this.gameObject.transform.position.x; //shootball의 x 좌표
-            float this_y = this.gameObject.transform.position.y; //shootball의 y 좌표
-
-            if (collision.gameObject.GetComponent<Ball>().type == 0) //0:10개 행
+            if (collision.gameObject.tag != "ceil")
             {
-                //collision의 (x, y)좌표와 shootball의 (x,y)좌표 비교했을 때 row, col, position 정해주기 (위왼, 위오, 왼, 오, 아래왼, 아래오)
-                if (col_x < this_x) 
+                this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
+                sem.play(2);
+                float col_x = collision.gameObject.transform.position.x; //collision의 x 좌표
+                float col_y = collision.gameObject.transform.position.y; //collision의 y 좌표
+                float this_x = this.gameObject.transform.position.x; //shootball의 x 좌표
+                float this_y = this.gameObject.transform.position.y; //shootball의 y 좌표
+
+                if (collision.gameObject.GetComponent<Ball>().type == 0) //0:10개 행
                 {
-                    if (col_y + 0.225 < this_y) //위쪽 오른쪽
+                    //collision의 (x, y)좌표와 shootball의 (x,y)좌표 비교했을 때 row, col, position 정해주기 (위왼, 위오, 왼, 오, 아래왼, 아래오)
+                    if (col_x < this_x)
                     {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
-                        this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y + 0.45f, 0f);
- 
+                        if (col_y + 0.225 < this_y) //위쪽 오른쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
+                            this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y + 0.45f, 0f);
+
+                        }
+                        else if (col_y - 0.225 > this_y) //아래쪽 오른쪽 
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
+                            this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y - 0.45f, 0f);
+
+                        }
+                        else //col_y - 0.225 <= this_y <= col_y + 0.225  //오른쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
+                            this.gameObject.transform.position = new Vector3(col_x + 0.52f, col_y, 0f);
+
+                        }
                     }
-                    else if(col_y - 0.225 > this_y) //아래쪽 오른쪽 
+                    else //col_x >= this_x
                     {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
-                        this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y - 0.45f, 0f);
-                 
+                        if (col_y + 0.225 < this_y) //위쪽 왼쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
+                            this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y + 0.45f, 0f);
+
+
+                        }
+                        else if (col_y - 0.225 > this_y) //아래쪽 왼쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
+                            this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y - 0.45f, 0f);
+
+
+                        }
+                        else //col_y - 0.225 <= this_y <= col_y + 0.225  //왼쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
+                            this.gameObject.transform.position = new Vector3(col_x - 0.52f, col_y, 0f);
+
+                        }
                     }
-                    else //col_y - 0.225 <= this_y <= col_y + 0.225  //오른쪽
-                    {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
-                        this.gameObject.transform.position = new Vector3(col_x + 0.52f, col_y, 0f);
-                      
-                    }
+
+
+
                 }
-                else //col_x >= this_x
+                else //1:9개 행
                 {
-                    if (col_y + 0.225 < this_y) //위쪽 왼쪽
+                    if (col_x < this_x)
                     {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
-                        this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y + 0.45f, 0f);
-              
+                        if (col_y + 0.225 < this_y) //위쪽 오른쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
+                            this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y + 0.45f, 0f);
 
-                    }
-                    else if (col_y - 0.225 > this_y) //아래쪽 왼쪽
-                    {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
-                        this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y - 0.45f, 0f);
-              
+                        }
+                        else if (col_y - 0.225 > this_y) //아래쪽 오른쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
+                            this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y - 0.45f, 0f);
 
+                        }
+                        else //col_y - 0.225 <= this_y <= col_y + 0.225  //오른쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
+                            this.gameObject.transform.position = new Vector3(col_x + 0.52f, col_y, 0f);
+
+                        }
                     }
-                    else //col_y - 0.225 <= this_y <= col_y + 0.225  //왼쪽
+                    else //col_x >= this_x  
                     {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
-                        this.gameObject.transform.position = new Vector3(col_x - 0.52f, col_y, 0f);
-                 
+                        if (col_y + 0.225 < this_y) //위쪽 왼쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
+                            this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y + 0.45f, 0f);
+
+                        }
+                        else if (col_y - 0.225 > this_y) //아래쪽 왼쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
+                            this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y - 0.45f, 0f);
+
+                        }
+                        else //col_y - 0.225 <= this_y <= col_y + 0.225  //왼쪽
+                        {
+                            this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
+                            this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
+                            this.gameObject.transform.position = new Vector3(col_x - 0.52f, col_y, 0f);
+
+                        }
                     }
+
                 }
 
-                
+
+
+
+
+
+                if (this.gameObject.GetComponent<Ball>().row >= Manager.total_row) //total_row보다 현재 row가 크면 Map에 새로운 배열을 넣어주어야함. total_row도 증가.
+                {
+                    int t; //현재 row의 갯수
+                    if (Manager.Map[this.gameObject.GetComponent<Ball>().row - 1].Length == Manager.total_col) //현재 row의 이전 행의 배열 수가 10 -> 현재 9
+                    {
+                        this.gameObject.GetComponent<Ball>().type = 1;
+                        t = Manager.total_col - 1;
+                    }
+                    else //현재 row의 이전 행의 배열 수가 9 -> 현재 10
+                    {
+                        this.gameObject.GetComponent<Ball>().type = 0;
+                        t = Manager.total_col;
+                    }
+
+                    GameObject[] tmp = new GameObject[t];
+                    Manager.Map.Add(tmp);
+                    Manager.total_row++;
+                }
+
+                Manager.Map[this.gameObject.GetComponent<Ball>().row][this.gameObject.GetComponent<Ball>().col] = this.gameObject; //Map의 해당 row, col 위치에 shootball 저장
+                this.gameObject.GetComponent<Ball>().type = Manager.total_col - Manager.Map[this.gameObject.GetComponent<Ball>().row].Length;
+
+
+                //shootball 발사하는공 여부 변경
+                shootball = false;
 
             }
-            else //1:9개 행
+            else if (collision.gameObject.tag == "ceil")//천장에 닿았을때
             {
-                if (col_x < this_x)
+                this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                this.gameObject.GetComponent<Ball>().row = 0;
+
+                float max_y = 0;
+                for (int i = 0; i < 9; i++)
                 {
-                    if (col_y + 0.225 < this_y) //위쪽 오른쪽
+                    if (Manager.Map[0][i])
                     {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
-                        this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y + 0.45f, 0f);
-            
-                    }
-                    else if (col_y - 0.225 > this_y) //아래쪽 오른쪽
-                    {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
-                        this.gameObject.transform.position = new Vector3(col_x + 0.26f, col_y - 0.45f, 0f);
-               
-                    }
-                    else //col_y - 0.225 <= this_y <= col_y + 0.225  //오른쪽
-                    {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col + 1;
-                        this.gameObject.transform.position = new Vector3(col_x + 0.52f, col_y, 0f);
-                   
-                    }
-                }
-                else //col_x >= this_x  
-                {
-                    if (col_y + 0.225 < this_y) //위쪽 왼쪽
-                    {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row - 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
-                        this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y + 0.45f, 0f);
-        
-                    }
-                    else if (col_y - 0.225 > this_y) //아래쪽 왼쪽
-                    {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row + 1;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col;
-                        this.gameObject.transform.position = new Vector3(col_x - 0.26f, col_y - 0.45f, 0f);
-    
-                    }
-                    else //col_y - 0.225 <= this_y <= col_y + 0.225  //왼쪽
-                    {
-                        this.gameObject.GetComponent<Ball>().row = collision.gameObject.GetComponent<Ball>().row;
-                        this.gameObject.GetComponent<Ball>().col = collision.gameObject.GetComponent<Ball>().col - 1;
-                        this.gameObject.transform.position = new Vector3(col_x - 0.52f, col_y, 0f);
-          
+                        max_y = Manager.Map[0][i].transform.position.y;
+                        break;
                     }
                 }
 
-            }
-
-           
-
-            
-            
-
-            if (this.gameObject.GetComponent<Ball>().row >= Manager.total_row) //total_row보다 현재 row가 크면 Map에 새로운 배열을 넣어주어야함. total_row도 증가.
-            {
-                int t; //현재 row의 갯수
-                if (Manager.Map[this.gameObject.GetComponent<Ball>().row - 1].Length == Manager.total_col) //현재 row의 이전 행의 배열 수가 10 -> 현재 9
+                float x = Mathf.Round(this.gameObject.transform.position.x * 100) / 100;
+                if (Manager.Map[0].Length == 9)//첫번째 행이 9개일때
                 {
                     this.gameObject.GetComponent<Ball>().type = 1;
-                    t = Manager.total_col - 1;
+                    if (-0.26f <= x && x < 0.26f)
+                    {
+                        if (!Manager.Map[0][4])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 4;
+                            Manager.Map[0][4] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(0f, max_y, 0f);
+                        }
+                    }
+                    else if (-0.78f <= x && x < -0.26f)
+                    {
+                        if (!Manager.Map[0][3])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 3;
+                            Manager.Map[0][3] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-0.52f, max_y, 0f);
+                        }
+                    }
+                    else if (-1.30f <= x && x < -0.78f)
+                    {
+                        if (!Manager.Map[0][2])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 2;
+                            Manager.Map[0][2] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-1.04f, max_y, 0f);
+                        }
+                    }
+                    else if (-1.82f <= x && x < -1.30f)
+                    {
+                        if (!Manager.Map[0][1])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 1;
+                            Manager.Map[0][1] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-1.56f, max_y, 0f);
+                        }
+                    }
+                    else if (x < -1.82f)
+                    {
+                        if (!Manager.Map[0][0])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 0;
+                            Manager.Map[0][0] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-2.08f, max_y, 0f);
+                        }
+                    }
+                    else if (0.26f <= x && x < 0.78f)
+                    {
+                        if (!Manager.Map[0][5])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 5;
+                            Manager.Map[0][5] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(0.52f, max_y, 0f);
+                        }
+                    }
+                    else if (0.78f <= x && x < 1.30f)
+                    {
+                        if (!Manager.Map[0][6])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 6;
+                            Manager.Map[0][6] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(1.04f, max_y, 0f);
+                        }
+                    }
+                    else if (1.30f <= x && x < 1.82f)
+                    {
+                        if (!Manager.Map[0][7])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 7;
+                            Manager.Map[0][7] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(1.56f, max_y, 0f);
+                        }
+                    }
+                    else if (1.82f <= x)
+                    {
+                        if (!Manager.Map[0][8])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 8;
+                            Manager.Map[0][8] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(2.08f, max_y, 0f);
+                        }
+                    }
                 }
-                else //현재 row의 이전 행의 배열 수가 9 -> 현재 10
+                else//첫번째 행이 10개일때
                 {
                     this.gameObject.GetComponent<Ball>().type = 0;
-                    t = Manager.total_col;
+
+                    if (-0.52f <= x && x < 0f)
+                    {
+                        if (!Manager.Map[0][4])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 4;
+                            Manager.Map[0][4] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-0.26f, max_y, 0f);
+                        }
+                    }
+                    else if (-1.04f <= x && x < -0.52f)
+                    {
+                        if (!Manager.Map[0][3])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 3;
+                            Manager.Map[0][3] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-0.78f, max_y, 0f);
+                        }
+                    }
+                    else if (-1.56f <= x && x < -1.04f)
+                    {
+                        if (!Manager.Map[0][2])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 2;
+                            Manager.Map[0][2] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-1.30f, max_y, 0f);
+                        }
+                    }
+                    else if (-2.08f <= x && x < -1.56f)
+                    {
+                        if (!Manager.Map[0][1])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 1;
+                            Manager.Map[0][1] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-1.82f, max_y, 0f);
+                        }
+                    }
+                    else if (x < -2.08f)
+                    {
+                        if (!Manager.Map[0][0])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 0;
+                            Manager.Map[0][0] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(-2.34f, max_y, 0f);
+                        }
+                    }
+                    else if (0f <= x && x < 0.52f)
+                    {
+                        if (!Manager.Map[0][5])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 5;
+                            Manager.Map[0][5] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(0.26f, max_y, 0f);
+                        }
+                    }
+                    else if (0.52f <= x && x < 1.04f)
+                    {
+                        if (!Manager.Map[0][6])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 6;
+                            Manager.Map[0][6] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(0.78f, max_y, 0f);
+                        }
+                    }
+                    else if (1.04f <= x && x < 1.56f)
+                    {
+                        if (!Manager.Map[0][7])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 7;
+                            Manager.Map[0][7] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(1.30f, max_y, 0f);
+                        }
+                    }
+                    else if (1.56f <= x && x < 2.08f)
+                    {
+                        if (!Manager.Map[0][8])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 8;
+                            Manager.Map[0][8] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(1.82f, max_y, 0f);
+                        }
+                    }
+                    else if (2.08f <= x)
+                    {
+                        if (!Manager.Map[0][9])
+                        {
+                            this.gameObject.GetComponent<Ball>().col = 9;
+                            Manager.Map[0][9] = this.gameObject;
+                            this.gameObject.transform.position = new Vector3(2.34f, max_y, 0f);
+                        }
+                    }
                 }
 
-                GameObject[] tmp = new GameObject[t];
-                Manager.Map.Add(tmp);
-                Manager.total_row++;
+                shootball = false;
+                Shooter.possible = true;
             }
 
-            Manager.Map[this.gameObject.GetComponent<Ball>().row][this.gameObject.GetComponent<Ball>().col] = this.gameObject; //Map의 해당 row, col 위치에 shootball 저장
-            this.gameObject.GetComponent<Ball>().type = Manager.total_col - Manager.Map[this.gameObject.GetComponent<Ball>().row].Length;
-            
-       
-            //shootball 발사하는공 여부 변경
-            shootball = false;
-
-            
-            
 
 
 
             //item사용
             if (this.gameObject.GetComponent<Ball>().rowbomb == true)
             {
-                Destroy(this.gameObject);
+                for (int i = 0; i < Manager.Map[row].Length; i++)
+                {
+                    Destroy(Manager.Map[row][i]);
+                    Manager.Map[row][i] = null;
+                }
             }
             else if (this.gameObject.GetComponent<Ball>().sixbomb == true)
             {
+                if (Manager.Map[row].Length == 9)
+                {
+                    if (0 <= row - 1 && Manager.Map[row - 1][col])
+                    {
+                        Destroy(Manager.Map[row - 1][col]);
+                        Manager.Map[row - 1][col] = null;
+                    }
+                    if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
+                    {
+                        Destroy(Manager.Map[row - 1][col + 1]);
+                        Manager.Map[row - 1][col + 1] = null;
+                    }
+                    if (0 <= col - 1 && Manager.Map[row][col - 1])
+                    {
+                        Destroy(Manager.Map[row][col - 1]);
+                        Manager.Map[row][col - 1] = null;
+                    }
+                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                    {
+                        Destroy(Manager.Map[row][col + 1]);
+                        Manager.Map[row][col + 1] = null;
+                    }
+                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col])
+                    {
+                        Destroy(Manager.Map[row + 1][col]);
+                        Manager.Map[row + 1][col] = null;
+                    }
+                    if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
+                    {
+                        Destroy(Manager.Map[row + 1][col + 1]);
+                        Manager.Map[row + 1][col + 1] = null;
+                    }
+
+                  
+                }
+                else
+                {
+                    if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1])
+                    {
+                        Destroy(Manager.Map[row - 1][col - 1]);
+                        Manager.Map[row - 1][col - 1] = null;
+                    }
+                    if (0 <= row - 1 && Manager.Map[row - 1][col])
+                    {
+                        Destroy(Manager.Map[row - 1][col]);
+                        Manager.Map[row - 1][col] = null;
+                    }
+                    if (0 <= col - 1 && Manager.Map[row][col - 1])
+                    {
+                        Destroy(Manager.Map[row][col - 1]);
+                        Manager.Map[row - 1][col] = null;
+                    }
+                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                    {
+                        Destroy(Manager.Map[row][col + 1]);
+                        Manager.Map[row][col + 1] = null;
+                    }
+                    if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
+                    {
+                        Destroy(Manager.Map[row + 1][col - 1]);
+                        Manager.Map[row + 1][col - 1] = null;
+                    }
+                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col])
+                    {
+                        Destroy(Manager.Map[row + 1][col]);
+                        Manager.Map[row + 1][col] = null;
+                    }
+                }
+
+                int t_r = this.gameObject.GetComponent<Ball>().row;
+                int t_c = this.gameObject.GetComponent<Ball>().col;
                 Destroy(this.gameObject);
+                Manager.Map[t_r][t_c] = null;
             }
             else if (this.gameObject.GetComponent<Ball>().rainbow == true)
             {
+
+                int t_r = this.gameObject.GetComponent<Ball>().row;
+                int t_c = this.gameObject.GetComponent<Ball>().col;
+
                 //주위 6개 bfs
+                for (int z = 0; z < 6; z++)
+                {
+                    //visit 초기화
+                    for (int i = 0; i < Manager.total_row; i++)
+                    {
+                        for (int j = 0; j < Manager.Map[i].Length; j++)
+                        {
+                            if (Manager.Map[i][j] != null)
+                                Manager.Map[i][j].GetComponent<Ball>().visit = false;
+                        }
+                    }
+
+                    //현재 구슬과 동일한 색상의 연속된 구슬이 3개 이상 있는지 판별
+                    Queue<GameObject> q = new Queue<GameObject>();
+
+                    switch (z)
+                    {
+                        case 0:
+                            if (this.gameObject.GetComponent<Ball>().type == 0)
+                            {
+                                if (0 <= t_r - 1 && 0 <= t_c - 1 && Manager.Map[t_r - 1][t_c - 1])
+                                {
+                                    q.Enqueue(Manager.Map[t_r - 1][t_c - 1]);
+                                }
+                            }
+                            else
+                            {
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c])
+                                {
+                                    q.Enqueue(Manager.Map[t_r - 1][t_c]);
+                                }
+                            }
+                            break;
+                        case 1:
+                            if (this.gameObject.GetComponent<Ball>().type == 0)
+                            {
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c])
+                                {
+                                    q.Enqueue(Manager.Map[t_r - 1][t_c]);
+                                }
+                            }
+                            else
+                            {
+                                if (0 <= t_r - 1 && t_c + 1 < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c + 1])
+                                {
+                                    q.Enqueue(Manager.Map[t_r - 1][t_c + 1]);
+                                }
+                            }
+                            break;
+                        case 2:
+                            if (0 <= t_c - 1 && Manager.Map[t_r][t_c - 1])
+                            {
+                                q.Enqueue(Manager.Map[t_r][t_c - 1]);
+                            }
+                            break;
+                        case 3:
+                            if (this.gameObject.GetComponent<Ball>().type == 0)
+                            {
+                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1])
+                                {
+                                    q.Enqueue(Manager.Map[t_r][t_c + 1]);
+                                }
+                            }
+                            else
+                            {
+                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1])
+                                {
+                                    q.Enqueue(Manager.Map[t_r][t_c + 1]);
+                                }
+                            }
+                            break;
+                        case 4:
+                            if (this.gameObject.GetComponent<Ball>().type == 0)
+                            {
+                                if (t_r + 1 < Manager.total_row && 0 <= t_c - 1 && Manager.Map[t_r + 1][t_c - 1])
+                                {
+                                    q.Enqueue(Manager.Map[t_r + 1][t_c - 1]);
+                                }
+                            }
+                            else
+                            {
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c])
+                                {
+                                    q.Enqueue(Manager.Map[t_r + 1][t_c]);
+                                }
+                            }
+                            break;
+                        case 5:
+                            if (this.gameObject.GetComponent<Ball>().type == 0)
+                            {
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c])
+                                {
+                                    q.Enqueue(Manager.Map[t_r + 1][t_c]);
+                                }
+                            }
+                            else
+                            {
+                                if (t_r + 1 < Manager.total_row && t_c + 1 < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c + 1])
+                                {
+                                    q.Enqueue(Manager.Map[t_r + 1][t_c + 1]);
+                                }
+                            }
+                            break;
+                    }
+
+                    string color=null;
+                    if (q.Count != 0)
+                    {
+                        q.Peek().GetComponent<Ball>().visit = true;
+                        Debug.Log(z + ":" + q.Peek().GetComponent<Ball>().row + "," + q.Peek().GetComponent<Ball>().col);
+                        color = q.Peek().tag;
+                    }
+                    int count = 0; //같은 색상의 연결된 구슬 갯수
+                                   //int qcount = 0; //같은 색상의 연결된 구슬 중 퀘스트 구슬 갯수
+                    while (q.Count != 0)
+                    {
+                        GameObject obj = q.Dequeue();
+                        int r = obj.GetComponent<Ball>().row;
+                        int c = obj.GetComponent<Ball>().col;
+                        Debug.Log(r + "," + c);
+
+                        count++;
+
+                        if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
+                        {
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r - 1][c]);
+                                Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                            }
+                            if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r - 1][c + 1]);
+                                Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
+                            }
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r][c - 1]);
+                                Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                            }
+                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r][c + 1]);
+                                Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
+                            }
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r + 1][c]);
+                                Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
+                            }
+                            if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r + 1][c + 1]);
+                                Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
+                            }
+                        }
+                        else //10개일 때 이웃한 6개 
+                        {
+                            if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r - 1][c - 1]);
+                                Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
+                            }
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r - 1][c]);
+                                Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                            }
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r][c - 1]);
+                                Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                            }
+                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r][c + 1]);
+                                Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
+                            }
+                            if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r + 1][c - 1]);
+                                Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
+                            }
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == color)
+                            {
+                                q.Enqueue(Manager.Map[r + 1][c]);
+                                Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
+                            }
+                        }
+                    }
+
+                    Debug.Log(count);
+
+                    //3개 이상인 경우 destroy
+                    if (count >= 3)
+                    {
+                        for (int i = 0; i < Manager.total_row; i++)
+                        {
+                            for (int j = 0; j < Manager.Map[i].Length; j++)
+                            {
+                                if (Manager.Map[i][j] != null && Manager.Map[i][j].GetComponent<Ball>().visit == true)
+                                {
+                                    Destroy(Manager.Map[i][j]);
+                                    Manager.Map[i][j] = null;
+                                }
+                            }
+                        }
+
+                    }
+                }
 
                 Destroy(this.gameObject);
+                Manager.Map[t_r][t_c] = null;
             }
             else//item 사용아닐때
             {
@@ -588,15 +1080,12 @@ public class Ball : MonoBehaviour
             }
 
 
-            
-
-
             //연결 여부 판별
             discon_total = 0; discon_cnt = 0; //연결되지 않은 구슬갯수 초기화
-            
-            for(int i = 0; i < Manager.total_row; i++)
+
+            for (int i = 0; i < Manager.total_row; i++)
             {
-                for(int j = 0; j < Manager.Map[i].Length; j++)
+                for (int j = 0; j < Manager.Map[i].Length; j++)
                 {
                     if (Manager.Map[i][j] != null)
                     {
@@ -639,7 +1128,7 @@ public class Ball : MonoBehaviour
                                 if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
                                 {
                                     s.Push(Manager.Map[r][c - 1]);
-                                   Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                                    Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                                 }
                                 if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
                                 {
@@ -696,11 +1185,11 @@ public class Ball : MonoBehaviour
 
                         if (min_r != 0)
                         {
-                    
+
                             Manager.Map[i][j].GetComponent<Ball>().connect = false; //connect여부 표시
                             discon_total++; //연결되지 않은 구슬 갯수
                         }
-                                             
+
                     }
                 }
             }
@@ -709,207 +1198,10 @@ public class Ball : MonoBehaviour
             if (discon_total == 0)
                 Shooter.possible = true;
 
+
+
         }
-        else if (shootball == true && collision.gameObject.tag == "ceil")//천장에 닿았을때
-        {
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            this.gameObject.GetComponent<Ball>().row = 0;
-
-            float max_y = 0;
-            for (int i = 0; i < 9; i++)
-            {
-                if (Manager.Map[0][i])
-                {
-                    max_y = Manager.Map[0][i].transform.position.y;
-                    break;
-                }
-            }
-
-            float x = Mathf.Round(this.gameObject.transform.position.x*100)/100;
-            if (Manager.Map[0].Length == 9)//첫번째 행이 9개일때
-            {
-                this.gameObject.GetComponent<Ball>().type = 1;
-                if (-0.26f <= x && x < 0.26f)
-                {
-                    if (!Manager.Map[0][4])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 4;
-                        Manager.Map[0][4] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(0f, max_y, 0f);
-                    }
-                }
-                else if (-0.78f <= x && x < -0.26f)
-                {
-                    if (!Manager.Map[0][3])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 3;
-                        Manager.Map[0][3] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-0.52f, max_y, 0f);
-                    }
-                }
-                else if (-1.30f <= x && x < -0.78f)
-                {
-                    if (!Manager.Map[0][2])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 2;
-                        Manager.Map[0][2] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-1.04f, max_y, 0f);
-                    }
-                }
-                else if (-1.82f <= x && x < -1.30f)
-                {
-                    if (!Manager.Map[0][1])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 1;
-                        Manager.Map[0][1] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-1.56f, max_y, 0f);
-                    }
-                }
-                else if (x < -1.82f)
-                {
-                    if (!Manager.Map[0][0])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 0;
-                        Manager.Map[0][0] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-2.08f, max_y, 0f);
-                    }
-                }
-                else if (0.26f <= x && x < 0.78f)
-                {
-                    if (!Manager.Map[0][5])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 5;
-                        Manager.Map[0][5] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(0.52f, max_y, 0f);
-                    }
-                }
-                else if (0.78f <= x && x < 1.30f)
-                {
-                    if (!Manager.Map[0][6])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 6;
-                        Manager.Map[0][6] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(1.04f, max_y, 0f);
-                    }
-                }
-                else if (1.30f <= x && x < 1.82f)
-                {
-                    if (!Manager.Map[0][7])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 7;
-                        Manager.Map[0][7] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(1.56f, max_y, 0f);
-                    }
-                }
-                else if (1.82f <= x)
-                {
-                    if (!Manager.Map[0][8])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 8;
-                        Manager.Map[0][8] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(2.08f, max_y, 0f);
-                    }
-                }
-            }
-            else//첫번째 행이 10개일때
-            {
-                this.gameObject.GetComponent<Ball>().type = 0;
-
-                if (-0.52f <= x && x < 0f)
-                {
-                    if (!Manager.Map[0][4])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 4;
-                        Manager.Map[0][4] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-0.26f, max_y, 0f);
-                    }
-                }
-                else if (-1.04f <= x && x < -0.52f)
-                {
-                    if (!Manager.Map[0][3])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 3;
-                        Manager.Map[0][3] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-0.78f, max_y, 0f);
-                    }
-                }
-                else if (-1.56f <= x && x < -1.04f)
-                {
-                    if (!Manager.Map[0][2])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 2;
-                        Manager.Map[0][2] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-1.30f, max_y, 0f);
-                    }
-                }
-                else if (-2.08f <= x && x < -1.56f)
-                {
-                    if (!Manager.Map[0][1])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 1;
-                        Manager.Map[0][1] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-1.82f, max_y, 0f);
-                    }
-                }
-                else if (x < -2.08f)
-                {
-                    if (!Manager.Map[0][0])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 0;
-                        Manager.Map[0][0] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(-2.34f, max_y, 0f);
-                    }
-                }
-                else if (0f <= x && x < 0.52f)
-                {
-                    if (!Manager.Map[0][5])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 5;
-                        Manager.Map[0][5] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(0.26f, max_y, 0f);
-                    }
-                }
-                else if (0.52f <= x && x < 1.04f)
-                {
-                    if (!Manager.Map[0][6])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 6;
-                        Manager.Map[0][6] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(0.78f, max_y, 0f);
-                    }
-                }
-                else if (1.04f <= x && x < 1.56f)
-                {
-                    if (!Manager.Map[0][7])
-                    {
-                        this.gameObject.GetComponent<Ball>().col=7;
-                        Manager.Map[0][7] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(1.30f, max_y, 0f);
-                    }
-                }
-                else if (1.56f <= x && x < 2.08f)
-                {
-                    if (!Manager.Map[0][8])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 8;
-                        Manager.Map[0][8] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(1.82f, max_y, 0f);
-                    }
-                }
-                else if (2.08f <= x)
-                {
-                    if (!Manager.Map[0][9])
-                    {
-                        this.gameObject.GetComponent<Ball>().col = 9;
-                        Manager.Map[0][9] = this.gameObject;
-                        this.gameObject.transform.position = new Vector3(2.34f, max_y, 0f);
-                    }
-                }
-            }
-
-            shootball = false;
-            Shooter.possible = true;
-        }
+        
     }
 
 
@@ -1002,5 +1294,6 @@ public class Ball : MonoBehaviour
                 }
             }
         }
+
     }
 }
