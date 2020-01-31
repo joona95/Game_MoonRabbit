@@ -90,7 +90,7 @@ public class Shooter : MonoBehaviour
             }
         }
 #else
-            if ((Input.GetMouseButton(0))&&(GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false))
+            if ((Input.GetMouseButton(0))&&(GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false)&& (GameObject.Find("ChangeBall").GetComponent<ChangeBall>().isPressed == false))
             {//설정 버튼이 눌리지 않을때 대포의 궤적을 조절하고 발사할 수 있음
                 color.a = 1f; //터치하고 있으면(누르고 있으면) 경로 보임
                 sprite.color = color;
