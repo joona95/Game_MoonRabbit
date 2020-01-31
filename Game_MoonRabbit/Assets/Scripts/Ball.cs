@@ -65,7 +65,6 @@ public class Ball : MonoBehaviour
             if (collision.gameObject.tag != "ceil")
             {
                 this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
-                sem.play(2);
                 float col_x = collision.gameObject.transform.position.x; //collision의 x 좌표
                 float col_y = collision.gameObject.transform.position.y; //collision의 y 좌표
                 float this_x = this.gameObject.transform.position.x; //shootball의 x 좌표
@@ -414,6 +413,7 @@ public class Ball : MonoBehaviour
                 shootball = false;
                 Shooter.possible = true;
             }
+            sem.play(2);
 
 
 
@@ -723,7 +723,7 @@ public class Ball : MonoBehaviour
 
                     }
                 }
-
+                sem.play(3);
                 Destroy(this.gameObject);
                 Manager.Map[t_r][t_c] = null;
             }
@@ -1260,6 +1260,7 @@ public class Ball : MonoBehaviour
                     Destroy(Manager.Map[row][i]);
                 }
             }
+            sem.play(4);
         }
 
         if (sixbomb == true)
@@ -1318,6 +1319,7 @@ public class Ball : MonoBehaviour
                     Destroy(Manager.Map[row + 1][col]);
                 }
             }
+            sem.play(4);
         }
 
 

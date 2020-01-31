@@ -215,6 +215,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3351079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +582,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage4_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1112,6 +1134,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage17_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1855,6 +1888,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &433508598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,6 +2115,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &509511886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2241,6 +2296,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage7_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2522,6 +2588,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &598553419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2735,8 +2812,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 823788030}
   m_HandleRect: {fileID: 823788029}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.29299387
+  m_Value: 1.1186064
+  m_Size: 0.14649731
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2935,8 +3012,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 464994487}
   m_HandleRect: {fileID: 464994486}
   m_Direction: 0
-  m_Value: -531.5
-  m_Size: 0.99906015
+  m_Value: -24091002
+  m_Size: 0.97702205
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3246,8 +3323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 666a90c4536c8cd4bb2ee0fb0d0150b4, type: 3}
-  - {fileID: 8300000, guid: 3fdb9d902cd1ba5418ac7ba8070ba228, type: 3}
+  - {fileID: 8300000, guid: 96b283597cd39fa4aa0dee73f818fb01, type: 3}
+  - {fileID: 8300000, guid: e3fcfeacda8d13b408a1b8be3ecf9494, type: 3}
   source: {fileID: 0}
 --- !u!82 &833823723
 AudioSource:
@@ -3453,6 +3530,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &835717130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3612,7 +3700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 951.4997}
+  m_AnchoredPosition: {x: 602274560, y: 406.85925}
   m_SizeDelta: {x: 1064, y: 6495}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1019240552
@@ -3788,6 +3876,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1079264910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3922,6 +4021,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage9_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4367,6 +4477,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage2_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4977,6 +5098,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1222191162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5111,6 +5243,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage1_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5340,6 +5483,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1332992386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5474,6 +5628,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage3_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5674,8 +5839,8 @@ GameObject:
   - component: {fileID: 1601564561}
   - component: {fileID: 1601564560}
   - component: {fileID: 1601564559}
-  - component: {fileID: 1601564562}
   - component: {fileID: 1601564563}
+  - component: {fileID: 1601564562}
   m_Layer: 5
   m_Name: StageOption
   m_TagString: Untagged
@@ -5771,10 +5936,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1601564557}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccb2ca056e4d9af4db6ff3ed9231298b, type: 3}
+  m_Script: {fileID: 11500000, guid: 926f31cefca014f4fb48577123fff3e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  opt: {fileID: 1601564557}
+  stage: {fileID: 1601564557}
 --- !u!114 &1601564563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5872,6 +6037,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage11_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6088,6 +6264,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1606020029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6246,8 +6433,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clips:
   - {fileID: 8300000, guid: 544dcb6f61dcdd640a0fd0e322ebfa6d, type: 3}
+  - {fileID: 8300000, guid: a349f64d209ee8e4790a18a23d8ebdb9, type: 3}
+  - {fileID: 8300000, guid: b05c2b3e93eeaac419c0e3301beaa928, type: 3}
   - {fileID: 8300000, guid: cbbc6439c7812d44c8446321342008b7, type: 3}
-  - {fileID: 8300000, guid: 6a511a09daa8cd041a3a0d893d2d80cf, type: 3}
+  - {fileID: 8300000, guid: caccb15b745889e4ea04f1d9848b8d09, type: 3}
   source: {fileID: 0}
 --- !u!82 &1679631520
 AudioSource:
@@ -7491,6 +7680,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1887185096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7625,6 +7825,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage13_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8697,6 +8908,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 92648583}
         m_MethodName: Stage20_Button
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1601564562}
+        m_MethodName: turnonoff
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -11,7 +11,7 @@ public class stageoption : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        StageOption.SetActive(false);
+        
     }
 
     // Update is called once per frame
