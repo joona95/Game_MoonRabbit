@@ -15,6 +15,9 @@ public class Ball : MonoBehaviour
     public int count = 0;
     semmanager sem;
 
+    int ChType = Character.ChType; //캐릭터 종류 판별
+    int replaynum; //ChType==2이고 diebomb 건드렸을 때 부활 여부 판별할 때 이용
+
     // Start is called before the first frame update
     void Start()
     {
@@ -774,6 +777,12 @@ public class Ball : MonoBehaviour
                             Time.timeScale = 0f;
                             //Shooter.possible = false;
                             GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                            replaynum = Random.Range(1, 5);
+                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                            {
+                                Time.timeScale = 1f;
+                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                            }
                         }
                     }
                     if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
@@ -786,6 +795,12 @@ public class Ball : MonoBehaviour
                             Time.timeScale = 0f;
                             //Shooter.possible = false;
                             GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                            replaynum = Random.Range(1, 5);
+                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                            {
+                                Time.timeScale = 1f;
+                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                            }
                         }
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1])
@@ -798,6 +813,12 @@ public class Ball : MonoBehaviour
                             Time.timeScale = 0f;
                             //Shooter.possible = false;
                             GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                            replaynum = Random.Range(1, 5);
+                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                            {
+                                Time.timeScale = 1f;
+                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                            }
                         }
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
@@ -810,6 +831,12 @@ public class Ball : MonoBehaviour
                             Time.timeScale = 0f;
                             //Shooter.possible = false;
                             GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                            replaynum = Random.Range(1, 5);
+                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                            {
+                                Time.timeScale = 1f;
+                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                            }
                         }
                     }
                     if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
@@ -822,6 +849,12 @@ public class Ball : MonoBehaviour
                             Time.timeScale = 0f;
                             //Shooter.possible = false;
                             GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                            replaynum = Random.Range(1, 5);
+                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                            {
+                                Time.timeScale = 1f;
+                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                            }
                         }
                     }
                     if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
@@ -834,6 +867,12 @@ public class Ball : MonoBehaviour
                             Time.timeScale = 0f;
                             //Shooter.possible = false;
                             GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                            replaynum = Random.Range(1, 5);
+                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                            {
+                                Time.timeScale = 1f;
+                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                            }
                         }
                     }
 

@@ -16,14 +16,21 @@ public class Shooter : MonoBehaviour
     float radian;
     private float offest;
     bool colcheck = false;
+    bool ch_colcheck = false;
 
     public GameObject reflectline;
-    
+    public GameObject ch_reflectline; //길잡이 캐릭터의 경로(ch_로 시작하는 모든 변수)
+
     SpriteRenderer sprite; //대포(경로) 이미지
     SpriteRenderer resprite;
     public Color color;
     public Color recolor;
+    
+    SpriteRenderer ch_resprite;
+    public Color ch_recolor;
+
     public int jdg;
+    int ChType = Character.ChType;
 
     public static float GetAngle(Vector3 from, Vector3 to)
     {
@@ -44,6 +51,14 @@ public class Shooter : MonoBehaviour
         recolor = resprite.color;
         recolor.a = 0f; //시작할 때 투명함
         resprite.color = recolor;
+
+        
+
+        ch_resprite = ch_reflectline.GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+        ch_recolor = ch_resprite.color;
+        ch_recolor.a = 0f; //시작할 때 투명함
+        ch_resprite.color = ch_recolor;
+
         bgm = FindObjectOfType<bgmmanager>();
         bgm.stop();
         bgm.play(1);
@@ -53,6 +68,8 @@ public class Shooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        
         if (Manager.queCnt == 0)
         {
             Time.timeScale = 0f;
@@ -107,25 +124,56 @@ public class Shooter : MonoBehaviour
                 {
                     if(80 > degree && degree > 0)
                     {
-                        reflectline.transform.position = new Vector3(-2.3f, -4f + yPos, 0);
-                        reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                        if(ChType == 1)
+                        {
+                            ch_reflectline.transform.position = new Vector3(-2.3f, -4f + yPos, 0);
+                            ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                        }
+
+                        else
+                        {
+                            reflectline.transform.position = new Vector3(-2.3f, -4f + yPos, 0);
+                            reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                        }
+
                     }
                     else if(-80 < degree && degree < 0)
                     {
-                        reflectline.transform.position = new Vector3(2.3f, -4f - yPos, 0);
-                        reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
-                    }
-                    
-                    recolor.a = 1f;
-                    resprite.color = recolor;
+                        if (ChType == 1)
+                        {
+                            ch_reflectline.transform.position = new Vector3(2.3f, -4f - yPos, 0);
+                            ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                        }
+
+                        else{
+                            reflectline.transform.position = new Vector3(2.3f, -4f - yPos, 0);
+                            reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                        }
                         
-                    
-                    
+                    }
+
+                    if (ChType == 1)
+                    {
+                        ch_recolor.a = 1f;
+                        ch_resprite.color = ch_recolor;
+                    }
+
+                    else
+                    {
+                        recolor.a = 1f;
+                        resprite.color = recolor;
+                    }
+                        
                 }
                 if (!colcheck)
                 {
                     recolor.a = 0f;
                     resprite.color = recolor;
+                }
+                if (!ch_colcheck)
+                {
+                    ch_recolor.a = 0f;
+                    ch_resprite.color = ch_recolor;
                 }
             }
             if (Input.GetMouseButtonUp(0))//터치 뗄때
@@ -134,6 +182,8 @@ public class Shooter : MonoBehaviour
                 resprite.color = recolor;
                 color.a = 0f; //터치 떼면 경로 안 보임
                 sprite.color = color;
+                ch_recolor.a = 0f;
+                ch_resprite.color = ch_recolor;
                 if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                 {
                     sem.play(0);//구슬 쏠때 효과음 생성
@@ -151,7 +201,8 @@ public class Shooter : MonoBehaviour
     {
         if(col.tag == "wall")
         {
-            colcheck = true;            
+            colcheck = true;
+            ch_colcheck = true;
         }
     }
 
@@ -160,6 +211,7 @@ public class Shooter : MonoBehaviour
         if(col.tag == "wall")
         {
             colcheck = false;
+            ch_colcheck = false;
         }
     }
 

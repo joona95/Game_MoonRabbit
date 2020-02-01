@@ -64,7 +64,7 @@ public class ChangeScene : MonoBehaviour
 
     public void Stage4_Button()
     {
-        StageOption.gameObject.SetActive(true);
+        //StageOption.gameObject.SetActive(true);
         //StageOption.gameObject.GetComponent<menuoption>().turnonoff();
         Manager.current_stage = 4;
         //SceneManager.LoadScene("Stage");
