@@ -33,6 +33,16 @@ public class ChangeScene : MonoBehaviour
     //back버튼
     public void BackToMapButton()
     {
+        for (int i = 0; i < Manager.total_row; i++)
+        {
+            for (int j = 0; j < Manager.Map[i].Length; j++)
+            {
+                if (Manager.Map[i][j])
+                {
+                    Manager.Map[i][j].GetComponent<Ball>().end = true;
+                }
+            }
+        }
         Debug.Log("back");
         SceneManager.LoadScene("Map");
     }
