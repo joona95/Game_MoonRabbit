@@ -780,12 +780,7 @@ public class Ball : MonoBehaviour
                             //Time.timeScale = 0f;
                             //Shooter.possible = false;
                             //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
+                            
                         }
                     }
                     if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
@@ -798,12 +793,7 @@ public class Ball : MonoBehaviour
                             //Time.timeScale = 0f;
                             //Shooter.possible = false;
                             //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
+                            
                         }
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1])
@@ -816,12 +806,7 @@ public class Ball : MonoBehaviour
                             //Time.timeScale = 0f;
                             //Shooter.possible = false;
                             //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
+                            
                         }
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
@@ -834,12 +819,7 @@ public class Ball : MonoBehaviour
                             //Time.timeScale = 0f;
                             //Shooter.possible = false;
                             //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
+                            
                         }
                     }
                     if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
@@ -852,12 +832,7 @@ public class Ball : MonoBehaviour
                             //Time.timeScale = 0f;
                             //Shooter.possible = false;
                             //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
+                            
                         }
                     }
                     if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
@@ -870,12 +845,7 @@ public class Ball : MonoBehaviour
                             //Time.timeScale = 0f;
                             //Shooter.possible = false;
                             //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
+                            
                         }
                     }
 
@@ -1397,6 +1367,13 @@ public class Ball : MonoBehaviour
                 if (GameObject.Find("대포"))
                 {
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                }
+
+                replaynum = Random.Range(1, 5);
+                if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                {
+                    Time.timeScale = 1f;
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 }
             }
 

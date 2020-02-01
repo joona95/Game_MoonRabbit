@@ -2812,8 +2812,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 823788030}
   m_HandleRect: {fileID: 823788029}
   m_Direction: 2
-  m_Value: 1.0001049
-  m_Size: 0.28930622
+  m_Value: 1.0000001
+  m_Size: 0.29047436
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3012,8 +3012,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 464994487}
   m_HandleRect: {fileID: 464994486}
   m_Direction: 0
-  m_Value: -24091002
-  m_Size: 0.97702205
+  m_Value: -26610166
+  m_Size: 0.51904297
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3323,8 +3323,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 96b283597cd39fa4aa0dee73f818fb01, type: 3}
-  - {fileID: 8300000, guid: e3fcfeacda8d13b408a1b8be3ecf9494, type: 3}
+  - {fileID: 8300000, guid: f80389a7e77d92c46b3f737f79edd38f, type: 3}
+  - {fileID: 8300000, guid: f80389a7e77d92c46b3f737f79edd38f, type: 3}
   source: {fileID: 0}
 --- !u!82 &833823723
 AudioSource:
@@ -3700,7 +3700,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 602274560, y: 951.0181}
+  m_AnchoredPosition: {x: 2.621101e+10, y: 951.4995}
   m_SizeDelta: {x: 1064, y: 6495}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1019240552
@@ -6431,7 +6431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clips:
-  - {fileID: 8300000, guid: 544dcb6f61dcdd640a0fd0e322ebfa6d, type: 3}
+  - {fileID: 8300000, guid: ad306830f215eaf48bec021461fa1072, type: 3}
   - {fileID: 8300000, guid: a349f64d209ee8e4790a18a23d8ebdb9, type: 3}
   - {fileID: 8300000, guid: b05c2b3e93eeaac419c0e3301beaa928, type: 3}
   - {fileID: 8300000, guid: cbbc6439c7812d44c8446321342008b7, type: 3}
