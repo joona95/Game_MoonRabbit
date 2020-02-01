@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    static public bool possible = true; //대포 발사 가능한 시점과 불가능한 시점 구분 용도
+    static public bool possible; //대포 발사 가능한 시점과 불가능한 시점 구분 용도
     Vector3 touchPos;
     Vector3 colPos;
     bgmmanager bgm;//스테이지의 배경음악의 매개체이자 효과음의 매개체
@@ -34,6 +34,7 @@ public class Shooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        possible = true;
         sprite = this.gameObject.GetComponent<SpriteRenderer>();
         color = sprite.color;
         color.a = 0f; //시작할 때 투명함

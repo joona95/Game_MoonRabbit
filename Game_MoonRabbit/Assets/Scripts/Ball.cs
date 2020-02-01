@@ -204,7 +204,7 @@ public class Ball : MonoBehaviour
                     Manager.total_row++;
                 }
 
-                Debug.Log(row + "," + col);
+                Debug.Log("shoot:"+row + "," + col);
                 Manager.Map[this.gameObject.GetComponent<Ball>().row][this.gameObject.GetComponent<Ball>().col] = this.gameObject; //Map의 해당 row, col 위치에 shootball 저장
                 this.gameObject.GetComponent<Ball>().type = Manager.total_col - Manager.Map[this.gameObject.GetComponent<Ball>().row].Length;
 
@@ -512,21 +512,23 @@ public class Ball : MonoBehaviour
                 int t_r = this.gameObject.GetComponent<Ball>().row;
                 int t_c = this.gameObject.GetComponent<Ball>().col;
 
+                //visit 초기화
+                for (int i = 0; i < Manager.total_row; i++)
+                {
+                    for (int j = 0; j < Manager.Map[i].Length; j++)
+                    {
+                        if (Manager.Map[i][j] != null)
+                            Manager.Map[i][j].GetComponent<Ball>().visit = false;
+                    }
+                }
+
                 //주위 6개 bfs
                 for (int z = 0; z < 6; z++)
                 {
-                    //visit 초기화
-                    for (int i = 0; i < Manager.total_row; i++)
-                    {
-                        for (int j = 0; j < Manager.Map[i].Length; j++)
-                        {
-                            if (Manager.Map[i][j] != null)
-                                Manager.Map[i][j].GetComponent<Ball>().visit = false;
-                        }
-                    }
 
                     //현재 구슬과 동일한 색상의 연속된 구슬이 3개 이상 있는지 판별
                     Queue<GameObject> q = new Queue<GameObject>();
+                    Queue<GameObject> re = new Queue<GameObject>();
 
                     switch (z)
                     {
@@ -629,6 +631,7 @@ public class Ball : MonoBehaviour
                                    //int qcount = 0; //같은 색상의 연결된 구슬 중 퀘스트 구슬 갯수
                     while (q.Count != 0)
                     {
+                        re.Enqueue(q.Peek());
                         GameObject obj = q.Dequeue();
                         int r = obj.GetComponent<Ball>().row;
                         int c = obj.GetComponent<Ball>().col;
@@ -706,7 +709,8 @@ public class Ball : MonoBehaviour
 
                     Debug.Log(count);
 
-                    //3개 이상인 경우 destroy
+                    //3개 이상인 경우 visit그대로 아닌경우 visit지우기
+                    /*
                     if (count >= 3)
                     {
                         for (int i = 0; i < Manager.total_row; i++)
@@ -720,9 +724,33 @@ public class Ball : MonoBehaviour
                                 }
                             }
                         }
+                    }*/
+                    
+                    while (re.Count != 0)
+                    {
+                        if (count < 2)
+                        {
+                            Manager.Map[re.Peek().GetComponent<Ball>().row][re.Peek().GetComponent<Ball>().col].GetComponent<Ball>().visit = false;
+                        }
+                        re.Dequeue();
+                    }
+                    
+                }
 
+                
+                //visit한 곳 다 destroy
+                for (int i = 0; i < Manager.total_row; i++)
+                {
+                    for (int j = 0; j < Manager.Map[i].Length; j++)
+                    {
+                        if (Manager.Map[i][j] != null && Manager.Map[i][j].GetComponent<Ball>().visit == true)
+                        {
+                            Destroy(Manager.Map[i][j]);
+                            Manager.Map[i][j] = null;
+                        }
                     }
                 }
+
                 sem.play(3);
                 Destroy(this.gameObject);
                 Manager.Map[t_r][t_c] = null;
@@ -742,8 +770,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col - 1]);
+                            Manager.Map[row - 1][col - 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
@@ -752,8 +782,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col]);
+                            Manager.Map[row - 1][col] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1])
@@ -762,8 +794,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col - 1]);
+                            Manager.Map[row][col - 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
@@ -772,8 +806,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col + 1]);
+                            Manager.Map[row][col + 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
@@ -782,8 +818,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col - 1]);
+                            Manager.Map[row + 1][col - 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
@@ -792,8 +830,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col]);
+                            Manager.Map[row + 1][col] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
 
@@ -806,6 +846,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col - 1]);
+                            Manager.Map[row - 1][col - 1] = null;
                         }
 
                     }
@@ -815,6 +856,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col]);
+                            Manager.Map[row - 1][col] = null;
                         }
 
                     }
@@ -824,6 +866,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col - 1]);
+                            Manager.Map[row][col - 1] = null;
                         }
 
                     }
@@ -833,6 +876,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col + 1]);
+                            Manager.Map[row][col + 1] = null;
                         }
 
                     }
@@ -842,6 +886,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col - 1]);
+                            Manager.Map[row + 1][col - 1] = null;
                         }
 
                     }
@@ -851,6 +896,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col]);
+                            Manager.Map[row + 1][col] = null;
                         }
 
                     }
@@ -865,8 +911,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col]);
+                            Manager.Map[row - 1][col] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
@@ -875,8 +923,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col + 1]);
+                            Manager.Map[row - 1][col + 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1])
@@ -885,8 +935,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col - 1]);
+                            Manager.Map[row][col - 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
@@ -895,8 +947,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col + 1]);
+                            Manager.Map[row][col + 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
@@ -905,8 +959,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col]);
+                            Manager.Map[row + 1][col] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
                     if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
@@ -915,8 +971,10 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col + 1]);
+                            Manager.Map[row + 1][col + 1] = null;
                             Time.timeScale = 0f;
-                            Shooter.possible = false;
+                            //Shooter.possible = false;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         }
                     }
 
@@ -930,6 +988,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col]);
+                            Manager.Map[row - 1][col] = null;
                         }
 
                     }
@@ -939,6 +998,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row - 1][col + 1]);
+                            Manager.Map[row - 1][col + 1] = null;
                         }
 
                     }
@@ -948,6 +1008,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col - 1]);
+                            Manager.Map[row][col - 1] = null;
                         }
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
@@ -956,6 +1017,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row][col + 1]);
+                            Manager.Map[row][col + 1] = null;
                         }
                     }
                     if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
@@ -964,6 +1026,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col]);
+                            Manager.Map[row + 1][col] = null;
                         }
                     }
                     if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
@@ -972,6 +1035,7 @@ public class Ball : MonoBehaviour
                         {
                             special = true;
                             Destroy(Manager.Map[row + 1][col + 1]);
+                            Manager.Map[row + 1][col] = null;
                         }
                     }
                 }
@@ -1240,15 +1304,17 @@ public class Ball : MonoBehaviour
             Manager.queCnt--;
         }
 
-        if (count != 0)
+        if (count != 0&&this.gameObject.transform.position.y>=0.8f)
         {
             Manager.limit_cnt += count;
         }
 
-        if (diebomb == true&& this.gameObject.transform.position.y > -3f)
+        if (diebomb == true&& this.gameObject.transform.position.y>=0.8f)
         {
+            Debug.Log("die");
             Time.timeScale = 0f;
-            Shooter.possible = false;
+            //Shooter.possible = false;
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         }
 
         if (rowbomb == true)
@@ -1258,6 +1324,7 @@ public class Ball : MonoBehaviour
                 if (Manager.Map[row][i] && Manager.Map[row][i].tag != "stone")
                 {
                     Destroy(Manager.Map[row][i]);
+                    Manager.Map[row][i] = null;
                 }
             }
             sem.play(4);
@@ -1270,26 +1337,32 @@ public class Ball : MonoBehaviour
                 if (0 <= row - 1 && Manager.Map[row - 1][col]&&Manager.Map[row-1][col].tag!="stone")
                 {
                     Destroy(Manager.Map[row - 1][col]);
+                    Manager.Map[row - 1][col] = null;
                 }
                 if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1]&&Manager.Map[row-1][col+1].tag!="stone")
                 {
                     Destroy(Manager.Map[row - 1][col + 1]);
+                    Manager.Map[row - 1][col + 1] = null;
                 }
                 if (0 <= col - 1 && Manager.Map[row][col - 1]&&Manager.Map[row][col-1].tag!="stone")
                 {
                     Destroy(Manager.Map[row][col - 1]);
+                    Manager.Map[row][col - 1] = null;
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1]&&Manager.Map[row][col+1].tag!="stone")
                 {
                     Destroy(Manager.Map[row][col + 1]);
+                    Manager.Map[row][col + 1] = null;
                 }
                 if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone")
                 {
                     Destroy(Manager.Map[row + 1][col]);
+                    Manager.Map[row + 1][col] = null;
                 }
                 if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1]&&Manager.Map[row+1][col+1].tag!="stone")
                 {
                     Destroy(Manager.Map[row + 1][col + 1]);
+                    Manager.Map[row + 1][col + 1] = null;
                 }
             }
             else
@@ -1297,26 +1370,32 @@ public class Ball : MonoBehaviour
                 if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1]&&Manager.Map[row-1][col-1].tag!="stone")
                 {
                     Destroy(Manager.Map[row - 1][col - 1]);
+                    Manager.Map[row - 1][col - 1] = null;
                 }
                 if (0 <= row - 1 && Manager.Map[row - 1][col]&&Manager.Map[row-1][col].tag!="stone")
                 {
                     Destroy(Manager.Map[row - 1][col]);
+                    Manager.Map[row - 1][col] = null;
                 }
                 if (0 <= col - 1 && Manager.Map[row][col - 1]&&Manager.Map[row][col-1].tag!="stone")
                 {
                     Destroy(Manager.Map[row][col - 1]);
+                    Manager.Map[row][col - 1] = null;
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1]&&Manager.Map[row][col+1].tag!="stone")
                 {
                     Destroy(Manager.Map[row][col + 1]);
+                    Manager.Map[row][col + 1] = null;
                 }
                 if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1]&&Manager.Map[row+1][col-1].tag!="stone")
                 {
                     Destroy(Manager.Map[row + 1][col - 1]);
+                    Manager.Map[row + 1][col - 1] = null;
                 }
                 if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone")
                 {
                     Destroy(Manager.Map[row + 1][col]);
+                    Manager.Map[row + 1][col] = null;
                 }
             }
             sem.play(4);

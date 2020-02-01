@@ -12,7 +12,7 @@ public class Items : MonoBehaviour
 
         GetComponent<Manager>().ballPrefabs[0].GetComponent<SpriteRenderer>().sprite = item_rowbomb;
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rowbomb = true;
-
+        GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().tag = null;
         Shooter.possible = true;
     }
 
@@ -22,7 +22,7 @@ public class Items : MonoBehaviour
 
         GetComponent<Manager>().ballPrefabs[0].GetComponent<SpriteRenderer>().sprite = item_sixbomb;
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().sixbomb = true;
-
+        GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().tag = null;
         Shooter.possible = true;
     }
 
@@ -32,7 +32,7 @@ public class Items : MonoBehaviour
 
         GetComponent<Manager>().ballPrefabs[0].GetComponent<SpriteRenderer>().sprite = item_rainbow;
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rainbow = true;
-
+        GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().tag = null;
         Shooter.possible = true;
     }
 }

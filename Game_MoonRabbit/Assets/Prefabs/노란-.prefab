@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3880584506530657810}
   m_Layer: 0
   m_Name: "\uB178\uB780-"
-  m_TagString: Untagged
+  m_TagString: yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

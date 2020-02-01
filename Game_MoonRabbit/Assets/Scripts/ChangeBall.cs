@@ -46,12 +46,15 @@ public class ChangeBall : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         float b_x = manager.GetComponent<Manager>().ballPrefabs[1].transform.position.x;
         float b_y = manager.GetComponent<Manager>().ballPrefabs[1].transform.position.y;
         GameObject tmp = manager.GetComponent<Manager>().ballPrefabs[0];
-        manager.GetComponent<Manager>().ballPrefabs[0] = manager.GetComponent<Manager>().ballPrefabs[1];
-        manager.GetComponent<Manager>().ballPrefabs[1] = tmp;
 
-        manager.GetComponent<Manager>().ballPrefabs[0].transform.position = new Vector3(a_x, a_y, 0f);
-        manager.GetComponent<Manager>().ballPrefabs[1].transform.position = new Vector3(b_x, b_y, 0f);
+        if (tmp.GetComponent<Ball>().rowbomb != true && tmp.GetComponent<Ball>().sixbomb != true && tmp.GetComponent<Ball>().rainbow != true)
+        {
+            manager.GetComponent<Manager>().ballPrefabs[0] = manager.GetComponent<Manager>().ballPrefabs[1];
+            manager.GetComponent<Manager>().ballPrefabs[1] = tmp;
 
+            manager.GetComponent<Manager>().ballPrefabs[0].transform.position = new Vector3(a_x, a_y, 0f);
+            manager.GetComponent<Manager>().ballPrefabs[1].transform.position = new Vector3(b_x, b_y, 0f);
+        }
         //isPressed = false;
         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         
