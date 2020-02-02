@@ -46,27 +46,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[4], new Vector3(0f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[4], new Vector3(0f, -3.5f, 0f), Quaternion.identity);
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[0], new Vector3(0f, -4.5f, 0f), Quaternion.identity); 
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[0], new Vector3(0f, -3.5f, 0f), Quaternion.identity); 
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[3], new Vector3(0f, -4.5f, 0f), Quaternion.identity); 
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[3], new Vector3(0f, -3.5f, 0f), Quaternion.identity); 
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[1], new Vector3(0f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[1], new Vector3(0f, -3.5f, 0f), Quaternion.identity);
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[0] = (GameObject)Instantiate(BallType[2], new Vector3(0f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[0] = (GameObject)Instantiate(BallType[2], new Vector3(0f, -3.5f, 0f), Quaternion.identity);
             greCnt++;
         }//(80퍼 이상 초록)
    
@@ -76,27 +76,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity); 
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity); 
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity); 
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity); 
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity); 
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity); 
             greCnt++;
         }//(80퍼 이상 초록)
  
@@ -418,7 +418,7 @@ public class Manager : MonoBehaviour
 
         //두번째 발사 구슬을 첫번째 발사 구슬로 바꾸고 첫번째 구슬 위치로 변경
         ballPrefabs[0] = ballPrefabs[1];
-        ballPrefabs[0].transform.position = new Vector3(0f, -4.5f, 0f);
+        ballPrefabs[0].transform.position = new Vector3(0f, -3.5f, 0f);
         
 
      //구슬 배열의 마지막 순서의 색깔을 정해줍니다.
@@ -428,27 +428,27 @@ public class Manager : MonoBehaviour
         
         if ((a >= 0.0f) && (a < purpl))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[4], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity);
             purCnt++;
         }// (0~ 20퍼) 보라색
         else if ((a >= purpl) && (a < re))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[0], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity);
             redCnt++;
         }//(20~40퍼) 레드
         else if ((a >= re) && (a < blu))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[3], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity);
             bluCnt++;
         }//(40~60퍼) 블루
         else if ((a >= blu) && (a < yello))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity);
             yelCnt++;
         }//(60~80퍼) 노랑
         else if ((a >= yello) && (a <= 100.0))
         {
-            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(-1.5f, -4.5f, 0f), Quaternion.identity);
+            ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity);
             greCnt++;
         }
         

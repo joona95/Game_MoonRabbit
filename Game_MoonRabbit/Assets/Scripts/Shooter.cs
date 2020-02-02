@@ -126,13 +126,13 @@ public class Shooter : MonoBehaviour
                     {
                         if(ChType == 1)
                         {
-                            ch_reflectline.transform.position = new Vector3(-2.3f, -4f + yPos, 0);
+                            ch_reflectline.transform.position = new Vector3(-2.3f, -3f + yPos, 0);
                             ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                         }
 
                         else
                         {
-                            reflectline.transform.position = new Vector3(-2.3f, -4f + yPos, 0);
+                            reflectline.transform.position = new Vector3(-2.3f, -3f + yPos, 0);
                             reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                         }
 
@@ -141,12 +141,12 @@ public class Shooter : MonoBehaviour
                     {
                         if (ChType == 1)
                         {
-                            ch_reflectline.transform.position = new Vector3(2.3f, -4f - yPos, 0);
+                            ch_reflectline.transform.position = new Vector3(2.3f, -3f - yPos, 0);
                             ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                         }
 
                         else{
-                            reflectline.transform.position = new Vector3(2.3f, -4f - yPos, 0);
+                            reflectline.transform.position = new Vector3(2.3f, -3f - yPos, 0);
                             reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                         }
                         
