@@ -45,8 +45,6 @@ public class ChangeBall : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         float a_y = manager.GetComponent<Manager>().ballPrefabs[0].transform.position.y;
         float b_x = manager.GetComponent<Manager>().ballPrefabs[1].transform.position.x;
         float b_y = manager.GetComponent<Manager>().ballPrefabs[1].transform.position.y;
-        string a_color = manager.GetComponent<Manager>().ballPrefabs[0].tag;
-        string b_color = manager.GetComponent<Manager>().ballPrefabs[1].tag;
         GameObject tmp = manager.GetComponent<Manager>().ballPrefabs[0];
 
         if (tmp.GetComponent<Ball>().rowbomb != true && tmp.GetComponent<Ball>().sixbomb != true && tmp.GetComponent<Ball>().rainbow != true)
