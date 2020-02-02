@@ -1352,6 +1352,7 @@ public class Ball : MonoBehaviour
             if (quest == true)
             {
                 Manager.queCnt--;
+                Debug.Log("quest:" + Manager.queCnt);
             }
 
             if (count != 0 && this.gameObject.transform.position.y >= 0.8f)

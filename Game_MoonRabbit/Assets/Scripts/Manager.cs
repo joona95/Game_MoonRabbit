@@ -114,6 +114,7 @@ public class Manager : MonoBehaviour
         Debug.Log(total_row + "," + total_col);
         MapLoader.MapRead(current_stage.ToString()); //구슬 생성 맵 정보 csv에서 읽어오기
         Map = new List<GameObject[]>();
+        redCnt = 0; yelCnt = 0; greCnt = 0; bluCnt = 0; purCnt = 0; queCnt = 0;
 
         float x, y=0.85f; //구슬 생성 위치 지정 변수.  제일 밑에서부터 쌓아올라가기
         int t; //행 구분을 위한 변수
