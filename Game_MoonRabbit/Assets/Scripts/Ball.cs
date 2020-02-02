@@ -541,14 +541,14 @@ public class Ball : MonoBehaviour
                         case 0:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (0 <= t_r - 1 && 0 <= t_c - 1 && Manager.Map[t_r - 1][t_c - 1])
+                                if (0 <= t_r - 1 && 0 <= t_c - 1 && Manager.Map[t_r - 1][t_c - 1] &&Manager.Map[t_r-1][t_c-1].GetComponent<Ball>().visit==false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c - 1]);
                                 }
                             }
                             else
                             {
-                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c])
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c]);
                                 }
@@ -557,21 +557,21 @@ public class Ball : MonoBehaviour
                         case 1:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c])
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c]);
                                 }
                             }
                             else
                             {
-                                if (0 <= t_r - 1 && t_c + 1 < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c + 1])
+                                if (0 <= t_r - 1 && t_c + 1 < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c + 1] && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c + 1]);
                                 }
                             }
                             break;
                         case 2:
-                            if (0 <= t_c - 1 && Manager.Map[t_r][t_c - 1])
+                            if (0 <= t_c - 1 && Manager.Map[t_r][t_c - 1] && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().visit == false)
                             {
                                 q.Enqueue(Manager.Map[t_r][t_c - 1]);
                             }
@@ -579,14 +579,14 @@ public class Ball : MonoBehaviour
                         case 3:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1])
+                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1] && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r][t_c + 1]);
                                 }
                             }
                             else
                             {
-                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1])
+                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1] && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r][t_c + 1]);
                                 }
@@ -595,14 +595,14 @@ public class Ball : MonoBehaviour
                         case 4:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (t_r + 1 < Manager.total_row && 0 <= t_c - 1 && Manager.Map[t_r + 1][t_c - 1])
+                                if (t_r + 1 < Manager.total_row && 0 <= t_c - 1 && Manager.Map[t_r + 1][t_c - 1] && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c - 1]);
                                 }
                             }
                             else
                             {
-                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c])
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c]);
                                 }
@@ -611,14 +611,14 @@ public class Ball : MonoBehaviour
                         case 5:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c])
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c]);
                                 }
                             }
                             else
                             {
-                                if (t_r + 1 < Manager.total_row && t_c + 1 < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c + 1])
+                                if (t_r + 1 < Manager.total_row && t_c + 1 < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c + 1] && Manager.Map[t_r +1][t_c + 1].GetComponent<Ball>().visit == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c + 1]);
                                 }
