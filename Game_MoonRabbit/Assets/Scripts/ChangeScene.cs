@@ -10,7 +10,7 @@ public class ChangeScene : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("stage:"+PlayerPrefs.GetInt("User_stage"));
     }
 
     // Update is called once per frame

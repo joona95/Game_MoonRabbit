@@ -424,6 +424,333 @@ public class Ball : MonoBehaviour
 
 
 
+
+            //10,11,12,13,14:갯수증가+2 빨,노,초,파,보 15,16,17,18,19:갯수감소-2 빨,노,초,파,보 
+            //20:돌 21:건드리면죽는폭탄 22:가로줄폭탄 23:6개폭탄 24:무지개
+            bool special = false; //특별구슬을 건드렸는지 여부 판별
+            if (this.gameObject.GetComponent<Ball>().type == 0) //10개 행
+            {
+                //건드리면 죽는 폭탄이 주위 6개에 있는지
+
+                if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1])
+                {
+                    if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col - 1]);
+                        Manager.Map[row - 1][col - 1] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+
+                    }
+                }
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                {
+                    if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col]);
+                        Manager.Map[row - 1][col] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+
+                    }
+                }
+                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                {
+                    if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col - 1]);
+                        Manager.Map[row][col - 1] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+
+                    }
+                }
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                {
+                    if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col + 1]);
+                        Manager.Map[row][col + 1] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+
+                    }
+                }
+                if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
+                {
+                    if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col - 1]);
+                        Manager.Map[row + 1][col - 1] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+
+                    }
+                }
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                {
+                    if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col]);
+                        Manager.Map[row + 1][col] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+
+                    }
+                }
+
+                //가로줄 폭탄이 주위6개에 있는지
+                //6개 폭탄이 주위6개에 있는지
+
+                if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1])
+                {
+                    if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col - 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col - 1]);
+                        Manager.Map[row - 1][col - 1] = null;
+                    }
+
+                }
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                {
+                    if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col]);
+                        Manager.Map[row - 1][col] = null;
+                    }
+
+                }
+                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                {
+                    if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col - 1]);
+                        Manager.Map[row][col - 1] = null;
+                    }
+
+                }
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                {
+                    if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col + 1]);
+                        Manager.Map[row][col + 1] = null;
+                    }
+
+                }
+                if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
+                {
+                    if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col - 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col - 1]);
+                        Manager.Map[row + 1][col - 1] = null;
+                    }
+
+                }
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                {
+                    if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col]);
+                        Manager.Map[row + 1][col] = null;
+                    }
+
+                }
+            }
+            else //9개 행
+            {
+                //건드리면 죽는 폭탄이 주위 6개에 있는지
+
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                {
+                    if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col]);
+                        Manager.Map[row - 1][col] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        replaynum = Random.Range(1, 5);
+                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                        {
+                            Time.timeScale = 1f;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                        }
+                    }
+                }
+                if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
+                {
+                    if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col + 1]);
+                        Manager.Map[row - 1][col + 1] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        replaynum = Random.Range(1, 5);
+                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                        {
+                            Time.timeScale = 1f;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                        }
+                    }
+                }
+                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                {
+                    if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col - 1]);
+                        Manager.Map[row][col - 1] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        replaynum = Random.Range(1, 5);
+                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                        {
+                            Time.timeScale = 1f;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                        }
+                    }
+                }
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                {
+                    if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col + 1]);
+                        Manager.Map[row][col + 1] = null;
+                        // Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        // GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        replaynum = Random.Range(1, 5);
+                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                        {
+                            Time.timeScale = 1f;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                        }
+                    }
+                }
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                {
+                    if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col]);
+                        Manager.Map[row + 1][col] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        replaynum = Random.Range(1, 5);
+                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                        {
+                            Time.timeScale = 1f;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                        }
+                    }
+                }
+                if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
+                {
+                    if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().diebomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col + 1]);
+                        Manager.Map[row + 1][col + 1] = null;
+                        //Time.timeScale = 0f;
+                        //Shooter.possible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        replaynum = Random.Range(1, 5);
+                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                        {
+                            Time.timeScale = 1f;
+                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                        }
+                    }
+                }
+
+
+                //가로줄 폭탄이 주위6개에 있는지
+                //6개 폭탄이 주위6개에 있는지
+
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                {
+                    if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col]);
+                        Manager.Map[row - 1][col] = null;
+                    }
+
+                }
+                if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
+                {
+                    if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col + 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row - 1][col + 1]);
+                        Manager.Map[row - 1][col + 1] = null;
+                    }
+
+                }
+                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                {
+                    if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col - 1]);
+                        Manager.Map[row][col - 1] = null;
+                    }
+                }
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                {
+                    if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row][col + 1]);
+                        Manager.Map[row][col + 1] = null;
+                    }
+                }
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                {
+                    if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col]);
+                        Manager.Map[row + 1][col] = null;
+                    }
+                }
+                if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
+                {
+                    if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col + 1].GetComponent<Ball>().sixbomb == true)
+                    {
+                        special = true;
+                        Destroy(Manager.Map[row + 1][col + 1]);
+                        Manager.Map[row + 1][col] = null;
+                    }
+                }
+            }
+
+
             //item사용
             if (this.gameObject.GetComponent<Ball>().rowbomb == true)
             {
@@ -541,14 +868,14 @@ public class Ball : MonoBehaviour
                         case 0:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (0 <= t_r - 1 && 0 <= t_c - 1 && Manager.Map[t_r - 1][t_c - 1] &&Manager.Map[t_r-1][t_c-1].GetComponent<Ball>().visit==false)
+                                if (0 <= t_r - 1 && 0 <= t_c - 1 && Manager.Map[t_r - 1][t_c - 1] &&Manager.Map[t_r-1][t_c-1].GetComponent<Ball>().visit==false&&Manager.Map[t_r-1][t_c-1].tag!="stone"&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().sixbomb==false&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().diebomb==false&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().rowbomb==false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c - 1]);
                                 }
                             }
                             else
                             {
-                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false)
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&&Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c]);
                                 }
@@ -557,52 +884,44 @@ public class Ball : MonoBehaviour
                         case 1:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false)
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c ].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c]);
                                 }
                             }
                             else
                             {
-                                if (0 <= t_r - 1 && t_c + 1 < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c + 1] && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().visit == false)
+                                if (0 <= t_r - 1 && t_c + 1 < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c + 1] && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().visit == false&&Manager.Map[t_r - 1][t_c + 1].tag != "stone" && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().rowbomb == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c + 1]);
                                 }
                             }
                             break;
                         case 2:
-                            if (0 <= t_c - 1 && Manager.Map[t_r][t_c - 1] && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().visit == false)
+                            if (0 <= t_c - 1 && Manager.Map[t_r][t_c - 1] && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().visit == false&&Manager.Map[t_r][t_c - 1].tag != "stone" && Manager.Map[t_r ][t_c - 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().rowbomb == false)
                             {
                                 q.Enqueue(Manager.Map[t_r][t_c - 1]);
                             }
                             break;
                         case 3:
-                            if (this.gameObject.GetComponent<Ball>().type == 0)
+
+                            if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1] && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().visit == false && Manager.Map[t_r][t_c + 1].tag != "stone" && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().rowbomb == false)
                             {
-                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1] && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().visit == false)
-                                {
-                                    q.Enqueue(Manager.Map[t_r][t_c + 1]);
-                                }
+                                q.Enqueue(Manager.Map[t_r][t_c + 1]);
                             }
-                            else
-                            {
-                                if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1] && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().visit == false)
-                                {
-                                    q.Enqueue(Manager.Map[t_r][t_c + 1]);
-                                }
-                            }
+
                             break;
                         case 4:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (t_r + 1 < Manager.total_row && 0 <= t_c - 1 && Manager.Map[t_r + 1][t_c - 1] && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().visit == false)
+                                if (t_r + 1 < Manager.total_row && 0 <= t_c - 1 && Manager.Map[t_r + 1][t_c - 1] && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c - 1].tag != "stone" && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().rowbomb == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c - 1]);
                                 }
                             }
                             else
                             {
-                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false)
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c ].tag != "stone" && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().rowbomb == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c]);
                                 }
@@ -611,14 +930,14 @@ public class Ball : MonoBehaviour
                         case 5:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false)
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c].tag != "stone" && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().rowbomb == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c]);
                                 }
                             }
                             else
                             {
-                                if (t_r + 1 < Manager.total_row && t_c + 1 < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c + 1] && Manager.Map[t_r +1][t_c + 1].GetComponent<Ball>().visit == false)
+                                if (t_r + 1 < Manager.total_row && t_c + 1 < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c + 1] && Manager.Map[t_r +1][t_c + 1].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c + 1].tag != "stone" && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().rowbomb == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c + 1]);
                                 }
@@ -647,65 +966,73 @@ public class Ball : MonoBehaviour
 
                         if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
                         {
-                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == color)
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r - 1][c]);
                                 Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
+                                
                             }
-                            if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == color)
+                            if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c + 1].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r - 1][c + 1]);
                                 Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
+              
                             }
-                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == color)
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c - 1].GetComponent<Ball>().tag == color || Manager.Map[r][c - 1].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r][c - 1]);
                                 Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
+                                
                             }
-                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == color)
+                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r][c + 1].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r][c + 1]);
                                 Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
+
                             }
-                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == color)
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c].GetComponent<Ball>().tag == color || Manager.Map[r + 1][c].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r + 1][c]);
                                 Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
+
                             }
-                            if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == color)
+                            if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r + 1][c + 1].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r + 1][c + 1]);
                                 Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
+ 
                             }
                         }
                         else //10개일 때 이웃한 6개 
                         {
-                            if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == color)
+                            if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == color || Manager.Map[r -1][c - 1].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r - 1][c - 1]);
                                 Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
+
                             }
-                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == color)
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c].GetComponent<Ball>().rainbow == true))
                             {
                                 q.Enqueue(Manager.Map[r - 1][c]);
+
                                 Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
                             }
-                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == color)
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c - 1].GetComponent<Ball>().tag == color||Manager.Map[r][c-1].GetComponent<Ball>().rainbow==true))
                             {
                                 q.Enqueue(Manager.Map[r][c - 1]);
                                 Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                             }
-                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == color)
+                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c + 1].GetComponent<Ball>().tag == color||Manager.Map[r][c+1].GetComponent<Ball>().rainbow==true))
                             {
                                 q.Enqueue(Manager.Map[r][c + 1]);
                                 Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == color)
+                            if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == color||Manager.Map[r+1][c-1].GetComponent<Ball>().rainbow==true))
                             {
                                 q.Enqueue(Manager.Map[r + 1][c - 1]);
                                 Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == color)
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c].GetComponent<Ball>().tag == color||Manager.Map[r+1][c].GetComponent<Ball>().rainbow==true))
                             {
                                 q.Enqueue(Manager.Map[r + 1][c]);
                                 Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
@@ -734,7 +1061,12 @@ public class Ball : MonoBehaviour
                     
                     while (re.Count != 0)
                     {
-                        if (count < 2)
+                        if (count < 3)
+                        {
+                            Manager.Map[re.Peek().GetComponent<Ball>().row][re.Peek().GetComponent<Ball>().col].GetComponent<Ball>().visit = false;
+                        }
+
+                        if (Manager.Map[re.Peek().GetComponent<Ball>().row][re.Peek().GetComponent<Ball>().col].GetComponent<Ball>().rainbow == true)
                         {
                             Manager.Map[re.Peek().GetComponent<Ball>().row][re.Peek().GetComponent<Ball>().col].GetComponent<Ball>().visit = false;
                         }
@@ -750,7 +1082,7 @@ public class Ball : MonoBehaviour
                     for (int j = 0; j < Manager.Map[i].Length; j++)
                     {
                         if (Manager.Map[i][j] != null && Manager.Map[i][j].GetComponent<Ball>().visit == true)
-                        {
+                        { 
                             Destroy(Manager.Map[i][j]);
                             Manager.Map[i][j] = null;
                         }
@@ -763,330 +1095,7 @@ public class Ball : MonoBehaviour
             }
             else//item 사용아닐때
             {
-                //10,11,12,13,14:갯수증가+2 빨,노,초,파,보 15,16,17,18,19:갯수감소-2 빨,노,초,파,보 
-                //20:돌 21:건드리면죽는폭탄 22:가로줄폭탄 23:6개폭탄 24:무지개
-                bool special = false; //특별구슬을 건드렸는지 여부 판별
-                if (this.gameObject.GetComponent<Ball>().type == 0) //10개 행
-                {
-                    //건드리면 죽는 폭탄이 주위 6개에 있는지
-
-                    if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1])
-                    {
-                        if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col - 1]);
-                            Manager.Map[row - 1][col - 1] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            
-                        }
-                    }
-                    if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
-                    {
-                        if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col]);
-                            Manager.Map[row - 1][col] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            
-                        }
-                    }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1])
-                    {
-                        if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col - 1]);
-                            Manager.Map[row][col - 1] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            
-                        }
-                    }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
-                    {
-                        if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col + 1]);
-                            Manager.Map[row][col + 1] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            
-                        }
-                    }
-                    if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
-                    {
-                        if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col - 1]);
-                            Manager.Map[row + 1][col - 1] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            
-                        }
-                    }
-                    if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
-                    {
-                        if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col]);
-                            Manager.Map[row + 1][col] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            
-                        }
-                    }
-
-                    //가로줄 폭탄이 주위6개에 있는지
-                    //6개 폭탄이 주위6개에 있는지
-
-                    if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1])
-                    {
-                        if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col - 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col - 1]);
-                            Manager.Map[row - 1][col - 1] = null;
-                        }
-
-                    }
-                    if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
-                    {
-                        if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col]);
-                            Manager.Map[row - 1][col] = null;
-                        }
-
-                    }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1])
-                    {
-                        if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col - 1]);
-                            Manager.Map[row][col - 1] = null;
-                        }
-
-                    }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
-                    {
-                        if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col + 1]);
-                            Manager.Map[row][col + 1] = null;
-                        }
-
-                    }
-                    if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
-                    {
-                        if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col - 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col - 1]);
-                            Manager.Map[row + 1][col - 1] = null;
-                        }
-
-                    }
-                    if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
-                    {
-                        if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col]);
-                            Manager.Map[row + 1][col] = null;
-                        }
-
-                    }
-                }
-                else //9개 행
-                {
-                    //건드리면 죽는 폭탄이 주위 6개에 있는지
-
-                    if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
-                    {
-                        if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col]);
-                            Manager.Map[row - 1][col] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
-                        }
-                    }
-                    if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
-                    {
-                        if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col + 1]);
-                            Manager.Map[row - 1][col + 1] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
-                        }
-                    }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1])
-                    {
-                        if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col - 1]);
-                            Manager.Map[row][col - 1] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
-                        }
-                    }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
-                    {
-                        if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col + 1]);
-                            Manager.Map[row][col + 1] = null;
-                           // Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                           // GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
-                        }
-                    }
-                    if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
-                    {
-                        if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col]);
-                            Manager.Map[row + 1][col] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                           //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
-                        }
-                    }
-                    if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
-                    {
-                        if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().diebomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col + 1]);
-                            Manager.Map[row + 1][col + 1] = null;
-                            //Time.timeScale = 0f;
-                            //Shooter.possible = false;
-                            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                            replaynum = Random.Range(1, 5);
-                            if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                            {
-                                Time.timeScale = 1f;
-                                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                            }
-                        }
-                    }
-
-
-                    //가로줄 폭탄이 주위6개에 있는지
-                    //6개 폭탄이 주위6개에 있는지
-
-                    if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
-                    {
-                        if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col]);
-                            Manager.Map[row - 1][col] = null;
-                        }
-
-                    }
-                    if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
-                    {
-                        if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col + 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row - 1][col + 1]);
-                            Manager.Map[row - 1][col + 1] = null;
-                        }
-
-                    }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1])
-                    {
-                        if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col - 1]);
-                            Manager.Map[row][col - 1] = null;
-                        }
-                    }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
-                    {
-                        if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row][col + 1]);
-                            Manager.Map[row][col + 1] = null;
-                        }
-                    }
-                    if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
-                    {
-                        if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col]);
-                            Manager.Map[row + 1][col] = null;
-                        }
-                    }
-                    if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
-                    {
-                        if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col + 1].GetComponent<Ball>().sixbomb == true)
-                        {
-                            special = true;
-                            Destroy(Manager.Map[row + 1][col + 1]);
-                            Manager.Map[row + 1][col] = null;
-                        }
-                    }
-                }
+               
 
 
                 if (special == false) //특별구슬없으면 그냥 주위 색깔 판별로 터뜨리기
@@ -1339,21 +1348,57 @@ public class Ball : MonoBehaviour
         if (end == false)
         {
             if (this.gameObject.tag == "red")
-                Manager.redCnt--;
-            else if (this.gameObject.tag == "yellow")
-                Manager.yelCnt--;
-            else if (this.gameObject.tag == "green")
-                Manager.greCnt--;
-            else if (this.gameObject.tag == "blue")
-                Manager.bluCnt--;
-            else if (this.gameObject.tag == "purple")
-                Manager.purCnt--;
-
-            if (quest == true)
             {
-                Manager.queCnt--;
-                Debug.Log("quest:" + Manager.queCnt);
+                Manager.redCnt--;
+                if (quest == true)
+                {
+                    Manager.red_quest++;
+                    Manager.queCnt--;
+                    Debug.Log("quest:" + Manager.queCnt);
+                }
             }
+            else if (this.gameObject.tag == "yellow")
+            {
+                Manager.yelCnt--;
+                if (quest == true)
+                {
+                    Manager.yel_quest++;
+                    Manager.queCnt--;
+                    Debug.Log("quest:" + Manager.queCnt);
+                }
+            }
+            else if (this.gameObject.tag == "green")
+            {
+                Manager.greCnt--;
+                if (quest == true)
+                {
+                    Manager.gre_quest++;
+                    Manager.queCnt--;
+                    Debug.Log("quest:" + Manager.queCnt);
+                }
+            }
+            else if (this.gameObject.tag == "blue")
+            {
+                Manager.bluCnt--;
+                if (quest == true)
+                {
+                    Manager.blu_quest++;
+                    Manager.queCnt--;
+                    Debug.Log("quest:" + Manager.queCnt);
+                }
+            }
+            else if (this.gameObject.tag == "purple")
+            {
+                Manager.purCnt--;
+                if (quest == true)
+                {
+                    Manager.pur_quest++;
+                    Manager.queCnt--;
+                    Debug.Log("quest:" + Manager.queCnt);
+                }
+            }
+
+            
 
             if (count != 0 && this.gameObject.transform.position.y >= 0.8f)
             {

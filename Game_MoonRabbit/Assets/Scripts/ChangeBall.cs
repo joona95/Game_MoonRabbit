@@ -54,10 +54,12 @@ public class ChangeBall : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
             manager.GetComponent<Manager>().ballPrefabs[0].transform.position = new Vector3(a_x, a_y, 0f);
             manager.GetComponent<Manager>().ballPrefabs[1].transform.position = new Vector3(b_x, b_y, 0f);
-            
+
+            Debug.Log(manager.GetComponent<Manager>().ballPrefabs[0].tag+","+ manager.GetComponent<Manager>().ballPrefabs[1].tag);
         }
         //isPressed = false;
         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+        
         
     }
 }
