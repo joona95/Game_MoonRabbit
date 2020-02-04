@@ -1400,12 +1400,12 @@ public class Ball : MonoBehaviour
 
             
 
-            if (count != 0 && this.gameObject.transform.position.y >= 0.8f)
+            if (count != 0 && this.gameObject.transform.position.y >= 0.4f)
             {
                 Manager.limit_cnt += count;
             }
 
-            if (diebomb == true && this.gameObject.transform.position.y >= 0.8f)
+            if (diebomb == true && this.gameObject.transform.position.y >= 0.4f)
             {
                 Debug.Log("die");
                 Time.timeScale = 0f;
@@ -1423,7 +1423,7 @@ public class Ball : MonoBehaviour
                 }
             }
 
-            if (rowbomb == true&&this.gameObject.transform.position.y>=0.8f)
+            if (rowbomb == true&&this.gameObject.transform.position.y>=0.4f)
             {
                 for (int i = 0; i < Manager.Map[row].Length; i++)
                 {
@@ -1436,7 +1436,7 @@ public class Ball : MonoBehaviour
                 sem.play(4);
             }
 
-            if (sixbomb == true&&this.gameObject.transform.position.y>=0.8f)
+            if (sixbomb == true&&this.gameObject.transform.position.y>=0.4f)
             {
                 if (Manager.Map[row].Length == 9)
                 {
@@ -1508,7 +1508,7 @@ public class Ball : MonoBehaviour
             }
 
 
-            if ((rowbomb == true || sixbomb == true)&&this.gameObject.transform.position.y>=0.8f)
+            if ((rowbomb == true || sixbomb == true)&&this.gameObject.transform.position.y>=0.4f)
             {
                 //연결 여부 판별
                 discon_total = 0; discon_cnt = 0; //연결되지 않은 구슬갯수 초기화

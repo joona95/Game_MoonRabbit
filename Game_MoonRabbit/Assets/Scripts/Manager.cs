@@ -274,49 +274,90 @@ public class Manager : MonoBehaviour
         {
             if (recentballs[i] == "red")
             {
-                re -= 10f;
-                purpl += 2.5f;
-                yello += 2.5f;
-                blu += 2.5f;
+                if (redCnt != 0)
+                {
+                    re -= 10f;
+
+                    if (purCnt != 0)
+                        purpl += 2.5f;
+                    if (yelCnt != 0)
+                        yello += 2.5f;
+                    if (bluCnt != 0)
+                        blu += 2.5f;
+                }
+
             }
             else if (recentballs[i] == "yellow")
             {
-                yello -= 10f;
-                purpl += 2.5f;
-                re += 2.5f;
-                blu += 2.5f;
+                if (yelCnt != 0)
+                {
+                    yello -= 10f;
+                    if (purCnt != 0)
+                        purpl += 2.5f;
+                    if (redCnt != 0)
+                        re += 2.5f;
+                    if (bluCnt != 0)
+                        blu += 2.5f;
+                }
+
             }
             else if (recentballs[i] == "green")
             {
-                re += 2.5f;
-                blu += 2.5f;
-                yello += 2.5f;
-                purpl += 2.5f;
+                if (greCnt != 0)
+                {
+                    if (redCnt != 0)
+                        re += 2.5f;
+                    if (bluCnt != 0)
+                        blu += 2.5f;
+                    if (yelCnt != 0)
+                        yello += 2.5f;
+                    if (purCnt != 0)
+                        purpl += 2.5f;
+                }
             }
             else if (recentballs[i] == "blue")
             {
-                blu -= 10f;
-                re += 2.5f;
-                yello += 2.5f;
-                purpl += 2.5f;
+                if (bluCnt != 0)
+                {
+                    blu -= 10f;
+                    if (redCnt != 0)
+                        re += 2.5f;
+                    if (yelCnt != 0)
+                        yello += 2.5f;
+                    if (purCnt != 0)
+                        purpl += 2.5f;
+                }
+
             }
             else if (recentballs[i] == "purple")
             {
-                purpl -= 10f;
-                re += 2.5f;
-                yello += 2.5f;
-                blu += 2.5f;
+                if (purCnt != 0)
+                {
+                    purpl -= 10f;
+                    if (redCnt != 0)
+                        re += 2.5f;
+                    if (yelCnt != 0)
+                        yello += 2.5f;
+                    if (bluCnt != 0)
+                        blu += 2.5f;
+                }
+
             }
         }
         total = redCnt + bluCnt + yelCnt + purCnt + greCnt;
+
         purpl += ((float)purCnt / total) * 100f;
+
         re += purpl + (((float)redCnt / total) * 100f);
+
         blu += re + (((float)bluCnt / total) * 100f);
+
         yello += blu + (((float)yelCnt / total) * 100f);
 
+
         
-        //Debug.Log("pur:" + purCnt + ",re:" + redCnt + ",blu:" + bluCnt + ",yel:" + yelCnt + ",gre:"+greCnt);
-        //Debug.Log("pur:"+purpl + ",re:" + re + ",blu:" + blu + ",yel:" + yello + ",gre:100");
+        Debug.Log("pur:" + purCnt + ",re:" + redCnt + ",blu:" + bluCnt + ",yel:" + yelCnt + ",gre:"+greCnt);
+        Debug.Log("pur:"+purpl + ",re:" + re + ",blu:" + blu + ",yel:" + yello + ",gre:100");
 
         //각 row에 구슬이 하나도 없다면 total_row 감소
         for (int i = total_row - 1; i >= 0; i--)
