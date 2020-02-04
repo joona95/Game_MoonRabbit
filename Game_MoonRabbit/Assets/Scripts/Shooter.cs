@@ -17,9 +17,11 @@ public class Shooter : MonoBehaviour
     private float offest;
     bool colcheck = false;
     bool ch_colcheck = false;
+    bool ch_ballcheck = false; //길잡이 캐릭터의 경로가 구슬과 충돌했는지 판단하는 변수
 
     public GameObject reflectline;
     public GameObject ch_reflectline; //길잡이 캐릭터의 경로(ch_로 시작하는 모든 변수)
+    public GameObject starline; //길잡이 캐릭터 경로 중 일부
 
     SpriteRenderer sprite; //대포(경로) 이미지
     SpriteRenderer resprite;
@@ -31,6 +33,7 @@ public class Shooter : MonoBehaviour
 
     public int jdg;
     int ChType = Character.ChType;
+    Object starobj;
 
     public static float GetAngle(Vector3 from, Vector3 to)
     {
@@ -120,6 +123,16 @@ public class Shooter : MonoBehaviour
                 colPos = this.gameObject.GetComponent<Transform>().position; //충돌 위치
                 radian = degree * Mathf.PI / 180; // 충돌 각
                 yPos = 2.3f / Mathf.Tan(radian);
+
+                float stard = 0f;
+                while (!ch_colcheck && stard<10f)
+                {
+                    starobj = Instantiate(starline, new Vector3(stard * -Mathf.Sin(radian), -3f + stard * Mathf.Cos(radian), 0), Quaternion.Euler(Mathf.Sin(radian), Mathf.Cos(radian), 0f));
+                    stard += 0.4f;
+                }
+                
+
+
                 if (colcheck) //경로와 벽이 충돌중인지 확인, 충돌중이라면 반사 경로 보여줌
                 {
                     if(80 > degree && degree > 0)
@@ -184,6 +197,9 @@ public class Shooter : MonoBehaviour
                 sprite.color = color;
                 ch_recolor.a = 0f;
                 ch_resprite.color = ch_recolor;
+
+                Destroy(starobj);
+
                 if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                 {
                     sem.play(0);//구슬 쏠때 효과음 생성
@@ -204,6 +220,31 @@ public class Shooter : MonoBehaviour
             colcheck = true;
             ch_colcheck = true;
         }
+
+        if(col.tag == "red")
+        {
+            ch_ballcheck = true;
+        }
+
+        if (col.tag == "yellow")
+        {
+            ch_ballcheck = true;
+        }
+
+        if (col.tag == "green")
+        {
+            ch_ballcheck = true;
+        }
+
+        if (col.tag == "blue")
+        {
+            ch_ballcheck = true;
+        }
+
+        if (col.tag == "purple")
+        {
+            ch_ballcheck = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -212,6 +253,31 @@ public class Shooter : MonoBehaviour
         {
             colcheck = false;
             ch_colcheck = false;
+        }
+
+        if (col.tag == "red")
+        {
+            ch_ballcheck = false;
+        }
+
+        if (col.tag == "yellow")
+        {
+            ch_ballcheck = false;
+        }
+
+        if (col.tag == "green")
+        {
+            ch_ballcheck = false;
+        }
+
+        if (col.tag == "blue")
+        {
+            ch_ballcheck = false;
+        }
+
+        if (col.tag == "purple")
+        {
+            ch_ballcheck = false;
         }
     }
 

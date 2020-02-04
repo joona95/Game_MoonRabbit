@@ -1306,6 +1306,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reflectline: {fileID: 633880234}
   ch_reflectline: {fileID: 2081587409}
+  starline: {fileID: 7136041229272425846, guid: 118929eba10c1934aac311e3fa6bacff,
+    type: 3}
   color: {r: 0, g: 0, b: 0, a: 0}
   recolor: {r: 0, g: 0, b: 0, a: 0}
   ch_recolor: {r: 0, g: 0, b: 0, a: 0}
@@ -1495,6 +1497,8 @@ MonoBehaviour:
   - {fileID: 6718371729192715672, guid: 83cf7ca89c9241345b720a27f2776670, type: 3}
   shotspawn: {fileID: 921221988}
   ballPrefabs: []
+  recentballs: []
+  recent_idx: 0
   size: 0
   ceil: {fileID: 683617626}
 --- !u!4 &645167016
