@@ -269,79 +269,94 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
-        re = 0; purpl = 0;yello = 0;blu = 0;
-        for (int i = 0; i < 5; i++)
-        {
-            if (recentballs[i] == "red")
-            {
-                if (redCnt != 0)
-                {
-                    re -= 10f;
+        int c = 0;
+        if (redCnt != 0)
+            c++;
+        if (yelCnt != 0)
+            c++;
+        if (bluCnt != 0)
+            c++;
+        if (greCnt != 0)
+            c++;
+        if (purCnt != 0)
+            c++;
 
-                    if (purCnt != 0)
-                        purpl += 2.5f;
-                    if (yelCnt != 0)
-                        yello += 2.5f;
-                    if (bluCnt != 0)
-                        blu += 2.5f;
-                }
+        float plus = 10f / (float)c;
 
-            }
-            else if (recentballs[i] == "yellow")
+        re = 0; purpl = 0; yello = 0; blu = 0;
+        if (c > 1)
+        {      
+            for (int i = 0; i < 5; i++)
             {
-                if (yelCnt != 0)
-                {
-                    yello -= 10f;
-                    if (purCnt != 0)
-                        purpl += 2.5f;
-                    if (redCnt != 0)
-                        re += 2.5f;
-                    if (bluCnt != 0)
-                        blu += 2.5f;
-                }
-
-            }
-            else if (recentballs[i] == "green")
-            {
-                if (greCnt != 0)
+                if (recentballs[i] == "red")
                 {
                     if (redCnt != 0)
-                        re += 2.5f;
-                    if (bluCnt != 0)
-                        blu += 2.5f;
-                    if (yelCnt != 0)
-                        yello += 2.5f;
-                    if (purCnt != 0)
-                        purpl += 2.5f;
-                }
-            }
-            else if (recentballs[i] == "blue")
-            {
-                if (bluCnt != 0)
-                {
-                    blu -= 10f;
-                    if (redCnt != 0)
-                        re += 2.5f;
-                    if (yelCnt != 0)
-                        yello += 2.5f;
-                    if (purCnt != 0)
-                        purpl += 2.5f;
-                }
+                    {
+                        re -= 10f;
 
-            }
-            else if (recentballs[i] == "purple")
-            {
-                if (purCnt != 0)
-                {
-                    purpl -= 10f;
-                    if (redCnt != 0)
-                        re += 2.5f;
-                    if (yelCnt != 0)
-                        yello += 2.5f;
-                    if (bluCnt != 0)
-                        blu += 2.5f;
-                }
+                        if (purCnt != 0)
+                            purpl += plus;
+                        if (yelCnt != 0)
+                            yello += plus;
+                        if (bluCnt != 0)
+                            blu += plus;
+                    }
 
+                }
+                else if (recentballs[i] == "yellow")
+                {
+                    if (yelCnt != 0)
+                    {
+                        yello -= 10f;
+                        if (purCnt != 0)
+                            purpl += plus;
+                        if (redCnt != 0)
+                            re += plus;
+                        if (bluCnt != 0)
+                            blu += plus;
+                    }
+
+                }
+                else if (recentballs[i] == "green")
+                {
+                    if (redCnt != 0)
+                        re += plus;
+                    if (bluCnt != 0)
+                        blu += plus;
+                    if (yelCnt != 0)
+                        yello += plus;
+                    if (purCnt != 0)
+                        purpl += plus;
+
+                }
+                else if (recentballs[i] == "blue")
+                {
+                    if (bluCnt != 0)
+                    {
+                        blu -= 10f;
+                        if (redCnt != 0)
+                            re += plus;
+                        if (yelCnt != 0)
+                            yello += plus;
+                        if (purCnt != 0)
+                            purpl += plus;
+                    }
+
+                }
+                else if (recentballs[i] == "purple")
+                {
+                    if (purCnt != 0)
+                    {
+                        purpl -= 10f;
+                        if (redCnt != 0)
+                            re += plus;
+                        if (yelCnt != 0)
+                            yello += plus;
+                        if (bluCnt != 0)
+                            blu += plus;
+                    }
+
+                }
             }
         }
         total = redCnt + bluCnt + yelCnt + purCnt + greCnt;
