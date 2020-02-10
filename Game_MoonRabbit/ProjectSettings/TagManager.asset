@@ -15,6 +15,7 @@ TagManager:
   - buttons
   - ceil
   - stone
+  - starline
   layers:
   - Default
   - TransparentFX

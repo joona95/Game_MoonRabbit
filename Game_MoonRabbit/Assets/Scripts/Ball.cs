@@ -19,6 +19,9 @@ public class Ball : MonoBehaviour
     int ChType = Character.ChType; //캐릭터 종류 판별
     int replaynum; //ChType==2이고 diebomb 건드렸을 때 부활 여부 판별할 때 이용
 
+    SpriteRenderer starlineSprite; //스타라인 투명도 조절 용도
+    public Color starlineColor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +37,7 @@ public class Ball : MonoBehaviour
             shootball = true; //shootball 발사할 공 여부 변경
             GetComponent<Rigidbody2D>().velocity = transform.right * 5f;//발사
         }
-
-
+        
         //연결되지 않은 경우 아래로 떨어지고 일정 위치에서 destroy
         if (connect == false)
         {
@@ -49,8 +51,12 @@ public class Ball : MonoBehaviour
                 discon_cnt++;
 
                 //연결끊긴것들 다 떨어지면 shooter 다시 동작하게
-                if(discon_cnt==discon_total)
+                if (discon_cnt == discon_total)
+                {
                     Shooter.possible = true;
+                    Shooter.starlinepossible = true;
+                }
+                    
             }
 
             //Debug.Log("connect:" + discon_cnt + "," + discon_total+"("+row+","+col+")");
@@ -65,8 +71,15 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
        
+        if(collision.gameObject.tag == "starline")
+        {
+            starlineSprite = collision.gameObject.GetComponent<SpriteRenderer>();
+            starlineColor = starlineSprite.color;
+            starlineColor.a = 0f;
+            starlineSprite.color = starlineColor;
+        }
 
-        if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line") //shootball이 벽이 아닌 공에 닿았을 때
+        if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line" && collision.gameObject.tag != "starline") //shootball이 벽이 아닌 공에 닿았을 때
         {
             if (collision.gameObject.tag != "ceil")
             {
@@ -418,6 +431,7 @@ public class Ball : MonoBehaviour
 
                 shootball = false;
                 Shooter.possible = true;
+                Shooter.starlinepossible = true;
             }
             sem.play(2);
 
@@ -1333,7 +1347,12 @@ public class Ball : MonoBehaviour
 
             //연결끊긴것들이 없으면 shooter 다시 동작하게
             if (discon_total == 0)
+            {
                 Shooter.possible = true;
+                Shooter.starlinepossible = true;
+            }
+                
+
 
 
 
@@ -1624,6 +1643,17 @@ public class Ball : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "starline")
+        {
+            starlineSprite = collision.gameObject.GetComponent<SpriteRenderer>();
+            starlineColor = starlineSprite.color;
+            starlineColor.a = 1f;
+            starlineSprite.color = starlineColor;
         }
     }
 }

@@ -19,21 +19,32 @@ public class Shooter : MonoBehaviour
     bool ch_colcheck = false;
     bool ch_ballcheck = false; //길잡이 캐릭터의 경로가 구슬과 충돌했는지 판단하는 변수
 
-    public GameObject reflectline;
-    public GameObject ch_reflectline; //길잡이 캐릭터의 경로(ch_로 시작하는 모든 변수)
+    //public GameObject reflectline;
+    //public GameObject ch_reflectline; //길잡이 캐릭터의 경로(ch_로 시작하는 모든 변수)
     public GameObject starline; //길잡이 캐릭터 경로 중 일부
 
     SpriteRenderer sprite; //대포(경로) 이미지
-    SpriteRenderer resprite;
+    //SpriteRenderer resprite;
     public Color color;
-    public Color recolor;
+    //public Color recolor;
     
-    SpriteRenderer ch_resprite;
-    public Color ch_recolor;
+    //SpriteRenderer ch_resprite;
+    //public Color ch_recolor;
+
+    public static bool starlinepossible;
+    SpriteRenderer starlineResprite; //일반 경로
+    public Color starlineRecolor;
+
+    public static bool restarlinepossible;
+    SpriteRenderer restarlineResprite; //반사 경로
+    public Color restarlineRecolor;
 
     public int jdg;
     int ChType = Character.ChType;
     Object starobj;
+
+    List<GameObject> StarLine = new List<GameObject>(); //일반 경로 배열
+    List<GameObject> reStarLine = new List<GameObject>(); //반사 경로 배열
 
     public static float GetAngle(Vector3 from, Vector3 to)
     {
@@ -44,12 +55,18 @@ public class Shooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        starInit(); //처음 시작할때 starline 비활성화
+        starlinepossible = true;
+
+        restarInit(); //restarline 비활성화
+
         possible = true;
         sprite = this.gameObject.GetComponent<SpriteRenderer>();
         color = sprite.color;
         color.a = 0f; //시작할 때 투명함
         sprite.color = color;
 
+        /*
         resprite = reflectline.GetComponent<SpriteRenderer>(); //반사 라인
         recolor = resprite.color;
         recolor.a = 0f; //시작할 때 투명함
@@ -61,6 +78,16 @@ public class Shooter : MonoBehaviour
         ch_recolor = ch_resprite.color;
         ch_recolor.a = 0f; //시작할 때 투명함
         ch_resprite.color = ch_recolor;
+        */
+        /*
+        for(int i = 0; i < 20; i++)
+        {
+            starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+            starlineRecolor = starlineResprite.color;
+            starlineRecolor.a = 0f; //시작할 때 투명함
+            starlineResprite.color = starlineRecolor;
+        }*/
+
 
         bgm = FindObjectOfType<bgmmanager>();
         bgm.stop();
@@ -124,87 +151,362 @@ public class Shooter : MonoBehaviour
                 radian = degree * Mathf.PI / 180; // 충돌 각
                 yPos = 2.3f / Mathf.Tan(radian);
 
+                float stard = 0f; //별빛 간 간격
+                int starlinenum = 19; //구슬과 닿은 첫 번째 별빛 알기 위한 변수
+                if(Shooter.possible == true && (-80 < degree && degree < 80)) //대포가 동작하고, 가동 범위내 일때
+                {
+                    if (ChType == 1) //길잡이 토끼
+                    {
+                        for (int i = 0; i < 20; i++)
+                        {
+                            StarLine[i].transform.position = new Vector3(stard * -Mathf.Sin(radian), -3f + stard * Mathf.Cos(radian), 0);
+                            StarLine[i].transform.rotation = Quaternion.Euler(Mathf.Sin(radian), Mathf.Cos(radian), 0f);
+                            stard += 0.4f;
+                            StarLine[i].SetActive(true);
+                            //StarLine[i].SetActive(true);
+                            //GameObject.Find("starline1").GetComponent<Line>().isBallCheck();
+
+                        }
+
+                        for (int i = 0; i < 20; i++) //처음 구슬과 닿은 별빛의 위치 i를 알기 위함
+                        {
+                            starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                            starlineRecolor = starlineResprite.color;
+                            if (starlineRecolor.a == 0f)
+                            {
+                                starlinenum = i;
+                                break;
+                            }
+                        }
+
+                        for (int i = starlinenum; i < 20; i++) //StarLine[i]~[19]까지 모두 투명하게 만듦
+                        {
+                            starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                            starlineRecolor = starlineResprite.color;
+                            starlineRecolor.a = 0f;
+                            starlineResprite.color = starlineRecolor;
+                        }
+                    }
+
+                    else
+                    {
+                        starlinenum = 9; //길잡이 토끼 아닐 때
+                        for (int i = 0; i < 10; i++)
+                        {
+                            StarLine[i].transform.position = new Vector3(stard * -Mathf.Sin(radian), -3f + stard * Mathf.Cos(radian), 0);
+                            StarLine[i].transform.rotation = Quaternion.Euler(Mathf.Sin(radian), Mathf.Cos(radian), 0f);
+                            stard += 0.4f;
+                            StarLine[i].SetActive(true);
+                            //StarLine[i].SetActive(true);
+                            //GameObject.Find("starline1").GetComponent<Line>().isBallCheck();
+
+                        }
+
+                        for (int i = 0; i < 10; i++)
+                        {
+                            starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                            starlineRecolor = starlineResprite.color;
+                            if (starlineRecolor.a == 0f)
+                            {
+                                starlinenum = i;
+                                break;
+                            }
+                        }
+
+                        for (int i = starlinenum; i < 10; i++)
+                        {
+                            starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                            starlineRecolor = starlineResprite.color;
+                            starlineRecolor.a = 0f;
+                            starlineResprite.color = starlineRecolor;
+                        }
+                    }
+                }
+                
+                /*
                 float stard = 0f;
-                while (!ch_colcheck && stard<10f)
+                while (!ch_colcheck && stard<10f && !ch_ballcheck)
                 {
                     starobj = Instantiate(starline, new Vector3(stard * -Mathf.Sin(radian), -3f + stard * Mathf.Cos(radian), 0), Quaternion.Euler(Mathf.Sin(radian), Mathf.Cos(radian), 0f));
                     stard += 0.4f;
-                }
+
+                    ch_ballcheck = Line.isBall;
+                    
+                }*/
                 
 
 
                 if (colcheck) //경로와 벽이 충돌중인지 확인, 충돌중이라면 반사 경로 보여줌
                 {
-                    if(80 > degree && degree > 0)
+                    if(80 > degree && degree > 0) //왼쪽 벽과 맞닿는 반사 경로
                     {
-                        if(ChType == 1)
+                        if(ChType == 1) //길잡이 토끼
                         {
-                            ch_reflectline.transform.position = new Vector3(-2.3f, -3f + yPos, 0);
-                            ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                            //ch_reflectline.transform.position = new Vector3(-2.3f, -3f + yPos, 0);
+                            //ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+
+
+                            if (Shooter.possible == true)
+                            {
+                                float restard = 0f;
+                                int restarlinenum = 14;
+                                for (int i = 0; i < 15; i++)
+                                {
+                                    reStarLine[i].transform.position = new Vector3(-2.3f + restard * Mathf.Sin(radian), -3f + yPos + restard * Mathf.Cos(radian), 0);
+                                    reStarLine[i].transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                                    restard += 0.4f;
+                                    reStarLine[i].SetActive(true);
+                                    //StarLine[i].SetActive(true);
+                                    //GameObject.Find("starline1").GetComponent<Line>().isBallCheck();
+
+                                }
+
+                                for (int i = 0; i < 15; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    if (restarlineRecolor.a == 0f)
+                                    {
+                                        restarlinenum = i;
+                                        break;
+                                    }
+                                }
+
+                                for (int i = restarlinenum; i < 15; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    restarlineRecolor.a = 0f;
+                                    restarlineResprite.color = restarlineRecolor;
+                                }
+                            }
                         }
 
                         else
                         {
-                            reflectline.transform.position = new Vector3(-2.3f, -3f + yPos, 0);
-                            reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                            //reflectline.transform.position = new Vector3(-2.3f, -3f + yPos, 0);
+                            //reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+
+                            if (Shooter.possible == true)
+                            {
+                                float restard = 0f;
+                                int restarlinenum = 4;
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    reStarLine[i].transform.position = new Vector3(-2.3f + restard * Mathf.Sin(radian), -3f + yPos + restard * Mathf.Cos(radian), 0);
+                                    reStarLine[i].transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                                    restard += 0.4f;
+                                    reStarLine[i].SetActive(true);
+                                    //StarLine[i].SetActive(true);
+                                    //GameObject.Find("starline1").GetComponent<Line>().isBallCheck();
+
+                                }
+
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    if (restarlineRecolor.a == 0f)
+                                    {
+                                        restarlinenum = i;
+                                        break;
+                                    }
+                                }
+
+                                for (int i = restarlinenum; i < 5; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    restarlineRecolor.a = 0f;
+                                    restarlineResprite.color = restarlineRecolor;
+                                }
+                            }
+
+
+
                         }
 
                     }
-                    else if(-80 < degree && degree < 0)
+                    else if(-80 < degree && degree < 0) //오른쪽 벽과 맞닿는 반사 경로
                     {
-                        if (ChType == 1)
+                        if (ChType == 1) //길잡이 토끼
                         {
-                            ch_reflectline.transform.position = new Vector3(2.3f, -3f - yPos, 0);
-                            ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                            //ch_reflectline.transform.position = new Vector3(2.3f, -3f - yPos, 0);
+                            //ch_reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+
+
+
+                            if (Shooter.possible == true)
+                            {
+                                float restard = 0f;
+                                int restarlinenum = 14;
+                                for (int i = 0; i < 15; i++)
+                                {
+                                    reStarLine[i].transform.position = new Vector3(2.3f + restard * Mathf.Sin(radian), -3f - yPos + restard * Mathf.Cos(radian), 0);
+                                    reStarLine[i].transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                                    restard += 0.4f;
+                                    reStarLine[i].SetActive(true);
+                                    //StarLine[i].SetActive(true);
+                                    //GameObject.Find("starline1").GetComponent<Line>().isBallCheck();
+
+                                }
+
+                                for (int i = 0; i < 15; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    if (restarlineRecolor.a == 0f)
+                                    {
+                                        restarlinenum = i;
+                                        break;
+                                    }
+                                }
+
+                                for (int i = restarlinenum; i < 15; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    restarlineRecolor.a = 0f;
+                                    restarlineResprite.color = restarlineRecolor;
+                                }
+                            }
                         }
 
                         else{
-                            reflectline.transform.position = new Vector3(2.3f, -3f - yPos, 0);
-                            reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                            //reflectline.transform.position = new Vector3(2.3f, -3f - yPos, 0);
+                            //reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+
+
+                            if (Shooter.possible == true)
+                            {
+                                float restard = 0f;
+                                int restarlinenum = 4;
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    reStarLine[i].transform.position = new Vector3(2.3f + restard * Mathf.Sin(radian), -3f - yPos + restard * Mathf.Cos(radian), 0);
+                                    reStarLine[i].transform.rotation = Quaternion.Euler(0f, 0f, -degree);
+                                    restard += 0.4f;
+                                    reStarLine[i].SetActive(true);
+                                    //StarLine[i].SetActive(true);
+                                    //GameObject.Find("starline1").GetComponent<Line>().isBallCheck();
+
+                                }
+
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    if (restarlineRecolor.a == 0f)
+                                    {
+                                        restarlinenum = i;
+                                        break;
+                                    }
+                                }
+
+                                for (int i = restarlinenum; i < 5; i++)
+                                {
+                                    restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                                    restarlineRecolor = restarlineResprite.color;
+                                    restarlineRecolor.a = 0f;
+                                    restarlineResprite.color = restarlineRecolor;
+                                }
+                            }
                         }
                         
                     }
 
+                    
                     if (ChType == 1)
                     {
-                        ch_recolor.a = 1f;
-                        ch_resprite.color = ch_recolor;
+                        //ch_recolor.a = 1f;
+                        //ch_resprite.color = ch_recolor;
+
+
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            reStarLine[i].SetActive(true);
+                            //restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                            //restarlineRecolor = restarlineResprite.color;
+                            //restarlineRecolor.a = 1f;
+                            //restarlineResprite.color = restarlineRecolor;
+                        }
                     }
 
                     else
                     {
-                        recolor.a = 1f;
-                        resprite.color = recolor;
+                        //recolor.a = 1f;
+                        //resprite.color = recolor;
+
+                        for (int i = 0; i < 5; i++)
+                        {
+                            reStarLine[i].SetActive(true);
+                            //restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                            //restarlineRecolor = restarlineResprite.color;
+                            //restarlineRecolor.a = 1f;
+                            //restarlineResprite.color = restarlineRecolor;
+                        }
+
                     }
-                        
+
                 }
-                if (!colcheck)
+                if (!colcheck) //벽과 충돌하지 않으면 반사경로 투명하게 함
                 {
-                    recolor.a = 0f;
-                    resprite.color = recolor;
+                    //recolor.a = 0f;
+                    //resprite.color = recolor;
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        reStarLine[i].SetActive(false);
+                        //restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                        //restarlineRecolor = restarlineResprite.color;
+                        //restarlineRecolor.a = 0f;
+                        //restarlineResprite.color = restarlineRecolor;
+                    }
+
                 }
-                if (!ch_colcheck)
+                if (!ch_colcheck) //벽과 충돌하지 않으면 반사경로 투명하게 함 (길잡이 토끼)
                 {
-                    ch_recolor.a = 0f;
-                    ch_resprite.color = ch_recolor;
+                    //ch_recolor.a = 0f;
+                    //ch_resprite.color = ch_recolor;
+
+
+                    for (int i = 0; i < 15; i++)
+                    {
+                        reStarLine[i].SetActive(false);
+                        //restarlineResprite = reStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
+                        //restarlineRecolor = restarlineResprite.color;
+                        //restarlineRecolor.a = 0f;
+                        //restarlineResprite.color = restarlineRecolor;
+                    }
                 }
             }
             if (Input.GetMouseButtonUp(0))//터치 뗄때
             {
-                recolor.a = 0f;
-                resprite.color = recolor;
+                //recolor.a = 0f;
+                //resprite.color = recolor;
                 color.a = 0f; //터치 떼면 경로 안 보임
                 sprite.color = color;
-                ch_recolor.a = 0f;
-                ch_resprite.color = ch_recolor;
+                //ch_recolor.a = 0f;
+                //ch_resprite.color = ch_recolor;
+                
 
-                Destroy(starobj);
+                for (int i = 0; i < 20; i++)
+                {
+                    StarLine[i].SetActive(false); //터치 떼면 경로 비활성화
+                }
 
-                if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
+                for (int i = 0; i < 15; i++)
+                {
+                    reStarLine[i].SetActive(false); //터치 떼면 반사경로 비활성화
+                }
+
+                if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0 && starlinepossible == true) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                 {
                     sem.play(0);//구슬 쏠때 효과음 생성
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
                     Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
+                    starlinepossible = false;
                     Manager.limit_cnt--; //제한 구슬 갯수 감소
                 }
             }
@@ -221,30 +523,6 @@ public class Shooter : MonoBehaviour
             ch_colcheck = true;
         }
 
-        if(col.tag == "red")
-        {
-            ch_ballcheck = true;
-        }
-
-        if (col.tag == "yellow")
-        {
-            ch_ballcheck = true;
-        }
-
-        if (col.tag == "green")
-        {
-            ch_ballcheck = true;
-        }
-
-        if (col.tag == "blue")
-        {
-            ch_ballcheck = true;
-        }
-
-        if (col.tag == "purple")
-        {
-            ch_ballcheck = true;
-        }
     }
 
     private void OnTriggerExit2D(Collider2D col)
@@ -254,31 +532,26 @@ public class Shooter : MonoBehaviour
             colcheck = false;
             ch_colcheck = false;
         }
+        
+    }
 
-        if (col.tag == "red")
+    void starInit()
+    {
+        for(int i = 0; i < 20; i++)
         {
-            ch_ballcheck = false;
-        }
-
-        if (col.tag == "yellow")
-        {
-            ch_ballcheck = false;
-        }
-
-        if (col.tag == "green")
-        {
-            ch_ballcheck = false;
-        }
-
-        if (col.tag == "blue")
-        {
-            ch_ballcheck = false;
-        }
-
-        if (col.tag == "purple")
-        {
-            ch_ballcheck = false;
+            GameObject _starline = Instantiate(starline) as GameObject;
+            StarLine.Add(_starline);
+            StarLine[i].SetActive(false);
         }
     }
 
+    void restarInit()
+    {
+        for (int i = 0; i < 15; i++)
+        {
+            GameObject _restarline = Instantiate(starline) as GameObject;
+            reStarLine.Add(_restarline);
+            reStarLine[i].SetActive(false);
+        }
+    }
 }
