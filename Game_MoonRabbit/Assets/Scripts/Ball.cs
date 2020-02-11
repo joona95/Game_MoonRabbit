@@ -1427,7 +1427,7 @@ public class Ball : MonoBehaviour
             if (diebomb == true && this.gameObject.transform.position.y >= 0.4f)
             {
                 Debug.Log("die");
-                Time.timeScale = 0f;
+                Time.timeScale = 0f; 
                 //Shooter.possible = false;
                 if (GameObject.Find("대포"))
                 {
@@ -1439,6 +1439,10 @@ public class Ball : MonoBehaviour
                 {
                     Time.timeScale = 1f;
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                }
+                else
+                {
+                    Manager.fail = true;
                 }
             }
 

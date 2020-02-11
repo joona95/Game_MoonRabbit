@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class stageturnonoff : MonoBehaviour
 {
+    public GameObject opacity;
     public GameObject stage;
     // Start is called before the first frame update
     private void Awake()
@@ -26,6 +27,7 @@ public class stageturnonoff : MonoBehaviour
     {
         if (stage.activeSelf == true)//Map 씬에서 옵션창 꺼지면서 스테이지 버튼 활성화 및 스크롤 가능
         {
+            opacity.SetActive(false);
             stage.SetActive(false);
             GameObject.Find("Scroll View").GetComponent<ScrollRect>().vertical = true;
             GameObject.Find("Button1").GetComponent<Button>().interactable = true;
@@ -52,6 +54,7 @@ public class stageturnonoff : MonoBehaviour
         }
         else if (stage.activeSelf == false)//옵션창 켜지면서 스크롤 및 스테이지 버튼 비활성화
         {
+            opacity.SetActive(true);
             stage.SetActive(true);
             GameObject.Find("Scroll View").GetComponent<ScrollRect>().vertical = false;
             GameObject.Find("Button1").GetComponent<Button>().interactable = false;

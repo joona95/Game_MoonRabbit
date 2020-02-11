@@ -18,6 +18,7 @@ public class Shooter : MonoBehaviour
     bool colcheck = false;
     bool ch_colcheck = false;
     bool ch_ballcheck = false; //길잡이 캐릭터의 경로가 구슬과 충돌했는지 판단하는 변수
+    public GameObject[] characters = new GameObject[4];
 
     //public GameObject reflectline;
     //public GameObject ch_reflectline; //길잡이 캐릭터의 경로(ch_로 시작하는 모든 변수)
@@ -103,6 +104,13 @@ public class Shooter : MonoBehaviour
         if (Manager.queCnt == 0)
         {
             Time.timeScale = 0f;
+            Manager.clear = true;
+
+        }
+        else if (Manager.limit_cnt == 0)
+        {
+            Time.timeScale = 0f;
+            Manager.fail = true;
         }
         else
         {
@@ -489,7 +497,6 @@ public class Shooter : MonoBehaviour
                 sprite.color = color;
                 //ch_recolor.a = 0f;
                 //ch_resprite.color = ch_recolor;
-                
 
                 for (int i = 0; i < 20; i++)
                 {
@@ -503,11 +510,49 @@ public class Shooter : MonoBehaviour
 
                 if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt!=0 && starlinepossible == true) //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                 {
+                    if (Character.ChType == 0)
+                    {
+                        characters[0].GetComponent<Animator>().SetTrigger("shooting");
+                    }
+                    else if (Character.ChType == 1)
+                    {
+                        characters[1].GetComponent<Animator>().SetTrigger("shooting");
+                    }
+                    else if (Character.ChType == 2)
+                    {
+                        characters[2].GetComponent<Animator>().SetTrigger("shooting");
+                    }
+                    else if (Character.ChType == 3)
+                    {
+                        characters[3].GetComponent<Animator>().SetTrigger("shooting");
+                    }
+
+
                     sem.play(0);//구슬 쏠때 효과음 생성
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
                     Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
                     starlinepossible = false;
                     Manager.limit_cnt--; //제한 구슬 갯수 감소
+
+
+                    /*
+                    if (Character.ChType == 0)
+                    {
+                        characters[0].GetComponent<Animator>().SetBool("shooting", false);
+                    }
+                    else if (Character.ChType == 1)
+                    {
+                        characters[1].GetComponent<Animator>().SetBool("shooting", false);
+                    }
+                    else if (Character.ChType == 2)
+                    {
+                        characters[2].GetComponent<Animator>().SetBool("shooting", false);
+                    }
+                    else if (Character.ChType == 3)
+                    {
+                        characters[3].GetComponent<Animator>().SetBool("shooting", false);
+                    }
+                    */
                 }
             }
 #endif

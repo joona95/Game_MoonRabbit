@@ -9,6 +9,8 @@ public class Manager : MonoBehaviour
     static public List<Dictionary<string, object>> StageInfo; //스테이지마다 전체 row,col정보읽어오기
     static public int current_stage;//현재 스테이지 레벨
     static public int[,] stage; //각 스테이지마다 맵 구슬 생성 정보 저장
+    static public bool clear = false, fail = false;
+    public GameObject opacity, endbutton;
 
     public GameObject[] BallType=new GameObject[24];//구슬 색깔별로 종류 저장
     //-1:10,9열구분 -2:없는거 
@@ -33,6 +35,7 @@ public class Manager : MonoBehaviour
     public GameObject ceil;
     float top_y;
 
+    public GameObject[] characters=new GameObject[4];
     // Start is called before the first frame update
     void Start()
     {
@@ -101,7 +104,31 @@ public class Manager : MonoBehaviour
 
     void Awake()
     {
-        
+        //ui감춤
+        clear = false;
+        fail = false;
+        opacity.SetActive(false);
+        endbutton.SetActive(false);
+     
+
+        //캐릭터 모양 표시
+        if (Character.ChType == 0)
+        {
+            characters[0].SetActive(true);
+        }
+        else if (Character.ChType == 1)
+        {
+            characters[1].SetActive(true);
+        }
+        else if (Character.ChType == 2)
+        {
+            characters[2].SetActive(true);
+        }
+        else if (Character.ChType == 3)
+        {
+            characters[3].SetActive(true);
+        }
+
         //맵생성
         StageInfo = MapLoader.StageRead("StageInfo");//stage정보 csv 읽어오기
         total_row = int.Parse(StageInfo[current_stage-1]["Row"].ToString()); //stage에 따른 total row
@@ -269,6 +296,20 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
+
+        if (clear == true)//성공
+        {
+            opacity.SetActive(true);
+            endbutton.SetActive(true);
+        }
+
+        if (fail == true)
+        {
+            opacity.SetActive(true);
+            endbutton.SetActive(true);
+        }
+
+
         int c = 0;
         if (redCnt != 0)
             c++;
@@ -394,10 +435,16 @@ public class Manager : MonoBehaviour
         if (queCnt==0) //게임 성공
         {
             Time.timeScale = 0f;
+            Manager.clear = true;
             if (PlayerPrefs.GetInt("User_stage") < current_stage)
             {
                 PlayerPrefs.SetInt("User_stage", current_stage);
             }
+        }
+        else if (Manager.limit_cnt == 0)
+        {
+            Time.timeScale = 0f;
+            Manager.fail = true;
         }
         else
         {
