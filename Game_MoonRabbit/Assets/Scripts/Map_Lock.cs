@@ -26,7 +26,13 @@ public class Map_Lock : MonoBehaviour
         for (int i = 1; i <= 20; i++)
         {
             if (i == stage)
+            {
+                float x = buttons[i].GetComponent<RectTransform>().anchoredPosition.x;
+                float y = buttons[i].GetComponent<RectTransform>().anchoredPosition.y;
+
+                rabbits[i].GetComponent<RectTransform>().anchoredPosition.Set(x, y - 2180f);
                 rabbits[i].SetActive(true);
+            }
             else
                 rabbits[i].SetActive(false);
         }
@@ -65,6 +71,16 @@ public class Map_Lock : MonoBehaviour
         
         if (Manager.clear == true)
         {
+
+            float x;
+            if ((stage-1 / 4) % 2 == 0)
+                x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + 30f;
+            else
+                x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x - 30f;
+            float y = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y;
+            rabbits[stage].GetComponent<RectTransform>().anchoredPosition.Set(x, y);
+
+            Debug.Log("(x,y):"+rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + "," + rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y);
             rabbits[stage].GetComponent<Animator>().SetTrigger("jump");
         }
 
