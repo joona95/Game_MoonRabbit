@@ -103,13 +103,13 @@ public class Shooter : MonoBehaviour
         
         if (Manager.queCnt == 0)
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             Manager.clear = true;
 
         }
         else if (Manager.limit_cnt == 0)
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             Manager.fail = true;
         }
         else

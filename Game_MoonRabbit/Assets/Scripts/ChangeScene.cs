@@ -26,6 +26,11 @@ public class ChangeScene : MonoBehaviour
         
     }
 
+    public void restartButton()
+    {
+        SceneManager.LoadScene("Stage");
+    }
+
     public void StageStartButton()
     {
         

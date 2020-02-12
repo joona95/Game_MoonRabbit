@@ -10,7 +10,14 @@ public class Manager : MonoBehaviour
     static public int current_stage;//현재 스테이지 레벨
     static public int[,] stage; //각 스테이지마다 맵 구슬 생성 정보 저장
     static public bool clear = false, fail = false;
-    public GameObject opacity, endbutton;
+    public GameObject black, opacity, endbutton, confirm;//성공/실패/아이템랜덤 시 ui
+    //아이템 랜덤시
+    public GameObject hat, confetti;
+    public GameObject[] hat_items = new GameObject[3];
+    //성공, 실패시
+    public GameObject back_night, back_ground; //배경
+    public GameObject clear_rabbit, clear_fireworks;//성공
+    public GameObject fail_rabbit, fail_one;//실패
 
     public GameObject[] BallType=new GameObject[24];//구슬 색깔별로 종류 저장
     //-1:10,9열구분 -2:없는거 
@@ -109,6 +116,15 @@ public class Manager : MonoBehaviour
         fail = false;
         opacity.SetActive(false);
         endbutton.SetActive(false);
+        confirm.SetActive(false);
+        hat.SetActive(false);
+        for (int i = 0; i < 3; i++)
+            hat_items[i].SetActive(false);
+        confetti.SetActive(false);
+        clear_fireworks.SetActive(false);
+        clear_rabbit.SetActive(false);
+        fail_one.SetActive(false);
+        fail_rabbit.SetActive(false);
      
 
         //캐릭터 모양 표시
@@ -127,6 +143,27 @@ public class Manager : MonoBehaviour
         else if (Character.ChType == 3)
         {
             characters[3].SetActive(true);
+            opacity.SetActive(true);
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+            hat.SetActive(true);
+            confetti.SetActive(true);
+
+            float p = Random.Range(0, 100);
+            if (0 <= p && p < 33.33f)
+            {
+                hat_items[0].SetActive(true);
+            }
+            else if (33.33f <= p && p < 66.66f)
+            {
+                hat_items[1].SetActive(true);
+            }
+            else
+            {
+                hat_items[2].SetActive(true);
+            }
+
+            confirm.SetActive(true);
+
         }
 
         //맵생성
@@ -299,13 +336,20 @@ public class Manager : MonoBehaviour
 
         if (clear == true)//성공
         {
-            opacity.SetActive(true);
+            black.SetActive(true);
+            back_night.SetActive(true);
+            clear_fireworks.SetActive(true);
+            clear_rabbit.SetActive(true);
             endbutton.SetActive(true);
         }
 
         if (fail == true)
         {
-            opacity.SetActive(true);
+            black.SetActive(true);
+            back_night.SetActive(true);
+            back_ground.SetActive(true);
+            fail_rabbit.SetActive(true);
+            fail_one.SetActive(true);
             endbutton.SetActive(true);
         }
 
@@ -412,8 +456,8 @@ public class Manager : MonoBehaviour
 
 
         
-        Debug.Log("pur:" + purCnt + ",re:" + redCnt + ",blu:" + bluCnt + ",yel:" + yelCnt + ",gre:"+greCnt);
-        Debug.Log("pur:"+purpl + ",re:" + re + ",blu:" + blu + ",yel:" + yello + ",gre:100");
+        //Debug.Log("pur:" + purCnt + ",re:" + redCnt + ",blu:" + bluCnt + ",yel:" + yelCnt + ",gre:"+greCnt);
+        //Debug.Log("pur:"+purpl + ",re:" + re + ",blu:" + blu + ",yel:" + yello + ",gre:100");
 
         //각 row에 구슬이 하나도 없다면 total_row 감소
         for (int i = total_row - 1; i >= 0; i--)
@@ -434,7 +478,7 @@ public class Manager : MonoBehaviour
 
         if (queCnt==0) //게임 성공
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             Manager.clear = true;
             if (PlayerPrefs.GetInt("User_stage") < current_stage)
             {
@@ -443,7 +487,7 @@ public class Manager : MonoBehaviour
         }
         else if (Manager.limit_cnt == 0)
         {
-            Time.timeScale = 0f;
+            //Time.timeScale = 0f;
             Manager.fail = true;
         }
         else

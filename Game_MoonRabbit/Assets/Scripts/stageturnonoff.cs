@@ -30,6 +30,7 @@ public class stageturnonoff : MonoBehaviour
             opacity.SetActive(false);
             stage.SetActive(false);
             GameObject.Find("Scroll View").GetComponent<ScrollRect>().vertical = true;
+            /*
             GameObject.Find("Button1").GetComponent<Button>().interactable = true;
             GameObject.Find("Button2").GetComponent<Button>().interactable = true;
             GameObject.Find("Button3").GetComponent<Button>().interactable = true;
@@ -51,12 +52,14 @@ public class stageturnonoff : MonoBehaviour
             GameObject.Find("Button19").GetComponent<Button>().interactable = true;
             GameObject.Find("Button20").GetComponent<Button>().interactable = true;
             GameObject.Find("menugear").GetComponent<Button>().interactable = true;
+            */
         }
         else if (stage.activeSelf == false)//옵션창 켜지면서 스크롤 및 스테이지 버튼 비활성화
         {
             opacity.SetActive(true);
-            stage.SetActive(true);
+            stage.SetActive(true);     
             GameObject.Find("Scroll View").GetComponent<ScrollRect>().vertical = false;
+            /*
             GameObject.Find("Button1").GetComponent<Button>().interactable = false;
             GameObject.Find("Button2").GetComponent<Button>().interactable = false;
             GameObject.Find("Button3").GetComponent<Button>().interactable = false;
@@ -78,6 +81,7 @@ public class stageturnonoff : MonoBehaviour
             GameObject.Find("Button19").GetComponent<Button>().interactable = false;
             GameObject.Find("Button20").GetComponent<Button>().interactable = false;
             GameObject.Find("menugear").GetComponent<Button>().interactable = false;
+            */
         }
     }
 }

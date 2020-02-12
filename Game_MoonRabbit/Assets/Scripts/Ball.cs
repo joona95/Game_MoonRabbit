@@ -450,6 +450,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row - 1][col - 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row - 1][col - 1]);
                         Manager.Map[row - 1][col - 1] = null;
@@ -463,6 +464,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row - 1][col].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row - 1][col]);
                         Manager.Map[row - 1][col] = null;
@@ -476,6 +478,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row][col - 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row][col - 1]);
                         Manager.Map[row][col - 1] = null;
@@ -489,6 +492,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row][col + 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row][col + 1]);
                         Manager.Map[row][col + 1] = null;
@@ -502,6 +506,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row + 1][col - 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row + 1][col - 1]);
                         Manager.Map[row + 1][col - 1] = null;
@@ -515,6 +520,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row + 1][col].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row + 1][col]);
                         Manager.Map[row + 1][col] = null;
@@ -597,6 +603,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row - 1][col].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row - 1][col]);
                         Manager.Map[row - 1][col] = null;
@@ -615,6 +622,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row - 1][col + 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row - 1][col + 1]);
                         Manager.Map[row - 1][col + 1] = null;
@@ -633,6 +641,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row][col - 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row][col - 1]);
                         Manager.Map[row][col - 1] = null;
@@ -651,6 +660,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row][col + 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row][col + 1]);
                         Manager.Map[row][col + 1] = null;
@@ -669,6 +679,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row + 1][col].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row + 1][col]);
                         Manager.Map[row + 1][col] = null;
@@ -687,6 +698,7 @@ public class Ball : MonoBehaviour
                 {
                     if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
+                        Manager.Map[row + 1][col + 1].GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(Manager.Map[row + 1][col + 1]);
                         Manager.Map[row + 1][col + 1] = null;
@@ -1426,8 +1438,8 @@ public class Ball : MonoBehaviour
 
             if (diebomb == true && this.gameObject.transform.position.y >= 0.4f)
             {
-                Debug.Log("die");
-                Time.timeScale = 0f; 
+                Debug.Log("die**");
+                //Time.timeScale = 0f; 
                 //Shooter.possible = false;
                 if (GameObject.Find("대포"))
                 {
