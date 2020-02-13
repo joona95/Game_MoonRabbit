@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Manager : MonoBehaviour
 {
@@ -18,6 +20,14 @@ public class Manager : MonoBehaviour
     public GameObject back_night, back_ground; //배경
     public GameObject clear_rabbit, clear_fireworks;//성공
     public GameObject fail_rabbit, fail_one;//실패
+    static public bool ing = false;
+    public GameObject allclear;
+
+    //ui 퀘스트 구슬 표시
+    public Sprite[] questimages = new Sprite[5];
+    public GameObject[] quests = new GameObject[5];
+    public GameObject[] texts = new GameObject[5];
+    public GameObject[] textboxes = new GameObject[5];
 
     public GameObject[] BallType=new GameObject[24];//구슬 색깔별로 종류 저장
     //-1:10,9열구분 -2:없는거 
@@ -46,6 +56,7 @@ public class Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         total = redCnt + bluCnt + yelCnt + purCnt + greCnt;//일단 첫째로 색깔별 구슬 생성확률을 정해둡니다. 
         purpl = ((float)purCnt / total) * 100f;
         re = purpl + (((float)redCnt / total) * 100f);
@@ -107,6 +118,8 @@ public class Manager : MonoBehaviour
         recentballs = new string[5];
         recentballs[recent_idx++] = ballPrefabs[0].tag;
         recentballs[recent_idx++] = ballPrefabs[1].tag;
+        //ballPrefabs[0].GetComponent<Ball>().willshoot = true;
+        //ballPrefabs[1].GetComponent<Ball>().willshoot = true;
     }
 
     void Awake()
@@ -125,7 +138,14 @@ public class Manager : MonoBehaviour
         clear_rabbit.SetActive(false);
         fail_one.SetActive(false);
         fail_rabbit.SetActive(false);
-     
+        ing = false;
+
+
+        for (int i = 0; i < 5; i++)
+        {
+            textboxes[i].SetActive(false);
+        }
+
 
         //캐릭터 모양 표시
         if (Character.ChType == 0)
@@ -166,7 +186,8 @@ public class Manager : MonoBehaviour
 
         }
 
-        //맵생성
+        //맵생성        
+
         StageInfo = MapLoader.StageRead("StageInfo");//stage정보 csv 읽어오기
         total_row = int.Parse(StageInfo[current_stage-1]["Row"].ToString()); //stage에 따른 total row
         total_col = int.Parse(StageInfo[current_stage-1]["Col"].ToString()); //stage에 따른 total col
@@ -176,11 +197,13 @@ public class Manager : MonoBehaviour
         MapLoader.MapRead(current_stage.ToString()); //구슬 생성 맵 정보 csv에서 읽어오기
         Map = new List<GameObject[]>();
         redCnt = 0; yelCnt = 0; greCnt = 0; bluCnt = 0; purCnt = 0; queCnt = 0;
+        red_queCnt = 0; yel_queCnt = 0; gre_queCnt = 0; blu_queCnt = 0; pur_queCnt = 0; //구슬 개수 카운트 변수
+        red_quest = 0; yel_quest = 0; gre_quest = 0; blu_quest = 0; pur_quest = 0;
 
-        float x, y=0.85f; //구슬 생성 위치 지정 변수.  제일 밑에서부터 쌓아올라가기
+        float x, y=3.1f; //구슬 생성 위치 지정 변수.  제일 위에서부터 쌓아올라가기
         int t; //행 구분을 위한 변수
-        Stack<GameObject[]> temp = new Stack<GameObject[]>();//List Map에 거꾸로 넣어주기
-        for(int i = total_row-1; i >=0; i--)
+        //Stack<GameObject[]> temp = new Stack<GameObject[]>();//List Map에 거꾸로 넣어주기
+        for(int i = 0; i<total_row; i++)
         {
             if (stage[i, total_col - 1] == -1) //9개 행
             {
@@ -312,20 +335,81 @@ public class Manager : MonoBehaviour
 
                 x -= 0.52f;
             }
-            temp.Push(tmp); //리스트에 구슬 한 줄의 배열 넣기
+            Map.Add(tmp); //리스트에 구슬 한 줄의 배열 넣기
             
 
-            y += 0.45f;
+            y -= 0.45f;
         }
 
+        /*
         //Map에 GameObject[] 처음 행부터 모든 행 전부 넣어주기
         while (temp.Count != 0)
         {
             Map.Add(temp.Pop());
         }
+        */
 
-        top_y = y;
-        ceil.transform.position = new Vector3(0f, top_y-0.15f, 0f);
+        //top_y = y;
+        //ceil.transform.position = new Vector3(0f, top_y-0.15f, 0f);
+        ceil.transform.position = new Vector3(0f, 3.4f, 0f);
+
+
+        int cc = 0;
+        if (red_queCnt != 0)
+        {           
+            textboxes[cc].SetActive(true);
+            quests[cc].SetActive(true);
+            texts[cc].SetActive(true);
+            quests[cc].GetComponent<Image>().sprite = questimages[0];
+            //texts[cc].GetComponent<QuestCnt>().Text.text = red_quest.ToString() + "/" + red_queCnt.ToString();
+            texts[cc].GetComponent<QuestCnt>().color = "red";
+            cc++;
+        }
+
+        if (yel_queCnt != 0)
+        {            
+            textboxes[cc].SetActive(true);
+            quests[cc].SetActive(true);
+            texts[cc].SetActive(true);
+            quests[cc].GetComponent<Image>().sprite = questimages[1];
+            //texts[cc].GetComponent<QuestCnt>().Text.text = yel_quest.ToString() + "/" + yel_queCnt.ToString();
+            texts[cc].GetComponent<QuestCnt>().color = "yellow";
+            cc++;
+        }
+
+        if (gre_queCnt != 0)
+        {
+            
+            textboxes[cc].SetActive(true);
+            quests[cc].SetActive(true);
+            texts[cc].SetActive(true);
+            quests[cc].GetComponent<Image>().sprite = questimages[2];
+            //texts[cc].GetComponent<QuestCnt>().Text.text = gre_quest.ToString() + "/" + gre_queCnt.ToString();
+            texts[cc].GetComponent<QuestCnt>().color = "green";
+            cc++;
+        }
+
+        if (blu_queCnt != 0)
+        {
+            textboxes[cc].SetActive(true);
+            quests[cc].SetActive(true);
+            texts[cc].SetActive(true);
+            quests[cc].GetComponent<Image>().sprite = questimages[3];
+            //texts[cc].GetComponent<QuestCnt>().Text.text = blu_quest.ToString() + "/" + blu_queCnt.ToString();
+            texts[cc].GetComponent<QuestCnt>().color = "blue";
+            cc++;
+        }
+
+        if (pur_queCnt != 0)
+        {
+            textboxes[cc].SetActive(true);
+            quests[cc].SetActive(true);
+            texts[cc].SetActive(true);
+            quests[cc].GetComponent<Image>().sprite = questimages[4];
+            //texts[cc].GetComponent<QuestCnt>().Text.text = pur_quest.ToString() + "/" + pur_queCnt.ToString();
+            texts[cc].GetComponent<QuestCnt>().color = "purple";
+            cc++;
+        }
 
     }
 
@@ -333,24 +417,84 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
+        /*
+        int cc = 0;
+        if (red_queCnt != 0)
+        {
+            texts[cc].GetComponent<QuestCnt>().Text.text = red_quest.ToString() + "/" + red_queCnt.ToString();
+            cc++;
+        }
+
+        if (yel_queCnt != 0)
+        {
+            texts[cc].GetComponent<QuestCnt>().Text.text = yel_quest.ToString() + "/" + yel_queCnt.ToString();
+            cc++;
+        }
+
+        if (gre_queCnt != 0)
+        {
+            texts[cc].GetComponent<QuestCnt>().Text.text = gre_quest.ToString() + "/" + gre_queCnt.ToString();
+            cc++;
+        }
+
+        if (blu_queCnt != 0)
+        {
+            texts[cc].GetComponent<QuestCnt>().Text.text = blu_quest.ToString() + "/" + blu_queCnt.ToString();
+            cc++;
+        }
+
+
+        if (pur_queCnt != 0)
+        {
+            texts[cc].GetComponent<QuestCnt>().Text.text = pur_quest.ToString() + "/" + pur_queCnt.ToString();
+            cc++;
+        }
+        */
+
 
         if (clear == true)//성공
         {
-            black.SetActive(true);
-            back_night.SetActive(true);
-            clear_fireworks.SetActive(true);
-            clear_rabbit.SetActive(true);
-            endbutton.SetActive(true);
+            Shooter.possible = false;
+            Shooter.starlinepossible = false;            
+            Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
+            foreach (Ball ball in balls)
+            {
+                ball.enabled = false;
+                //Destroy(ball);
+            }
+            if (current_stage == 20)
+            {
+                black.SetActive(true);
+                allclear.SetActive(true);
+            }
+            else
+            {
+                black.SetActive(true);
+                back_night.SetActive(true);
+                clear_fireworks.SetActive(true);
+                clear_rabbit.SetActive(true);
+                endbutton.SetActive(true);
+            }
         }
 
         if (fail == true)
         {
+            
+            Shooter.possible = false;
+            Shooter.starlinepossible = false;
+            Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
+            foreach (Ball ball in balls)
+            {
+                ball.enabled = false;
+                //Destroy(ball);
+            }
             black.SetActive(true);
             back_night.SetActive(true);
             back_ground.SetActive(true);
             fail_rabbit.SetActive(true);
             fail_one.SetActive(true);
             endbutton.SetActive(true);
+            
         }
 
 
@@ -483,6 +627,19 @@ public class Manager : MonoBehaviour
             if (PlayerPrefs.GetInt("User_stage") < current_stage)
             {
                 PlayerPrefs.SetInt("User_stage", current_stage);
+                Map_Lock.jump = true;
+                if (current_stage == 5)
+                {
+                    Map_Lock.give1 = true;
+                }
+                if (current_stage == 10)
+                {
+                    Map_Lock.give2 = true;
+                }
+                if (current_stage == 15)
+                {
+                    Map_Lock.give3 = true;
+                }
             }
         }
         else if (Manager.limit_cnt == 0)
@@ -493,114 +650,128 @@ public class Manager : MonoBehaviour
         else
         {
 
+
+
             //가장 낮은 위치에 있는 구슬 y값 구하기
             float min_y = 0.85f;
             int map_index = 0;
-            map_index = Map[total_row - 1].Length - 1;
-            
-            for (int i = map_index; i >= 0 ; i--)
+            if (total_row > 0)
             {
+                map_index = Map[total_row - 1].Length - 1;
 
-          
-                if (Map[total_row - 1][i] != null)
+                for (int i = map_index; i >= 0; i--)
                 {
-                    min_y = Mathf.Round(Map[total_row - 1][i].transform.position.y * 100) / 100;
-                    break;
-                }
-            }
 
-
-            if (Ball.discon_total == Ball.discon_cnt) //연결되지 않은 구슬들 다 떨어지면 동작
-            {
-                //가장 높은 위치에 있는 구슬 y 값 구하기
-                float max_y = 4.45f;
-                for (int i = Map[0].Length - 1; i >= 0; i--)
-                {
-                    if (Map[0][i] != null)
+                    if (Map[total_row - 1][i] != null)
                     {
-                        max_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100;
+                        min_y = Mathf.Round(Map[total_row - 1][i].transform.position.y * 100) / 100;
                         break;
                     }
                 }
 
 
-                if (min_y < 0.85f)
+                //if (Ball.discon_total == Ball.discon_cnt) //연결되지 않은 구슬들 다 떨어지면 동작
+                //{
+                Shooter.possible = false;
+                Shooter.starlinepossible = false;
+                if (ing == false)
                 {
-                    float[,] end_y = new float[total_row, total_col];
-                    for (int i = 0; i < total_row; i++)
+                    //가장 높은 위치에 있는 구슬 y 값 구하기
+                    float max_y = 4f;
+                    for (int i = Map[0].Length - 1; i >= 0; i--)
                     {
-                        for (int j = 0; j < Map[i].Length; j++)
+                        if (Map[0][i] != null)
                         {
-                            if (Map[i][j] != null)
-                            {
-                                end_y[i, j] = Map[i][j].transform.position.y + 0.45f;
-                            }
+                            max_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100;
+                            break;
                         }
                     }
 
 
-                    for (int i = 0; i < total_row; i++)
+                    if (min_y < 0.85f)
                     {
-                        for (int j = 0; j < Map[i].Length; j++)
+                        float[,] end_y = new float[total_row, total_col];
+                        for (int i = 0; i < total_row; i++)
                         {
-                            if (Map[i][j] != null)
+                            for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
+                                if (Map[i][j] != null)
                                 {
-                                    Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y + 0.05f, Map[i][j].transform.position.z);
+                                    end_y[i, j] = Map[i][j].transform.position.y + 0.45f;
                                 }
-
                             }
                         }
-                    }
 
 
-                }
-                else if (min_y > 0.85f && max_y > 4.45f)
-                {
-                    float[,] end_y = new float[total_row, total_col];
-                    for (int i = 0; i < total_row; i++)
-                    {
-                        for (int j = 0; j < Map[i].Length; j++)
+                        for (int i = 0; i < total_row; i++)
                         {
-                            if (Map[i][j] != null)
-                                end_y[i, j] = Map[i][j].transform.position.y - (max_y - 4.45f);
-                        }
-                    }
-
-                    for (int i = 0; i < total_row; i++)
-                    {
-                        for (int j = 0; j < Map[i].Length; j++)
-                        {
-                            if (Map[i][j] != null)
+                            for (int j = 0; j < Map[i].Length; j++)
                             {
-
-                                if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 > end_y[i, j])
+                                if (Map[i][j] != null)
                                 {
-                                    Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y - 0.05f, Map[i][j].transform.position.z);
+                                    if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
+                                    {
+                                        Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y + 0.05f, Map[i][j].transform.position.z);
+                                    }
 
                                 }
-                                
                             }
+                        }
+
+
+                    }
+                    else if (min_y > 0.85f && max_y > 4.0f)
+                    {
+                        float[,] end_y = new float[total_row, total_col];
+                        for (int i = 0; i < total_row; i++)
+                        {
+                            for (int j = 0; j < Map[i].Length; j++)
+                            {
+                                if (Map[i][j] != null)
+                                    end_y[i, j] = Map[i][j].transform.position.y - (max_y - 4f);
+                            }
+                        }
+
+                        for (int i = 0; i < total_row; i++)
+                        {
+                            for (int j = 0; j < Map[i].Length; j++)
+                            {
+                                if (Map[i][j] != null)
+                                {
+
+                                    if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 > end_y[i, j])
+                                    {
+                                        Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y - 0.05f, Map[i][j].transform.position.z);
+
+                                    }
+
+                                }
+                            }
+                        }
+
+
+                    }
+
+
+                    for (int i = Map[0].Length - 1; i >= 0; i--)
+                    {
+                        if (Map[0][i] != null)
+                        {
+                            top_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100 + 0.3f;
+                            ceil.transform.position = new Vector3(0f, top_y, 0f);
+                            break;
                         }
                     }
 
 
-                }
-
-             
-                for (int i = Map[0].Length - 1; i >= 0; i--)
-                {
-                    if (Map[0][i] != null)
+                    if (min_y >= 0.85f)
                     {
-                        top_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100 + 0.3f;
-                        ceil.transform.position = new Vector3(0f, top_y, 0f);
-                        break;
+                        Shooter.possible = true;
+                        Shooter.starlinepossible = true;
                     }
                 }
-
+                //}
             }
-            
         }
 
     }
@@ -610,6 +781,7 @@ public class Manager : MonoBehaviour
         //발사할 첫번째 구슬 위치를 대포 위치로 변경
         ballPrefabs[0].transform.position = shotspawn.transform.position;
         ballPrefabs[0].transform.rotation = shotspawn.transform.rotation;
+        ballPrefabs[0].GetComponent<Ball>().shootball = true;
 
         //두번째 발사 구슬을 첫번째 발사 구슬로 바꾸고 첫번째 구슬 위치로 변경
         if (ballPrefabs[0].tag == "red")

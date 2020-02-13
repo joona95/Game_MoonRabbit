@@ -6,12 +6,14 @@ public class Items : MonoBehaviour
 {
     public GameObject opacity, confirm, hat, confetti;
     public GameObject[] hat_items = new GameObject[3];
-    public Sprite item_rowbomb, item_sixbomb, item_rainbow;
+    public GameObject item_rowbomb, item_sixbomb, item_rainbow;
 
     public void Item1()
     {
         Shooter.possible = false;
-        GetComponent<Manager>().ballPrefabs[0].GetComponent<SpriteRenderer>().sprite = item_rowbomb;
+        GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
+        Destroy(tmp);
+        GetComponent<Manager>().ballPrefabs[0] = (GameObject)Instantiate(item_rowbomb, new Vector3(0f, -3.5f, 0f), Quaternion.identity);
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rowbomb = true;
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().tag = "Untagged";
         Shooter.possible = true;
@@ -20,7 +22,9 @@ public class Items : MonoBehaviour
     public void Item2()
     {
         Shooter.possible = false;
-        GetComponent<Manager>().ballPrefabs[0].GetComponent<SpriteRenderer>().sprite = item_sixbomb;
+        GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
+        Destroy(tmp);
+        GetComponent<Manager>().ballPrefabs[0] = (GameObject)Instantiate(item_sixbomb, new Vector3(0f, -3.5f, 0f), Quaternion.identity);
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().sixbomb = true;
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().tag = "Untagged";
         Shooter.possible = true;
@@ -29,7 +33,9 @@ public class Items : MonoBehaviour
     public void Item3()
     {
         Shooter.possible = false;
-        GetComponent<Manager>().ballPrefabs[0].GetComponent<SpriteRenderer>().sprite = item_rainbow;
+        GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
+        Destroy(tmp);
+        GetComponent<Manager>().ballPrefabs[0] = (GameObject)Instantiate(item_rainbow, new Vector3(0f, -3.5f, 0f), Quaternion.identity);
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rainbow = true;
         GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().tag = "Untagged";
         Shooter.possible = true;

@@ -5,12 +5,17 @@ using UnityEngine.UI;
 
 public class Map_Lock : MonoBehaviour
 {
+    public static bool give1 = false, give2 = false, give3 = false;
+    public static bool jump=false;
     public GameObject[] rabbits = new GameObject[21];
     public GameObject[] locks = new GameObject[21];
     public GameObject[] buttons = new GameObject[21];
     public GameObject[] characters = new GameObject[4];
     public GameObject[] char_locks = new GameObject[4];
     public GameObject[] char_buttons = new GameObject[4];
+    static public int stage;
+    public GameObject back_ground;
+    public GameObject[] gives = new GameObject[3];
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +25,11 @@ public class Map_Lock : MonoBehaviour
 
     private void Awake()
     {
-        int stage = PlayerPrefs.GetInt("User_stage");
+        stage = PlayerPrefs.GetInt("User_stage");
         Debug.Log("user_stage:" + stage);
+
+        if (jump == true)
+            stage--;
 
         for (int i = 1; i <= 20; i++)
         {
@@ -30,7 +38,7 @@ public class Map_Lock : MonoBehaviour
                 float x = buttons[i].GetComponent<RectTransform>().anchoredPosition.x;
                 float y = buttons[i].GetComponent<RectTransform>().anchoredPosition.y;
 
-                rabbits[i].GetComponent<RectTransform>().anchoredPosition.Set(x, y - 2180f);
+                rabbits[i].GetComponent<RectTransform>().anchoredPosition=new Vector2(x, y + 320f);
                 rabbits[i].SetActive(true);
             }
             else
@@ -69,26 +77,35 @@ public class Map_Lock : MonoBehaviour
 
         }
         
-        if (Manager.clear == true)
+        if (jump == true)
         {
 
             float x;
-            if ((stage-1 / 4) % 2 == 0)
+            if (((stage-1) / 4) % 2 == 0)
                 x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + 30f;
             else
                 x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x - 30f;
             float y = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y;
-            rabbits[stage].GetComponent<RectTransform>().anchoredPosition.Set(x, y);
+            rabbits[stage].GetComponent<RectTransform>().anchoredPosition= new Vector2(x, y);
 
             Debug.Log("(x,y):"+rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + "," + rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y);
             rabbits[stage].GetComponent<Animator>().SetTrigger("jump");
+
+            //yield return new WaitForSeconds(rabbits[stage].GetComponent<Animation>())
+            //rabbits[stage].SetActive(false);
+            //rabbits[++stage].SetActive(true);
+
+            jump = false;
         }
 
     }
+
+  
 
     // Update is called once per frame
     void Update()
     {
         
     }
+    
 }
