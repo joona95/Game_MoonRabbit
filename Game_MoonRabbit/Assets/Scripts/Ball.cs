@@ -83,6 +83,7 @@ public class Ball : MonoBehaviour
             starlineColor = starlineSprite.color;
             starlineColor.a = 0f;
             starlineSprite.color = starlineColor;
+            
         }
 
         if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line" && collision.gameObject.tag != "starline") //shootball이 벽이 아닌 공에 닿았을 때
@@ -1989,6 +1990,7 @@ public class Ball : MonoBehaviour
             starlineColor = starlineSprite.color;
             starlineColor.a = 1f;
             starlineSprite.color = starlineColor;
+            
         }
     }
 

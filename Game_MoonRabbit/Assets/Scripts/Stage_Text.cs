@@ -15,6 +15,6 @@ public class Stage_Text : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        stageText.text = "Stage "+Manager.current_stage.ToString();
+        stageText.text = "STAGE "+Manager.current_stage.ToString();
     }
 }
