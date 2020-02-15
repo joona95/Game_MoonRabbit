@@ -88,7 +88,7 @@ public class Ball : MonoBehaviour
 
         if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line" && collision.gameObject.tag != "starline") //shootball이 벽이 아닌 공에 닿았을 때
         {
-            Manager.ing = true;
+            //Manager.ing = true;
 
             if (collision.gameObject.tag != "ceil" && collision.gameObject.GetComponent<Ball>().connect == true && collision.gameObject.GetComponent<Ball>().animation == false)
             {
@@ -1443,6 +1443,8 @@ public class Ball : MonoBehaviour
 
 
             }
+
+
 
 
             //연결 여부 판별

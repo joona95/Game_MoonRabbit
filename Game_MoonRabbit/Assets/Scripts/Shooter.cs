@@ -608,6 +608,7 @@ public class Shooter : MonoBehaviour
                     GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();//구슬 생성함수 Manager에서 불러오기
                     Shooter.possible = false;//연결되지 않은 게 떨어지기 전에 shooter 동작안하게
                     starlinepossible = false;
+                    Manager.ing = true;
                     Manager.limit_cnt--; //제한 구슬 갯수 감소
 
 

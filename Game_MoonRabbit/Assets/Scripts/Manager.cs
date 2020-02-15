@@ -672,10 +672,11 @@ public class Manager : MonoBehaviour
 
                 //if (Ball.discon_total == Ball.discon_cnt) //연결되지 않은 구슬들 다 떨어지면 동작
                 //{
-                Shooter.possible = false;
-                Shooter.starlinepossible = false;
+                
                 if (ing == false)
                 {
+                    Shooter.possible = false;
+                    Shooter.starlinepossible = false;
                     //가장 높은 위치에 있는 구슬 y 값 구하기
                     float max_y = 4f;
                     for (int i = Map[0].Length - 1; i >= 0; i--)
@@ -687,6 +688,7 @@ public class Manager : MonoBehaviour
                         }
                     }
 
+                   //Debug.Log(min_y+","+max_y);
 
                     if (min_y < 0.85f)
                     {
@@ -751,6 +753,36 @@ public class Manager : MonoBehaviour
 
 
                     }
+                    
+                    else if(min_y>=0.85f && max_y < 4.0f)
+                    {
+                        float[,] end_y = new float[total_row, total_col];
+                        for (int i = 0; i < total_row; i++)
+                        {
+                            for (int j = 0; j < Map[i].Length; j++)
+                            {
+                                if (Map[i][j] != null)
+                                    end_y[i, j] = Map[i][j].transform.position.y + (4f-max_y);
+                            }
+                        }
+
+                        for (int i = 0; i < total_row; i++)
+                        {
+                            for (int j = 0; j < Map[i].Length; j++)
+                            {
+                                if (Map[i][j] != null)
+                                {
+
+                                    if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
+                                    {
+                                        Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y + 0.05f, Map[i][j].transform.position.z);
+
+                                    }
+
+                                }
+                            }
+                        }
+                    }
 
 
                     for (int i = Map[0].Length - 1; i >= 0; i--)
@@ -764,7 +796,7 @@ public class Manager : MonoBehaviour
                     }
 
 
-                    if (min_y >= 0.85f)
+                    if (min_y >= 0.85f&& Ball.discon_total == Ball.discon_cnt)
                     {
                         Shooter.possible = true;
                         Shooter.starlinepossible = true;
