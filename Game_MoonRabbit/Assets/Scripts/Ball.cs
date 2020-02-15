@@ -69,10 +69,7 @@ public class Ball : MonoBehaviour
             //Debug.Log("connect:" + discon_cnt + "," + discon_total+"("+row+","+col+")");
         }
 
-        if (discon_total == 0 && anim_cnt == 0)
-        {
-            Manager.ing = false;
-        }
+
     }
 
 
@@ -473,7 +470,7 @@ public class Ball : MonoBehaviour
 
                     }
                 }
-                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col] && Manager.Map[row-1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row-1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
                     {
@@ -490,7 +487,7 @@ public class Ball : MonoBehaviour
 
                     }
                 }
-                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
@@ -506,7 +503,7 @@ public class Ball : MonoBehaviour
 
                     }
                 }
-                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
@@ -522,7 +519,7 @@ public class Ball : MonoBehaviour
 
                     }
                 }
-                if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
+                if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1] && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().diebomb == true)
                     {
@@ -538,7 +535,7 @@ public class Ball : MonoBehaviour
 
                     }
                 }
-                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
@@ -558,7 +555,7 @@ public class Ball : MonoBehaviour
                 //가로줄 폭탄이 주위6개에 있는지
                 //6개 폭탄이 주위6개에 있는지
 
-                if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1])
+                if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1] && Manager.Map[row - 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -571,7 +568,7 @@ public class Ball : MonoBehaviour
                     }
 
                 }
-                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
                     {
@@ -584,7 +581,7 @@ public class Ball : MonoBehaviour
                     }
 
                 }
-                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -597,7 +594,7 @@ public class Ball : MonoBehaviour
                     }
 
                 }
-                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -610,7 +607,7 @@ public class Ball : MonoBehaviour
                     }
 
                 }
-                if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1])
+                if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1] && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -623,7 +620,7 @@ public class Ball : MonoBehaviour
                     }
 
                 }
-                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
                     {
@@ -641,7 +638,7 @@ public class Ball : MonoBehaviour
             {
                 //건드리면 죽는 폭탄이 주위 6개에 있는지
 
-                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
                     {
@@ -662,7 +659,7 @@ public class Ball : MonoBehaviour
                         }
                     }
                 }
-                if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
+                if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
@@ -683,7 +680,7 @@ public class Ball : MonoBehaviour
                         }
                     }
                 }
-                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
@@ -704,7 +701,7 @@ public class Ball : MonoBehaviour
                         }
                     }
                 }
-                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
@@ -725,7 +722,7 @@ public class Ball : MonoBehaviour
                         }
                     }
                 }
-                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
@@ -746,7 +743,7 @@ public class Ball : MonoBehaviour
                         }
                     }
                 }
-                if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
+                if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
@@ -772,7 +769,7 @@ public class Ball : MonoBehaviour
                 //가로줄 폭탄이 주위6개에 있는지
                 //6개 폭탄이 주위6개에 있는지
 
-                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col])
+                if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
                     {
@@ -785,7 +782,7 @@ public class Ball : MonoBehaviour
                     }
 
                 }
-                if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1])
+                if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -798,7 +795,7 @@ public class Ball : MonoBehaviour
                     }
 
                 }
-                if (0 <= col - 1 && Manager.Map[row][col - 1])
+                if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -810,7 +807,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col - 1] = null;
                     }
                 }
-                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
+                if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -822,7 +819,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col + 1] = null;
                     }
                 }
-                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
+                if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
                     {
@@ -834,7 +831,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col] = null;
                     }
                 }
-                if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
+                if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                 {
                     if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
@@ -854,7 +851,7 @@ public class Ball : MonoBehaviour
             {
                 for (int i = 0; i < Manager.Map[row].Length; i++)
                 {
-                    if (Manager.Map[row][i] && Manager.Map[row][i].tag != "stone")
+                    if (Manager.Map[row][i] && Manager.Map[row][i].tag != "stone"&& Manager.Map[row][i].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][i].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][i];
                         
@@ -876,7 +873,7 @@ public class Ball : MonoBehaviour
             {
                 if (Manager.Map[row].Length == 9)
                 {
-                    if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone")
+                    if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone" && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row-1][col];
                         
@@ -892,7 +889,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col] = null;
 
                     }
-                    if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone")
+                    if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone" && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row - 1][col+1];
                         
@@ -907,7 +904,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row - 1][col + 1] = null;
                     }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone")
+                    if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone" && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col-1];
                         
@@ -922,7 +919,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col - 1] = null;
                     }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag!="stone")
+                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag!="stone" && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col+1];
                         
@@ -937,7 +934,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col + 1] = null;
                     }
-                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone")
+                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
                         
@@ -952,7 +949,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row + 1][col] = null;
                     }
-                    if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1]&&Manager.Map[row+1][col+1].tag!="stone")
+                    if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1]&&Manager.Map[row+1][col+1].tag!="stone" && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col+1];
                         
@@ -972,7 +969,7 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1]&&Manager.Map[row-1][col-1].tag!="stone")
+                    if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1]&&Manager.Map[row-1][col-1].tag!="stone" && Manager.Map[row - 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row - 1][col-1];
                         
@@ -987,7 +984,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row - 1][col - 1] = null;
                     }
-                    if (0 <= row - 1 && Manager.Map[row - 1][col]&&Manager.Map[row-1][col].tag!="stone")
+                    if (0 <= row - 1 && Manager.Map[row - 1][col]&&Manager.Map[row-1][col].tag!="stone" && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
                         
@@ -1002,7 +999,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row - 1][col] = null;
                     }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1]&&Manager.Map[row][col-1].tag!="stone")
+                    if (0 <= col - 1 && Manager.Map[row][col - 1]&&Manager.Map[row][col-1].tag!="stone" && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col-1];
                         
@@ -1017,7 +1014,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col - 1] = null;
                     }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1]&&Manager.Map[row][col+1].tag!="stone")
+                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1]&&Manager.Map[row][col+1].tag!="stone" && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col+1];
                         
@@ -1032,7 +1029,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col + 1] = null;
                     }
-                    if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1]&&Manager.Map[row+1][col-1].tag!="stone")
+                    if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1]&&Manager.Map[row+1][col-1].tag!="stone" && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col-1];
                         
@@ -1047,7 +1044,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row + 1][col - 1] = null;
                     }
-                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone")
+                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
                         
@@ -1099,14 +1096,14 @@ public class Ball : MonoBehaviour
                         case 0:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (0 <= t_r - 1 && 0 <= t_c - 1 && Manager.Map[t_r - 1][t_c - 1] &&Manager.Map[t_r-1][t_c-1].GetComponent<Ball>().visit==false&&Manager.Map[t_r-1][t_c-1].tag!="stone"&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().sixbomb==false&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().diebomb==false&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().rowbomb==false)
+                                if (0 <= t_r - 1 && 0 <= t_c - 1 && Manager.Map[t_r - 1][t_c - 1] &&Manager.Map[t_r-1][t_c-1].GetComponent<Ball>().visit==false&&Manager.Map[t_r-1][t_c-1].tag!="stone"&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().sixbomb==false&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().diebomb==false&& Manager.Map[t_r - 1][t_c - 1].GetComponent<Ball>().rowbomb==false && Manager.Map[t_r - 1][t_c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r - 1][t_c-1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c - 1]);
                                 }
                             }
                             else
                             {
-                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&&Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb == false)
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&&Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c]);
                                 }
@@ -1115,28 +1112,28 @@ public class Ball : MonoBehaviour
                         case 1:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c ].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb == false)
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c ].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c]);
                                 }
                             }
                             else
                             {
-                                if (0 <= t_r - 1 && t_c + 1 < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c + 1] && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().visit == false&&Manager.Map[t_r - 1][t_c + 1].tag != "stone" && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().rowbomb == false)
+                                if (0 <= t_r - 1 && t_c + 1 < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c + 1] && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().visit == false&&Manager.Map[t_r - 1][t_c + 1].tag != "stone" && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c + 1].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r - 1][t_c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r - 1][t_c+1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c + 1]);
                                 }
                             }
                             break;
                         case 2:
-                            if (0 <= t_c - 1 && Manager.Map[t_r][t_c - 1] && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().visit == false&&Manager.Map[t_r][t_c - 1].tag != "stone" && Manager.Map[t_r ][t_c - 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().rowbomb == false)
+                            if (0 <= t_c - 1 && Manager.Map[t_r][t_c - 1] && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().visit == false&&Manager.Map[t_r][t_c - 1].tag != "stone" && Manager.Map[t_r ][t_c - 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r][t_c - 1].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r][t_c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r][t_c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[t_r][t_c - 1]);
                             }
                             break;
                         case 3:
 
-                            if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1] && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().visit == false && Manager.Map[t_r][t_c + 1].tag != "stone" && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().rowbomb == false)
+                            if (t_c + 1 < Manager.Map[t_r].Length && Manager.Map[t_r][t_c + 1] && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().visit == false && Manager.Map[t_r][t_c + 1].tag != "stone" && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r][t_c + 1].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r][t_c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r][t_c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[t_r][t_c + 1]);
                             }
@@ -1145,14 +1142,14 @@ public class Ball : MonoBehaviour
                         case 4:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (t_r + 1 < Manager.total_row && 0 <= t_c - 1 && Manager.Map[t_r + 1][t_c - 1] && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c - 1].tag != "stone" && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().rowbomb == false)
+                                if (t_r + 1 < Manager.total_row && 0 <= t_c - 1 && Manager.Map[t_r + 1][t_c - 1] && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c - 1].tag != "stone" && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c - 1].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r+1][t_c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r+1][t_c-1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c - 1]);
                                 }
                             }
                             else
                             {
-                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c ].tag != "stone" && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().rowbomb == false)
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c ].tag != "stone" && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r+1][t_c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r+1][t_c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c]);
                                 }
@@ -1161,14 +1158,14 @@ public class Ball : MonoBehaviour
                         case 5:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c].tag != "stone" && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().rowbomb == false)
+                                if (t_r + 1 < Manager.total_row && t_c < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c] && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c].tag != "stone" && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r+1][t_c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r+1][t_c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c]);
                                 }
                             }
                             else
                             {
-                                if (t_r + 1 < Manager.total_row && t_c + 1 < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c + 1] && Manager.Map[t_r +1][t_c + 1].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c + 1].tag != "stone" && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().rowbomb == false)
+                                if (t_r + 1 < Manager.total_row && t_c + 1 < Manager.Map[t_r+1].Length && Manager.Map[t_r + 1][t_c + 1] && Manager.Map[t_r +1][t_c + 1].GetComponent<Ball>().visit == false&& Manager.Map[t_r + 1][t_c + 1].tag != "stone" && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().diebomb == false && Manager.Map[t_r + 1][t_c + 1].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r+1][t_c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r+1][t_c+1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r + 1][t_c + 1]);
                                 }
@@ -1197,37 +1194,37 @@ public class Ball : MonoBehaviour
 
                         if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
                         {
-                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c].GetComponent<Ball>().rainbow == true))
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c].GetComponent<Ball>().rainbow == true) && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c]);
                                 Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
                                 
                             }
-                            if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c + 1].GetComponent<Ball>().rainbow == true))
+                            if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c + 1].GetComponent<Ball>().rainbow == true) && Manager.Map[r - 1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c + 1]);
                                 Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
               
                             }
-                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c - 1].GetComponent<Ball>().tag == color || Manager.Map[r][c - 1].GetComponent<Ball>().rainbow == true))
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c - 1].GetComponent<Ball>().tag == color || Manager.Map[r][c - 1].GetComponent<Ball>().rainbow == true) && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r][c - 1]);
                                 Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                                 
                             }
-                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r][c + 1].GetComponent<Ball>().rainbow == true))
+                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r][c + 1].GetComponent<Ball>().rainbow == true) && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r][c + 1]);
                                 Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
 
                             }
-                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c].GetComponent<Ball>().tag == color || Manager.Map[r + 1][c].GetComponent<Ball>().rainbow == true))
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c].GetComponent<Ball>().tag == color || Manager.Map[r + 1][c].GetComponent<Ball>().rainbow == true) && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c]);
                                 Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
 
                             }
-                            if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r + 1][c + 1].GetComponent<Ball>().rainbow == true))
+                            if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == color || Manager.Map[r + 1][c + 1].GetComponent<Ball>().rainbow == true) && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c + 1]);
                                 Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
@@ -1236,34 +1233,34 @@ public class Ball : MonoBehaviour
                         }
                         else //10개일 때 이웃한 6개 
                         {
-                            if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == color || Manager.Map[r -1][c - 1].GetComponent<Ball>().rainbow == true))
+                            if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == color || Manager.Map[r -1][c - 1].GetComponent<Ball>().rainbow == true) && Manager.Map[r - 1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r- 1][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c - 1]);
                                 Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
 
                             }
-                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c].GetComponent<Ball>().rainbow == true))
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r - 1][c].GetComponent<Ball>().tag == color || Manager.Map[r - 1][c].GetComponent<Ball>().rainbow == true) && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r- 1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c]);
 
                                 Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
                             }
-                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c - 1].GetComponent<Ball>().tag == color||Manager.Map[r][c-1].GetComponent<Ball>().rainbow==true))
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c - 1].GetComponent<Ball>().tag == color||Manager.Map[r][c-1].GetComponent<Ball>().rainbow==true) && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r][c - 1]);
                                 Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                             }
-                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c + 1].GetComponent<Ball>().tag == color||Manager.Map[r][c+1].GetComponent<Ball>().rainbow==true))
+                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && (Manager.Map[r][c + 1].GetComponent<Ball>().tag == color||Manager.Map[r][c+1].GetComponent<Ball>().rainbow==true) && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r][c + 1]);
                                 Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == color||Manager.Map[r+1][c-1].GetComponent<Ball>().rainbow==true))
+                            if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == color||Manager.Map[r+1][c-1].GetComponent<Ball>().rainbow==true) && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c - 1]);
                                 Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c].GetComponent<Ball>().tag == color||Manager.Map[r+1][c].GetComponent<Ball>().rainbow==true))
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && (Manager.Map[r + 1][c].GetComponent<Ball>().tag == color||Manager.Map[r+1][c].GetComponent<Ball>().rainbow==true) && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c]);
                                 Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
@@ -1363,32 +1360,32 @@ public class Ball : MonoBehaviour
 
                         if (obj.GetComponent<Ball>().type == 1)//9개일 때 이웃한 6개
                         {
-                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c]);
                                 Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
                             }
-                            if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c + 1].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r - 1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c + 1]);
                                 Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
                             }
-                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r][c - 1]);
                                 Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                             }
-                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c + 1].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r][c + 1]);
                                 Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c]);
                                 Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c + 1].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c + 1]);
                                 Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
@@ -1396,17 +1393,17 @@ public class Ball : MonoBehaviour
                         }
                         else //10개일 때 이웃한 6개 
                         {
-                            if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c - 1].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r- 1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c - 1]);
                                 Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
                             }
-                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r - 1][c]);
                                 Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
                             }
-                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c - 1].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r][c - 1]);
                                 Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
@@ -1416,12 +1413,12 @@ public class Ball : MonoBehaviour
                                 q.Enqueue(Manager.Map[r][c + 1]);
                                 Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c - 1].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c - 1]);
                                 Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
                             }
-                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == this.gameObject.tag)
+                            if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r + 1][c].GetComponent<Ball>().tag == this.gameObject.tag && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                             {
                                 q.Enqueue(Manager.Map[r + 1][c]);
                                 Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
@@ -1493,7 +1490,7 @@ public class Ball : MonoBehaviour
             {
                 for (int j = 0; j < Manager.Map[i].Length; j++)
                 {
-                    if (Manager.Map[i][j] != null)
+                    if (Manager.Map[i][j] != null && Manager.Map[i][j].gameObject.GetComponent<Ball>().connect == true && Manager.Map[i][j].gameObject.GetComponent<Ball>().anim == false)
                     {
                         //visit 초기화
                         for (int k = 0; k < Manager.total_row; k++)
@@ -1521,32 +1518,32 @@ public class Ball : MonoBehaviour
 
                             if (obj.GetComponent<Ball>().type == 1) //9개
                             {
-                                if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false)
+                                if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r + 1][c]);
                                     Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
                                 }
-                                if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false)
+                                if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r + 1][c + 1]);
                                     Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
                                 }
-                                if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
+                                if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r][c - 1]);
                                     Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                                 }
-                                if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
+                                if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r][c + 1]);
                                     Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                                 }
-                                if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false)
+                                if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r- 1][c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r - 1][c]);
                                     Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
                                 }
-                                if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false)
+                                if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c+1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r - 1][c + 1]);
                                     Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
@@ -1555,32 +1552,32 @@ public class Ball : MonoBehaviour
                             }
                             else //10개
                             {
-                                if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false)
+                                if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r + 1][c - 1]);
                                     Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
                                 }
-                                if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false)
+                                if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r + 1][c]);
                                     Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
                                 }
-                                if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
+                                if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r][c - 1]);
                                     Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                                 }
-                                if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
+                                if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r][c + 1]);
                                     Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                                 }
-                                if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false)
+                                if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c-1].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r - 1][c - 1]);
                                     Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
                                 }
-                                if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false)
+                                if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     s.Push(Manager.Map[r - 1][c]);
                                     Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
@@ -1708,7 +1705,7 @@ public class Ball : MonoBehaviour
             {
                 for (int i = 0; i < Manager.Map[row].Length; i++)
                 {
-                    if (Manager.Map[row][i] && Manager.Map[row][i].tag != "stone")
+                    if (Manager.Map[row][i] && Manager.Map[row][i].tag != "stone" && Manager.Map[row][i].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][i].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][i];
                         
@@ -1731,7 +1728,7 @@ public class Ball : MonoBehaviour
             {
                 if (Manager.Map[row].Length == 9)
                 {
-                    if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone")
+                    if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone" && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
                         
@@ -1746,7 +1743,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row - 1][col] = null;
                     }
-                    if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone")
+                    if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone" && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row - 1][col+1];
                         
@@ -1761,7 +1758,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row - 1][col + 1] = null;
                     }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone")
+                    if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone" && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col-1];
                         
@@ -1776,7 +1773,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col - 1] = null;
                     }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone")
+                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone" && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col+1];
                         
@@ -1791,7 +1788,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col + 1] = null;
                     }
-                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone")
+                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
                         
@@ -1806,7 +1803,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row + 1][col] = null;
                     }
-                    if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col + 1].tag != "stone")
+                    if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col + 1].tag != "stone" && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col+1];
                         
@@ -1824,7 +1821,7 @@ public class Ball : MonoBehaviour
                 }
                 else
                 {
-                    if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1] && Manager.Map[row - 1][col - 1].tag != "stone")
+                    if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1] && Manager.Map[row - 1][col - 1].tag != "stone" && Manager.Map[row - 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row - 1][col-1];
                         
@@ -1839,7 +1836,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row - 1][col - 1] = null;
                     }
-                    if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone")
+                    if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone" && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
                         Manager.Map[row - 1][col] = null;
@@ -1853,7 +1850,7 @@ public class Ball : MonoBehaviour
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                     }
-                    if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone")
+                    if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone" && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col-1];
                         
@@ -1868,7 +1865,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col - 1] = null;
                     }
-                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone")
+                    if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone" && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row][col+1];
                         
@@ -1883,7 +1880,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row][col + 1] = null;
                     }
-                    if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1] && Manager.Map[row + 1][col - 1].tag != "stone")
+                    if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1] && Manager.Map[row + 1][col - 1].tag != "stone" && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col-1];
                         
@@ -1898,7 +1895,7 @@ public class Ball : MonoBehaviour
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
                         Manager.Map[row + 1][col - 1] = null;
                     }
-                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone")
+                    if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
                         
@@ -1957,32 +1954,32 @@ public class Ball : MonoBehaviour
 
                                 if (obj.GetComponent<Ball>().type == 1) //9개
                                 {
-                                    if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false)
+                                    if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r + 1][c]);
                                         Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
                                     }
-                                    if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false)
+                                    if (r + 1 < Manager.total_row && c + 1 < Manager.Map[r + 1].Length && Manager.Map[r + 1][c + 1] != null && Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c+1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r + 1][c + 1]);
                                         Manager.Map[r + 1][c + 1].GetComponent<Ball>().visit = true;
                                     }
-                                    if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
+                                    if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r][c - 1]);
                                         Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                                     }
-                                    if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
+                                    if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r][c + 1]);
                                         Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                                     }
-                                    if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false)
+                                    if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r- 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r - 1][c]);
                                         Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
                                     }
-                                    if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false)
+                                    if (0 <= r - 1 && c + 1 < Manager.Map[r - 1].Length && Manager.Map[r - 1][c + 1] != null && Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r- 1][c+1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r - 1][c + 1]);
                                         Manager.Map[r - 1][c + 1].GetComponent<Ball>().visit = true;
@@ -1991,32 +1988,32 @@ public class Ball : MonoBehaviour
                                 }
                                 else //10개
                                 {
-                                    if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false)
+                                    if (r + 1 < Manager.total_row && 0 <= c - 1 && Manager.Map[r + 1][c - 1] != null && Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c-1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r + 1][c - 1]);
                                         Manager.Map[r + 1][c - 1].GetComponent<Ball>().visit = true;
                                     }
-                                    if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false)
+                                    if (r + 1 < Manager.total_row && c < Manager.Map[r + 1].Length && Manager.Map[r + 1][c] != null && Manager.Map[r + 1][c].GetComponent<Ball>().visit == false && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r+1][c].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r + 1][c]);
                                         Manager.Map[r + 1][c].GetComponent<Ball>().visit = true;
                                     }
-                                    if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false)
+                                    if (0 <= c - 1 && Manager.Map[r][c - 1] != null && Manager.Map[r][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c-1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r][c - 1]);
                                         Manager.Map[r][c - 1].GetComponent<Ball>().visit = true;
                                     }
-                                    if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false)
+                                    if (c + 1 < Manager.Map[r].Length && Manager.Map[r][c + 1] != null && Manager.Map[r][c + 1].GetComponent<Ball>().visit == false && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r][c+1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r][c + 1]);
                                         Manager.Map[r][c + 1].GetComponent<Ball>().visit = true;
                                     }
-                                    if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false)
+                                    if (0 <= r - 1 && 0 <= c - 1 && Manager.Map[r - 1][c - 1] != null && Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit == false && Manager.Map[r- 1][c-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r- 1][c-1].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r - 1][c - 1]);
                                         Manager.Map[r - 1][c - 1].GetComponent<Ball>().visit = true;
                                     }
-                                    if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false)
+                                    if (0 <= r - 1 && c < Manager.Map[r - 1].Length && Manager.Map[r - 1][c] != null && Manager.Map[r - 1][c].GetComponent<Ball>().visit == false && Manager.Map[r - 1][c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[r- 1][c].gameObject.GetComponent<Ball>().anim == false)
                                     {
                                         s.Push(Manager.Map[r - 1][c]);
                                         Manager.Map[r - 1][c].GetComponent<Ball>().visit = true;
@@ -2061,8 +2058,8 @@ public class Ball : MonoBehaviour
 
     public void animationstart()
     {
-        Shooter.possible = false;
-        Shooter.starlinepossible = false;
+        //Shooter.possible = false;
+        //Shooter.starlinepossible = false;
         Manager.ing = true;
         anim = true;
         anim_cnt++;
