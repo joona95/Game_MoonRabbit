@@ -12,10 +12,11 @@ public class Ball : MonoBehaviour
     static public int discon_cnt = 0, discon_total = 0; //연결끊긴 구슬의 갯수
     public bool quest, diebomb, rowbomb, sixbomb, rainbow; //퀘스트 구슬인지 여부
     public bool shootball = false; //발사하는 공인지 여부
-    public bool animation = false;
+    public bool anim = false;
     public int count = 0;
     public bool end = false;
     semmanager sem;
+    static int anim_cnt = 0;
 
     int ChType = Character.ChType; //캐릭터 종류 판별
     int replaynum; //ChType==2이고 diebomb 건드렸을 때 부활 여부 판별할 때 이용
@@ -68,9 +69,10 @@ public class Ball : MonoBehaviour
             //Debug.Log("connect:" + discon_cnt + "," + discon_total+"("+row+","+col+")");
         }
 
-
-        
-        
+        if (discon_total == 0 && anim_cnt == 0)
+        {
+            Manager.ing = false;
+        }
     }
 
 
@@ -90,7 +92,7 @@ public class Ball : MonoBehaviour
         {
             //Manager.ing = true;
 
-            if (collision.gameObject.tag != "ceil" && collision.gameObject.GetComponent<Ball>().connect == true && collision.gameObject.GetComponent<Ball>().animation == false)
+            if (collision.gameObject.tag != "ceil" && collision.gameObject.GetComponent<Ball>().connect == true && collision.gameObject.GetComponent<Ball>().anim == false)
             {
                 this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero; //발사되는 공이 벽이 아닌 다른 공과 닿았을 때 멈춤
                 float col_x = collision.gameObject.transform.position.x; //collision의 x 좌표
@@ -460,10 +462,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col - 1];
-                        Manager.Map[row - 1][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");                      
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col - 1] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -476,10 +479,11 @@ public class Ball : MonoBehaviour
                     {
                   
                         GameObject tmp = Manager.Map[row - 1][col];
-                        Manager.Map[row - 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -491,10 +495,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col - 1];
-                        Manager.Map[row][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -506,10 +511,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col + 1];
-                        Manager.Map[row][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -521,10 +527,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col - 1];
-                        Manager.Map[row + 1][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col - 1] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -536,10 +543,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -555,10 +563,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col - 1];
-                        Manager.Map[row - 1][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col - 1] = null;
                     }
 
                 }
@@ -567,10 +576,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
-                        Manager.Map[row - 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col] = null;
                     }
 
                 }
@@ -579,10 +589,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col - 1];
-                        Manager.Map[row][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                     }
 
                 }
@@ -591,10 +602,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col + 1];
-                        Manager.Map[row][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                     }
 
                 }
@@ -603,10 +615,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col - 1];
-                        Manager.Map[row + 1][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col - 1] = null;
                     }
 
                 }
@@ -615,10 +628,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                     }
 
                 }
@@ -632,10 +646,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
-                        Manager.Map[row - 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -652,10 +667,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col + 1];
-                        Manager.Map[row - 1][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col + 1] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -672,10 +688,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col - 1];
-                        Manager.Map[row][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -692,10 +709,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col + 1];
-                        Manager.Map[row][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                         // Time.timeScale = 0f;
                         //Shooter.possible = false;
                         // GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -712,10 +730,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -732,10 +751,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().diebomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col + 1];
-                        Manager.Map[row + 1][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col + 1] = null;
                         //Time.timeScale = 0f;
                         //Shooter.possible = false;
                         //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -757,10 +777,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
-                        Manager.Map[row - 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col] = null;
                     }
 
                 }
@@ -769,10 +790,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col + 1];
-                        Manager.Map[row - 1][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col + 1] = null;
                     }
 
                 }
@@ -781,10 +803,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col - 1];
-                        Manager.Map[row][col - 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                     }
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1])
@@ -792,10 +815,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row][col + 1];
-                        Manager.Map[row][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                     }
                 }
                 if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col])
@@ -803,10 +827,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                     }
                 }
                 if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1])
@@ -814,10 +839,11 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row + 1][col + 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row + 1][col + 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row + 1][col + 1];
-                        Manager.Map[row + 1][col + 1] = null;
+                        
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col + 1] = null;
                     }
                 }
             }
@@ -831,7 +857,7 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][i] && Manager.Map[row][i].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row][i];
-                        Manager.Map[row][i] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb==true) || (tmp.GetComponent<Ball>().sixbomb==true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -841,7 +867,8 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        Manager.Map[row][i] = null;
+
                     }
                 }
             }
@@ -852,7 +879,7 @@ public class Ball : MonoBehaviour
                     if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row-1][col];
-                        Manager.Map[row-1][col] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -862,12 +889,13 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col] = null;
 
                     }
                     if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row - 1][col+1];
-                        Manager.Map[row - 1][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -877,11 +905,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col + 1] = null;
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row][col-1];
-                        Manager.Map[row][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -891,11 +920,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row][col+1];
-                        Manager.Map[row][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -905,11 +935,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                     }
                     if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -919,11 +950,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                     }
                     if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1]&&Manager.Map[row+1][col+1].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col+1];
-                        Manager.Map[row + 1][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -933,6 +965,7 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col + 1] = null;
                     }
 
                   
@@ -942,7 +975,7 @@ public class Ball : MonoBehaviour
                     if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1]&&Manager.Map[row-1][col-1].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row - 1][col-1];
-                        Manager.Map[row - 1][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -952,11 +985,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col - 1] = null;
                     }
                     if (0 <= row - 1 && Manager.Map[row - 1][col]&&Manager.Map[row-1][col].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
-                        Manager.Map[row - 1][col] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -966,11 +1000,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col] = null;
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1]&&Manager.Map[row][col-1].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row][col-1];
-                        Manager.Map[row][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -980,11 +1015,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1]&&Manager.Map[row][col+1].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row][col+1];
-                        Manager.Map[row][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -994,11 +1030,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                     }
                     if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1]&&Manager.Map[row+1][col-1].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col-1];
-                        Manager.Map[row + 1][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1008,11 +1045,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col - 1] = null;
                     }
                     if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1022,6 +1060,7 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                     }
                 }
 
@@ -1276,20 +1315,20 @@ public class Ball : MonoBehaviour
                         if (Manager.Map[i][j] != null && Manager.Map[i][j].GetComponent<Ball>().visit == true)
                         {
                             GameObject tmp = Manager.Map[i][j];
-                            Manager.Map[i][j] = null;
+                            
                             tmp.GetComponent<Animator>().SetTrigger("rainbow");
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            Manager.Map[i][j] = null;
                         }
                     }
                 }
 
                 sem.play(3);
                 //GameObject tmp = Manager.Map[t_r][t_c];
-                Manager.Map[t_r][t_c] = null;
+                
                 this.gameObject.GetComponent<Animator>().SetTrigger("destroy");
                 Destroy(this.gameObject, this.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-               
+                Manager.Map[t_r][t_c] = null;
             }
             else//item 사용아닐때
             {
@@ -1583,6 +1622,8 @@ public class Ball : MonoBehaviour
     {
         if (end == false)
         {
+            //Manager.ing = true;
+            
             if (this.gameObject.tag == "red")
             {
                 Manager.redCnt--;
@@ -1670,7 +1711,7 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row][i] && Manager.Map[row][i].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row][i];
-                        Manager.Map[row][i] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1680,6 +1721,7 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][i] = null;
                     }
                 }
                 sem.play(4);
@@ -1692,7 +1734,7 @@ public class Ball : MonoBehaviour
                     if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row - 1][col];
-                        Manager.Map[row - 1][col] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1702,11 +1744,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col] = null;
                     }
                     if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row - 1][col+1];
-                        Manager.Map[row - 1][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1716,11 +1759,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col + 1] = null;
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row][col-1];
-                        Manager.Map[row][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1730,11 +1774,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row][col+1];
-                        Manager.Map[row][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1744,11 +1789,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                     }
                     if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1758,11 +1804,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                     }
                     if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col + 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col+1];
-                        Manager.Map[row + 1][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1772,6 +1819,7 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col + 1] = null;
                     }
                 }
                 else
@@ -1779,7 +1827,7 @@ public class Ball : MonoBehaviour
                     if (0 <= row - 1 && 0 <= col - 1 && Manager.Map[row - 1][col - 1] && Manager.Map[row - 1][col - 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row - 1][col-1];
-                        Manager.Map[row - 1][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1789,6 +1837,7 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row - 1][col - 1] = null;
                     }
                     if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone")
                     {
@@ -1807,7 +1856,7 @@ public class Ball : MonoBehaviour
                     if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row][col-1];
-                        Manager.Map[row][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1817,11 +1866,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col - 1] = null;
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row][col+1];
-                        Manager.Map[row][col+1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1831,11 +1881,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row][col + 1] = null;
                     }
                     if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1] && Manager.Map[row + 1][col - 1].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col-1];
-                        Manager.Map[row + 1][col-1] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1845,11 +1896,12 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col - 1] = null;
                     }
                     if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone")
                     {
                         GameObject tmp = Manager.Map[row + 1][col];
-                        Manager.Map[row + 1][col] = null;
+                        
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
@@ -1859,14 +1911,17 @@ public class Ball : MonoBehaviour
                             tmp.GetComponent<Animator>().SetTrigger("item");
                         }
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                        Manager.Map[row + 1][col] = null;
                     }
                 }
                 sem.play(4);
             }
 
+            //Manager.ing = false;
 
             if ((rowbomb == true || sixbomb == true)&&this.gameObject.transform.position.y>=0.4f)
             {
+                Manager.ing = true;
                 //연결 여부 판별
                 discon_total = 0; discon_cnt = 0; //연결되지 않은 구슬갯수 초기화
 
@@ -1980,6 +2035,14 @@ public class Ball : MonoBehaviour
                         }
                     }
                 }
+
+                //연결끊긴것들이 없으면 shooter 다시 동작하게
+                if (discon_total == 0)
+                {
+                    //Shooter.possible = true;
+                    //Shooter.starlinepossible = true;
+                    //Manager.ing = false;
+                }
             }
         }
     }
@@ -2001,14 +2064,17 @@ public class Ball : MonoBehaviour
         Shooter.possible = false;
         Shooter.starlinepossible = false;
         Manager.ing = true;
-        animation = true;
+        anim = true;
+        anim_cnt++;
     }
 
     public void animationend()
     {
+        anim_cnt--;
         //Shooter.possible = true;
         //Shooter.starlinepossible = true;
-        Manager.ing = false;
+        //Manager.ing = false;
+        
     }
 
 

@@ -60,9 +60,7 @@ public class Shooter : MonoBehaviour
     {
         starInit(); //처음 시작할때 starline 비활성화
         starlinepossible = true;
-
         restarInit(); //restarline 비활성화
-
         possible = true;
         //sprite = this.gameObject.GetComponent<SpriteRenderer>();
         //color = sprite.color;
@@ -96,6 +94,14 @@ public class Shooter : MonoBehaviour
         bgm.stop();
         bgm.play(1);
         sem = FindObjectOfType<semmanager>();
+    }
+
+    private void Awake()
+    {
+        starInit(); //처음 시작할때 starline 비활성화
+        starlinepossible = true;
+        restarInit(); //restarline 비활성화
+        possible = true;
     }
 
     // Update is called once per frame

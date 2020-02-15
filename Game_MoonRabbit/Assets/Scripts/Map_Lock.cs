@@ -7,9 +7,9 @@ public class Map_Lock : MonoBehaviour
 {
     public static bool give1 = false, give2 = false, give3 = false;
     public static bool jump=false;
-    public GameObject[] rabbits = new GameObject[21];
-    public GameObject[] locks = new GameObject[21];
-    public GameObject[] buttons = new GameObject[21];
+    public GameObject[] rabbits = new GameObject[41];
+    public GameObject[] locks = new GameObject[41];
+    public GameObject[] buttons = new GameObject[41];
     public GameObject[] characters = new GameObject[4];
     public GameObject[] char_locks = new GameObject[4];
     public GameObject[] char_buttons = new GameObject[4];
@@ -25,6 +25,10 @@ public class Map_Lock : MonoBehaviour
 
     private void Awake()
     {
+        if (!PlayerPrefs.HasKey("User_stage"))
+        {
+            PlayerPrefs.SetInt("User_stage", 0);
+        }
         stage = PlayerPrefs.GetInt("User_stage");
         Debug.Log("user_stage:" + stage);
 

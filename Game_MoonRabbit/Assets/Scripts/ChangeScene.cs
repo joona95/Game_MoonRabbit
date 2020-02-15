@@ -212,4 +212,104 @@ public class ChangeScene : MonoBehaviour
         Manager.current_stage = 20;
         //SceneManager.LoadScene("Stage");
     }
+
+    public void Stage21_Button()
+    {
+        Manager.current_stage = 21;
+    }
+
+    public void Stage22_Button()
+    {
+        Manager.current_stage = 22;
+    }
+
+    public void Stage23_Button()
+    {
+        Manager.current_stage = 23;
+    }
+
+    public void Stage24_Button()
+    {
+        Manager.current_stage = 24;
+    }
+
+    public void Stage25_Button()
+    {
+        Manager.current_stage = 25;
+    }
+
+    public void Stage26_Button()
+    {
+        Manager.current_stage = 26;
+    }
+
+    public void Stage27_Button()
+    {
+        Manager.current_stage = 27;
+    }
+
+    public void Stage28_Button()
+    {
+        Manager.current_stage = 28;
+    }
+
+    public void Stage29_Button()
+    {
+        Manager.current_stage = 29;
+    }
+
+    public void Stage30_Button()
+    {
+        Manager.current_stage = 30;
+    }
+
+    public void Stage31_Button()
+    {
+        Manager.current_stage = 31;
+    }
+
+    public void Stage32_Button()
+    {
+        Manager.current_stage = 32;
+    }
+
+    public void Stage33_Button()
+    {
+        Manager.current_stage = 33;
+    }
+
+    public void Stage34_Button()
+    {
+        Manager.current_stage = 34;
+    }
+
+    public void Stage35_Button()
+    {
+        Manager.current_stage = 35;
+    }
+
+    public void Stage36_Button()
+    {
+        Manager.current_stage = 36;
+    }
+
+    public void Stage37_Button()
+    {
+        Manager.current_stage = 37;
+    }
+
+    public void Stage38_Button()
+    {
+        Manager.current_stage = 38;
+    }
+
+    public void Stage39_Button()
+    {
+        Manager.current_stage = 39;
+    }
+
+    public void Stage40_Button()
+    {
+        Manager.current_stage = 40;
+    }
 }

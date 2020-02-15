@@ -6,6 +6,8 @@ using TMPro;
 
 public class Manager : MonoBehaviour
 {
+    public GameObject night, star, left_wall, right_wall;
+
     static public List<GameObject[]> Map; //관리할 맵
     static public int total_row, total_col; //맵 전체 행, 열
     static public List<Dictionary<string, object>> StageInfo; //스테이지마다 전체 row,col정보읽어오기
@@ -51,6 +53,7 @@ public class Manager : MonoBehaviour
 
     public GameObject ceil;
     float top_y;
+    bool start = true;
 
     public GameObject[] characters=new GameObject[4];
     // Start is called before the first frame update
@@ -453,27 +456,40 @@ public class Manager : MonoBehaviour
 
 
         if (clear == true)//성공
-        {
+        { 
             Shooter.possible = false;
             Shooter.starlinepossible = false;            
+
             Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
             foreach (Ball ball in balls)
             {
                 ball.enabled = false;
                 //Destroy(ball);
             }
-            if (current_stage == 20)
+
+
+            if (Mathf.Round(night.transform.position.y * 100) / 100 > -6f)
             {
-                black.SetActive(true);
-                allclear.SetActive(true);
+                night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y - 0.2f, night.transform.position.z);
+                star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y - 0.2f, star.transform.position.z);
+                left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y - 0.2f, left_wall.transform.position.z);
+                right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y - 0.2f, right_wall.transform.position.z);
             }
             else
             {
-                black.SetActive(true);
-                back_night.SetActive(true);
-                clear_fireworks.SetActive(true);
-                clear_rabbit.SetActive(true);
-                endbutton.SetActive(true);
+                if (current_stage == 40)
+                {
+                    black.SetActive(true);
+                    allclear.SetActive(true);
+                }
+                else
+                {
+                    black.SetActive(true);
+                    back_night.SetActive(true);
+                    clear_fireworks.SetActive(true);
+                    clear_rabbit.SetActive(true);
+                    endbutton.SetActive(true);
+                }
             }
         }
 
@@ -628,19 +644,20 @@ public class Manager : MonoBehaviour
             {
                 PlayerPrefs.SetInt("User_stage", current_stage);
                 Map_Lock.jump = true;
-                if (current_stage == 5)
+                if (current_stage == 10)
                 {
                     Map_Lock.give1 = true;
                 }
-                if (current_stage == 10)
+                if (current_stage == 20)
                 {
                     Map_Lock.give2 = true;
                 }
-                if (current_stage == 15)
+                if (current_stage == 30)
                 {
                     Map_Lock.give3 = true;
                 }
             }
+
         }
         else if (Manager.limit_cnt == 0)
         {
@@ -649,7 +666,24 @@ public class Manager : MonoBehaviour
         }
         else
         {
-
+            if (start == true)
+            {
+                Shooter.possible = false;
+                Shooter.starlinepossible = false;
+                if (Mathf.Round(night.transform.position.y * 100) / 100 < 6f)
+                {
+                    night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y + 0.3f, night.transform.position.z);
+                    star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y + 0.3f, star.transform.position.z);
+                    left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y + 0.3f, left_wall.transform.position.z);
+                    right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y + 0.3f, right_wall.transform.position.z);
+                }
+                else
+                {
+                    Shooter.possible = true;
+                    Shooter.starlinepossible = true;
+                    start = false;
+                }
+            }
 
 
             //가장 낮은 위치에 있는 구슬 y값 구하기
@@ -688,7 +722,7 @@ public class Manager : MonoBehaviour
                         }
                     }
 
-                   //Debug.Log(min_y+","+max_y);
+                    //Debug.Log(min_y+","+max_y);
 
                     if (min_y < 0.85f)
                     {
@@ -720,7 +754,7 @@ public class Manager : MonoBehaviour
                             }
                         }
 
-
+                        
                     }
                     else if (min_y > 0.85f && max_y > 4.0f)
                     {
@@ -751,10 +785,17 @@ public class Manager : MonoBehaviour
                             }
                         }
 
+                        if (Mathf.Round(night.transform.position.y * 100) / 100 > -6f)
+                        {
+                            night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y - 0.2f, night.transform.position.z);
+                            star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y - 0.2f, star.transform.position.z);
+                            left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y - 0.2f, left_wall.transform.position.z);
+                            right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y - 0.2f, right_wall.transform.position.z);
+                        }
+
 
                     }
-                    
-                    else if(min_y>=0.85f && max_y < 4.0f)
+                    else if (min_y >= 0.85f && max_y < 4.0f)
                     {
                         float[,] end_y = new float[total_row, total_col];
                         for (int i = 0; i < total_row; i++)
@@ -762,7 +803,7 @@ public class Manager : MonoBehaviour
                             for (int j = 0; j < Map[i].Length; j++)
                             {
                                 if (Map[i][j] != null)
-                                    end_y[i, j] = Map[i][j].transform.position.y + (4f-max_y);
+                                    end_y[i, j] = Map[i][j].transform.position.y + (4f - max_y);
                             }
                         }
 
@@ -782,6 +823,7 @@ public class Manager : MonoBehaviour
                                 }
                             }
                         }
+                        
                     }
 
 
@@ -796,7 +838,7 @@ public class Manager : MonoBehaviour
                     }
 
 
-                    if (min_y >= 0.85f&& Ball.discon_total == Ball.discon_cnt)
+                    if (min_y >= 0.85f&& Ball.discon_total == Ball.discon_cnt &&start==false)
                     {
                         Shooter.possible = true;
                         Shooter.starlinepossible = true;
