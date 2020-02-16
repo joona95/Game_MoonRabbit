@@ -28,7 +28,9 @@ public class Items : MonoBehaviour
 
     public void Item1()
     {
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         int cnt = PlayerPrefs.GetInt("Item1_Cnt");
+
         if (cnt > 0)
         {
             Shooter.possible = false;
@@ -41,10 +43,12 @@ public class Items : MonoBehaviour
 
             Shooter.possible = true;
         }
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
     }
 
     public void Item2()
     {
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         int cnt = PlayerPrefs.GetInt("Item2_Cnt");
         if (cnt> 0)
         {
@@ -58,10 +62,12 @@ public class Items : MonoBehaviour
 
             Shooter.possible = true;
         }
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
     }
 
     public void Item3()
     {
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         int cnt = PlayerPrefs.GetInt("Item3_Cnt");
         if ( cnt> 0)
         {
@@ -75,6 +81,7 @@ public class Items : MonoBehaviour
 
             Shooter.possible = true;
         }
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
     }
 
 

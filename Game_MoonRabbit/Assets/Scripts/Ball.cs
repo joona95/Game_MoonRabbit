@@ -2070,7 +2070,8 @@ public class Ball : MonoBehaviour
         anim_cnt--;
         //Shooter.possible = true;
         //Shooter.starlinepossible = true;
-        //Manager.ing = false;
+        if(anim_cnt==0)
+            Manager.ing = false;
         
     }
 

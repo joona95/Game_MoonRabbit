@@ -128,6 +128,7 @@ public class Shooter : MonoBehaviour
 
             if ((Input.touchCount > 0) && (GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false))
             {
+            
                 //화면 touch 처음 하나만 인식
                 Touch touch = Input.GetTouch(0);
 

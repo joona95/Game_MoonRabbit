@@ -706,9 +706,10 @@ public class Manager : MonoBehaviour
 
                 //if (Ball.discon_total == Ball.discon_cnt) //연결되지 않은 구슬들 다 떨어지면 동작
                 //{
-                
-                if (ing == false)
+
+                if (ing == false )
                 {
+                    bool end = false;
                     Shooter.possible = false;
                     Shooter.starlinepossible = false;
                     //가장 높은 위치에 있는 구슬 y 값 구하기
@@ -733,7 +734,7 @@ public class Manager : MonoBehaviour
                             {
                                 if (Map[i][j] != null)
                                 {
-                                    end_y[i, j] = Map[i][j].transform.position.y + 0.45f;
+                                    end_y[i, j] = Map[i][j].transform.position.y + (0.85f-min_y);
                                 }
                             }
                         }
@@ -825,6 +826,10 @@ public class Manager : MonoBehaviour
                         }
                         
                     }
+                    else
+                    {
+                        end = true;
+                    }
 
 
                     for (int i = Map[0].Length - 1; i >= 0; i--)
@@ -837,11 +842,11 @@ public class Manager : MonoBehaviour
                         }
                     }
 
-
-                    if (min_y >= 0.85f&& Ball.discon_total == Ball.discon_cnt &&start==false)
+                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && start == false)
                     {
                         Shooter.possible = true;
                         Shooter.starlinepossible = true;
+                        end = false;
                     }
                 }
                 //}

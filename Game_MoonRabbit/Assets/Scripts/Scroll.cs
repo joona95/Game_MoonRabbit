@@ -13,12 +13,20 @@ public class Scroll : MonoBehaviour
         Debug.Log("Now its called");
         yield return null; // Waiting just one frame is probably good enough, yield return null does that
         bar = GetComponentInChildren<Scrollbar>();
-        float _value= (gameobject.GetComponent<Map_Lock>().rabbits[PlayerPrefs.GetInt("User_stage")].GetComponent<RectTransform>().anchoredPosition.y) / 4000-0.2f;
-
-        if (_value < 0)
+        int stage = PlayerPrefs.GetInt("User_stage");
+        float _value;
+        if (stage > 0)
         {
-            _value = 0f;
+            _value = (gameobject.GetComponent<Map_Lock>().rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y) / 4000 - 0.2f;
+            if (_value < 0)
+            {
+                _value = 0f;
+            }
         }
+        else
+            _value = 0f;
+
+        
 
         bar.value = _value;
         Debug.Log(_value);

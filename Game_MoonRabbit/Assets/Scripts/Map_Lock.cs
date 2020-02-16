@@ -16,6 +16,7 @@ public class Map_Lock : MonoBehaviour
     static public int stage;
     public GameObject back_ground;
     public GameObject[] gives = new GameObject[3];
+    public GameObject confirm;
 
     // Start is called before the first frame update
     void Start()
@@ -35,7 +36,7 @@ public class Map_Lock : MonoBehaviour
         if (jump == true)
             stage--;
 
-        for (int i = 1; i <= 20; i++)
+        for (int i = 1; i <= 40; i++)
         {
             if (i == stage)
             {
@@ -48,14 +49,14 @@ public class Map_Lock : MonoBehaviour
             else
                 rabbits[i].SetActive(false);
         }
-        for (int i = 1; i <= 20; i++)
+        for (int i = 1; i <= 40; i++)
         {
             if (i <= stage + 1)
                 buttons[i].GetComponent<Button>().interactable = true;
             else
                 buttons[i].GetComponent<Button>().interactable = false;
         }
-        for (int i = 2; i <= 20; i++)
+        for (int i = 2; i <= 40; i++)
         {
             if (i <= stage + 1)
                 locks[i].SetActive(false);
@@ -66,7 +67,7 @@ public class Map_Lock : MonoBehaviour
 
         for(int i = 0; i < 4; i++)
         {
-            if (i <= stage / 5)
+            if (i <= stage / 10)
             {
                 char_buttons[i].GetComponent<Button>().interactable = true;
                 characters[i].SetActive(true);
@@ -81,7 +82,7 @@ public class Map_Lock : MonoBehaviour
 
         }
         
-        if (jump == true)
+        if (jump == true&&stage>0)
         {
 
             float x;
