@@ -22,6 +22,7 @@ public class Manager : MonoBehaviour
     public GameObject back_night, back_ground; //배경
     public GameObject clear_rabbit, clear_fireworks;//성공
     public GameObject fail_rabbit, fail_one;//실패
+    public GameObject clear_ment, fail_ment; //성공 실패 문구
     static public bool ing = false;
     public GameObject allclear;
 
@@ -141,6 +142,8 @@ public class Manager : MonoBehaviour
         clear_rabbit.SetActive(false);
         fail_one.SetActive(false);
         fail_rabbit.SetActive(false);
+        clear_ment.SetActive(false);
+        fail_ment.SetActive(false);
         ing = false;
 
 
@@ -489,6 +492,7 @@ public class Manager : MonoBehaviour
                     clear_fireworks.SetActive(true);
                     clear_rabbit.SetActive(true);
                     endbutton.SetActive(true);
+                    clear_ment.SetActive(true);
                 }
             }
         }
@@ -510,7 +514,8 @@ public class Manager : MonoBehaviour
             fail_rabbit.SetActive(true);
             fail_one.SetActive(true);
             endbutton.SetActive(true);
-            
+            fail_ment.SetActive(true);
+
         }
 
 
