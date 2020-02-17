@@ -16,7 +16,7 @@ public class Ball : MonoBehaviour
     public int count = 0;
     public bool end = false;
     semmanager sem;
-    static int anim_cnt = 0;
+    public static int anim_cnt = 0;
 
     int ChType = Character.ChType; //캐릭터 종류 판별
     int replaynum; //ChType==2이고 diebomb 건드렸을 때 부활 여부 판별할 때 이용

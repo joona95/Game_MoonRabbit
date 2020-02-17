@@ -145,6 +145,7 @@ public class Manager : MonoBehaviour
         clear_ment.SetActive(false);
         fail_ment.SetActive(false);
         ing = false;
+        Ball.anim_cnt = 0;
 
 
         for (int i = 0; i < 5; i++)
@@ -847,7 +848,7 @@ public class Manager : MonoBehaviour
                         }
                     }
 
-                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && start == false)
+                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && start == false&& Ball.anim_cnt==0)
                     {
                         Shooter.possible = true;
                         Shooter.starlinepossible = true;
