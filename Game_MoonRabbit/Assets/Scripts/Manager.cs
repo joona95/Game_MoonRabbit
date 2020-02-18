@@ -500,23 +500,24 @@ public class Manager : MonoBehaviour
 
         if (fail == true)
         {
-            
-            Shooter.possible = false;
-            Shooter.starlinepossible = false;
-            Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
-            foreach (Ball ball in balls)
+            if (Shooter.possible == true)
             {
-                ball.enabled = false;
-                //Destroy(ball);
+                Shooter.possible = false;
+                Shooter.starlinepossible = false;
+                Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
+                foreach (Ball ball in balls)
+                {
+                    ball.enabled = false;
+                    //Destroy(ball);
+                }
+                black.SetActive(true);
+                back_night.SetActive(true);
+                back_ground.SetActive(true);
+                fail_rabbit.SetActive(true);
+                fail_one.SetActive(true);
+                endbutton.SetActive(true);
+                fail_ment.SetActive(true);
             }
-            black.SetActive(true);
-            back_night.SetActive(true);
-            back_ground.SetActive(true);
-            fail_rabbit.SetActive(true);
-            fail_one.SetActive(true);
-            endbutton.SetActive(true);
-            fail_ment.SetActive(true);
-
         }
 
 
@@ -670,8 +671,8 @@ public class Manager : MonoBehaviour
             //Time.timeScale = 0f;
             Manager.fail = true;
         }
-        else
-        {
+        //else
+        //{
             if (start == true)
             {
                 Shooter.possible = false;
@@ -857,7 +858,7 @@ public class Manager : MonoBehaviour
                 }
                 //}
             }
-        }
+        //}
 
     }
 
