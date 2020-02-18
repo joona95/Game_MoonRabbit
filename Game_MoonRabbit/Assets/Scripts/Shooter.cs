@@ -134,7 +134,7 @@ public class Shooter : MonoBehaviour
 
                 if (touch.phase == TouchPhase.Began) //화면을 touch한 순간
                 {
-                    touchPos = touch.position;
+                    touchPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -Camera.main.transform.position.z));
                     degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
                     if (-80 < degree && degree < 80)
                         this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree); //여기부터 추가함
@@ -428,7 +428,7 @@ public class Shooter : MonoBehaviour
                 }
                 if (touch.phase == TouchPhase.Moved) //손가락이 화면 위에서 터치한 상태로 이동
                 {
-                    touchPos = touch.position;
+                    touchPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -Camera.main.transform.position.z));
                     degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
                     if (-80 < degree && degree < 80)
                         this.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, degree); //여기부터 추가
