@@ -2050,7 +2050,7 @@ public class Ball : MonoBehaviour
         {
             starlineSprite = collision.gameObject.GetComponent<SpriteRenderer>();
             starlineColor = starlineSprite.color;
-            starlineColor.a = 1f;
+            //starlineColor.a = 1f;
             starlineSprite.color = starlineColor;
             
         }
