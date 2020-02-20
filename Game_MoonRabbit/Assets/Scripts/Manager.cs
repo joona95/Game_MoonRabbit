@@ -497,8 +497,7 @@ public class Manager : MonoBehaviour
                 }
             }
         }
-
-        if (fail == true)
+        else if (fail == true)
         {
             if (Shooter.possible == true)
             {

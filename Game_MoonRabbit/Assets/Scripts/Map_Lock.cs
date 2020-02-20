@@ -110,7 +110,6 @@ public class Map_Lock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
     
 }

@@ -166,7 +166,7 @@ public class Shooter : MonoBehaviour
 #if (UNITY_ANDROID || UNITY_IOS)
 
 
-            if ((Input.touchCount > 0) && (GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false))
+            if ((Input.touchCount > 0) && (GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false)&& (GameObject.Find("ChangeBall").GetComponent<ChangeBall>().isPressed == false))
             {
             
                 //화면 touch 처음 하나만 인식
@@ -763,7 +763,7 @@ public class Shooter : MonoBehaviour
 
                 if (touch.phase == TouchPhase.Ended) //손가락이 화면에서 떨어지면 touch가 끝난 경우
                 {
-                    if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt != 0)
+                    if (-80 < degree && degree < 80 && possible == true && Manager.limit_cnt != 0 && starlinepossible == true)
                     { //회전각도 조정, 과정 끝날때까지 작동안하게, 구슬갯수제한 끝나면 작동안하게
                         sem.play(0);
                         GameObject.Find("GameObject").GetComponent<Manager>().bubblepop();
