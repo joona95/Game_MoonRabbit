@@ -5,10 +5,16 @@ using UnityEngine;
 public class ShooterLine : MonoBehaviour
 {
     static public bool linecol = false;
+    public static bool avalue = false;
+    SpriteRenderer sprite; //대포(경로) 이미지
+    public Color color;
+
     // Start is called before the first frame update
     void Start()
     {
         linecol = false;
+        sprite = this.gameObject.GetComponent<SpriteRenderer>();
+        color = sprite.color;
     }
 
     // Update is called once per frame
@@ -22,6 +28,12 @@ public class ShooterLine : MonoBehaviour
         if (col.tag == "wall")
         {
             linecol = true;
+            if (color.a == 1f)
+            {
+                avalue = true;
+                Debug.Log("!!!!!!!");
+            }
+            else if(color.a == 0f) avalue = false;
         }
 
     }
@@ -31,6 +43,7 @@ public class ShooterLine : MonoBehaviour
         if (col.tag == "wall")
         {
             linecol = false;
+            avalue = false;
         }
 
     }

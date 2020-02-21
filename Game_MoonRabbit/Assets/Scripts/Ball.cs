@@ -15,6 +15,8 @@ public class Ball : MonoBehaviour
     public bool anim = false;
     public int count = 0;
     public bool end = false;
+    float x = 0f, y = 0f; //발사하는 공이 날아가는 벡터 구하는 변수
+    Vector3 ballway;
     semmanager sem;
     public static int anim_cnt = 0;
 
@@ -23,6 +25,7 @@ public class Ball : MonoBehaviour
 
     SpriteRenderer starlineSprite; //스타라인 투명도 조절 용도
     public Color starlineColor;
+    public GameObject shooter;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +39,12 @@ public class Ball : MonoBehaviour
 
         if (this.gameObject.transform.position == GameObject.Find("Shotspawn").transform.position&&shootball==true)//발사할 공에 한정하여 발사가 되게끔 하는 함수
         {
+            x = Mathf.Sin(Shooter.radian);
+            y = Mathf.Cos(Shooter.radian);
+            ballway = new Vector3(-x, y, 0f);
             //shootball = true; //shootball 발사할 공 여부 변경
-            GetComponent<Rigidbody2D>().velocity = transform.right * 5f;//발사
+            //GetComponent<Rigidbody2D>().velocity = transform.right * 5f;//발사
+            GetComponent<Rigidbody2D>().velocity = ballway.normalized * 5f;
         }
         
         //연결되지 않은 경우 아래로 떨어지고 일정 위치에서 destroy
@@ -76,13 +83,12 @@ public class Ball : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
        
-        if(collision.gameObject.tag == "starline")
+        if(collision.gameObject.tag == "starline" && Shooter.possible)
         {
             starlineSprite = collision.gameObject.GetComponent<SpriteRenderer>();
             starlineColor = starlineSprite.color;
             starlineColor.a = 0f;
             starlineSprite.color = starlineColor;
-            
         }
 
         if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line" && collision.gameObject.tag != "starline") //shootball이 벽이 아닌 공에 닿았을 때
@@ -2044,13 +2050,14 @@ public class Ball : MonoBehaviour
         }
     }
 
+    
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "starline")
+        if (collision.gameObject.tag == "starline" && Shooter.possible)
         {
             starlineSprite = collision.gameObject.GetComponent<SpriteRenderer>();
             starlineColor = starlineSprite.color;
-            //starlineColor.a = 1f;
+            starlineColor.a = 1f;
             starlineSprite.color = starlineColor;
             
         }

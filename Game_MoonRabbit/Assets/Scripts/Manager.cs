@@ -865,7 +865,7 @@ public class Manager : MonoBehaviour
     {
         //발사할 첫번째 구슬 위치를 대포 위치로 변경
         ballPrefabs[0].transform.position = shotspawn.transform.position;
-        ballPrefabs[0].transform.rotation = shotspawn.transform.rotation;
+        //ballPrefabs[0].transform.rotation = shotspawn.transform.rotation;
         ballPrefabs[0].GetComponent<Ball>().shootball = true;
 
         //두번째 발사 구슬을 첫번째 발사 구슬로 바꾸고 첫번째 구슬 위치로 변경

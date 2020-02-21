@@ -146,9 +146,11 @@ MonoBehaviour:
   sixbomb: 0
   rainbow: 0
   shootball: 0
+  anim: 0
   count: 0
   end: 0
   starlineColor: {r: 0, g: 0, b: 0, a: 0}
+  shooter: {fileID: 2489362821145892784, guid: dd1a685679e59ae459aa99d238a04563, type: 3}
 --- !u!95 &8748273418759880336
 Animator:
   serializedVersion: 3
