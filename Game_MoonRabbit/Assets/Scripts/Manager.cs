@@ -505,6 +505,7 @@ public class Manager : MonoBehaviour
                     clear_ment.SetActive(true);
                 }
             }
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         }
         else if (fail == true)
         {
@@ -528,6 +529,8 @@ public class Manager : MonoBehaviour
                 fail_one.SetActive(true);
                 endbutton.SetActive(true);
                 fail_ment.SetActive(true);
+
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
             }
 
         }
