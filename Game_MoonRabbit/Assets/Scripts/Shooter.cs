@@ -123,9 +123,9 @@ public class Shooter : MonoBehaviour
     private void Awake()
     {
         //starInit(); //처음 시작할때 starline 비활성화
-        //starlinepossible = true;
+        starlinepossible = true;
         //restarInit(); //restarline 비활성화
-        //possible = true;
+        possible = true;
     }
 
     // Update is called once per frame
@@ -137,12 +137,16 @@ public class Shooter : MonoBehaviour
         {
             //Time.timeScale = 0f;
             Manager.clear = true;
+            possible = false;
+            starlinepossible = false;
 
         }
         else if (Manager.limit_cnt == 0)
         {
             //Time.timeScale = 0f;
-            Manager.fail = true;
+            //Manager.fail = true;
+            //possible = false;
+            //starlinepossible = false;
         }
         else
         {

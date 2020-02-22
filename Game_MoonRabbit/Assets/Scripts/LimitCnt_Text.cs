@@ -5,11 +5,17 @@ using TMPro;
 
 public class LimitCnt_Text : MonoBehaviour
 {
+    static public GameObject limit;
     TextMeshProUGUI limitcntText;
     // Start is called before the first frame update
     void Start()
-    {
+    {        
         limitcntText = GetComponent<TextMeshProUGUI>();
+    }
+
+    private void Awake()
+    {
+        limit = this.gameObject; 
     }
 
     // Update is called once per frame

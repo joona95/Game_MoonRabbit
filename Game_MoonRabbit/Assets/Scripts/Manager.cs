@@ -13,7 +13,7 @@ public class Manager : MonoBehaviour
     static public List<Dictionary<string, object>> StageInfo; //스테이지마다 전체 row,col정보읽어오기
     static public int current_stage;//현재 스테이지 레벨
     static public int[,] stage; //각 스테이지마다 맵 구슬 생성 정보 저장
-    static public bool clear = false, fail = false;
+    static public bool clear = false, fail = false, die = false;
     public GameObject black, opacity, endbutton, confirm;//성공/실패/아이템랜덤 시 ui
     //아이템 랜덤시
     public GameObject hat, confetti;
@@ -25,6 +25,7 @@ public class Manager : MonoBehaviour
     public GameObject clear_ment, fail_ment; //성공 실패 문구
     static public bool ing = false;
     public GameObject allclear;
+    public GameObject allclear_star;
 
     //ui 퀘스트 구슬 표시
     public Sprite[] questimages = new Sprite[5];
@@ -131,6 +132,7 @@ public class Manager : MonoBehaviour
         //ui감춤
         clear = false;
         fail = false;
+        die = false;
         opacity.SetActive(false);
         endbutton.SetActive(false);
         confirm.SetActive(false);
@@ -146,6 +148,9 @@ public class Manager : MonoBehaviour
         fail_ment.SetActive(false);
         ing = false;
         Ball.anim_cnt = 0;
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+        Shooter.possible = true;
+        Shooter.starlinepossible = true;
 
 
         for (int i = 0; i < 5; i++)
@@ -179,10 +184,12 @@ public class Manager : MonoBehaviour
             if (0 <= p && p < 33.33f)
             {
                 hat_items[0].SetActive(true);
+
             }
             else if (33.33f <= p && p < 66.66f)
             {
                 hat_items[1].SetActive(true);
+
             }
             else
             {
@@ -460,9 +467,11 @@ public class Manager : MonoBehaviour
 
 
         if (clear == true)//성공
-        { 
+        {
+            
             Shooter.possible = false;
-            Shooter.starlinepossible = false;            
+            Shooter.starlinepossible = false;
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
             Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
             foreach (Ball ball in balls)
@@ -483,8 +492,8 @@ public class Manager : MonoBehaviour
             {
                 if (current_stage == 40)
                 {
-                    black.SetActive(true);
                     allclear.SetActive(true);
+                    allclear_star.SetActive(true);
                 }
                 else
                 {
@@ -499,10 +508,13 @@ public class Manager : MonoBehaviour
         }
         else if (fail == true)
         {
-            if (Shooter.possible == true)
+            //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+            if (Shooter.possible == true||die==true)
             {
+                
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                 Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
                 foreach (Ball ball in balls)
                 {
@@ -517,6 +529,7 @@ public class Manager : MonoBehaviour
                 endbutton.SetActive(true);
                 fail_ment.SetActive(true);
             }
+
         }
 
 
@@ -646,6 +659,7 @@ public class Manager : MonoBehaviour
         {
             //Time.timeScale = 0f;
             Manager.clear = true;
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
             if (PlayerPrefs.GetInt("User_stage") < current_stage)
             {
                 PlayerPrefs.SetInt("User_stage", current_stage);
@@ -668,29 +682,176 @@ public class Manager : MonoBehaviour
         else if (Manager.limit_cnt == 0)
         {
             //Time.timeScale = 0f;
-            Manager.fail = true;
+            //Manager.fail = true;
         }
-        //else
-        //{
-            if (start == true)
+ 
+
+        if (start == true)
+        {
+            Shooter.possible = false;
+            Shooter.starlinepossible = false;
+
+            bool end2 = false;
+            if (Mathf.Round(night.transform.position.y * 100) / 100 < 6f)
             {
-                Shooter.possible = false;
-                Shooter.starlinepossible = false;
-                if (Mathf.Round(night.transform.position.y * 100) / 100 < 6f)
+                night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y + 0.15f, night.transform.position.z);
+                star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y + 0.15f, star.transform.position.z);
+                left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y + 0.15f, left_wall.transform.position.z);
+                right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y + 0.15f, right_wall.transform.position.z);
+            }
+            else
+            {
+                end2 = true;
+            }
+            
+
+            bool end = false;
+            float min_y = 0.85f;
+            int map_index = 0;
+            map_index = Map[total_row - 1].Length - 1;
+
+            for (int i = map_index; i >= 0; i--)
+            {
+
+                if (Map[total_row - 1][i] != null)
                 {
-                    night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y + 0.3f, night.transform.position.z);
-                    star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y + 0.3f, star.transform.position.z);
-                    left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y + 0.3f, left_wall.transform.position.z);
-                    right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y + 0.3f, right_wall.transform.position.z);
-                }
-                else
-                {
-                    Shooter.possible = true;
-                    Shooter.starlinepossible = true;
-                    start = false;
+                    min_y = Mathf.Round(Map[total_row - 1][i].transform.position.y * 100) / 100;
+                    break;
                 }
             }
 
+            float max_y = 4f;
+            for (int i = Map[0].Length - 1; i >= 0; i--)
+            {
+                if (Map[0][i] != null)
+                {
+                    max_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100;
+                    break;
+                }
+            }
+
+            //Debug.Log(min_y+","+max_y);
+
+            if (min_y < 0.85f)
+            {
+                float[,] end_y = new float[total_row, total_col];
+                for (int i = 0; i < total_row; i++)
+                {
+                    for (int j = 0; j < Map[i].Length; j++)
+                    {
+                        if (Map[i][j] != null)
+                        {
+                            end_y[i, j] = Map[i][j].transform.position.y + (0.85f - min_y);
+                        }
+                    }
+                }
+
+
+                for (int i = 0; i < total_row; i++)
+                {
+                    for (int j = 0; j < Map[i].Length; j++)
+                    {
+                        if (Map[i][j] != null)
+                        {
+                            if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
+                            {
+                                Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y + 0.03f, Map[i][j].transform.position.z);
+                            }
+
+                        }
+                    }
+                }
+
+
+            }
+            else if (min_y > 0.85f && max_y > 4.0f)
+            {
+                float[,] end_y = new float[total_row, total_col];
+                for (int i = 0; i < total_row; i++)
+                {
+                    for (int j = 0; j < Map[i].Length; j++)
+                    {
+                        if (Map[i][j] != null)
+                            end_y[i, j] = Map[i][j].transform.position.y - (max_y - 4f);
+                    }
+                }
+
+                for (int i = 0; i < total_row; i++)
+                {
+                    for (int j = 0; j < Map[i].Length; j++)
+                    {
+                        if (Map[i][j] != null)
+                        {
+
+                            if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 > end_y[i, j])
+                            {
+                                Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y - 0.03f, Map[i][j].transform.position.z);
+
+                            }
+
+                        }
+                    }
+                }
+
+
+            }
+            else if (min_y >= 0.85f && max_y < 4.0f)
+            {
+                float[,] end_y = new float[total_row, total_col];
+                for (int i = 0; i < total_row; i++)
+                {
+                    for (int j = 0; j < Map[i].Length; j++)
+                    {
+                        if (Map[i][j] != null)
+                            end_y[i, j] = Map[i][j].transform.position.y + (4f - max_y);
+                    }
+                }
+
+                for (int i = 0; i < total_row; i++)
+                {
+                    for (int j = 0; j < Map[i].Length; j++)
+                    {
+                        if (Map[i][j] != null)
+                        {
+
+                            if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
+                            {
+                                Map[i][j].transform.position = new Vector3(Map[i][j].transform.position.x, Map[i][j].transform.position.y + 0.03f, Map[i][j].transform.position.z);
+
+                            }
+
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                end = true;
+            }
+
+
+            for (int i = Map[0].Length - 1; i >= 0; i--)
+            {
+                if (Map[0][i] != null)
+                {
+                    top_y = Mathf.Round(Map[0][i].transform.position.y * 100) / 100 + 0.3f;
+                    ceil.transform.position = new Vector3(0f, top_y, 0f);
+                    break;
+                }
+            }
+
+            if (end == true&&end2==true)
+            {
+                Shooter.possible = true;
+                Shooter.starlinepossible = true;
+                ing = false;
+                start = false;
+            }
+
+        }
+        else
+        {
 
             //가장 낮은 위치에 있는 구슬 y값 구하기
             float min_y = 0.85f;
@@ -710,10 +871,8 @@ public class Manager : MonoBehaviour
                 }
 
 
-                //if (Ball.discon_total == Ball.discon_cnt) //연결되지 않은 구슬들 다 떨어지면 동작
-                //{
-
-                if (ing == false )
+       
+                if (ing == false)
                 {
                     bool end = false;
                     Shooter.possible = false;
@@ -738,9 +897,9 @@ public class Manager : MonoBehaviour
                         {
                             for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Map[i][j] != null)
+                                if (Map[i][j] != null&&Map[i][j].GetComponent<Ball>().connect!=false)
                                 {
-                                    end_y[i, j] = Map[i][j].transform.position.y + (0.85f-min_y);
+                                    end_y[i, j] = Map[i][j].transform.position.y + (0.85f - min_y);
                                 }
                             }
                         }
@@ -750,7 +909,7 @@ public class Manager : MonoBehaviour
                         {
                             for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Map[i][j] != null)
+                                if (Map[i][j] != null && Map[i][j].GetComponent<Ball>().connect != false)
                                 {
                                     if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
                                     {
@@ -761,7 +920,7 @@ public class Manager : MonoBehaviour
                             }
                         }
 
-                        
+
                     }
                     else if (min_y > 0.85f && max_y > 4.0f)
                     {
@@ -770,7 +929,7 @@ public class Manager : MonoBehaviour
                         {
                             for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Map[i][j] != null)
+                                if (Map[i][j] != null && Map[i][j].GetComponent<Ball>().connect != false)
                                     end_y[i, j] = Map[i][j].transform.position.y - (max_y - 4f);
                             }
                         }
@@ -779,7 +938,7 @@ public class Manager : MonoBehaviour
                         {
                             for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Map[i][j] != null)
+                                if (Map[i][j] != null && Map[i][j].GetComponent<Ball>().connect != false)
                                 {
 
                                     if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 > end_y[i, j])
@@ -794,10 +953,10 @@ public class Manager : MonoBehaviour
 
                         if (Mathf.Round(night.transform.position.y * 100) / 100 > -6f)
                         {
-                            night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y - 0.2f, night.transform.position.z);
-                            star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y - 0.2f, star.transform.position.z);
-                            left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y - 0.2f, left_wall.transform.position.z);
-                            right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y - 0.2f, right_wall.transform.position.z);
+                            night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y - 0.1f, night.transform.position.z);
+                            star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y - 0.1f, star.transform.position.z);
+                            left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y - 0.1f, left_wall.transform.position.z);
+                            right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y - 0.1f, right_wall.transform.position.z);
                         }
 
 
@@ -809,7 +968,7 @@ public class Manager : MonoBehaviour
                         {
                             for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Map[i][j] != null)
+                                if (Map[i][j] != null && Map[i][j].GetComponent<Ball>().connect != false)
                                     end_y[i, j] = Map[i][j].transform.position.y + (4f - max_y);
                             }
                         }
@@ -818,7 +977,7 @@ public class Manager : MonoBehaviour
                         {
                             for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Map[i][j] != null)
+                                if (Map[i][j] != null && Map[i][j].GetComponent<Ball>().connect != false)
                                 {
 
                                     if (Mathf.Round(Map[i][j].transform.position.y * 100) / 100 < end_y[i, j])
@@ -830,7 +989,7 @@ public class Manager : MonoBehaviour
                                 }
                             }
                         }
-                        
+
                     }
                     else
                     {
@@ -848,16 +1007,16 @@ public class Manager : MonoBehaviour
                         }
                     }
 
-                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && start == false&& Ball.anim_cnt==0)
+                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && Ball.anim_cnt == 0)
                     {
                         Shooter.possible = true;
                         Shooter.starlinepossible = true;
                         end = false;
                     }
                 }
-                //}
+                
             }
-        //}
+        }
 
     }
 

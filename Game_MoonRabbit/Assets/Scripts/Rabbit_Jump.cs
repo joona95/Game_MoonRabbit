@@ -25,8 +25,11 @@ public class Rabbit_Jump : MonoBehaviour
         Map_Lock.stage++;
         Debug.Log("2:"+Map_Lock.stage);
         gameobject.GetComponent<Map_Lock>().rabbits[Map_Lock.stage].SetActive(true);
-        gameobject.GetComponent<Map_Lock>().buttons[Map_Lock.stage+1].GetComponent<Button>().interactable = true;
-        gameobject.GetComponent<Map_Lock>().locks[Map_Lock.stage+1].SetActive(false);
+        if (Map_Lock.stage < 40)
+        {
+            gameobject.GetComponent<Map_Lock>().buttons[Map_Lock.stage + 1].GetComponent<Button>().interactable = true;
+            gameobject.GetComponent<Map_Lock>().locks[Map_Lock.stage + 1].SetActive(false);
+        }
 
         if (Map_Lock.give1 == true)
         {
