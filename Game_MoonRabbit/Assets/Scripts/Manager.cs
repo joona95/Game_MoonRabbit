@@ -468,10 +468,10 @@ public class Manager : MonoBehaviour
 
         if (clear == true)//성공
         {
-            
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
             Shooter.possible = false;
             Shooter.starlinepossible = false;
-            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+            
 
             Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
             foreach (Ball ball in balls)
@@ -505,17 +505,18 @@ public class Manager : MonoBehaviour
                     clear_ment.SetActive(true);
                 }
             }
-            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+            //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+            clear = false;
         }
         else if (fail == true)
         {
             //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
             if (Shooter.possible == true||die==true)
             {
-                
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
-                GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                 Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
                 foreach (Ball ball in balls)
                 {
@@ -530,7 +531,8 @@ public class Manager : MonoBehaviour
                 endbutton.SetActive(true);
                 fail_ment.SetActive(true);
 
-                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                fail = false;
             }
 
         }

@@ -478,8 +478,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
                     }
@@ -498,8 +498,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
                     }
@@ -517,8 +517,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
                     }
@@ -536,8 +536,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
                     }
@@ -555,8 +555,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
                     }
@@ -574,8 +574,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
                     }
@@ -680,8 +680,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         replaynum = Random.Range(1, 5);
                         if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
@@ -704,8 +704,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         replaynum = Random.Range(1, 5);
                         if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
@@ -728,8 +728,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         replaynum = Random.Range(1, 5);
                         if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
@@ -752,8 +752,8 @@ public class Ball : MonoBehaviour
                         // Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         replaynum = Random.Range(1, 5);
                         if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
@@ -776,8 +776,8 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         replaynum = Random.Range(1, 5);
                         if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
@@ -800,9 +800,9 @@ public class Ball : MonoBehaviour
                         //Time.timeScale = 0f;
                         //Manager.fail = true;
                         //Manager.die = true;
-                        //Shooter.possible = false;
-                        //Shooter.starlinepossible = false;
-                        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        Shooter.possible = false;
+                        Shooter.starlinepossible = false;
+                        //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                         replaynum = Random.Range(1, 5);
                         if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
                         {
@@ -1751,6 +1751,9 @@ public class Ball : MonoBehaviour
                 if (GameObject.Find("대포"))
                 {
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    //Shooter.possible = false;
+                    //Shooter.starlinepossible = false;
+
                 }
 
                 replaynum = Random.Range(1, 5);
@@ -1758,12 +1761,14 @@ public class Ball : MonoBehaviour
                 {
                     Time.timeScale = 1f;
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                    //Shooter.possible = true;
+                    //Shooter.starlinepossible = true;
                 }
                 else
                 {
-                    //Manager.fail = true;
-                    
+                    //Manager.fail = true;                   
                     //Manager.die = true;
+
                 }
             }
 
