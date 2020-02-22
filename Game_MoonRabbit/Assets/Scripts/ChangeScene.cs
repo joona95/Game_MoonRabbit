@@ -7,16 +7,19 @@ using UnityEngine.UI;
 public class ChangeScene : MonoBehaviour
 {
     public GameObject StageOption;
+    public GameObject infobutton;
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("stage:"+PlayerPrefs.GetInt("User_stage"));
+        
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     //start버튼
