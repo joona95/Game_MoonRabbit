@@ -40,7 +40,7 @@ public class CheckInfoButton : MonoBehaviour
 
         if (infoBomb.activeSelf)
         {
-            infobutton.SetActive(false);
+            infoBomb.SetActive(false);
         }
 
         if (this.gameObject.activeSelf)
