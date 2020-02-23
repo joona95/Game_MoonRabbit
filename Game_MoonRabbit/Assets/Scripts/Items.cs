@@ -7,6 +7,7 @@ public class Items : MonoBehaviour
     public GameObject opacity, confirm, hat, confetti;
     public GameObject[] hat_items = new GameObject[3];
     public GameObject item_rowbomb, item_sixbomb, item_rainbow;
+    public GameObject InfoQ, InfoPnM, InfoStone, InfoBomb, checkinfobutton;
 
     public void Start()
     {
@@ -87,7 +88,6 @@ public class Items : MonoBehaviour
 
     public void randomItem()
     {
-        opacity.SetActive(false);
         hat.SetActive(false);
         confetti.SetActive(false);
         if (hat_items[0].activeSelf == true)
@@ -109,6 +109,30 @@ public class Items : MonoBehaviour
             PlayerPrefs.SetInt("Item3_Cnt", cnt + 1);
         }
         confirm.SetActive(false);
-        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+
+        switch (Manager.current_stage)
+        {
+            case 1:
+                InfoQ.SetActive(true);
+                checkinfobutton.SetActive(true);
+                break;
+            case 11:
+                InfoStone.SetActive(true);
+                checkinfobutton.SetActive(true);
+                break;
+            case 15:
+                InfoPnM.SetActive(true);
+                checkinfobutton.SetActive(true);
+                break;
+            case 20:
+                InfoBomb.SetActive(true);
+                checkinfobutton.SetActive(true);
+                break;
+            default:
+                opacity.SetActive(false);               
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                break;
+        }
+
     }
 }

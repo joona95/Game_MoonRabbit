@@ -26,6 +26,12 @@ public class Manager : MonoBehaviour
     static public bool ing = false;
     public GameObject allclear;
     public GameObject allclear_star;
+    public GameObject reward, rewardbutton, endinfobutton, checkinfobutton;
+    public GameObject reward_1row, reward_1six, reward_1rain, reward_1r1s, reward_1r1r, reward_1s1r, reward_1r1s1r;
+    //차례대로 1가로, 1육각형, 1무지개, 1가로1육각, 1가로1무지개, 1육각형1무지개, 1가로1육각1무지개
+
+    public GameObject InfoRow, InfoSix, InfoRain, InfoPnM, InfoQ, InfoStone, InfoBomb, infobutton;
+    //차례대로 가로줄, 육각형, 무지개, +-2, 퀘스트, 돌, 폭탄 설명 ui
 
     //ui 퀘스트 구슬 표시
     public Sprite[] questimages = new Sprite[5];
@@ -51,17 +57,72 @@ public class Manager : MonoBehaviour
     static public int limit_cnt; //구슬 제한 갯수
     static public int redCnt=0, yelCnt=0, greCnt=0, bluCnt=0, purCnt=0, queCnt=0, red_queCnt=0, yel_queCnt=0, gre_queCnt=0, blu_queCnt=0, pur_queCnt=0; //구슬 개수 카운트 변수
     static public int red_quest = 0, yel_quest = 0, gre_quest = 0, blu_quest = 0, pur_quest = 0; //지금까지 깬 퀘스트 구슬 갯수
+    static public int[] rewardis;
     int total = 0;//전체 구슬 개수
 
     public GameObject ceil;
     float top_y;
     bool start = true;
+    int rewardnum = 0, gotreward; //reward 창으로 넘어갈 때 이용하는 변수
 
     public GameObject[] characters=new GameObject[4];
+
+    bool infostart = false;
     // Start is called before the first frame update
     void Start()
     {
+        if (!PlayerPrefs.HasKey("Stage3_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage3_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage6_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage6_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage9_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage9_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage12_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage12_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage15_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage15_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage18_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage18_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage21_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage21_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage25_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage25_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage29_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage29_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage34_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage34_GetItem", 0);
+        }
+        if (!PlayerPrefs.HasKey("Stage39_GetItem"))
+        {
+            PlayerPrefs.SetInt("Stage39_GetItem", 0);
+        }
 
+
+
+
+
+
+        rewardis = new int[11];
+        rewardnum = 0;
         total = redCnt + bluCnt + yelCnt + purCnt + greCnt;//일단 첫째로 색깔별 구슬 생성확률을 정해둡니다. 
         purpl = ((float)purCnt / total) * 100f;
         re = purpl + (((float)redCnt / total) * 100f);
@@ -136,6 +197,7 @@ public class Manager : MonoBehaviour
         opacity.SetActive(false);
         endbutton.SetActive(false);
         confirm.SetActive(false);
+        checkinfobutton.SetActive(false);
         hat.SetActive(false);
         for (int i = 0; i < 3; i++)
             hat_items[i].SetActive(false);
@@ -146,12 +208,30 @@ public class Manager : MonoBehaviour
         fail_rabbit.SetActive(false);
         clear_ment.SetActive(false);
         fail_ment.SetActive(false);
+        reward.SetActive(false);
+        rewardbutton.SetActive(false);
+        reward_1row.SetActive(false);
+        reward_1six.SetActive(false);
+        reward_1rain.SetActive(false);
+        reward_1r1s.SetActive(false);
+        reward_1r1r.SetActive(false);
+        reward_1s1r.SetActive(false);
+        reward_1r1s1r.SetActive(false);
+        InfoRow.SetActive(false);
+        InfoSix.SetActive(false);
+        InfoRain.SetActive(false);
+        InfoPnM.SetActive(false);
+        InfoQ.SetActive(false);
+        InfoStone.SetActive(false);
+        InfoBomb.SetActive(false);
+        infobutton.SetActive(false);
+        endinfobutton.SetActive(false);
         ing = false;
         Ball.anim_cnt = 0;
         GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         Shooter.possible = true;
         Shooter.starlinepossible = true;
-
+        infostart = false;
 
         for (int i = 0; i < 5; i++)
         {
@@ -199,6 +279,40 @@ public class Manager : MonoBehaviour
             confirm.SetActive(true);
 
         }
+        
+        
+        if (Character.ChType != 3)
+        {            
+            switch (current_stage)
+            {
+                case 1:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoQ.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+                case 11:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoStone.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+                case 15:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoPnM.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+                case 20:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoBomb.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+
+            }
+        }
+        
 
         //맵생성        
 
@@ -431,6 +545,7 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
+        
         /*
         int cc = 0;
         if (red_queCnt != 0)
@@ -468,10 +583,10 @@ public class Manager : MonoBehaviour
 
         if (clear == true)//성공
         {
-            
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
             Shooter.possible = false;
             Shooter.starlinepossible = false;
-            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+            
 
             Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
             foreach (Ball ball in balls)
@@ -497,24 +612,168 @@ public class Manager : MonoBehaviour
                 }
                 else
                 {
-                    black.SetActive(true);
-                    back_night.SetActive(true);
-                    clear_fireworks.SetActive(true);
-                    clear_rabbit.SetActive(true);
-                    endbutton.SetActive(true);
-                    clear_ment.SetActive(true);
+                    if (rewardnum == 0)
+                    {
+                        black.SetActive(true);
+                        back_night.SetActive(true);
+                        clear_fireworks.SetActive(true);
+                        clear_rabbit.SetActive(true);
+                        //endbutton.SetActive(true);
+                        clear_ment.SetActive(true);
+                        switch (current_stage)
+                        {
+                            case 3:
+                                gotreward = PlayerPrefs.GetInt("Stage3_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 6:
+                                gotreward = PlayerPrefs.GetInt("Stage6_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 9:
+                                gotreward = PlayerPrefs.GetInt("Stage9_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 12:
+                                gotreward = PlayerPrefs.GetInt("Stage12_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 15:
+                                gotreward = PlayerPrefs.GetInt("Stage15_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 18:
+                                gotreward = PlayerPrefs.GetInt("Stage18_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 21:
+                                gotreward = PlayerPrefs.GetInt("Stage21_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 25:
+                                gotreward = PlayerPrefs.GetInt("Stage25_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 29:
+                                gotreward = PlayerPrefs.GetInt("Stage29_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 34:
+                                gotreward = PlayerPrefs.GetInt("Stage34_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            case 39:
+                                gotreward = PlayerPrefs.GetInt("Stage39_GetItem");
+                                if (gotreward == 0)
+                                {
+                                    rewardbutton.SetActive(true);
+                                    rewardnum++;
+                                }
+                                else
+                                {
+                                    endbutton.SetActive(true);
+                                }
+                                break;
+                            default:
+                                endbutton.SetActive(true);
+                                break;
+                        }
+                    }
+                    
                 }
             }
+            //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+
         }
         else if (fail == true)
         {
             //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
             if (Shooter.possible == true||die==true)
             {
-                
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
-                GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                 Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
                 foreach (Ball ball in balls)
                 {
@@ -528,6 +787,9 @@ public class Manager : MonoBehaviour
                 fail_one.SetActive(true);
                 endbutton.SetActive(true);
                 fail_ment.SetActive(true);
+
+                //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+
             }
 
         }
