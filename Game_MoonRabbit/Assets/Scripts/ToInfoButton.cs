@@ -19,10 +19,10 @@ public class ToInfoButton : MonoBehaviour
 
     void Awake()
     {
-        info_row.SetActive(false);
-        info_six.SetActive(false);
-        info_rain.SetActive(false);
-        check.SetActive(false);
+        //info_row.SetActive(false);
+        //info_six.SetActive(false);
+        //info_rain.SetActive(false);
+        //check.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,21 +45,21 @@ public class ToInfoButton : MonoBehaviour
                     info_six.SetActive(true);
                     info_done++;
                     //endbutton.SetActive(true);
-                    check.SetActive(true);
+                    endbutton.SetActive(true);
                     break;
                 case 6:
                     reward_1row.SetActive(false);
                     info_row.SetActive(true);
                     info_done++;
                     //endbutton.SetActive(true);
-                    check.SetActive(true);
+                    endbutton.SetActive(true);
                     break;
                 case 9:
                     reward_1rain.SetActive(false);
                     info_rain.SetActive(true);
                     info_done++;
                     //endbutton.SetActive(true);
-                    check.SetActive(true);
+                    endbutton.SetActive(true);
                     break;
                 default:
                     endbutton.SetActive(true);

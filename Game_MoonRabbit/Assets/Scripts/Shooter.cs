@@ -148,7 +148,7 @@ public class Shooter : MonoBehaviour
             //possible = false;
             //starlinepossible = false;
         }
-        else
+        else if(possible == true&&starlinepossible==true)
         {
             Time.timeScale = 1f;
 #if (UNITY_ANDROID || UNITY_IOS)

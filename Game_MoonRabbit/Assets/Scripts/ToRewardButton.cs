@@ -29,7 +29,7 @@ public class ToRewardButton : MonoBehaviour
 
     void Awake()
     {
-        infobutton.SetActive(false);
+        //infobutton.SetActive(false);
 
     }
 

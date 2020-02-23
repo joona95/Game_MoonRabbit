@@ -26,7 +26,7 @@ public class Manager : MonoBehaviour
     static public bool ing = false;
     public GameObject allclear;
     public GameObject allclear_star;
-    public GameObject reward, rewardbutton, endinfobutton;
+    public GameObject reward, rewardbutton, endinfobutton, checkinfobutton;
     public GameObject reward_1row, reward_1six, reward_1rain, reward_1r1s, reward_1r1r, reward_1s1r, reward_1r1s1r;
     //차례대로 1가로, 1육각형, 1무지개, 1가로1육각, 1가로1무지개, 1육각형1무지개, 1가로1육각1무지개
 
@@ -66,6 +66,8 @@ public class Manager : MonoBehaviour
     int rewardnum = 0, gotreward; //reward 창으로 넘어갈 때 이용하는 변수
 
     public GameObject[] characters=new GameObject[4];
+
+    bool infostart = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -195,6 +197,7 @@ public class Manager : MonoBehaviour
         opacity.SetActive(false);
         endbutton.SetActive(false);
         confirm.SetActive(false);
+        checkinfobutton.SetActive(false);
         hat.SetActive(false);
         for (int i = 0; i < 3; i++)
             hat_items[i].SetActive(false);
@@ -228,7 +231,7 @@ public class Manager : MonoBehaviour
         GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         Shooter.possible = true;
         Shooter.starlinepossible = true;
-
+        infostart = false;
 
         for (int i = 0; i < 5; i++)
         {
@@ -276,6 +279,40 @@ public class Manager : MonoBehaviour
             confirm.SetActive(true);
 
         }
+        
+        
+        if (Character.ChType != 3)
+        {            
+            switch (current_stage)
+            {
+                case 1:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoQ.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+                case 11:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoStone.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+                case 15:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoPnM.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+                case 20:
+                    GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                    opacity.SetActive(true);
+                    InfoBomb.SetActive(true);
+                    checkinfobutton.SetActive(true);
+                    break;
+
+            }
+        }
+        
 
         //맵생성        
 
@@ -508,6 +545,7 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
+        
         /*
         int cc = 0;
         if (red_queCnt != 0)
@@ -725,7 +763,7 @@ public class Manager : MonoBehaviour
                 }
             }
             //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-            clear = false;
+
         }
         else if (fail == true)
         {
@@ -751,7 +789,7 @@ public class Manager : MonoBehaviour
                 fail_ment.SetActive(true);
 
                 //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                fail = false;
+
             }
 
         }
