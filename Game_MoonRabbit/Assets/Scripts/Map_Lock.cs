@@ -82,23 +82,31 @@ public class Map_Lock : MonoBehaviour
 
         }
         
-        if (jump == true&&stage>0)
+        if (jump == true)
         {
+            if (stage > 0)
+            {
+                float x;
+                if (((stage - 1) / 4) % 2 == 0)
+                    x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + 30f;
+                else
+                    x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x - 30f;
+                float y = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y;
+                rabbits[stage].GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 
-            float x;
-            if (((stage-1) / 4) % 2 == 0)
-                x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + 30f;
+                Debug.Log("(x,y):" + rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + "," + rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y);
+                rabbits[stage].GetComponent<Animator>().SetTrigger("jump");
+
+                //yield return new WaitForSeconds(rabbits[stage].GetComponent<Animation>())
+                //rabbits[stage].SetActive(false);
+                //rabbits[++stage].SetActive(true);
+            }
             else
-                x = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x - 30f;
-            float y = rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y;
-            rabbits[stage].GetComponent<RectTransform>().anchoredPosition= new Vector2(x, y);
-
-            Debug.Log("(x,y):"+rabbits[stage].GetComponent<RectTransform>().anchoredPosition.x + "," + rabbits[stage].GetComponent<RectTransform>().anchoredPosition.y);
-            rabbits[stage].GetComponent<Animator>().SetTrigger("jump");
-
-            //yield return new WaitForSeconds(rabbits[stage].GetComponent<Animation>())
-            //rabbits[stage].SetActive(false);
-            //rabbits[++stage].SetActive(true);
+            {
+                rabbits[++stage].SetActive(true);
+                buttons[Map_Lock.stage + 1].GetComponent<Button>().interactable = true;
+                locks[Map_Lock.stage + 1].SetActive(false);
+            }
 
             jump = false;
         }
