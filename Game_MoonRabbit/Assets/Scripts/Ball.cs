@@ -32,11 +32,13 @@ public class Ball : MonoBehaviour
     void Start()
     {
         sem = FindObjectOfType<semmanager>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(discon_cnt + "+" + discon_total + "+" + anim_cnt);
 
         if (this.gameObject.transform.position == GameObject.Find("Shotspawn").transform.position&&shootball==true)//발사할 공에 한정하여 발사가 되게끔 하는 함수
         {

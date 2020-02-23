@@ -968,6 +968,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StageOption: {fileID: 1601564557}
+  infobutton: {fileID: 0}
 --- !u!4 &92648584
 Transform:
   m_ObjectHideFlags: 0
@@ -6622,7 +6623,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 823788029}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0
+  m_Size: 0.5198701
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8918,7 +8919,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1100, y: 2000}
+  m_SizeDelta: {x: 1200, y: 2200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &869965538
 GameObject:
@@ -9836,7 +9837,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -3697}
+  m_AnchoredPosition: {x: -551.5, y: -3697}
   m_SizeDelta: {x: 1068, y: 7700}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &1029674625

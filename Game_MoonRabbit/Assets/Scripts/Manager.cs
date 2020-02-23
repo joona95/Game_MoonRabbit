@@ -71,6 +71,15 @@ public class Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Debug.Log("start");
+
+        Ball.discon_cnt = 0; Ball.discon_total = 0; 
+        Ball.anim_cnt = 0;
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+        Shooter.possible = true;
+        Shooter.starlinepossible = true;
+
         if (!PlayerPrefs.HasKey("Stage3_GetItem"))
         {
             PlayerPrefs.SetInt("Stage3_GetItem", 0);
@@ -190,6 +199,8 @@ public class Manager : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("awake");
+
         //ui감춤
         clear = false;
         fail = false;
@@ -226,11 +237,7 @@ public class Manager : MonoBehaviour
         InfoBomb.SetActive(false);
         infobutton.SetActive(false);
         endinfobutton.SetActive(false);
-        ing = false;
-        Ball.anim_cnt = 0;
-        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-        Shooter.possible = true;
-        Shooter.starlinepossible = true;
+        ing = false;       
         infostart = false;
 
         for (int i = 0; i < 5; i++)
@@ -297,13 +304,13 @@ public class Manager : MonoBehaviour
                     InfoStone.SetActive(true);
                     checkinfobutton.SetActive(true);
                     break;
-                case 15:
+                case 16:
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                     opacity.SetActive(true);
                     InfoPnM.SetActive(true);
                     checkinfobutton.SetActive(true);
                     break;
-                case 20:
+                case 21:
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                     opacity.SetActive(true);
                     InfoBomb.SetActive(true);
@@ -545,7 +552,18 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()//구슬 색깔별로 개수 비율 맞춰놓은 겁니다.(발사 구슬 랜덤) 구슬 색깔 비율 변수를 여기 저기 넣어봤는데 update에 넣어둬야 제대로 되더라고요
     {
-        
+        /*
+        if (Shooter.possible == false)
+            Debug.Log("false");
+        else
+            Debug.Log("true");
+
+        if (ing == false)
+            Debug.Log("ing-false");
+        else
+            Debug.Log("ing-true");
+        */
+
         /*
         int cc = 0;
         if (red_queCnt != 0)

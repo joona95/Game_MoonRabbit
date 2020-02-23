@@ -67,7 +67,13 @@ public class Map_Lock : MonoBehaviour
 
         for(int i = 0; i < 4; i++)
         {
-            if (i <= stage / 10)
+            int tmp_stage = stage;
+            if (jump == true)
+            {
+                tmp_stage++;
+            }
+
+            if (i <= tmp_stage / 10)
             {
                 char_buttons[i].GetComponent<Button>().interactable = true;
                 characters[i].SetActive(true);

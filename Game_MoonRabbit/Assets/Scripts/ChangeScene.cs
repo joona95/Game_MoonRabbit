@@ -31,7 +31,8 @@ public class ChangeScene : MonoBehaviour
 
     public void restartButton()
     {
-        SceneManager.LoadScene("Stage");
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+        SceneManager.LoadScene("Stage");        
     }
 
     public void StageStartButton()
@@ -51,6 +52,7 @@ public class ChangeScene : MonoBehaviour
                 }
             }
         }
+        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         Debug.Log("back");
         SceneManager.LoadScene("Map");
     }

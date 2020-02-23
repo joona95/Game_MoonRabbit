@@ -120,11 +120,11 @@ public class Items : MonoBehaviour
                 InfoStone.SetActive(true);
                 checkinfobutton.SetActive(true);
                 break;
-            case 15:
+            case 16:
                 InfoPnM.SetActive(true);
                 checkinfobutton.SetActive(true);
                 break;
-            case 20:
+            case 21:
                 InfoBomb.SetActive(true);
                 checkinfobutton.SetActive(true);
                 break;
