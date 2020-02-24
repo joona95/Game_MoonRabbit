@@ -259,7 +259,7 @@ public class Ball : MonoBehaviour
                 this.gameObject.GetComponent<Ball>().row = 0;
 
                 float max_y = 0;
-                for (int i = 0; i < 9; i++)
+                for (int i = 0; i < Manager.Map[0].Length; i++)
                 {
                     if (Manager.Map[0][i])
                     {

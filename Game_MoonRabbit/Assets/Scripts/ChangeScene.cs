@@ -31,6 +31,16 @@ public class ChangeScene : MonoBehaviour
 
     public void restartButton()
     {
+        for (int i = 0; i < Manager.total_row; i++)
+        {
+            for (int j = 0; j < Manager.Map[i].Length; j++)
+            {
+                if (Manager.Map[i][j])
+                {
+                    Manager.Map[i][j].GetComponent<Ball>().end = true;
+                }
+            }
+        }
         GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         SceneManager.LoadScene("Stage");        
     }

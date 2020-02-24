@@ -76,7 +76,7 @@ public class Manager : MonoBehaviour
 
         Ball.discon_cnt = 0; Ball.discon_total = 0; 
         Ball.anim_cnt = 0;
-        GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+        //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         Shooter.possible = true;
         Shooter.starlinepossible = true;
 
