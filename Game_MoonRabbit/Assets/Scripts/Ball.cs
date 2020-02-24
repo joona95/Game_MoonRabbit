@@ -19,6 +19,7 @@ public class Ball : MonoBehaviour
     Vector3 ballway;
     semmanager sem;
     public static int anim_cnt = 0;
+    public static int destroyCnt = 0;
 
     int ChType = Character.ChType; //캐릭터 종류 판별
     int replaynum; //ChType==2이고 diebomb 건드렸을 때 부활 여부 판별할 때 이용
@@ -1680,6 +1681,8 @@ public class Ball : MonoBehaviour
         if (end == false)
         {
             //Manager.ing = true;
+            destroyCnt++;
+            Debug.Log("in:" + destroyCnt);
             
             if (this.gameObject.tag == "red")
             {
@@ -2121,6 +2124,9 @@ public class Ball : MonoBehaviour
                     //Manager.ing = false;
                 }
             }
+
+            destroyCnt--;
+            Debug.Log("out:" + destroyCnt);
         }
     }
 

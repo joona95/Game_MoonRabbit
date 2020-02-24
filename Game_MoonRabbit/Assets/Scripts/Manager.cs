@@ -75,7 +75,7 @@ public class Manager : MonoBehaviour
         Debug.Log("start");
 
         Ball.discon_cnt = 0; Ball.discon_total = 0; 
-        Ball.anim_cnt = 0;
+        Ball.anim_cnt = 0; Ball.destroyCnt = 0;
         //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         Shooter.possible = true;
         Shooter.starlinepossible = true;
@@ -1306,7 +1306,7 @@ public class Manager : MonoBehaviour
                         }
                     }
 
-                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && Ball.anim_cnt == 0)
+                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && Ball.anim_cnt == 0&&Ball.destroyCnt==0)
                     {
                         Shooter.possible = true;
                         Shooter.starlinepossible = true;
