@@ -136,9 +136,9 @@ public class Shooter : MonoBehaviour
         if (Manager.queCnt == 0)
         {
             //Time.timeScale = 0f;
-            Manager.clear = true;
-            possible = false;
-            starlinepossible = false;
+            //Manager.clear = true;
+            //possible = false;
+            //starlinepossible = false;
 
         }
         else if (Manager.limit_cnt == 0)

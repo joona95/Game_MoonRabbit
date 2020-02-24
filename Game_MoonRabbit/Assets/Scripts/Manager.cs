@@ -26,7 +26,7 @@ public class Manager : MonoBehaviour
     static public bool ing = false;
     public GameObject allclear;
     public GameObject allclear_star;
-    public GameObject reward, rewardbutton, endinfobutton, checkinfobutton;
+    public GameObject reward, rewardbutton, endinfobutton, checkinfobutton, clearbutton;
     public GameObject reward_1row, reward_1six, reward_1rain, reward_1r1s, reward_1r1r, reward_1s1r, reward_1r1s1r;
     //차례대로 1가로, 1육각형, 1무지개, 1가로1육각, 1가로1무지개, 1육각형1무지개, 1가로1육각1무지개
 
@@ -597,39 +597,57 @@ public class Manager : MonoBehaviour
             cc++;
         }
         */
-
-
-        if (clear == true)//성공
+        if (die == true)
         {
             GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
             Shooter.possible = false;
             Shooter.starlinepossible = false;
-            
-
+            //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
             Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
             foreach (Ball ball in balls)
             {
                 ball.enabled = false;
                 //Destroy(ball);
             }
+            black.SetActive(true);
+            back_night.SetActive(true);
+            back_ground.SetActive(true);
+            fail_rabbit.SetActive(true);
+            fail_one.SetActive(true);
+            endbutton.SetActive(true);
+            fail_ment.SetActive(true);
+
+            //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+
+        }
+        else if (Shooter.possible == true)
+        {
+            if (queCnt == 0)//성공
+            {
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                Shooter.possible = false;
+                Shooter.starlinepossible = false;
 
 
-            if (Mathf.Round(night.transform.position.y * 100) / 100 > -6f)
-            {
-                night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y - 0.2f, night.transform.position.z);
-                star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y - 0.2f, star.transform.position.z);
-                left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y - 0.2f, left_wall.transform.position.z);
-                right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y - 0.2f, right_wall.transform.position.z);
-            }
-            else
-            {
-                if (current_stage == 40)
+                Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
+                foreach (Ball ball in balls)
                 {
-                    allclear.SetActive(true);
-                    allclear_star.SetActive(true);
+                    ball.enabled = false;
+                    //Destroy(ball);
+                }
+
+
+                if (Mathf.Round(night.transform.position.y * 100) / 100 > -6f)
+                {
+                    night.transform.position = new Vector3(night.transform.position.x, night.transform.position.y - 0.2f, night.transform.position.z);
+                    star.transform.position = new Vector3(star.transform.position.x, star.transform.position.y - 0.2f, star.transform.position.z);
+                    left_wall.transform.position = new Vector3(left_wall.transform.position.x, left_wall.transform.position.y - 0.2f, left_wall.transform.position.z);
+                    right_wall.transform.position = new Vector3(right_wall.transform.position.x, right_wall.transform.position.y - 0.2f, right_wall.transform.position.z);
                 }
                 else
                 {
+
+
                     if (rewardnum == 0)
                     {
                         black.SetActive(true);
@@ -772,22 +790,23 @@ public class Manager : MonoBehaviour
                                     endbutton.SetActive(true);
                                 }
                                 break;
+                            case 40:
+                                clearbutton.SetActive(true);
+                                break;
                             default:
                                 endbutton.SetActive(true);
                                 break;
                         }
                     }
-                    
-                }
-            }
-            //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
 
-        }
-        else if (fail == true)
-        {
-            //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-            if (Shooter.possible == true||die==true)
+
+                }
+                //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+
+            }
+            else if (limit_cnt==0)
             {
+                //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
@@ -808,8 +827,8 @@ public class Manager : MonoBehaviour
 
                 //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
 
-            }
 
+            }
         }
 
 
