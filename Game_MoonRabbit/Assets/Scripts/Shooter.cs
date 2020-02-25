@@ -757,7 +757,7 @@ public class Shooter : MonoBehaviour
 
 
                         float restard = 0f;
-                        Debug.Log("avalue" + ShooterLine.avalue);
+                        //Debug.Log("avalue" + ShooterLine.avalue);
                         
                         for(int i = 0; i < 16; i++)
                         {
@@ -796,7 +796,7 @@ public class Shooter : MonoBehaviour
                                 if (restarlineRecolor.a == 0f)
                                 {
                                     starlinenum = i;
-                                    Debug.Log("star" + starlinenum);
+                                    //Debug.Log("star" + starlinenum);
                                     break;
                                 }
                             }
@@ -842,7 +842,7 @@ public class Shooter : MonoBehaviour
                                 if (restarlineRecolor.a == 0f)
                                 {
                                     starlinenum = i;
-                                    Debug.Log("star" + starlinenum);
+                                    //Debug.Log("star" + starlinenum);
                                     break;
                                 }
                             }

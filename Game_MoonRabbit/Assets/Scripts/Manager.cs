@@ -554,10 +554,11 @@ public class Manager : MonoBehaviour
     {
         /*
         if (Shooter.possible == false)
-            Debug.Log("false");
+            Debug.Log("false" + Ball.destroyCnt);
         else
-            Debug.Log("true");
+            Debug.Log("true"+ Ball.destroyCnt);
 
+        
         if (ing == false)
             Debug.Log("ing-false");
         else
@@ -1170,7 +1171,7 @@ public class Manager : MonoBehaviour
                 }
 
 
-       
+
                 if (ing == false)
                 {
                     bool end = false;
@@ -1196,7 +1197,7 @@ public class Manager : MonoBehaviour
                         {
                             for (int j = 0; j < Map[i].Length; j++)
                             {
-                                if (Map[i][j] != null&&Map[i][j].GetComponent<Ball>().connect!=false)
+                                if (Map[i][j] != null && Map[i][j].GetComponent<Ball>().connect != false)
                                 {
                                     end_y[i, j] = Map[i][j].transform.position.y + (0.85f - min_y);
                                 }
@@ -1306,7 +1307,7 @@ public class Manager : MonoBehaviour
                         }
                     }
 
-                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && Ball.anim_cnt == 0&&Ball.destroyCnt==0)
+                    if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && Ball.anim_cnt == 0 && Ball.destroyCnt == 0)
                     {
                         Shooter.possible = true;
                         Shooter.starlinepossible = true;
@@ -1314,6 +1315,12 @@ public class Manager : MonoBehaviour
                     }
                 }
                 
+                
+            }
+            else
+            {
+                Shooter.possible = true;
+                Shooter.starlinepossible = true;
             }
         }
 
