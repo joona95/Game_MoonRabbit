@@ -68,6 +68,9 @@ public class Manager : MonoBehaviour
     public GameObject[] characters=new GameObject[4];
 
     bool infostart = false;
+
+    static public int life=0;//부활토끼
+
     // Start is called before the first frame update
     void Start()
     {
@@ -258,6 +261,7 @@ public class Manager : MonoBehaviour
         else if (Character.ChType == 2)
         {
             characters[2].SetActive(true);
+            life = 1;
         }
         else if (Character.ChType == 3)
         {
@@ -600,7 +604,7 @@ public class Manager : MonoBehaviour
         */
         if (die == true)
         {
-            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+            //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
             Shooter.possible = false;
             Shooter.starlinepossible = false;
             //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;

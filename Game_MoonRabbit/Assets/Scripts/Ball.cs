@@ -487,6 +487,7 @@ public class Ball : MonoBehaviour
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
 
+
                     }
                 }
                 if (0 <= row - 1 && col < Manager.Map[row - 1].Length && Manager.Map[row - 1][col] && Manager.Map[row-1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row-1][col].gameObject.GetComponent<Ball>().anim == false)
@@ -700,12 +701,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                        replaynum = Random.Range(1, 5);
-                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                        {
-                            Time.timeScale = 1f;
-                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                        }
+
                     }
                 }
                 if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -725,12 +721,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                        replaynum = Random.Range(1, 5);
-                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                        {
-                            Time.timeScale = 1f;
-                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                        }
+
                     }
                 }
                 if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
@@ -750,12 +741,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                        replaynum = Random.Range(1, 5);
-                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                        {
-                            Time.timeScale = 1f;
-                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                        }
+
                     }
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -775,12 +761,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                        replaynum = Random.Range(1, 5);
-                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                        {
-                            Time.timeScale = 1f;
-                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                        }
+
                     }
                 }
                 if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
@@ -800,12 +781,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                        replaynum = Random.Range(1, 5);
-                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                        {
-                            Time.timeScale = 1f;
-                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                        }
+
                     }
                 }
                 if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -825,12 +801,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-                        replaynum = Random.Range(1, 5);
-                        if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
-                        {
-                            Time.timeScale = 1f;
-                            GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                        }
+
                     }
                 }
 
@@ -1802,18 +1773,21 @@ public class Ball : MonoBehaviour
 
                 }
 
-                replaynum = Random.Range(1, 5);
-                if (ChType == 2 && replaynum == 1) //일단 1/4 확률로 부활
+                //replaynum = Random.Range(1, 5);
+                if (ChType == 2 &&Manager.life==1) //부활
                 {
                     Time.timeScale = 1f;
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                    Shooter.possible = true;
-                    Shooter.starlinepossible = true;
+                    Manager.life--;
+                    GameObject.Find("Character2").GetComponent<Animator>().SetTrigger("life");
+
+                    //Shooter.possible = true;
+                    //Shooter.starlinepossible = true;
                 }
                 else
                 {
                     //Manager.fail = true;                   
-                    //Manager.die = true;
+                    Manager.die = true;
 
                 }
             }
@@ -2226,7 +2200,7 @@ public class Ball : MonoBehaviour
         anim_cnt--;
         //Shooter.possible = true;
         //Shooter.starlinepossible = true;
-        if(anim_cnt==0)
+        //if(anim_cnt==0)
             //Manager.ing = false;
 
         /*
@@ -2235,12 +2209,12 @@ public class Ball : MonoBehaviour
             Manager.fail = true;
             
         }*/
-
+        /*
         if (diebomb == true)
         {
             Manager.fail = true;
             Manager.die = true;
-        }
+        }*/
 
     }
 
