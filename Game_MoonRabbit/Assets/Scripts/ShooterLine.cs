@@ -8,10 +8,12 @@ public class ShooterLine : MonoBehaviour
     public static bool avalue = false;
     SpriteRenderer sprite; //대포(경로) 이미지
     public Color color;
+    public bool starcolball = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        //starcolball = false;
         linecol = false;
         sprite = this.gameObject.GetComponent<SpriteRenderer>();
         color = sprite.color;
@@ -31,7 +33,7 @@ public class ShooterLine : MonoBehaviour
             if (color.a == 1f)
             {
                 avalue = true;
-                Debug.Log("!!!!!!!");
+                Debug.Log("avlue is true");
             }
             else if(color.a == 0f) avalue = false;
         }

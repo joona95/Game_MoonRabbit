@@ -96,8 +96,9 @@ public class Ball : MonoBehaviour
         {
             starlineSprite = collision.gameObject.GetComponent<SpriteRenderer>();
             starlineColor = starlineSprite.color;
-            starlineColor.a = 0f;
+            //starlineColor.a = 0f;
             starlineSprite.color = starlineColor;
+            collision.gameObject.GetComponent<ShooterLine>().starcolball = true;
         }
 
         if (shootball==true && collision.gameObject.tag!="wall" && collision.gameObject.tag!="line" && collision.gameObject.tag != "starline") //shootball이 벽이 아닌 공에 닿았을 때
@@ -2220,9 +2221,10 @@ public class Ball : MonoBehaviour
         {
             starlineSprite = collision.gameObject.GetComponent<SpriteRenderer>();
             starlineColor = starlineSprite.color;
-            starlineColor.a = 1f;
+            //starlineColor.a = 1f;
             starlineSprite.color = starlineColor;
-            
+            collision.gameObject.GetComponent<ShooterLine>().starcolball = false;
+
         }
     }
 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2230910792483337941}
   - component: {fileID: -5257404126481040642}
   - component: {fileID: -5748367976099395816}
+  - component: {fileID: 8833728340742217657}
   m_Layer: 0
   m_Name: starline2
   m_TagString: starline
@@ -96,7 +97,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.022186667, y: -0.0606229}
+  m_Offset: {x: 0.00019556284, y: -0.038256854}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -107,7 +108,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8905806, y: 1.6530318}
+  m_Size: {x: 1.1591672, y: 1.6977639}
   m_EdgeRadius: 0
 --- !u!50 &-5748367976099395816
 Rigidbody2D:
@@ -130,3 +131,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8833728340742217657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8976516816766684517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7a45bf465824224e96384d4b912ca15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
+  starcolball: 0
