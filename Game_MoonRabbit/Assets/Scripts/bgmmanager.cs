@@ -40,6 +40,10 @@ public class bgmmanager : MonoBehaviour
     {
         source.volume = 1f;
     }
+    public void vld()
+    {
+        source.volume = 0.05f;
+    }
     public void soundoff()
     {
         source.volume = 0f;

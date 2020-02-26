@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class stageoption : MonoBehaviour
 {
     public GameObject StageOption;
+    bgmmanager bgm;
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,6 +23,8 @@ public class stageoption : MonoBehaviour
 
     public void stagestart()
     {
+        bgm = FindObjectOfType<bgmmanager>();
+        bgm.play(1);
         SceneManager.LoadScene("Stage");
     }
 }

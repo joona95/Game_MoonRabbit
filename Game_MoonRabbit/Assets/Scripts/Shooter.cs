@@ -88,8 +88,6 @@ public class Shooter : MonoBehaviour
 
 
         bgm = FindObjectOfType<bgmmanager>();
-        bgm.stop();
-        bgm.play(1);
         sem = FindObjectOfType<semmanager>();
     }
 

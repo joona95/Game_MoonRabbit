@@ -5,6 +5,7 @@ using UnityEngine;
 public class ToRewardButton : MonoBehaviour
 {
     public GameObject reward;
+    semmanager sem;
     public GameObject reward_1row, reward_1six, reward_1rain, reward_1r1s, reward_1r1r, reward_1s1r, reward_1r1s1r;
     //차례대로 1가로, 1육각형, 1무지개, 1가로1육각, 1가로1무지개, 1육각형1무지개, 1가로1육각1무지개
 
@@ -41,6 +42,7 @@ public class ToRewardButton : MonoBehaviour
 
     public void CheckReward()
     {
+        sem = FindObjectOfType<semmanager>();
         if (this.gameObject.activeSelf)
         {
             
@@ -56,7 +58,7 @@ public class ToRewardButton : MonoBehaviour
                     reward_1six.SetActive(true);
                     giveitem = PlayerPrefs.GetInt("Item2_Cnt");
                     PlayerPrefs.SetInt("Item2_Cnt", giveitem + 1);
-
+                    sem.play(6);
                     //Manager.rewardis[0]++;
                     cnt = PlayerPrefs.GetInt("Stage3_GetItem");
                     cnt++;
@@ -73,6 +75,7 @@ public class ToRewardButton : MonoBehaviour
                     reward_1row.SetActive(true);
                     giveitem = PlayerPrefs.GetInt("Item1_Cnt");
                     PlayerPrefs.SetInt("Item1_Cnt", giveitem + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage6_GetItem");
                     cnt++;
@@ -90,6 +93,7 @@ public class ToRewardButton : MonoBehaviour
                     reward_1rain.SetActive(true);
                     giveitem = PlayerPrefs.GetInt("Item3_Cnt");
                     PlayerPrefs.SetInt("Item3_Cnt", giveitem + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage9_GetItem");
                     cnt++;
@@ -107,6 +111,7 @@ public class ToRewardButton : MonoBehaviour
                     reward_1six.SetActive(true);
                     giveitem = PlayerPrefs.GetInt("Item2_Cnt");
                     PlayerPrefs.SetInt("Item2_Cnt", giveitem + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage12_GetItem");
                     cnt++;
@@ -119,6 +124,7 @@ public class ToRewardButton : MonoBehaviour
                     reward_1row.SetActive(true);
                     giveitem = PlayerPrefs.GetInt("Item1_Cnt");
                     PlayerPrefs.SetInt("Item1_Cnt", giveitem + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage15_GetItem");
                     cnt++;
@@ -131,6 +137,7 @@ public class ToRewardButton : MonoBehaviour
                     reward_1rain.SetActive(true);
                     giveitem = PlayerPrefs.GetInt("Item3_Cnt");
                     PlayerPrefs.SetInt("Item3_Cnt", giveitem + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage18_GetItem");
                     cnt++;
@@ -145,6 +152,7 @@ public class ToRewardButton : MonoBehaviour
                     PlayerPrefs.SetInt("Item1_Cnt", giveitem + 1);
                     giveitem2 = PlayerPrefs.GetInt("Item2_Cnt");
                     PlayerPrefs.SetInt("Item2_Cnt", giveitem2 + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage21_GetItem");
                     cnt++;
@@ -159,6 +167,7 @@ public class ToRewardButton : MonoBehaviour
                     PlayerPrefs.SetInt("Item1_Cnt", giveitem + 1);
                     giveitem2 = PlayerPrefs.GetInt("Item2_Cnt");
                     PlayerPrefs.SetInt("Item2_Cnt", giveitem2 + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage25_GetItem");
                     cnt++;
@@ -173,6 +182,7 @@ public class ToRewardButton : MonoBehaviour
                     PlayerPrefs.SetInt("Item1_Cnt", giveitem + 1);
                     giveitem2 = PlayerPrefs.GetInt("Item3_Cnt");
                     PlayerPrefs.SetInt("Item3_Cnt", giveitem2 + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage29_GetItem");
                     cnt++;
@@ -187,6 +197,7 @@ public class ToRewardButton : MonoBehaviour
                     PlayerPrefs.SetInt("Item2_Cnt", giveitem + 1);
                     giveitem2 = PlayerPrefs.GetInt("Item3_Cnt");
                     PlayerPrefs.SetInt("Item3_Cnt", giveitem2 + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage34_GetItem");
                     cnt++;
@@ -203,6 +214,7 @@ public class ToRewardButton : MonoBehaviour
                     PlayerPrefs.SetInt("Item2_Cnt", giveitem2 + 1);
                     giveitem3 = PlayerPrefs.GetInt("Item3_Cnt");
                     PlayerPrefs.SetInt("Item3_Cnt", giveitem3 + 1);
+                    sem.play(6);
 
                     cnt = PlayerPrefs.GetInt("Stage39_GetItem");
                     cnt++;

@@ -7,7 +7,7 @@ using TMPro;
 public class Manager : MonoBehaviour
 {
     public GameObject night, star, left_wall, right_wall;
-
+    semmanager sem;
     static public List<GameObject[]> Map; //관리할 맵
     static public int total_row, total_col; //맵 전체 행, 열
     static public List<Dictionary<string, object>> StageInfo; //스테이지마다 전체 row,col정보읽어오기
@@ -629,6 +629,7 @@ public class Manager : MonoBehaviour
         {
             if (queCnt == 0)//성공
             {
+                sem = FindObjectOfType<semmanager>();
                 GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
@@ -655,6 +656,7 @@ public class Manager : MonoBehaviour
 
                     if (rewardnum == 0)
                     {
+                        sem = FindObjectOfType<semmanager>();
                         black.SetActive(true);
                         back_night.SetActive(true);
                         clear_fireworks.SetActive(true);
@@ -668,6 +670,7 @@ public class Manager : MonoBehaviour
                                 if (gotreward == 0)
                                 {
                                     rewardbutton.SetActive(true);
+
                                     rewardnum++;
                                 }
                                 else
@@ -963,6 +966,7 @@ public class Manager : MonoBehaviour
         {
             //Time.timeScale = 0f;
             Manager.clear = true;
+            
             GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
             if (PlayerPrefs.GetInt("User_stage") < current_stage)
             {
@@ -1329,7 +1333,7 @@ public class Manager : MonoBehaviour
         }
 
     }
-
+   
     public void bubblepop()//구슬 생성 함수
     {
         //발사할 첫번째 구슬 위치를 대포 위치로 변경

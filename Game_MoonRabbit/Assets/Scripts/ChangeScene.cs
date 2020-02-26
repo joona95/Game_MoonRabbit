@@ -8,6 +8,7 @@ public class ChangeScene : MonoBehaviour
 {
     public GameObject StageOption;
     public GameObject infobutton;
+    bgmmanager bgm;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +53,7 @@ public class ChangeScene : MonoBehaviour
     //back버튼
     public void BackToMapButton()
     {
+        bgm = FindObjectOfType<bgmmanager>();
         for (int i = 0; i < Manager.total_row; i++)
         {
             for (int j = 0; j < Manager.Map[i].Length; j++)
@@ -65,6 +67,9 @@ public class ChangeScene : MonoBehaviour
         GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
         Debug.Log("back");
         SceneManager.LoadScene("Map");
+        bgm.play(0);
+        if (bgm.source.volume > 0f)
+            bgm.soundon();
     }
 
     //stage이동 버튼
