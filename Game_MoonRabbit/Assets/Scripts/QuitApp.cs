@@ -5,6 +5,7 @@ using UnityEngine;
 public class QuitApp : MonoBehaviour
 {
     int ClickCount = 0;
+    public GameObject QuitOpt;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,9 @@ public class QuitApp : MonoBehaviour
         else if (ClickCount == 2)
         {
             CancelInvoke("DoubleClick");
-            Application.Quit();
+            QuitOpt.SetActive(true);
+            //Application.Quit();
+            ClickCount = 0;
         }
     }
 
