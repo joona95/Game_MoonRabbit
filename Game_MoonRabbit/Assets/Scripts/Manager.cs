@@ -665,7 +665,7 @@ public class Manager : MonoBehaviour
             if (queCnt == 0)//성공
             {
                 sem = FindObjectOfType<semmanager>();
-                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
                 clear = true;
@@ -847,7 +847,7 @@ public class Manager : MonoBehaviour
             else if (limit_cnt==0)
             {
                 //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
-                GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
                 //GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
