@@ -168,7 +168,7 @@ public class User : MonoBehaviour
             PlayerPrefs.SetInt("Magic40", 1);
         }
 
-        PlayerPrefs.SetInt("User_stage", 40);
+        //PlayerPrefs.SetInt("User_stage", 40);
     }
 
     // Update is called once per frame
