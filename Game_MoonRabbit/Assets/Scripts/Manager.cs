@@ -24,9 +24,7 @@ public class Manager : MonoBehaviour
     public GameObject fail_rabbit, fail_one;//실패
     public GameObject clear_ment, fail_ment; //성공 실패 문구
     static public bool ing = false;
-    public GameObject allclear;
-    public GameObject allclear_star;
-    public GameObject reward, rewardbutton, endinfobutton, checkinfobutton, clearbutton;
+    public GameObject reward, rewardbutton, endinfobutton, checkinfobutton;
     public GameObject reward_1row, reward_1six, reward_1rain, reward_1r1s, reward_1r1r, reward_1s1r, reward_1r1s1r;
     //차례대로 1가로, 1육각형, 1무지개, 1가로1육각, 1가로1무지개, 1육각형1무지개, 1가로1육각1무지개
 
@@ -266,29 +264,66 @@ public class Manager : MonoBehaviour
         else if (Character.ChType == 3)
         {
             characters[3].SetActive(true);
-            opacity.SetActive(true);
-            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-            hat.SetActive(true);
-            confetti.SetActive(true);
 
-            float p = Random.Range(0, 100);
-            if (0 <= p && p < 33.33f)
+            if (PlayerPrefs.GetInt("Magic" + current_stage.ToString()) != 0)
             {
-                hat_items[0].SetActive(true);
+                opacity.SetActive(true);
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                hat.SetActive(true);
+                confetti.SetActive(true);
 
-            }
-            else if (33.33f <= p && p < 66.66f)
-            {
-                hat_items[1].SetActive(true);
+                float p = Random.Range(0, 100);
+                if (0 <= p && p < 33.33f)
+                {
+                    hat_items[0].SetActive(true);
 
+                }
+                else if (33.33f <= p && p < 66.66f)
+                {
+                    hat_items[1].SetActive(true);
+
+                }
+                else
+                {
+                    hat_items[2].SetActive(true);
+                }
+
+                confirm.SetActive(true);
+
+                int magic = PlayerPrefs.GetInt("Magic" + current_stage.ToString());
+                PlayerPrefs.SetInt("Magic" + current_stage.ToString(), --magic);
             }
             else
             {
-                hat_items[2].SetActive(true);
+                switch (current_stage)
+                {
+                    case 1:
+                        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        opacity.SetActive(true);
+                        InfoQ.SetActive(true);
+                        checkinfobutton.SetActive(true);
+                        break;
+                    case 11:
+                        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        opacity.SetActive(true);
+                        InfoStone.SetActive(true);
+                        checkinfobutton.SetActive(true);
+                        break;
+                    case 16:
+                        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        opacity.SetActive(true);
+                        InfoPnM.SetActive(true);
+                        checkinfobutton.SetActive(true);
+                        break;
+                    case 21:
+                        GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                        opacity.SetActive(true);
+                        InfoBomb.SetActive(true);
+                        checkinfobutton.SetActive(true);
+                        break;
+
+                }
             }
-
-            confirm.SetActive(true);
-
         }
         
         
@@ -633,7 +668,7 @@ public class Manager : MonoBehaviour
                 GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 Shooter.possible = false;
                 Shooter.starlinepossible = false;
-
+                clear = true;
 
                 Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
                 foreach (Ball ball in balls)
@@ -797,9 +832,6 @@ public class Manager : MonoBehaviour
                                 {
                                     endbutton.SetActive(true);
                                 }
-                                break;
-                            case 40:
-                                clearbutton.SetActive(true);
                                 break;
                             default:
                                 endbutton.SetActive(true);

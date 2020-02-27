@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Rabbit_Jump : MonoBehaviour
 {
     public GameObject gameobject;
+    public GameObject allclear, allclear_star;
     semmanager sem;
     // Start is called before the first frame update
     void Start()
@@ -31,6 +32,12 @@ public class Rabbit_Jump : MonoBehaviour
         {
             gameobject.GetComponent<Map_Lock>().buttons[Map_Lock.stage + 1].GetComponent<Button>().interactable = true;
             gameobject.GetComponent<Map_Lock>().locks[Map_Lock.stage + 1].SetActive(false);
+        }
+        else if (Map_Lock.stage == 40)
+        {
+            allclear.SetActive(true);
+            allclear_star.SetActive(true);
+            Manager.clear = false;
         }
 
         if (Map_Lock.give1 == true)

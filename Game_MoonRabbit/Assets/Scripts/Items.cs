@@ -36,6 +36,7 @@ public class Items : MonoBehaviour
         {
             Shooter.possible = false;
             GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
+            Ball.destroyCnt++;
             Destroy(tmp);
             GetComponent<Manager>().ballPrefabs[0] = (GameObject)Instantiate(item_rowbomb, new Vector3(0f, -3.5f, 0f), Quaternion.identity);
             GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rowbomb = true;
@@ -55,6 +56,7 @@ public class Items : MonoBehaviour
         {
             Shooter.possible = false;
             GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
+            Ball.destroyCnt++;
             Destroy(tmp);
             GetComponent<Manager>().ballPrefabs[0] = (GameObject)Instantiate(item_sixbomb, new Vector3(0f, -3.5f, 0f), Quaternion.identity);
             GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().sixbomb = true;
@@ -74,6 +76,7 @@ public class Items : MonoBehaviour
         {
             Shooter.possible = false;
             GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
+            Ball.destroyCnt++;
             Destroy(tmp);
             GetComponent<Manager>().ballPrefabs[0] = (GameObject)Instantiate(item_rainbow, new Vector3(0f, -3.5f, 0f), Quaternion.identity);
             GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rainbow = true;

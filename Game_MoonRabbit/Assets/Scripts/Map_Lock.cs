@@ -17,6 +17,7 @@ public class Map_Lock : MonoBehaviour
     public GameObject back_ground;
     public GameObject[] gives = new GameObject[3];
     public GameObject confirm;
+    public GameObject allclear, allclear_star;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +27,10 @@ public class Map_Lock : MonoBehaviour
 
     private void Awake()
     {
+        allclear.SetActive(false);
+        allclear_star.SetActive(false);
+
+
         if (!PlayerPrefs.HasKey("User_stage"))
         {
             PlayerPrefs.SetInt("User_stage", 0);
@@ -117,6 +122,12 @@ public class Map_Lock : MonoBehaviour
             jump = false;
         }
 
+        if (jump == false && Manager.clear == true&&stage==40)
+        {
+            allclear.SetActive(true);
+            allclear_star.SetActive(true);
+            Manager.clear = false;
+        }
     }
 
   
