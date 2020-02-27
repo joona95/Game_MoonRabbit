@@ -2236,7 +2236,7 @@ public class Ball : MonoBehaviour
         anim = true;
         anim_cnt++;
 
-        if (count != 0 )
+        if (count != 0 &&Manager.limit_cnt>0)
         {
             Manager.limit_cnt += count;
 

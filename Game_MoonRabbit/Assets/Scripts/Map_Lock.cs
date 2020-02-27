@@ -122,12 +122,14 @@ public class Map_Lock : MonoBehaviour
             jump = false;
         }
 
+        /*
         if (jump == false && Manager.clear == true&&stage==40)
         {
             allclear.SetActive(true);
             allclear_star.SetActive(true);
             Manager.clear = false;
         }
+        */
     }
 
   
