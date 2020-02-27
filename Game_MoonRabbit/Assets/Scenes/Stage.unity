@@ -3245,7 +3245,6 @@ GameObject:
   - component: {fileID: 645167019}
   - component: {fileID: 645167018}
   - component: {fileID: 645167020}
-  - component: {fileID: 645167021}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -3287,8 +3286,6 @@ MonoBehaviour:
   fail_one: {fileID: 1013480961}
   clear_ment: {fileID: 1548477520}
   fail_ment: {fileID: 838728845}
-  allclear: {fileID: 0}
-  allclear_star: {fileID: 0}
   reward: {fileID: 1711193601}
   rewardbutton: {fileID: 1952492739}
   endinfobutton: {fileID: 619565626}
@@ -3492,20 +3489,6 @@ MonoBehaviour:
   infoQ: {fileID: 862282406}
   infoStone: {fileID: 1935498582}
   infoBomb: {fileID: 1421113479}
---- !u!114 &645167021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645167014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 927ed8fae6d291e47b7e2e1eabb2c4f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  allclear: {fileID: 0}
-  allclear_star: {fileID: 0}
 --- !u!1 &645552002
 GameObject:
   m_ObjectHideFlags: 0

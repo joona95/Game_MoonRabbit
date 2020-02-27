@@ -519,7 +519,7 @@ public class Shooter : MonoBehaviour
                 yPos = 2.3f / Mathf.Tan(radian);
 
                 float stard = 0f; //별빛 간 간격
-                int starlinenum = 19; //구슬과 닿은 첫 번째 별빛 알기 위한 변수
+                int starlinenum = 15; //구슬과 닿은 첫 번째 별빛 알기 위한 변수
                 if (Shooter.possible == true && (-80 < degree && degree < 80)) //대포가 동작하고, 가동 범위내 일때
                 {
                     color.a = 1f; //터치하고 있으면(누르고 있으면) 경로 보임
@@ -535,14 +535,38 @@ public class Shooter : MonoBehaviour
                             StarLine[i].transform.position = new Vector3(stard * -Mathf.Sin(radian), -3f + stard * Mathf.Cos(radian), 0);
                             StarLine[i].transform.rotation = Quaternion.Euler(Mathf.Sin(radian), Mathf.Cos(radian), 0f);
                             stard += 0.3f;
-                            //StarLine[i].SetActive(true);
-                            //StarLine[i].SetActive(true);
-                            //GameObject.Find("starline1").GetComponent<Line>().isBallCheck();
-                            //starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
-                            //starlineRecolor = starlineResprite.color;
-                            //starlineRecolor.a = 1f;
-                            //starlineResprite.color = starlineRecolor;
+                            if(StarLine[i].GetComponent<ShooterLine>().starcolball == true)
+                            {
+                                starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                starlineRecolor = starlineResprite.color;
+                                starlineRecolor.a = 0f;
+                                starlineResprite.color = starlineRecolor;
+                                if (starlinenum > i)
+                                {
+                                    starlinenum = i;
+                                }
+                            }
+                            for(int j = starlinenum; j < 16; j++)
+                            {
+                                starlineResprite = StarLine[j].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                starlineRecolor = starlineResprite.color;
+                                starlineRecolor.a = 0f;
+                                starlineResprite.color = starlineRecolor;
+                            }
+                        }
 
+                        for(int i = 0; i < 16; i++)
+                        {
+                            if(StarLine[i].GetComponent<ShooterLine>().starcolball == false)
+                            {
+                                if (i < starlinenum)
+                                {
+                                    starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                    starlineRecolor = starlineResprite.color;
+                                    starlineRecolor.a = 1f;
+                                    starlineResprite.color = starlineRecolor;
+                                }
+                            }
                         }
 
                         for (int i = 0; i < 16; i++) //처음 구슬과 닿은 별빛의 위치 i를 알기 위함
@@ -553,26 +577,20 @@ public class Shooter : MonoBehaviour
                             {
                                 starlinenum = i;
                                 acheck = false;
-                                
+
                                 break;
                             }
                             acheck = true;
                         }
 
-                        for (int i = starlinenum; i < 16; i++) //StarLine[i]~[19]까지 모두 투명하게 만듦
-                        {
-                            starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
-                            starlineRecolor = starlineResprite.color;
-                            starlineRecolor.a = 0f;
-                            starlineResprite.color = starlineRecolor;
-                        }
-                        
+                            
+
 
 
                         float restard = 0f;
-                        //Debug.Log("avalue" + ShooterLine.avalue);
-                        
-                        for(int i = 0; i < 16; i++)
+                        Debug.Log("avalue" + ShooterLine.avalue);
+
+                        for (int i = 0; i < 16; i++)
                         {
                             starlineResprite = StarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
                             starlineRecolor = starlineResprite.color;
@@ -586,102 +604,134 @@ public class Shooter : MonoBehaviour
                             }
                         }
 
-                        if((80 > degree && degree > 0) && (acheck || colcheck)) //왼쪽벽
+
+                        starlinenum = 19;
+
+                        if ((80 > degree && degree > 0) && (acheck || colcheck)) //왼쪽벽
                         {
                             restard = 0f;
-                            for (int i = 0; i < 15; i++)
+                            for (int i = 0; i < 20; i++)
                             {
-                                //raaaa.SetActive(true);
+                                    
                                 leftStarLine[i].SetActive(true);
                                 leftStarLine[i].transform.position = new Vector3(-2.3f + restard * Mathf.Sin(radian), -3f + yPos + restard * Mathf.Cos(radian), 0);
                                 leftStarLine[i].transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                                 restard += 0.3f;
-
+                                if (leftStarLine[i].GetComponent<ShooterLine>().starcolball == true)
+                                {
+                                    starlineResprite = leftStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                    starlineRecolor = starlineResprite.color;
+                                    starlineRecolor.a = 0f;
+                                    starlineResprite.color = starlineRecolor;
+                                    if (starlinenum > i)
+                                    {
+                                        starlinenum = i;
+                                    }
+                                }
+                                for (int j = starlinenum; j < 20; j++)
+                                {
+                                    starlineResprite = leftStarLine[j].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                    starlineRecolor = starlineResprite.color;
+                                    starlineRecolor.a = 0f;
+                                    starlineResprite.color = starlineRecolor;
+                                }
 
                             }
 
-                            starlinenum = 14;
 
-                            for (int i = 0; i < 15; i++) //처음 구슬과 닿은 별빛의 위치 i를 알기 위함
+                            for (int i = 0; i < 20; i++)
                             {
-                                restarlineResprite = leftStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
-                                restarlineRecolor = restarlineResprite.color;
-                                if (restarlineRecolor.a == 0f)
+                                if (leftStarLine[i].GetComponent<ShooterLine>().starcolball == false)
                                 {
-                                    starlinenum = i;
-                                    //Debug.Log("star" + starlinenum);
-                                    break;
+                                    if (i < starlinenum)
+                                    {
+                                        starlineResprite = leftStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                        starlineRecolor = starlineResprite.color;
+                                        starlineRecolor.a = 1f;
+                                        starlineResprite.color = starlineRecolor;
+                                    }
                                 }
                             }
 
-                            for (int i = starlinenum; i < 15; i++) //StarLine[i]~[19]까지 모두 투명하게 만듦
-                            {
-                                restarlineResprite = leftStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
-                                restarlineRecolor = restarlineResprite.color;
-                                restarlineRecolor.a = 0f;
-                                restarlineResprite.color = restarlineRecolor;
-                            }
+
                         }
-                        else if((80 > degree && degree > 0) && !acheck) //왼쪽벽인데 일반라인 중 투명한게 있음
+                        else if ((80 > degree && degree > 0) && !acheck) //왼쪽벽인데 일반라인 중 투명한게 있음
                         {
-                            for (int i = 0; i < 15; i++)
+                            for (int i = 0; i < 20; i++)
                             {
-                                //raaaa.SetActive(true);
+
                                 leftStarLine[i].SetActive(false);
 
 
                             }
                         }
-                        else if((-80 < degree && degree < 0) && (acheck || colcheck)) //오른쪽벽
+
+                            
+
+                        else if ((-80 < degree && degree < 0) && (acheck || colcheck)) //오른쪽벽
                         {
+                            starlinenum = 19;
                             restard = 0f;
-                            for (int i = 0; i < 15; i++)
+                            for (int i = 0; i < 20; i++)
                             {
-                                //raaaa.SetActive(true);
+
                                 rightStarLine[i].SetActive(true);
                                 rightStarLine[i].transform.position = new Vector3(2.3f + restard * Mathf.Sin(radian), -3f - yPos + restard * Mathf.Cos(radian), 0);
                                 rightStarLine[i].transform.rotation = Quaternion.Euler(0f, 0f, -degree);
                                 restard += 0.3f;
-
+                                if (rightStarLine[i].GetComponent<ShooterLine>().starcolball == true)
+                                {
+                                    starlineResprite = rightStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                    starlineRecolor = starlineResprite.color;
+                                    starlineRecolor.a = 0f;
+                                    starlineResprite.color = starlineRecolor;
+                                    if (starlinenum > i)
+                                    {
+                                        starlinenum = i;
+                                    }
+                                }
+                                for (int j = starlinenum; j < 20; j++)
+                                {
+                                    starlineResprite = rightStarLine[j].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                    starlineRecolor = starlineResprite.color;
+                                    starlineRecolor.a = 0f;
+                                    starlineResprite.color = starlineRecolor;
+                                }
 
                             }
 
-                            starlinenum = 14;
-
-                            for (int i = 0; i < 15; i++) //처음 구슬과 닿은 별빛의 위치 i를 알기 위함
+                            for (int i = 0; i < 20; i++)
                             {
-                                restarlineResprite = rightStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
-                                restarlineRecolor = restarlineResprite.color;
-                                if (restarlineRecolor.a == 0f)
+                                if (rightStarLine[i].GetComponent<ShooterLine>().starcolball == false)
                                 {
-                                    starlinenum = i;
-                                    //Debug.Log("star" + starlinenum);
-                                    break;
+                                    if (i < starlinenum)
+                                    {
+                                        starlineResprite = rightStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
+                                        starlineRecolor = starlineResprite.color;
+                                        starlineRecolor.a = 1f;
+                                        starlineResprite.color = starlineRecolor;
+                                    }
                                 }
                             }
 
-                            for (int i = starlinenum; i < 15; i++) //StarLine[i]~[19]까지 모두 투명하게 만듦
-                            {
-                                restarlineResprite = rightStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 라인
-                                restarlineRecolor = restarlineResprite.color;
-                                restarlineRecolor.a = 0f;
-                                restarlineResprite.color = restarlineRecolor;
-                            }
+                                
+
+                                
                         }
-                        else if((-80 < degree && degree < 0) && !acheck) //오른벽인데 일반 라인 중 투명한게 있음
+                        else if ((-80 < degree && degree < 0) && !acheck) //오른벽인데 일반 라인 중 투명한게 있음
                         {
-                            for (int i = 0; i < 15; i++)
+                            for (int i = 0; i < 20; i++)
                             {
-                                //raaaa.SetActive(true);
+
                                 rightStarLine[i].SetActive(false);
 
 
                             }
                         }
-                        
+
                     }
 
-                    //여기부터 추가
+
 
                     else //일반
                     {
@@ -695,20 +745,20 @@ public class Shooter : MonoBehaviour
                                 resprite.color = recolor;
                                 reflectline.transform.position = new Vector3(-2.3f, -3f + yPos, 0);
                                 reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
-                                
+
                             }
 
 
                             else if (-80 < degree && degree < 0) //오른쪽 벽과 맞닿는 반사 경로
                             {
-                                
+
                                 resprite = reflectline.GetComponent<SpriteRenderer>(); //반사 라인
                                 recolor = resprite.color;
                                 recolor.a = 1f; //시작할 때 투명함
                                 resprite.color = recolor;
                                 reflectline.transform.position = new Vector3(2.3f, -3f - yPos, 0);
                                 reflectline.transform.rotation = Quaternion.Euler(0f, 0f, -degree);
-                                
+
 
                             }
 
@@ -716,15 +766,15 @@ public class Shooter : MonoBehaviour
 
                         else if (!(ShooterLine.linecol || colcheck)) //벽과 충돌 안 할 때
                         {
-                            
+
                             resprite = reflectline.GetComponent<SpriteRenderer>(); //반사 라인
                             recolor = resprite.color;
                             recolor.a = 0f; //시작할 때 투명함
                             resprite.color = recolor;
-                            
+
                         }
                     }
-                    
+
 
 
                 }
@@ -753,7 +803,7 @@ public class Shooter : MonoBehaviour
 
 
 
-                    for (int i = 0; i < 15; i++) //길잡이-반사
+                    for (int i = 0; i < 20; i++) //길잡이-반사
                     {
                         restarlineResprite = leftStarLine[i].GetComponent<SpriteRenderer>(); //길잡이 캐릭터 반사 라인
                         restarlineRecolor = restarlineResprite.color;
