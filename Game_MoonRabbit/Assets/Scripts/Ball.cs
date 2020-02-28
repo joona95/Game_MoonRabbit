@@ -613,7 +613,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -628,7 +628,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -643,7 +643,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -658,7 +658,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -673,7 +673,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -688,7 +688,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -839,7 +839,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -854,7 +854,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
 
                 }
@@ -869,7 +869,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -883,7 +883,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
                 }
                 if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
@@ -897,7 +897,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
                 }
                 if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -911,7 +911,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        sem.play(4);//sem.play(4)
+                        //sem.play(4);//왁왁
                     }
                 }
             }
@@ -937,7 +937,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][i] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        //sem.play(4);//sem.play(4)
+                        sem.play(4);//sem.play(4)
 
                     }
                 }
@@ -954,7 +954,7 @@ public class Ball : MonoBehaviour
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
-                            //sem.play(4);//sem.play(4)
+                            sem.play(4);//sem.play(4)
                         }
                         else
                         {
@@ -963,7 +963,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
 
                     }
                     if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone" && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -981,7 +981,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone" && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -998,7 +998,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag!="stone" && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1015,7 +1015,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1032,7 +1032,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1]&&Manager.Map[row+1][col+1].tag!="stone" && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1049,7 +1049,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
 
                   
@@ -1071,7 +1071,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (0 <= row - 1 && Manager.Map[row - 1][col]&&Manager.Map[row-1][col].tag!="stone" && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1088,7 +1088,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (0 <= col - 1 && Manager.Map[row][col - 1]&&Manager.Map[row][col-1].tag!="stone" && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1105,7 +1105,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1]&&Manager.Map[row][col+1].tag!="stone" && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1122,7 +1122,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1]&&Manager.Map[row+1][col-1].tag!="stone" && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1139,7 +1139,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                     if (row + 1 < Manager.total_row && Manager.Map[row + 1][col]&&Manager.Map[row+1][col].tag!="stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                     {
@@ -1156,7 +1156,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)아이템구슬
                     }
                 }
 
@@ -1213,7 +1213,7 @@ public class Ball : MonoBehaviour
                         case 1:
                             if (this.gameObject.GetComponent<Ball>().type == 0)
                             {
-                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c ].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb == false && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().anim == false)
+                                if (0 <= t_r - 1 && t_c < Manager.Map[t_r-1].Length && Manager.Map[t_r - 1][t_c] && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().visit == false&& Manager.Map[t_r - 1][t_c].tag != "stone" && Manager.Map[t_r - 1][t_c ].GetComponent<Ball>().sixbomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().diebomb == false && Manager.Map[t_r - 1][t_c].GetComponent<Ball>().rowbomb== false && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().connect == true && Manager.Map[t_r - 1][t_c].gameObject.GetComponent<Ball>().anim == false)
                                 {
                                     q.Enqueue(Manager.Map[t_r - 1][t_c]);
                                 }
@@ -1846,7 +1846,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1855,7 +1855,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row][i] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                     }
                     //sem.play(4);
@@ -1875,7 +1875,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1884,7 +1884,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row - 1][col] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col + 1].tag != "stone" && Manager.Map[row - 1][col + 1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col + 1].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -1893,7 +1893,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1902,7 +1902,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row - 1][col + 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone" && Manager.Map[row][col - 1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col - 1].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -1911,7 +1911,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1920,7 +1920,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row][col - 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone" && Manager.Map[row][col + 1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col + 1].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -1929,7 +1929,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1938,7 +1938,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row][col + 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -1947,7 +1947,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1956,7 +1956,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row + 1][col] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col + 1].tag != "stone" && Manager.Map[row + 1][col + 1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col + 1].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -1965,7 +1965,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1974,7 +1974,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row + 1][col + 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                     }
                     else
@@ -1986,7 +1986,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1995,7 +1995,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row - 1][col - 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (0 <= row - 1 && Manager.Map[row - 1][col] && Manager.Map[row - 1][col].tag != "stone" && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -2004,7 +2004,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2012,6 +2012,7 @@ public class Ball : MonoBehaviour
                             }
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
+                           sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col - 1].tag != "stone" && Manager.Map[row][col - 1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col - 1].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -2020,7 +2021,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2029,7 +2030,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row][col - 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col + 1].tag != "stone" && Manager.Map[row][col + 1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col + 1].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -2038,7 +2039,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2047,7 +2048,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row][col + 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1] && Manager.Map[row + 1][col - 1].tag != "stone" && Manager.Map[row + 1][col - 1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col - 1].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -2056,7 +2057,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2065,7 +2066,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row + 1][col - 1] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                         if (row + 1 < Manager.total_row && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].tag != "stone" && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
                         {
@@ -2074,7 +2075,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
-                                sem.play(4);//sem.play(4)
+                                //sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2083,7 +2084,7 @@ public class Ball : MonoBehaviour
                             Manager.Map[row + 1][col] = null;
                             destroyCnt++;
                             Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                            
+                            sem.play(4);//sem.play(4)아이템구슬
                         }
                     }
                     //sem.play(4);
