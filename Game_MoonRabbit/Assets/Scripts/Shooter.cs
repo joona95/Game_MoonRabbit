@@ -53,6 +53,7 @@ public class Shooter : MonoBehaviour
     List<GameObject> leftStarLine = new List<GameObject>(); //반사 경로 배열
     List<GameObject> rightStarLine = new List<GameObject>();
 
+    bool touching = false;
 
     public static float GetAngle(Vector3 from, Vector3 to)
     {
@@ -97,6 +98,7 @@ public class Shooter : MonoBehaviour
         starlinepossible = false;
         //restarInit(); //restarline 비활성화
         possible = false;
+        touching = false;
     }
 
     // Update is called once per frame
@@ -133,6 +135,8 @@ public class Shooter : MonoBehaviour
 
                 if (touch.phase == TouchPhase.Began) //화면을 touch한 순간
                 {
+                    touching =true;
+
                     touchPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -Camera.main.transform.position.z));
                     degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
                     if (-80 < degree && degree < 80)
@@ -145,8 +149,11 @@ public class Shooter : MonoBehaviour
                     
                     
                 }
+
                 if (touch.phase == TouchPhase.Moved) //손가락이 화면 위에서 터치한 상태로 이동
                 {
+                    touching=true;
+
                     touchPos = Camera.main.ScreenToWorldPoint(new Vector3(touch.position.x, touch.position.y, -Camera.main.transform.position.z));
                     degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
                     if (-80 < degree && degree < 80)
@@ -418,7 +425,7 @@ public class Shooter : MonoBehaviour
                     }
                 }
 
-                if (touch.phase == TouchPhase.Ended) //손가락이 화면에서 떨어지면 touch가 끝난 경우
+                if (touch.phase == TouchPhase.Ended&&touching==true) //손가락이 화면에서 떨어지면 touch가 끝난 경우
                 {
                     color.a = 0f; //터치 떼면 경로 안 보임
                     sprite.color = color;
@@ -503,12 +510,16 @@ public class Shooter : MonoBehaviour
                         }
                         */
                     }
+                    touching=false;
+
                 }
+
             }
 #else
             if ((Input.GetMouseButton(0)) && (GameObject.Find("Optionbutton").GetComponent<optionbuttontouch>().isPressed == false) && (GameObject.Find("ChangeBall").GetComponent<ChangeBall>().isPressed == false))
             {//설정 버튼이 눌리지 않을때 대포의 궤적을 조절하고 발사할 수 있음
-                
+                touching = true;
+
                 touchPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, -Camera.main.transform.position.z));
                 degree = GetAngle(this.gameObject.transform.position, touchPos) - 90;
                 if (-80 < degree && degree < 80)
@@ -781,8 +792,9 @@ public class Shooter : MonoBehaviour
 
                 
             }
-            if (Input.GetMouseButtonUp(0))//터치 뗄때
+            if (Input.GetMouseButtonUp(0)&&touching==true)//터치 뗄때
             {
+
                 color.a = 0f; //터치 떼면 경로 안 보임
                 sprite.color = color;
                 resprite = reflectline.GetComponent<SpriteRenderer>(); //반사 라인
@@ -866,6 +878,8 @@ public class Shooter : MonoBehaviour
                     }
                     */
                 }
+
+                touching = false;
             }
 
 
