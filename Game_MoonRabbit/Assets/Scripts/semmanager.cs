@@ -25,6 +25,16 @@ public class semmanager : MonoBehaviour
     }
     void Update()
     {
+        if ((this.gameObject.GetComponent<AudioSource>().clip == clips[10])&&(source.volume!=0f))
+        {
+            source.volume = 0.5f;
+        }
+        else if((this.gameObject.GetComponent<AudioSource>().clip != (clips[10])) && (source.volume != 0f)&& (this.gameObject.GetComponent<AudioSource>().clip != clips[4]))
+            source.volume = 1.0f;
+        else if((this.gameObject.GetComponent<AudioSource>().clip == clips[4])&&(source.volume != 0f))
+        {
+            source.volume = 0.7f;
+        }
     }
     public void play(int _playmusictrack)
     {

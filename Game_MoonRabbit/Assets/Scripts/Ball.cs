@@ -488,7 +488,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
 
                     }
                 }
@@ -511,7 +511,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
@@ -532,7 +532,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -553,7 +553,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (row + 1 < Manager.total_row && 0 <= col - 1 && Manager.Map[row + 1][col - 1] && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col-1].gameObject.GetComponent<Ball>().anim == false)
@@ -574,7 +574,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
@@ -595,7 +595,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
 
@@ -607,13 +607,13 @@ public class Ball : MonoBehaviour
                     if (Manager.Map[row - 1][col - 1].GetComponent<Ball>().rowbomb == true || Manager.Map[row - 1][col - 1].GetComponent<Ball>().sixbomb == true)
                     {
                         GameObject tmp = Manager.Map[row - 1][col - 1];
-                        
+                        //sem.play(4);
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
                         special = true;
                         Manager.Map[row - 1][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -628,7 +628,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -643,7 +643,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -658,7 +658,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -673,7 +673,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -688,7 +688,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -715,7 +715,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (0 <= row - 1 && col + 1 < Manager.Map[row - 1].Length && Manager.Map[row - 1][col + 1] && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row - 1][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -736,7 +736,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (0 <= col - 1 && Manager.Map[row][col - 1] && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col-1].gameObject.GetComponent<Ball>().anim == false)
@@ -757,7 +757,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -778,7 +778,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
@@ -799,7 +799,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -820,7 +820,7 @@ public class Ball : MonoBehaviour
                         Shooter.possible = false;
                         Shooter.starlinepossible = false;
                         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-
+                        sem.play(4);//sem.play(4)
                     }
                 }
 
@@ -839,7 +839,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -854,7 +854,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row - 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
 
                 }
@@ -869,7 +869,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (col + 1 < Manager.Map[row].Length && Manager.Map[row][col + 1] && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -883,7 +883,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (row + 1 < Manager.total_row && col < Manager.Map[row + 1].Length && Manager.Map[row + 1][col] && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col].gameObject.GetComponent<Ball>().anim == false)
@@ -897,7 +897,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
                 }
                 if (row + 1 < Manager.total_row && col + 1 < Manager.Map[row + 1].Length && Manager.Map[row + 1][col + 1] && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().connect == true && Manager.Map[row + 1][col+1].gameObject.GetComponent<Ball>().anim == false)
@@ -911,7 +911,7 @@ public class Ball : MonoBehaviour
                         Manager.Map[row + 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        sem.play(4);//sem.play(4)
                     }
                 }
             }
@@ -937,10 +937,11 @@ public class Ball : MonoBehaviour
                         Manager.Map[row][i] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                        
+                        //sem.play(4);//sem.play(4)
 
                     }
                 }
+                sem.play(4);
             }
             else if (this.gameObject.GetComponent<Ball>().sixbomb == true)
             {
@@ -953,6 +954,7 @@ public class Ball : MonoBehaviour
                         if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                         {
                             tmp.GetComponent<Animator>().SetTrigger("destroy");
+                            //sem.play(4);//sem.play(4)
                         }
                         else
                         {
@@ -1164,7 +1166,7 @@ public class Ball : MonoBehaviour
                 Manager.Map[t_r][t_c] = null;
                 destroyCnt++;
                 Destroy(this.gameObject, this.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
-                
+                sem.play(4);
             }
             else if (this.gameObject.GetComponent<Ball>().rainbow == true)
             {
@@ -1811,7 +1813,6 @@ public class Ball : MonoBehaviour
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
                     Shooter.possible = false;
                     Shooter.starlinepossible = false;
-
                 }
 
                 //replaynum = Random.Range(1, 5);
@@ -1821,7 +1822,7 @@ public class Ball : MonoBehaviour
                     GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                     Manager.life--;
                     GameObject.Find("Character2").GetComponent<Animator>().SetTrigger("life");
-
+                    sem.play(11);
                     //Shooter.possible = true;
                     //Shooter.starlinepossible = true;
                 }
@@ -1829,7 +1830,6 @@ public class Ball : MonoBehaviour
                 {
                     //Manager.fail = true;                   
                     Manager.die = true;
-
                 }
             }
 
@@ -1846,6 +1846,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1857,7 +1858,7 @@ public class Ball : MonoBehaviour
                             
                         }
                     }
-                    sem.play(4);
+                    //sem.play(4);
                 }
             }
 
@@ -1874,6 +1875,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1891,6 +1893,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1908,6 +1911,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1925,6 +1929,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1942,6 +1947,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1959,6 +1965,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1979,6 +1986,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -1996,6 +2004,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2011,6 +2020,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2028,6 +2038,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2045,6 +2056,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2062,6 +2074,7 @@ public class Ball : MonoBehaviour
                             if ((tmp.GetComponent<Ball>().rowbomb == true) || (tmp.GetComponent<Ball>().sixbomb == true) || (tmp.GetComponent<Ball>().diebomb == true))
                             {
                                 tmp.GetComponent<Animator>().SetTrigger("destroy");
+                                sem.play(4);//sem.play(4)
                             }
                             else
                             {
@@ -2073,7 +2086,7 @@ public class Ball : MonoBehaviour
                             
                         }
                     }
-                    sem.play(4);
+                    //sem.play(4);
                 }
             }
 
