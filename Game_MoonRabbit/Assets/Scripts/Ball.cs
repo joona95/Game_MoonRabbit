@@ -477,7 +477,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row - 1][col - 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");                      
-                        special = true;
+                        //special = true;
                         Manager.Map[row - 1][col - 1] = null;
                         destroyCnt++;                        
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -500,7 +500,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row - 1][col];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -521,7 +521,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row][col - 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -542,7 +542,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row][col + 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -563,7 +563,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row + 1][col - 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row + 1][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -584,7 +584,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row + 1][col];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -704,7 +704,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row - 1][col];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row - 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -725,7 +725,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row - 1][col + 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row - 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -746,7 +746,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row][col - 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row][col - 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -767,7 +767,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row][col + 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -788,7 +788,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row + 1][col];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row + 1][col] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
@@ -809,7 +809,7 @@ public class Ball : MonoBehaviour
                         GameObject tmp = Manager.Map[row + 1][col + 1];
                         
                         tmp.GetComponent<Animator>().SetTrigger("destroy");
-                        special = true;
+                        //special = true;
                         Manager.Map[row + 1][col + 1] = null;
                         destroyCnt++;
                         Destroy(tmp, tmp.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length);
