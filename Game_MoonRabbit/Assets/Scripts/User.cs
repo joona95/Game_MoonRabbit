@@ -7,6 +7,7 @@ public class User : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         if (!PlayerPrefs.HasKey("Magic1"))
         {
             PlayerPrefs.SetInt("Magic1", 1);
@@ -167,6 +168,7 @@ public class User : MonoBehaviour
         {
             PlayerPrefs.SetInt("Magic40", 1);
         }
+        */
 
         //PlayerPrefs.SetInt("User_stage", 40);
     }

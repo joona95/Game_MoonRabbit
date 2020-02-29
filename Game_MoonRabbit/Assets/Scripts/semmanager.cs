@@ -6,6 +6,10 @@ public class semmanager : MonoBehaviour
 {
     static public semmanager instance;//씬이 넘어가도 이 스크립트는 지속됨
     public AudioClip[] clips;
+    /*
+     * 0:공쏠때(shooter)
+     * 1:3개이상터질때, 2: 공쌓일때, 3:무지개구슬, 4:폭탄, 5:캐릭터보상, 6:아이템보상, 7:승리, 8:실패, 9:마술랜덤아이템, 10:ui버튼음 11:부활, 12: 가로줄/육각형구슬 (ball)
+     */
     public AudioSource source;
     //private WaitForSeconds waitTime = new WaitForSeconds(0.01f);
     private void Awake()

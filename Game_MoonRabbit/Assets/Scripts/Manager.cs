@@ -264,7 +264,30 @@ public class Manager : MonoBehaviour
         else if (Character.ChType == 3)
         {
             characters[3].SetActive(true);
+            opacity.SetActive(true);
+            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+            hat.SetActive(true);
+            confetti.SetActive(true);
 
+            float p = Random.Range(0, 100);
+            if (0 <= p && p < 33.33f)
+            {
+                hat_items[0].SetActive(true);
+
+            }
+            else if (33.33f <= p && p < 66.66f)
+            {
+                hat_items[1].SetActive(true);
+
+            }
+            else
+            {
+                hat_items[2].SetActive(true);
+            }
+
+            confirm.SetActive(true);
+
+            /*
             if (PlayerPrefs.GetInt("Magic" + current_stage.ToString()) != 0)
             {
                 opacity.SetActive(true);
@@ -321,9 +344,9 @@ public class Manager : MonoBehaviour
                         InfoBomb.SetActive(true);
                         checkinfobutton.SetActive(true);
                         break;
-
                 }
             }
+            */
         }
         
         
@@ -637,6 +660,7 @@ public class Manager : MonoBehaviour
             cc++;
         }
         */
+
         if (die == true)
         {
             //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
@@ -662,6 +686,7 @@ public class Manager : MonoBehaviour
         }
         else if (Shooter.possible == true)
         {
+            
             if (queCnt == 0)//성공
             {
                 sem = FindObjectOfType<semmanager>();
