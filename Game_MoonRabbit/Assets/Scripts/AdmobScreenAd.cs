@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class AdmobScreenAd : MonoBehaviour
 {
-    private readonly string unitID = "ca-app-pub-8256776937865205/3481656575";
+    private readonly string unitID = "ca-app-pub-8256776937865205/3481656575"; //달토끼 진짜 ID
+    private readonly string testID = "ca-app-pub-3940256099942544/1033173712"; //테스트용 ID
 
     private InterstitialAd screenAd;
     
@@ -37,7 +38,7 @@ public class AdmobScreenAd : MonoBehaviour
 
     private void InitAd()
     {
-        string id = unitID;
+        string id = testID; //출시할 때 unitID로 바꿔야 함
 
         screenAd = new InterstitialAd(id);
 
