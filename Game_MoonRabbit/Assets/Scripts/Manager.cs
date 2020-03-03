@@ -66,6 +66,7 @@ public class Manager : MonoBehaviour
     public GameObject[] characters=new GameObject[4];
 
     bool infostart = false;
+    bool clearend = false;
 
     static public int life=0;//부활토끼
 
@@ -240,6 +241,7 @@ public class Manager : MonoBehaviour
         endinfobutton.SetActive(false);
         ing = false;       
         infostart = false;
+        clearend = false;
 
         for (int i = 0; i < 5; i++)
         {
@@ -625,7 +627,10 @@ public class Manager : MonoBehaviour
             Debug.Log("ing-false");
         else
             Debug.Log("ing-true");
+
+        Debug.Log("quest:" + queCnt);
         */
+
 
         /*
         int cc = 0;
@@ -684,9 +689,9 @@ public class Manager : MonoBehaviour
             //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
 
         }
-        else if (Shooter.possible == true)
+        else if (clearend==true)
         {
-            
+
             if (queCnt == 0)//성공
             {
                 sem = FindObjectOfType<semmanager>();
@@ -869,7 +874,7 @@ public class Manager : MonoBehaviour
                 //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
 
             }
-            else if (limit_cnt==0)
+            else if (limit_cnt == 0)
             {
                 //GameObject.Find("대포").GetComponent<Shooter>().enabled = true;
                 GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
@@ -894,6 +899,7 @@ public class Manager : MonoBehaviour
 
 
             }
+
         }
 
 
@@ -911,7 +917,7 @@ public class Manager : MonoBehaviour
 
         float plus = 10f / (float)c;
 
-        re = 0; purpl = 0; yello = 0; blu = 0;
+        re = 0; purpl = 0; yello = 0; blu = 0; gre = 0;
         if (c > 1)
         {      
             for (int i = 0; i < 5; i++)
@@ -997,10 +1003,18 @@ public class Manager : MonoBehaviour
 
         yello += blu + (((float)yelCnt / total) * 100f);
 
+        if (greCnt == 0)
+        {
+            gre += yello + (((float)greCnt / total) * 100f);
+        }
+        else
+        {
+            gre = 100f;
+        }
 
         
-        //Debug.Log("pur:" + purCnt + ",re:" + redCnt + ",blu:" + bluCnt + ",yel:" + yelCnt + ",gre:"+greCnt);
-        //Debug.Log("pur:"+purpl + ",re:" + re + ",blu:" + blu + ",yel:" + yello + ",gre:100");
+        Debug.Log("pur:" + purCnt + ",re:" + redCnt + ",blu:" + bluCnt + ",yel:" + yelCnt + ",gre:"+greCnt);
+        Debug.Log("pur:"+purpl + ",re:" + re + ",blu:" + blu + ",yel:" + yello + ",gre:"+gre);
 
         //각 row에 구슬이 하나도 없다면 total_row 감소
         for (int i = total_row - 1; i >= 0; i--)
@@ -1215,7 +1229,7 @@ public class Manager : MonoBehaviour
             }
 
         }
-        else
+        else if(clearend==false)
         {
 
             //가장 낮은 위치에 있는 구슬 y값 구하기
@@ -1374,9 +1388,19 @@ public class Manager : MonoBehaviour
 
                     if (min_y >= 0.85f && Ball.discon_total == Ball.discon_cnt && end == true && Ball.anim_cnt == 0 && Ball.destroyCnt == 0)
                     {
-                        Shooter.possible = true;
-                        Shooter.starlinepossible = true;
-                        end = false;
+                        Debug.Log("qes:" + queCnt);
+                        if (queCnt == 0||limit_cnt==0)
+                        {
+                            Shooter.possible = false;
+                            Shooter.starlinepossible = false;
+                            clearend = true;
+                        }
+                        else
+                        {
+                            Shooter.possible = true;
+                            Shooter.starlinepossible = true;
+                            end = false;
+                        }
                     }
                 }
                 
@@ -1384,8 +1408,14 @@ public class Manager : MonoBehaviour
             }
             else
             {
-                Shooter.possible = true;
-                Shooter.starlinepossible = true;
+                if (queCnt == 0)
+                {
+                    Debug.Log("qes:" + queCnt);
+
+                    Shooter.possible = false;
+                    Shooter.starlinepossible = false;
+                    clearend = true;
+                }
             }
         }
 
@@ -1428,7 +1458,7 @@ public class Manager : MonoBehaviour
      //구슬 배열의 마지막 순서의 색깔을 정해줍니다.
 
         float a;
-        a = Random.Range(0.0f, 100.0f);
+        a = Random.Range(0.0f, gre);
         
         if ((a >= 0.0f) && (a < purpl))
         {
@@ -1446,7 +1476,7 @@ public class Manager : MonoBehaviour
         {
             ballPrefabs[1] = (GameObject)Instantiate(BallType[1], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity);
         }//(60~80퍼) 노랑
-        else if ((a >= yello) && (a <= 100.0))
+        else if ((a >= yello) && (a <= gre))
         {
             ballPrefabs[1] = (GameObject)Instantiate(BallType[2], new Vector3(1.5f, -3.7f, 0f), Quaternion.identity);
         }

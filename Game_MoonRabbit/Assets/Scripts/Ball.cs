@@ -228,7 +228,7 @@ public class Ball : MonoBehaviour
 
 
 
-                if (this.gameObject.GetComponent<Ball>().row >= Manager.total_row) //total_row보다 현재 row가 크면 Map에 새로운 배열을 넣어주어야함. total_row도 증가.
+                if (this.gameObject.GetComponent<Ball>().row >= Manager.total_row&& this.gameObject.GetComponent<Ball>().row - 1>=0) //total_row보다 현재 row가 크면 Map에 새로운 배열을 넣어주어야함. total_row도 증가.
                 {
                     int t; //현재 row의 갯수
                     if (Manager.Map[this.gameObject.GetComponent<Ball>().row - 1].Length == Manager.total_col) //현재 row의 이전 행의 배열 수가 10 -> 현재 9
@@ -261,18 +261,29 @@ public class Ball : MonoBehaviour
                 this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 this.gameObject.GetComponent<Ball>().row = 0;
 
-                float max_y = 0;
-                for (int i = 0; i < Manager.Map[0].Length; i++)
+                float max_y = 4f;
+                int len=10;
+                if (Manager.Map.Count != 0)
                 {
-                    if (Manager.Map[0][i])
+                    for (int i = 0; i < Manager.Map[0].Length; i++)
                     {
-                        max_y = Manager.Map[0][i].transform.position.y;
-                        break;
+                        if (Manager.Map[0][i])
+                        {
+                            max_y = Manager.Map[0][i].transform.position.y;
+                            break;
+                        }
                     }
+
+                    len = Manager.Map[0].Length;
+                }
+                else
+                {
+                    Manager.Map.Add(new GameObject[10]);
                 }
 
+
                 float x = Mathf.Round(this.gameObject.transform.position.x * 100) / 100;
-                if (Manager.Map[0].Length == 9)//첫번째 행이 9개일때
+                if (len == 9)//첫번째 행이 9개일때
                 {
                     this.gameObject.GetComponent<Ball>().type = 1;
                     if (-0.26f <= x && x < 0.26f)
