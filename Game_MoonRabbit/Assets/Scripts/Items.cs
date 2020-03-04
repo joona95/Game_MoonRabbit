@@ -32,7 +32,7 @@ public class Items : MonoBehaviour
         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         int cnt = PlayerPrefs.GetInt("Item1_Cnt");
 
-        if (cnt > 0)
+        if (cnt > 0&&!(GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rowbomb==true|| GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().sixbomb == true|| GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rainbow == true))
         {
             Shooter.possible = false;
             GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
@@ -52,7 +52,7 @@ public class Items : MonoBehaviour
     {
         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         int cnt = PlayerPrefs.GetInt("Item2_Cnt");
-        if (cnt> 0)
+        if (cnt> 0 && !(GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rowbomb == true|| GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().sixbomb == true || GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rainbow == true))
         {
             Shooter.possible = false;
             GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
@@ -72,7 +72,7 @@ public class Items : MonoBehaviour
     {
         GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
         int cnt = PlayerPrefs.GetInt("Item3_Cnt");
-        if ( cnt> 0)
+        if ( cnt> 0 && !(GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rowbomb == true || GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().sixbomb == true || GetComponent<Manager>().ballPrefabs[0].GetComponent<Ball>().rainbow == true))
         {
             Shooter.possible = false;
             GameObject tmp = GetComponent<Manager>().ballPrefabs[0];
