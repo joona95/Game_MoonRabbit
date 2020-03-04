@@ -7,6 +7,7 @@ public class User : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Shooter.stagenum = 0;
         /*
         if (!PlayerPrefs.HasKey("Magic1"))
         {

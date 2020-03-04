@@ -22,6 +22,7 @@ public class Shooter : MonoBehaviour
     bool lastCol = false;
     bool reflect = false;
     bool acheck = false;
+    static public int stagenum;
 
     public GameObject reflectline;
     //public GameObject ch_reflectline; //길잡이 캐릭터의 경로(ch_로 시작하는 모든 변수)
@@ -64,6 +65,7 @@ public class Shooter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stagenum++;
         starInit();
         //starlinepossible = true;
         leftstarInit();

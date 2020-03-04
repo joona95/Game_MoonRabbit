@@ -21,7 +21,7 @@ public class AdmobScreenAd : MonoBehaviour
     {
         InitAd();
 
-        if(((Manager.current_stage % 2 ) == 0)&&(Manager.current_stage!=40))
+        if(((Shooter.stagenum % 2 ) == 0)&&(Manager.current_stage!=40))
         {
             Show();
             screenAd.OnAdClosed += (sender, e) => GameObject.Find("Main Camera").GetComponent<ChangeScene>().BackToMapButton();
