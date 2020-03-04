@@ -97,19 +97,28 @@ public class Items : MonoBehaviour
         {
             hat_items[0].SetActive(false);
             int cnt = PlayerPrefs.GetInt("Item1_Cnt");
-            PlayerPrefs.SetInt("Item1_Cnt", cnt + 1);
+            if (cnt < 99)
+            {
+                PlayerPrefs.SetInt("Item1_Cnt", cnt + 1);
+            }
         }
         if (hat_items[1].activeSelf == true)
         {
             hat_items[1].SetActive(false);
             int cnt = PlayerPrefs.GetInt("Item2_Cnt");
-            PlayerPrefs.SetInt("Item2_Cnt", cnt + 1);
+            if (cnt < 99)
+            {
+                PlayerPrefs.SetInt("Item2_Cnt", cnt + 1);
+            }
         }
         if (hat_items[2].activeSelf == true)
         {
             hat_items[2].SetActive(false);
             int cnt = PlayerPrefs.GetInt("Item3_Cnt");
-            PlayerPrefs.SetInt("Item3_Cnt", cnt + 1);
+            if (cnt < 99)
+            {
+                PlayerPrefs.SetInt("Item3_Cnt", cnt + 1);
+            }
         }
         confirm.SetActive(false);
 

@@ -38,7 +38,7 @@ public class AdmobScreenAd : MonoBehaviour
 
     private void InitAd()
     {
-        string id = testID; //출시할 때 unitID로 바꿔야 함
+        string id = unitID;
 
         screenAd = new InterstitialAd(id);
 
