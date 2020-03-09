@@ -50,16 +50,27 @@ public class AdmobScreenAd : MonoBehaviour
 
     public void Show()
     {
-        StartCoroutine("ShowScreenAd");
+        //StartCoroutine("ShowScreenAd");
+
+        if (screenAd.IsLoaded())
+        {
+            screenAd.Show();
+        }
+        else
+        {
+            GameObject.Find("Main Camera").GetComponent<ChangeScene>().BackToMapButton();
+        }
     }
 
     private IEnumerator ShowScreenAd()
     {
+        
         while (!screenAd.IsLoaded())
         {
             yield return null;
         }
-
+        
         screenAd.Show();
+
     }
 }
