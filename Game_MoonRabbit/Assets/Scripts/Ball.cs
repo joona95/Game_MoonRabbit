@@ -48,7 +48,7 @@ public class Ball : MonoBehaviour
             ballway = new Vector3(-x, y, 0f);
             //shootball = true; //shootball 발사할 공 여부 변경
             //GetComponent<Rigidbody2D>().velocity = transform.right * 5f;//발사
-            GetComponent<Rigidbody2D>().velocity = ballway.normalized * 5f;
+            GetComponent<Rigidbody2D>().velocity = ballway.normalized * 6f; //5f->6f로 변경
         }
         
         //연결되지 않은 경우 아래로 떨어지고 일정 위치에서 destroy

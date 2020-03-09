@@ -10,6 +10,8 @@ public class AdmobScreenAd : MonoBehaviour
     private readonly string testID = "ca-app-pub-3940256099942544/1033173712"; //테스트용 ID
 
     private InterstitialAd screenAd;
+
+    bool adload = true;
     
     // Start is called before the first frame update
     private void Start()
@@ -50,7 +52,7 @@ public class AdmobScreenAd : MonoBehaviour
 
     public void Show()
     {
-        StartCoroutine("ShowScreenAd");
+        //StartCoroutine("ShowScreenAd");
 
         /*
         if (screenAd.IsLoaded())
@@ -61,7 +63,20 @@ public class AdmobScreenAd : MonoBehaviour
         {
             GameObject.Find("Main Camera").GetComponent<ChangeScene>().BackToMapButton();
         }*/
+
+        Invoke("checkad", 5f); //5초 후에 함수 실행
+
+        if (adload) //광고 로드 됐으면 보여줌
+        {
+            screenAd.Show();
+        }
+        else
+        {
+            GameObject.Find("Main Camera").GetComponent<ChangeScene>().BackToMapButton();
+        }
+
     }
+    
 
     private IEnumerator ShowScreenAd()
     {
@@ -73,5 +88,17 @@ public class AdmobScreenAd : MonoBehaviour
         
         screenAd.Show();
 
+    }
+
+    private void checkad()
+    {
+        if (screenAd.IsLoaded())
+        {
+            adload = true;
+        }
+        else
+        {
+            adload = false;
+        }
     }
 }

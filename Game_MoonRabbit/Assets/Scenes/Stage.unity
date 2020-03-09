@@ -3558,8 +3558,8 @@ MonoBehaviour:
   gf: {fileID: 0}
   hf: {fileID: 0}
   currentImage: {fileID: 645552006}
-  t1: {fileID: 21300000, guid: 0e6686f6a2cfc5746961b663ec5a960e, type: 3}
-  t2: {fileID: 21300000, guid: 68071cac5fd36e7469f597d06dc69d57, type: 3}
+  t1: {fileID: 21300000, guid: 68071cac5fd36e7469f597d06dc69d57, type: 3}
+  t2: {fileID: 21300000, guid: 0e6686f6a2cfc5746961b663ec5a960e, type: 3}
 --- !u!114 &645552005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3632,7 +3632,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 68071cac5fd36e7469f597d06dc69d57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e6686f6a2cfc5746961b663ec5a960e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4234,7 +4234,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 68071cac5fd36e7469f597d06dc69d57, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e6686f6a2cfc5746961b663ec5a960e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4269,8 +4269,8 @@ MonoBehaviour:
   gf: {fileID: 0}
   hf: {fileID: 0}
   currentImage: {fileID: 779600502}
-  t1: {fileID: 21300000, guid: 0e6686f6a2cfc5746961b663ec5a960e, type: 3}
-  t2: {fileID: 21300000, guid: 68071cac5fd36e7469f597d06dc69d57, type: 3}
+  t1: {fileID: 21300000, guid: 68071cac5fd36e7469f597d06dc69d57, type: 3}
+  t2: {fileID: 21300000, guid: 0e6686f6a2cfc5746961b663ec5a960e, type: 3}
 --- !u!114 &779600505
 MonoBehaviour:
   m_ObjectHideFlags: 0
