@@ -700,6 +700,25 @@ public class Manager : MonoBehaviour
                 Shooter.starlinepossible = false;
                 clear = true;
 
+                GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
+                if (PlayerPrefs.GetInt("User_stage") < current_stage)
+                {
+                    PlayerPrefs.SetInt("User_stage", current_stage);
+                    Map_Lock.jump = true;
+                    if (current_stage == 10)
+                    {
+                        Map_Lock.give1 = true;
+                    }
+                    if (current_stage == 20)
+                    {
+                        Map_Lock.give2 = true;
+                    }
+                    if (current_stage == 30)
+                    {
+                        Map_Lock.give3 = true;
+                    }
+                }
+
                 Ball[] balls = (Ball[])GameObject.FindObjectsOfType(typeof(Ball));
                 foreach (Ball ball in balls)
                 {
@@ -1033,37 +1052,6 @@ public class Manager : MonoBehaviour
 
         }
 
-        if (queCnt==0) //게임 성공
-        {
-            //Time.timeScale = 0f;
-            Manager.clear = true;
-            
-            GameObject.Find("대포").GetComponent<Shooter>().enabled = false;
-            if (PlayerPrefs.GetInt("User_stage") < current_stage)
-            {
-                PlayerPrefs.SetInt("User_stage", current_stage);
-                Map_Lock.jump = true;
-                if (current_stage == 10)
-                {
-                    Map_Lock.give1 = true;
-                }
-                if (current_stage == 20)
-                {
-                    Map_Lock.give2 = true;
-                }
-                if (current_stage == 30)
-                {
-                    Map_Lock.give3 = true;
-                }
-            }
-
-        }
-        else if (Manager.limit_cnt == 0)
-        {
-            //Time.timeScale = 0f;
-            //Manager.fail = true;
-        }
- 
 
         if (start == true)
         {

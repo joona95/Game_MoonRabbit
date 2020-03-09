@@ -171,7 +171,7 @@ public class User : MonoBehaviour
         }
         */
 
-        //PlayerPrefs.SetInt("User_stage", 40);
+        //PlayerPrefs.SetInt("User_stage", 25);
     }
 
     // Update is called once per frame
