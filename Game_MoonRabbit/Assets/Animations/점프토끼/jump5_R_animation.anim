@@ -30,7 +30,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -39,7 +39,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -67,7 +67,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -76,7 +76,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -104,7 +104,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -113,7 +113,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -141,7 +141,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -150,7 +150,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 0
         inSlope: 0
         outSlope: 0
@@ -169,35 +169,35 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: 4cbae9d5566de7a40a027db049818baa, type: 3}
-    - time: 0.033333335
+    - time: 0.11666667
       value: {fileID: 21300000, guid: b6573c87fe85b7244a757dce4320b28a, type: 3}
-    - time: 0.06666667
+    - time: 0.15
       value: {fileID: 21300000, guid: adbcb706df5cc4b409ffd824102f9eca, type: 3}
-    - time: 0.1
+    - time: 0.18333334
       value: {fileID: 21300000, guid: d6b2fe4cc0e2cc94181ab0b0ed6311ff, type: 3}
-    - time: 0.13333334
+    - time: 0.21666667
       value: {fileID: 21300000, guid: 386989176e5574c42a0c1e69a185b9e6, type: 3}
-    - time: 0.16666667
+    - time: 0.25
       value: {fileID: 21300000, guid: 7c72a9fb70a101b4d91c2a9691e15dcd, type: 3}
-    - time: 0.2
+    - time: 0.28333333
       value: {fileID: 21300000, guid: 3ce4c213c897ee748bae4556899881c3, type: 3}
-    - time: 0.23333333
+    - time: 0.31666666
       value: {fileID: 21300000, guid: 1e7d6ae2ced22e5479c818f2acabe164, type: 3}
-    - time: 0.26666668
+    - time: 0.35
       value: {fileID: 21300000, guid: 5988c08265d0df1429702aa4f46d3bb0, type: 3}
-    - time: 0.3
+    - time: 0.38333333
       value: {fileID: 21300000, guid: 527edf60e040897449c713a2331c7f6d, type: 3}
-    - time: 0.33333334
+    - time: 0.41666666
       value: {fileID: 21300000, guid: 4961f42b1358837488926a44272cfe1a, type: 3}
-    - time: 0.36666667
+    - time: 0.45
       value: {fileID: 21300000, guid: 92eb32228a300be44b65eef3007a9bb5, type: 3}
-    - time: 0.4
+    - time: 0.48333332
       value: {fileID: 21300000, guid: 6e14d383e16279d4d9a8b620016886f9, type: 3}
-    - time: 0.43333334
+    - time: 0.51666665
       value: {fileID: 21300000, guid: a7058dfa9af06ca4d8b08c8190ed34cf, type: 3}
-    - time: 0.46666667
+    - time: 0.55
       value: {fileID: 21300000, guid: 26afbce40520f7745aa8439ce890f78f, type: 3}
-    - time: 0.5
+    - time: 0.5833333
       value: {fileID: 21300000, guid: ae11f4f901013a54184454861f80785a, type: 3}
     attribute: m_Sprite
     path: 
@@ -267,7 +267,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.51666665
+    m_StopTime: 0.6
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -296,7 +296,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -305,7 +305,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -333,7 +333,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -342,7 +342,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -370,7 +370,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -379,7 +379,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 1
         inSlope: 0
         outSlope: 0
@@ -407,7 +407,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.5
+        time: 0.5833333
         value: 1
         inSlope: 0
         outSlope: 0
@@ -416,7 +416,7 @@ AnimationClip:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.51666665
+        time: 0.6
         value: 0
         inSlope: 0
         outSlope: 0
@@ -435,7 +435,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.51666665
+  - time: 0.6
     functionName: setting
     data: 
     objectReferenceParameter: {fileID: 0}
