@@ -52,7 +52,7 @@ public class AdmobScreenAd : MonoBehaviour
 
     public void Show()
     {
-        //StartCoroutine("ShowScreenAd");
+        StartCoroutine("ShowScreenAd");
 
         /*
         if (screenAd.IsLoaded())
@@ -64,6 +64,7 @@ public class AdmobScreenAd : MonoBehaviour
             GameObject.Find("Main Camera").GetComponent<ChangeScene>().BackToMapButton();
         }*/
 
+        /*
         Invoke("checkad", 5f); //5초 후에 함수 실행
 
         if (adload) //광고 로드 됐으면 보여줌
@@ -74,7 +75,7 @@ public class AdmobScreenAd : MonoBehaviour
         {
             GameObject.Find("Main Camera").GetComponent<ChangeScene>().BackToMapButton();
         }
-
+        */
     }
     
 
@@ -85,7 +86,7 @@ public class AdmobScreenAd : MonoBehaviour
         {
             yield return null;
         }
-        
+
         screenAd.Show();
 
     }
