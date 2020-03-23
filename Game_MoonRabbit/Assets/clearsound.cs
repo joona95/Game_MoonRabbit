@@ -11,7 +11,7 @@ public class clearsound : MonoBehaviour
     {
         bgm = FindObjectOfType<bgmmanager>();
         sem = FindObjectOfType<semmanager>();
-        if(this.gameObject.activeSelf ==true)
+        if((this.gameObject.activeSelf ==true)&&(bgm.source.volume != 0f))
         {
             bgm.source.volume = 0.2f;
             sem.play(7);

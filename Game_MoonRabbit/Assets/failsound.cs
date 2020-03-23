@@ -11,7 +11,7 @@ public class failsound : MonoBehaviour
     {
         sem = FindObjectOfType<semmanager>();
         bgm = FindObjectOfType<bgmmanager>();
-        if (this.gameObject.activeSelf == true)
+        if ((this.gameObject.activeSelf == true)&& (bgm.source.volume != 0f))
         {
             bgm.source.volume = 0.2f;
             sem.play(8);
